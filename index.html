@@ -38,10 +38,23 @@
       line-height: 1.15;
     }
     .container.overflow {
-      padding-bottom: 120px !important;
+      padding-bottom: 180px !important;
     }
     #learn-more + .section .container.padding-144px {
       padding-top: 48px !important;
+    }
+    /* Animasjon for begge kort ved innlasting */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .w-dyn-item:nth-child(1) .services-card-wrapper {
+      animation: fadeSlideUp 0.7s ease both;
+      animation-delay: 0.1s;
+    }
+    .w-dyn-item:nth-child(2) .services-card-wrapper {
+      animation: fadeSlideUp 0.7s ease both;
+      animation-delay: 0.3s;
     }
   </style>
 </head>
@@ -217,7 +230,7 @@ function playVideoOnLowPower() {
               <a href="detail_tjenester.html" class="services-card-hover w-inline-block">
                 <div class="services-card-text-block">
                   <h3 class="color-black">Webdesign</h3>
-                  <h5 class="color-black">Vi lager nettsider som ser profesjonelle ut og gjor besokende til kunder.</h5>
+                  <h5 class="color-black">Vi lager nettsider som ser profesjonelle ut og gjør besøkende til kunder.</h5>
                 </div>
               </a>
               <div class="square"></div>
@@ -228,7 +241,7 @@ function playVideoOnLowPower() {
               <div class="services-card">
                 <div class="services-card-text-block">
                   <h3 class="services-card-title">Google Ads</h3>
-                  <h6>Malrettet annonsering</h6>
+                  <h6>Målrettet annonsering</h6>
                 </div>
               </div>
               <a href="detail_tjenester.html" class="services-card-hover w-inline-block">
