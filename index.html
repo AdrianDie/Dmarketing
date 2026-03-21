@@ -56,6 +56,38 @@
       animation: fadeSlideUp 0.7s ease both;
       animation-delay: 0.3s;
     }
+    /* ── MOBIL ── */
+    @media screen and (max-width: 767px) {
+      .services-cards-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      .services-card,
+      .services-card-hover {
+        min-width: 90vw;
+        max-width: 90vw;
+        min-height: 260px;
+        max-height: none;
+      }
+      .container.overflow {
+        padding-bottom: 80px !important;
+      }
+      #learn-more + .section .container.padding-144px {
+        padding-top: 0px !important;
+      }
+    }
+    @media screen and (max-width: 479px) {
+      .services-card,
+      .services-card-hover {
+        min-width: 90vw;
+        max-width: 90vw;
+        min-height: 220px;
+      }
+      .container.overflow {
+        padding-bottom: 40px !important;
+      }
+    }
   </style>
 </head>
 <body class="body-3">
