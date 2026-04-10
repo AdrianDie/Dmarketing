@@ -9,433 +9,173 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --black: #050505;
-      --white: #F5F5F5;
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --text: #050505;
+      --muted: #888;
       --primary: #0339f8;
-      --secondary: #1c1c1c;
-      --dark-gray: #404040;
-      --drop-shadow: #0339f833;
+      --primary-soft: #0339f812;
+      --border: rgba(0,0,0,0.08);
+      --dark: #050505;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    body {
-      font-family: 'Archivo', sans-serif;
-      background: var(--black);
-      color: var(--white);
-      overflow-x: hidden;
-    }
-
-    /* ── PRELOADER ── */
-    #preloader {
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex;
-    }
-    .pre-panel {
-      width: 50%; height: 100%;
-      background: var(--primary);
-      transition: transform 0.8s cubic-bezier(0.77,0,0.175,1);
-    }
+    #preloader { position: fixed; inset: 0; z-index: 9999; display: flex; }
+    .pre-panel { width: 50%; height: 100%; background: var(--primary); transition: transform 0.8s cubic-bezier(0.77,0,0.175,1); }
     #preloader.done .pre-panel.left  { transform: translateX(-100%); }
     #preloader.done .pre-panel.right { transform: translateX(100%); }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    nav.scrolled {
-      background: rgba(5,5,5,0.95);
-      backdrop-filter: blur(12px);
-      padding: 14px 24px;
-      border-bottom: 1px solid #ffffff10;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s, padding 0.3s, box-shadow 0.3s; }
+    nav.scrolled { background: rgba(245,245,245,0.96); backdrop-filter: blur(12px); padding: 14px 24px; box-shadow: 0 1px 0 var(--border); }
     .nav-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; }
-    .nav-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
-    .nav-logo span:last-child {
-      font-size: 1.1rem; font-weight: 700;
-      color: transparent; -webkit-text-stroke: 1.5px var(--white);
-      letter-spacing: -0.02em;
-    }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .nav-phone {
-      font-size: 0.82rem; font-weight: 600; color: var(--white);
-      text-decoration: none; letter-spacing: 0.02em;
-    }
+    .nav-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .nav-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--text); letter-spacing: -0.02em; }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-phone { font-size: 0.82rem; font-weight: 600; color: var(--text); text-decoration: none; }
     .nav-phone:hover { color: var(--primary); }
-    .nav-cta {
-      background: var(--primary); color: var(--white);
-      padding: 10px 22px; border-radius: 4px;
-      font-size: 0.82rem; font-weight: 600;
-      text-decoration: none; transition: opacity 0.2s;
-    }
+    .nav-cta { background: var(--primary); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
     .nav-cta:hover { opacity: 0.85; }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: var(--white); transition: all 0.3s;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
     .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-    /* OVERLAY */
-    .nav-overlay {
-      position: fixed; inset: 0; z-index: 99;
-      background: var(--black);
-      display: flex; flex-direction: column; justify-content: center; padding: 0 40px;
-      clip-path: inset(0 0 100% 0);
-      transition: clip-path 0.6s cubic-bezier(0.77,0,0.175,1);
-    }
+    .nav-overlay { position: fixed; inset: 0; z-index: 99; background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 0 40px; clip-path: inset(0 0 100% 0); transition: clip-path 0.6s cubic-bezier(0.77,0,0.175,1); }
     .nav-overlay.open { clip-path: inset(0 0 0% 0); }
     .overlay-links { list-style: none; }
-    .overlay-links li {
-      display: flex; align-items: baseline; gap: 16px;
-      border-top: 1px solid #ffffff0a; padding: 16px 0;
-    }
+    .overlay-links li { display: flex; align-items: baseline; gap: 16px; border-top: 1px solid #ffffff0a; padding: 16px 0; }
     .overlay-links li:last-child { border-bottom: 1px solid #ffffff0a; }
     .overlay-num { font-size: 0.7rem; color: #444; font-weight: 500; }
-    .overlay-links a {
-      font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700;
-      letter-spacing: -0.03em;
-      color: transparent; -webkit-text-stroke: 1.5px var(--white);
-      text-decoration: none; transition: color 0.2s;
-    }
-    .overlay-links a:hover { color: var(--white); }
+    .overlay-links a { font-size: clamp(2rem,6vw,3.5rem); font-weight: 700; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px #f5f5f5; text-decoration: none; transition: color 0.2s; }
+    .overlay-links a:hover { color: #f5f5f5; }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      display: flex; align-items: center;
-      padding: 0 24px; padding-top: 80px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1600&q=80');
-      background-size: cover; background-position: center;
-      filter: brightness(0.2);
-    }
-    .hero-content {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto; width: 100%;
-    }
+    /* HERO — full image med lys overlay */
+    .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 0 24px; padding-top: 80px; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('bilder/elektriker/hero-bg.jpg'); background-size: cover; background-position: center; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: rgba(245,245,245,0.88); }
+    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
 
-    /* Emergency badge */
-    .emergency-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #ff3b30; color: #fff;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 6px 14px; border-radius: 4px;
-      margin-bottom: 24px;
-    }
-    .emergency-badge::before {
-      content: ''; width: 8px; height: 8px; border-radius: 50%;
-      background: #fff; animation: pulse 1.2s ease-in-out infinite;
-    }
+    .emergency-badge { display: inline-flex; align-items: center; gap: 8px; background: #ff3b30; color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; margin-bottom: 24px; }
+    .emergency-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
 
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 700; line-height: 1.02; letter-spacing: -0.04em;
-      margin-bottom: 24px; max-width: 800px;
-    }
-    .hero h1 .outline {
-      color: transparent; -webkit-text-stroke: 3px var(--white);
-    }
-    .hero-sub {
-      font-size: 1.05rem; color: #888; font-weight: 300;
-      line-height: 1.7; max-width: 480px; margin-bottom: 40px;
-    }
+    .hero h1 { font-size: clamp(3rem,7vw,6rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 24px; max-width: 800px; }
+    .hero h1 .outline { color: transparent; -webkit-text-stroke: 3px var(--text); }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
-    .btn-emergency {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #ff3b30; color: #fff;
-      padding: 16px 32px; border-radius: 4px;
-      font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 700;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: opacity 0.2s; letter-spacing: 0.02em;
-    }
+    .btn-emergency { display: inline-flex; align-items: center; gap: 8px; background: #ff3b30; color: #fff; padding: 16px 32px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 1rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
     .btn-emergency:hover { opacity: 0.9; }
-    .btn-book {
-      background: var(--primary); color: var(--white);
-      padding: 16px 32px; border-radius: 4px;
-      font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 600;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: opacity 0.2s;
-    }
+    .btn-book { background: var(--primary); color: #fff; padding: 16px 32px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
     .btn-book:hover { opacity: 0.85; }
-    .btn-ghost {
-      background: transparent; color: var(--white);
-      padding: 16px 28px; border-radius: 4px;
-      border: 1px solid #ffffff30;
-      font-family: 'Archivo', sans-serif; font-size: 0.9rem; font-weight: 600;
-      text-decoration: none; cursor: pointer; transition: border-color 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--white); }
-
-    .hero-stats {
-      display: flex; gap: 48px; flex-wrap: wrap;
-      padding-top: 32px; border-top: 1px solid #ffffff15;
-    }
+    .btn-ghost { background: transparent; color: var(--text); padding: 16px 28px; border-radius: 4px; border: 1.5px solid rgba(0,0,0,0.2); font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: var(--text); }
+    .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
     .hero-stat-num { font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); }
-    .hero-stat-label { font-size: 0.75rem; color: #555; margin-top: 2px; }
+    .hero-stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
-    /* ── TICKER ── */
-    .ticker-wrap {
-      overflow: hidden;
-      border-top: 1px solid #ffffff08;
-      border-bottom: 1px solid #ffffff08;
-      padding: 14px 0;
-    }
-    .ticker {
-      display: flex; animation: ticker 30s linear infinite; white-space: nowrap;
-    }
-    .ticker-item {
-      display: inline-flex; align-items: center; gap: 20px;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #444; padding: 0 40px;
-    }
-    .ticker-item span { color: var(--primary); font-size: 0.9rem; }
+    .ticker-wrap { overflow: hidden; background: var(--dark); padding: 14px 0; }
+    .ticker { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+    .ticker-item { display: inline-flex; align-items: center; gap: 20px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #555; padding: 0 40px; }
+    .ticker-item span { color: var(--primary); }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      display: flex; flex-wrap: wrap;
-      border-bottom: 1px solid #ffffff08;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 28px 40px; flex: 1; min-width: 220px;
-      border-right: 1px solid #ffffff08;
-    }
+    .trust-bar { background: var(--surface); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+    .trust-item { display: flex; align-items: center; gap: 16px; padding: 28px 40px; flex: 1; min-width: 220px; border-right: 1px solid var(--border); }
     .trust-item:last-child { border-right: none; }
-    .trust-icon-wrap {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--primary);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .trust-text .trust-title { font-size: 0.88rem; font-weight: 700; }
-    .trust-text .trust-sub { font-size: 0.75rem; color: #555; margin-top: 2px; }
+    .trust-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .trust-title { font-size: 0.88rem; font-weight: 700; }
+    .trust-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 
-    /* ── SECTION COMMON ── */
-    .section { padding: 112px 24px; max-width: 1200px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
-    }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    .section-title .outline { color: transparent; -webkit-text-stroke: 1.5px var(--white); }
-    .section-sub {
-      font-size: 0.95rem; color: #666; line-height: 1.7;
-      max-width: 500px; margin-bottom: 56px;
-    }
+    .section { padding: 96px 24px; max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
+    .section-title { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
+    .section-title .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
+    .section-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin-bottom: 48px; }
 
-    /* ── SERVICES ── */
-    .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .service-card {
-      background: var(--secondary); padding: 32px 28px;
-      border: 1px solid #ffffff06;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .service-card:hover { border-color: var(--primary); transform: translateY(-4px); }
-    .service-num {
-      font-size: 0.7rem; font-weight: 700; color: var(--primary);
-      letter-spacing: 0.1em; margin-bottom: 12px;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+    .service-card { background: var(--surface); border: 1px solid var(--border); padding: 32px 28px; border-radius: 8px; transition: box-shadow 0.3s, transform 0.3s; }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .service-num { font-size: 0.68rem; font-weight: 700; color: var(--primary); letter-spacing: 0.1em; margin-bottom: 12px; }
     .service-icon { font-size: 2rem; margin-bottom: 16px; }
-    .service-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
-    .service-desc { font-size: 0.82rem; color: #666; line-height: 1.65; }
-    .service-tag {
-      display: inline-block; margin-top: 16px;
-      font-size: 0.7rem; font-weight: 600; color: var(--primary);
-      border: 1px solid var(--primary); padding: 3px 10px; border-radius: 4px;
-    }
+    .service-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+    .service-tag { display: inline-block; margin-top: 14px; font-size: 0.7rem; font-weight: 700; color: var(--primary); background: var(--primary-soft); padding: 4px 10px; border-radius: 4px; }
 
-    /* ── HOW IT WORKS ── */
-    .how-section {
-      background: var(--secondary);
-      border-top: 1px solid #ffffff08;
-      border-bottom: 1px solid #ffffff08;
-    }
-    .how-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 80px 24px;
-    }
-    .how-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; margin-top: 40px;
-    }
-    .how-step {
-      background: var(--black); padding: 40px 32px;
-      position: relative;
-    }
-    .how-step-num {
-      font-size: 4rem; font-weight: 700;
-      color: transparent; -webkit-text-stroke: 1.5px var(--primary);
-      letter-spacing: -0.06em; line-height: 1;
-      margin-bottom: 20px;
-    }
-    .how-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .how-section { background: var(--dark); padding: 80px 24px; }
+    .how-inner { max-width: 1200px; margin: 0 auto; }
+    .how-section .section-label { color: var(--primary); }
+    .how-section .section-title { color: #f5f5f5; }
+    .how-section .section-title .outline { -webkit-text-stroke: 1.5px #f5f5f5; }
+    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; }
+    .how-step { background: #0f0f0f; padding: 40px 32px; }
+    .how-step-num { font-size: 4rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--primary); letter-spacing: -0.06em; line-height: 1; margin-bottom: 20px; }
+    .how-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: #f5f5f5; }
     .how-step p { font-size: 0.82rem; color: #666; line-height: 1.7; }
 
-    /* ── ABOUT ── */
-    .about-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .about-img-wrap { position: relative; }
-    .about-img {
-      width: 100%; aspect-ratio: 4/5;
-      object-fit: cover; display: block;
-    }
-    .about-badge {
-      position: absolute; bottom: -20px; right: -20px;
-      background: var(--primary); padding: 24px;
-      text-align: center; min-width: 120px;
-    }
+    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 4px; }
+    .about-badge { position: absolute; bottom: -16px; right: -16px; background: var(--primary); color: #fff; padding: 24px; text-align: center; border-radius: 4px; }
     .about-badge-num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
-    .about-badge-text { font-size: 0.72rem; margin-top: 4px; opacity: 0.85; }
-    .about-text h2 {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    .about-text h2 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--white); }
-    .about-text p { font-size: 0.88rem; color: #666; line-height: 1.75; margin-bottom: 14px; }
-    .about-certs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .cert-badge {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--secondary); border: 1px solid #ffffff0a;
-      padding: 8px 14px; border-radius: 4px;
-      font-size: 0.75rem; font-weight: 600;
-    }
+    .about-badge-text { font-size: 0.7rem; margin-top: 4px; opacity: 0.9; }
+    .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .about-certs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .cert-badge { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
 
-    /* ── TESTIMONIALS ── */
-    .testimonials-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    }
-    .testimonial {
-      background: var(--secondary); padding: 28px;
-      border: 1px solid #ffffff06;
-    }
-    .test-stars { color: #f5c542; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
-    .test-text { font-size: 0.88rem; color: #bbb; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .testimonial { background: var(--surface); border: 1px solid var(--border); padding: 28px; border-radius: 8px; }
+    .test-stars { color: #f5a623; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
+    .test-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
     .test-author { display: flex; align-items: center; gap: 12px; }
-    .test-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: var(--primary); display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
-    }
+    .test-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
     .test-name { font-size: 0.82rem; font-weight: 700; }
-    .test-meta { font-size: 0.72rem; color: #555; }
+    .test-meta { font-size: 0.72rem; color: var(--muted); }
 
-    /* ── CONTACT ── */
-    .contact-section {
-      background: var(--secondary);
-      border-top: 1px solid #ffffff08;
-      border-bottom: 1px solid #ffffff08;
-    }
-    .contact-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 80px 24px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
-    }
-    .contact-left h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    .contact-left h2 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--white); }
-    .contact-left p { font-size: 0.88rem; color: #666; line-height: 1.7; margin-bottom: 32px; }
-    .contact-details { display: flex; flex-direction: column; gap: 20px; }
-    .contact-detail {
-      display: flex; align-items: flex-start; gap: 14px;
-    }
-    .contact-icon {
-      width: 40px; height: 40px; border-radius: 4px;
-      background: var(--primary); display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .contact-info-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #555; margin-bottom: 3px; }
+    .contact-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .contact-inner { max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-left h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
+    .contact-left h2 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
+    .contact-left > p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .contact-details { display: flex; flex-direction: column; gap: 18px; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 14px; }
+    .contact-icon { width: 38px; height: 38px; border-radius: 6px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+    .contact-info-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
     .contact-info-val { font-size: 0.88rem; font-weight: 600; }
-    .contact-info-val a { color: var(--white); text-decoration: none; }
+    .contact-info-val a { color: var(--text); text-decoration: none; }
     .contact-info-val a:hover { color: var(--primary); }
-
     .contact-form { display: flex; flex-direction: column; gap: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.72rem; font-weight: 700; color: #666; letter-spacing: 0.08em; text-transform: uppercase; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: var(--black); border: 1px solid #ffffff12;
-      color: var(--white); padding: 12px 14px;
-      border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 0.88rem;
-      outline: none; transition: border-color 0.2s; width: 100%;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--primary); }
+    .form-group label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .form-group input, .form-group select, .form-group textarea { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); padding: 12px 14px; border-radius: 6px; font-family: 'Archivo',sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
     .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-group select option { background: var(--black); }
-    .form-submit {
-      background: var(--primary); color: var(--white);
-      border: none; border-radius: 4px; padding: 14px;
-      font-family: 'Archivo', sans-serif; font-size: 0.9rem; font-weight: 600;
-      cursor: pointer; transition: opacity 0.2s; margin-top: 4px;
-    }
+    .form-submit { background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 14px; font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
     .form-submit:hover { opacity: 0.85; }
-    .form-success {
-      display: none; background: #0339f820; border: 1px solid var(--primary);
-      border-radius: 4px; padding: 16px; text-align: center;
-      font-size: 0.88rem; color: var(--primary);
-    }
+    .form-success { display: none; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 6px; padding: 16px; text-align: center; font-size: 0.88rem; color: var(--primary); }
 
-    /* ── FOOTER ── */
-    .site-footer {
-      border-top: 1px solid #ffffff08;
-      padding: 48px 24px;
-      max-width: 1200px; margin: 0 auto;
-    }
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;
-    }
-    .footer-logo-wrap { display: flex; align-items: baseline; gap: 6px; text-decoration: none; }
-    .footer-logo-wrap span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--white); }
-    .footer-logo-wrap span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1px var(--white); }
-    .footer-brand p { font-size: 0.82rem; color: #444; line-height: 1.7; margin-top: 14px; max-width: 280px; }
-    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #555; margin-bottom: 16px; }
+    .site-footer { background: var(--dark); color: #f5f5f5; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 56px 24px 32px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; margin-bottom: 14px; }
+    .footer-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: #f5f5f5; }
+    .footer-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1px #f5f5f5; }
+    .footer-brand p { font-size: 0.82rem; color: #555; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 16px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { font-size: 0.82rem; color: #444; text-decoration: none; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: var(--white); }
-    .footer-bottom {
-      border-top: 1px solid #ffffff08; padding-top: 24px;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
+    .footer-col ul li a { font-size: 0.82rem; color: #555; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #f5f5f5; }
+    .footer-bottom { border-top: 1px solid #ffffff08; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-bottom p { font-size: 0.78rem; color: #333; }
 
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
-      .about-inner { grid-template-columns: 1fr; }
-      .about-badge { bottom: 10px; right: 10px; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
       .how-grid { grid-template-columns: 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -446,20 +186,14 @@
     @media (max-width: 600px) {
       .form-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
-      .trust-item { border-right: none; border-bottom: 1px solid #ffffff08; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
       .hero-stats { gap: 24px; }
     }
   </style>
 </head>
 <body>
+  <div id="preloader"><div class="pre-panel left"></div><div class="pre-panel right"></div></div>
 
-  <!-- PRELOADER -->
-  <div id="preloader">
-    <div class="pre-panel left"></div>
-    <div class="pre-panel right"></div>
-  </div>
-
-  <!-- OVERLAY NAV -->
   <div class="nav-overlay" id="navOverlay">
     <ul class="overlay-links">
       <li><span class="overlay-num">01</span><a href="#tjenester" onclick="closeNav()">Tjenester</a></li>
@@ -470,205 +204,97 @@
     </ul>
   </div>
 
-  <!-- NAV -->
   <nav id="navbar">
-    <a href="#" class="nav-logo">
-      <span>Volt</span><span>Elektro</span>
-    </a>
+    <a href="#" class="nav-logo"><span>Volt</span><span>Elektro</span></a>
     <div class="nav-right">
       <a href="tel:+4712345678" class="nav-phone">📞 +47 123 45 678</a>
       <a href="#kontakt" class="nav-cta">Book elektriker</a>
     </div>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg" style="background-image:url('bilder/elektriker/hero-bg.jpg');"></div>
     <div class="hero-content">
       <div class="emergency-badge reveal">Akutt utrykning 24/7</div>
-      <h1 class="reveal">
-        Din elektriker<br/>
-        i <span class="outline">[By]</span>
-      </h1>
-      <p class="hero-sub reveal">
-        Sertifisert elektrikerfirma med over 15 års erfaring. Vi tar oppdrag i hele
-        [By] og omegn — fra sikringsskap til nybygg.
-      </p>
+      <h1 class="reveal">Din elektriker<br/>i <span class="outline">[By]</span></h1>
+      <p class="hero-sub reveal">DSB-registrert elektrikerfirma med over 15 års erfaring. Vi tar oppdrag i hele [By] og omegn — fra sikringsskap til solceller.</p>
       <div class="hero-actions reveal">
         <a href="tel:+4712345678" class="btn-emergency">⚡ Ring nå — 24/7</a>
         <a href="#kontakt" class="btn-book">Book befaring</a>
         <a href="#tjenester" class="btn-ghost">Se tjenester</a>
       </div>
       <div class="hero-stats reveal">
-        <div class="hero-stat">
-          <div class="hero-stat-num">15+</div>
-          <div class="hero-stat-label">Års erfaring</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">2 400+</div>
-          <div class="hero-stat-label">Oppdrag utført</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">4.9 ★</div>
-          <div class="hero-stat-label">Google-vurdering</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">4t</div>
-          <div class="hero-stat-label">Responstid akutt</div>
-        </div>
+        <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Års erfaring</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">2 400+</div><div class="hero-stat-label">Oppdrag utført</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4.9 ★</div><div class="hero-stat-label">Google-vurdering</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4t</div><div class="hero-stat-label">Responstid akutt</div></div>
       </div>
     </div>
   </section>
 
-  <!-- TICKER -->
   <div class="ticker-wrap">
     <div class="ticker" id="ticker">
       <div class="ticker-item"><span>⚡</span> Akutt utrykning</div>
       <div class="ticker-item"><span>⚡</span> Sikringsskap</div>
-      <div class="ticker-item"><span>⚡</span> Ladestasjoner</div>
+      <div class="ticker-item"><span>⚡</span> EL-bil ladestasjon</div>
       <div class="ticker-item"><span>⚡</span> Solcelleanlegg</div>
       <div class="ticker-item"><span>⚡</span> Smarthjem</div>
       <div class="ticker-item"><span>⚡</span> Nybygg & rehab</div>
       <div class="ticker-item"><span>⚡</span> Akutt utrykning</div>
       <div class="ticker-item"><span>⚡</span> Sikringsskap</div>
-      <div class="ticker-item"><span>⚡</span> Ladestasjoner</div>
+      <div class="ticker-item"><span>⚡</span> EL-bil ladestasjon</div>
       <div class="ticker-item"><span>⚡</span> Solcelleanlegg</div>
       <div class="ticker-item"><span>⚡</span> Smarthjem</div>
       <div class="ticker-item"><span>⚡</span> Nybygg & rehab</div>
     </div>
   </div>
 
-  <!-- TRUST BAR -->
   <div class="trust-bar reveal">
-    <div class="trust-item">
-      <div class="trust-icon-wrap">⚡</div>
-      <div class="trust-text">
-        <div class="trust-title">Registrert elsikkerhetsbedrift</div>
-        <div class="trust-sub">DSB-godkjent</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon-wrap">🛡️</div>
-      <div class="trust-text">
-        <div class="trust-title">Forsikret & garantert</div>
-        <div class="trust-sub">Ansvarsforsikring 10 MNOK</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon-wrap">📋</div>
-      <div class="trust-text">
-        <div class="trust-title">Komplett dokumentasjon</div>
-        <div class="trust-sub">Samsvarserklæring inkludert</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon-wrap">⏱️</div>
-      <div class="trust-text">
-        <div class="trust-title">Rask respons</div>
-        <div class="trust-sub">Akutt utrykning innen 4 timer</div>
-      </div>
-    </div>
+    <div class="trust-item"><div class="trust-icon">⚡</div><div><div class="trust-title">DSB-registrert</div><div class="trust-sub">Godkjent elsikkerhetsbedrift</div></div></div>
+    <div class="trust-item"><div class="trust-icon">🛡️</div><div><div class="trust-title">Forsikret & garantert</div><div class="trust-sub">Ansvarsforsikring 10 MNOK</div></div></div>
+    <div class="trust-item"><div class="trust-icon">📋</div><div><div class="trust-title">Komplett dokumentasjon</div><div class="trust-sub">Samsvarserklæring inkludert</div></div></div>
+    <div class="trust-item"><div class="trust-icon">⏱️</div><div><div class="trust-title">Rask respons</div><div class="trust-sub">Akutt utrykning innen 4 timer</div></div></div>
   </div>
 
-  <!-- TJENESTER -->
   <section class="section" id="tjenester">
     <div class="section-label reveal">Tjenester</div>
     <h2 class="section-title reveal">Alt innen <span class="outline">elektro</span></h2>
     <p class="section-sub reveal">Fra enkle reparasjoner til komplette elektroanlegg for bolig og næring.</p>
     <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <div class="service-icon">⚡</div>
-        <div class="service-name">Akutt utrykning</div>
-        <div class="service-desc">Strømbrudd, kortslutning eller annen elektrisk fare? Vi rykker ut 24/7 og er på plass innen 4 timer.</div>
-        <div class="service-tag">24/7 tilgjengelig</div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">02</div>
-        <div class="service-icon">🔌</div>
-        <div class="service-name">Sikringsskap & kurser</div>
-        <div class="service-desc">Oppgradering av sikringsskap, nye kurser, jordfeilautomat og kapasitetsutvidelse for moderne bolig.</div>
-        <div class="service-tag">Vanligst oppdrag</div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">03</div>
-        <div class="service-icon">🚗</div>
-        <div class="service-name">EL-bil ladestasjon</div>
-        <div class="service-desc">Installasjon av elbil-ladepunkt hjemme eller på kontor. Alle merker og modeller. Støtteordning Enova.</div>
-        <div class="service-tag">Enova-støtte</div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">04</div>
-        <div class="service-icon">☀️</div>
-        <div class="service-name">Solcelleanlegg</div>
-        <div class="service-desc">Design, installasjon og nettilkobling av solcelleanlegg for privatboliger og næringsbygg.</div>
-        <div class="service-tag">Spar strøm</div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">05</div>
-        <div class="service-icon">🏠</div>
-        <div class="service-name">Smarthjem</div>
-        <div class="service-desc">Intelligent styring av lys, varme og sikkerhet. Kompatibelt med Google Home, Apple Home og Homey.</div>
-        <div class="service-tag">Fremtidssikret</div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">06</div>
-        <div class="service-icon">🏗️</div>
-        <div class="service-name">Nybygg & renovering</div>
-        <div class="service-desc">Komplett elektroanlegg for nye bygg og totalrehabiliteringer. Fra tegning til ferdig samsvarserklæring.</div>
-        <div class="service-tag">Nøkkelferdig</div>
-      </div>
+      <div class="service-card reveal"><div class="service-num">01</div><div class="service-icon">⚡</div><div class="service-name">Akutt utrykning</div><div class="service-desc">Strømbrudd, kortslutning eller elektrisk fare? Vi rykker ut 24/7 og er på plass innen 4 timer.</div><div class="service-tag">24/7 tilgjengelig</div></div>
+      <div class="service-card reveal"><div class="service-num">02</div><div class="service-icon">🔌</div><div class="service-name">Sikringsskap & kurser</div><div class="service-desc">Oppgradering av sikringsskap, nye kurser, jordfeilautomat og kapasitetsutvidelse.</div><div class="service-tag">Vanligst oppdrag</div></div>
+      <div class="service-card reveal"><div class="service-num">03</div><div class="service-icon">🚗</div><div class="service-name">EL-bil ladestasjon</div><div class="service-desc">Installasjon av elbil-ladepunkt hjemme eller på kontor. Alle merker. Enova-støtte.</div><div class="service-tag">Enova-støtte</div></div>
+      <div class="service-card reveal"><div class="service-num">04</div><div class="service-icon">☀️</div><div class="service-name">Solcelleanlegg</div><div class="service-desc">Design, installasjon og nettilkobling av solcelleanlegg for privatboliger og næringsbygg.</div><div class="service-tag">Spar strøm</div></div>
+      <div class="service-card reveal"><div class="service-num">05</div><div class="service-icon">🏠</div><div class="service-name">Smarthjem</div><div class="service-desc">Intelligent styring av lys, varme og sikkerhet. Kompatibelt med Google Home og Apple Home.</div></div>
+      <div class="service-card reveal"><div class="service-num">06</div><div class="service-icon">🏗️</div><div class="service-name">Nybygg & renovering</div><div class="service-desc">Komplett elektroanlegg for nye bygg og totalrehabiliteringer. Nøkkelferdig med samsvarserklæring.</div></div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
   <section class="how-section" id="slik-jobber-vi">
     <div class="how-inner">
       <div class="section-label reveal">Slik jobber vi</div>
       <h2 class="section-title reveal">Enkelt fra start <span class="outline">til slutt</span></h2>
       <div class="how-grid">
-        <div class="how-step reveal">
-          <div class="how-step-num">01</div>
-          <h3>Ta kontakt</h3>
-          <p>Ring oss direkte eller fyll ut kontaktskjemaet. Vi svarer innen 2 timer i arbeidstiden — raskere ved akutt situasjon.</p>
-        </div>
-        <div class="how-step reveal">
-          <div class="how-step-num">02</div>
-          <h3>Gratis befaring & tilbud</h3>
-          <p>Vi kommer på befaring, vurderer jobben og gir et skriftlig tilbud uten skjulte kostnader. Ingen bindinger.</p>
-        </div>
-        <div class="how-step reveal">
-          <div class="how-step-num">03</div>
-          <h3>Jobb utført & dokumentert</h3>
-          <p>Vi utfører arbeidet ryddig og profesjonelt, og leverer fullstendig samsvarserklæring ved ferdigstillelse.</p>
-        </div>
+        <div class="how-step reveal"><div class="how-step-num">01</div><h3>Ta kontakt</h3><p>Ring oss direkte eller fyll ut kontaktskjemaet. Vi svarer innen 2 timer — raskere ved akutt situasjon.</p></div>
+        <div class="how-step reveal"><div class="how-step-num">02</div><h3>Gratis befaring & tilbud</h3><p>Vi kommer på befaring og gir et skriftlig tilbud uten skjulte kostnader. Ingen bindinger.</p></div>
+        <div class="how-step reveal"><div class="how-step-num">03</div><h3>Jobb utført & dokumentert</h3><p>Vi utfører arbeidet ryddig og profesjonelt, og leverer fullstendig samsvarserklæring.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- OM OSS -->
   <section class="section" id="om-oss">
     <div class="about-inner">
       <div class="about-img-wrap reveal">
-        <img
-          class="about-img"
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80"
-          alt="Elektriker på jobb"
-        />
-        <div class="about-badge">
-          <div class="about-badge-num">15</div>
-          <div class="about-badge-text">Års erfaring</div>
-        </div>
+        <img class="about-img" src="bilder/elektriker/about.jpg" onerror="this.src='https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=700&q=80'" alt="Volt Elektro team" />
+        <div class="about-badge"><div class="about-badge-num">15</div><div class="about-badge-text">Års erfaring</div></div>
       </div>
       <div class="about-text reveal">
         <div class="section-label">Om oss</div>
-        <h2>Lokalt firma —<br/><span class="outline">faglig tyngde</span></h2>
+        <h2 class="section-title">Lokalt firma —<br/><span class="outline">faglig tyngde</span></h2>
         <p>Volt Elektro ble startet i [By] i 2009 og er i dag et av de mest anerkjente elektrikerfirmaene i regionen. Vi er 8 fast ansatte elektrikere med spesialisering innen bolig, næring og fornybar energi.</p>
-        <p>Alle våre elektrikere er DSB-godkjente og jobber etter gjeldende norske normer og standarder. Vi er stolt av å levere arbeid av høyeste kvalitet med full dokumentasjon.</p>
-        <p>Som lokalt firma kjenner vi [By] godt, og vi er opptatt av å bygge varige relasjoner med kundene våre — ikke bare ta ett oppdrag.</p>
+        <p>Alle våre elektrikere er DSB-godkjente og jobber etter gjeldende norske normer og standarder. Vi leverer alltid komplett samsvarserklæring.</p>
+        <p>Som lokalt firma kjenner vi [By] godt, og vi er opptatt av å bygge varige relasjoner — ikke bare ta ett oppdrag.</p>
         <div class="about-certs">
           <div class="cert-badge">✓ DSB-registrert</div>
           <div class="cert-badge">✓ Lavenergiprogrammet</div>
@@ -679,234 +305,79 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section class="section" id="anmeldelser">
     <div class="section-label reveal">Anmeldelser</div>
     <h2 class="section-title reveal">Hva kundene <span class="outline">sier</span></h2>
     <div class="testimonials-grid">
-      <div class="testimonial reveal">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Fikk hjelp samme dag med strømbrudd i kjelleren. Ryddig, rask og profesjonell jobb. Forklarte alt de gjorde underveis. Anbefales på det sterkeste!"</div>
-        <div class="test-author">
-          <div class="test-avatar">AS</div>
-          <div>
-            <div class="test-name">Anders Strand</div>
-            <div class="test-meta">Boligeier · Google</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial reveal">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Installerte elbil-lader og oppgraderte sikringsskapet. Meget profesjonell jobb til god pris. Kom presis og leverte komplett dokumentasjon. 10/10!"</div>
-        <div class="test-author">
-          <div class="test-avatar">KR</div>
-          <div>
-            <div class="test-name">Kristin Røed</div>
-            <div class="test-meta">Eneboligeier · Google</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial reveal">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Bruker Volt Elektro på alle bygg i firmaet. Alltid på tid, alltid ryddig arbeid. De leverer samsvarserklæring og holder god kommunikasjon gjennom hele jobben."</div>
-        <div class="test-author">
-          <div class="test-avatar">PH</div>
-          <div>
-            <div class="test-name">Per Halvorsen</div>
-            <div class="test-meta">Byggherre · Google</div>
-          </div>
-        </div>
-      </div>
+      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Fikk hjelp samme dag med strømbrudd i kjelleren. Ryddig, rask og profesjonell jobb. Forklarte alt de gjorde underveis. Anbefales på det sterkeste!"</div><div class="test-author"><div class="test-avatar">AS</div><div><div class="test-name">Anders Strand</div><div class="test-meta">Boligeier · Google</div></div></div></div>
+      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Installerte elbil-lader og oppgraderte sikringsskapet. Meget profesjonell jobb til god pris. Kom presis og leverte komplett dokumentasjon. 10/10!"</div><div class="test-author"><div class="test-avatar">KR</div><div><div class="test-name">Kristin Røed</div><div class="test-meta">Eneboligeier · Google</div></div></div></div>
+      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Bruker Volt Elektro på alle bygg i firmaet. Alltid på tid, alltid ryddig arbeid. God kommunikasjon og samsvarserklæring på alle jobber."</div><div class="test-author"><div class="test-avatar">PH</div><div><div class="test-name">Per Halvorsen</div><div class="test-meta">Byggherre · Google</div></div></div></div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="contact-section" id="kontakt">
     <div class="contact-inner">
       <div class="contact-left reveal">
         <div class="section-label">Kontakt</div>
         <h2>Book din<br/><span class="outline">elektriker</span></h2>
-        <p>Fyll ut skjemaet — vi kontakter deg innen 2 timer for å avtale befaring eller utrykning.</p>
+        <p>Fyll ut skjemaet — vi kontakter deg innen 2 timer. Akutte henvendelser besvares umiddelbart på telefon.</p>
         <div class="contact-details">
-          <div class="contact-detail">
-            <div class="contact-icon">📞</div>
-            <div>
-              <div class="contact-info-label">Telefon (akutt 24/7)</div>
-              <div class="contact-info-val"><a href="tel:+4712345678">+47 123 45 678</a></div>
-            </div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-icon">✉️</div>
-            <div>
-              <div class="contact-info-label">E-post</div>
-              <div class="contact-info-val"><a href="mailto:hei@voltelektro.no">hei@voltelektro.no</a></div>
-            </div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-icon">📍</div>
-            <div>
-              <div class="contact-info-label">Adresse</div>
-              <div class="contact-info-val">Industriveien 4, [By]</div>
-            </div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-icon">🕐</div>
-            <div>
-              <div class="contact-info-label">Åpningstider</div>
-              <div class="contact-info-val">Man–Fre 07–17 · Akutt: 24/7</div>
-            </div>
-          </div>
+          <div class="contact-detail"><div class="contact-icon">📞</div><div><div class="contact-info-label">Telefon (akutt 24/7)</div><div class="contact-info-val"><a href="tel:+4712345678">+47 123 45 678</a></div></div></div>
+          <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-info-label">E-post</div><div class="contact-info-val"><a href="mailto:hei@voltelektro.no">hei@voltelektro.no</a></div></div></div>
+          <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-info-label">Adresse</div><div class="contact-info-val">Industriveien 4, [By]</div></div></div>
+          <div class="contact-detail"><div class="contact-icon">🕐</div><div><div class="contact-info-label">Åpningstider</div><div class="contact-info-val">Man–Fre 07–17 · Akutt: 24/7</div></div></div>
         </div>
       </div>
       <div class="reveal">
         <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
           <div class="form-row">
-            <div class="form-group">
-              <label>Fornavn</label>
-              <input type="text" placeholder="Ola" required />
-            </div>
-            <div class="form-group">
-              <label>Etternavn</label>
-              <input type="text" placeholder="Nordmann" required />
-            </div>
+            <div class="form-group"><label>Fornavn</label><input type="text" placeholder="Ola" required /></div>
+            <div class="form-group"><label>Etternavn</label><input type="text" placeholder="Nordmann" required /></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Telefon</label>
-              <input type="tel" placeholder="+47 xxx xx xxx" required />
-            </div>
-            <div class="form-group">
-              <label>E-post</label>
-              <input type="email" placeholder="din@epost.no" required />
-            </div>
+            <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+47 xxx xx xxx" required /></div>
+            <div class="form-group"><label>E-post</label><input type="email" placeholder="din@epost.no" required /></div>
           </div>
-          <div class="form-group">
-            <label>Hva trenger du hjelp med?</label>
-            <select required>
-              <option value="" disabled selected>Velg tjeneste</option>
-              <option>Akutt utrykning</option>
-              <option>Sikringsskap & kurser</option>
-              <option>EL-bil ladestasjon</option>
-              <option>Solcelleanlegg</option>
-              <option>Smarthjem</option>
-              <option>Nybygg & renovering</option>
-              <option>Annet</option>
-            </select>
+          <div class="form-group"><label>Hva trenger du hjelp med?</label>
+            <select required><option value="" disabled selected>Velg tjeneste</option><option>Akutt utrykning</option><option>Sikringsskap & kurser</option><option>EL-bil ladestasjon</option><option>Solcelleanlegg</option><option>Smarthjem</option><option>Nybygg & renovering</option><option>Annet</option></select>
           </div>
-          <div class="form-group">
-            <label>Adresse for oppdraget</label>
-            <input type="text" placeholder="Storgata 1, [By]" />
-          </div>
-          <div class="form-group">
-            <label>Beskriv behovet</label>
-            <textarea placeholder="Beskriv gjerne hva som er feil eller hva du ønsker utført..."></textarea>
-          </div>
+          <div class="form-group"><label>Adresse for oppdraget</label><input type="text" placeholder="Storgata 1, [By]" /></div>
+          <div class="form-group"><label>Beskriv behovet</label><textarea placeholder="Beskriv gjerne hva som er feil eller hva du ønsker utført..."></textarea></div>
           <button type="submit" class="form-submit" id="submitBtn">Send forespørsel</button>
         </form>
-        <div class="form-success" id="formSuccess">
-          ✓ Takk! Vi tar kontakt innen 2 timer for å avtale tidspunkt.
-        </div>
+        <div class="form-success" id="formSuccess">✓ Takk! Vi tar kontakt innen 2 timer for å avtale tidspunkt.</div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="footer-logo-wrap">
-          <span>Volt</span><span>Elektro</span>
-        </a>
-        <p>DSB-registrert elektrikerfirma i [By]. Vi utfører elektriske installasjoner og reparasjoner for private og næringsliv.</p>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo"><span>Volt</span><span>Elektro</span></a>
+          <p>DSB-registrert elektrikerfirma i [By] — elektriske installasjoner og reparasjoner for private og næringsliv.</p>
+        </div>
+        <div class="footer-col"><h4>Tjenester</h4><ul><li><a href="#tjenester">Akutt utrykning</a></li><li><a href="#tjenester">Sikringsskap</a></li><li><a href="#tjenester">EL-bil ladestasjon</a></li><li><a href="#tjenester">Solcelleanlegg</a></li><li><a href="#tjenester">Smarthjem</a></li></ul></div>
+        <div class="footer-col"><h4>Kontakt</h4><ul><li><a href="tel:+4712345678">+47 123 45 678</a></li><li><a href="mailto:hei@voltelektro.no">hei@voltelektro.no</a></li><li><a href="#">Industriveien 4, [By]</a></li><li><a href="#">Man–Fre: 07–17</a></li><li><a href="#">Akutt: 24/7</a></li></ul></div>
       </div>
-      <div class="footer-col">
-        <h4>Tjenester</h4>
-        <ul>
-          <li><a href="#tjenester">Akutt utrykning</a></li>
-          <li><a href="#tjenester">Sikringsskap</a></li>
-          <li><a href="#tjenester">EL-bil ladestasjon</a></li>
-          <li><a href="#tjenester">Solcelleanlegg</a></li>
-          <li><a href="#tjenester">Smarthjem</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <p>© 2025 Volt Elektro · Org.nr. 123 456 789 · DSB-registrert</p>
+        <p>Nettside av <a href="https://dmarketing.no" style="color:#555;text-decoration:none;">Dietrichs Marketing</a></p>
       </div>
-      <div class="footer-col">
-        <h4>Kontakt</h4>
-        <ul>
-          <li><a href="tel:+4712345678">+47 123 45 678</a></li>
-          <li><a href="mailto:hei@voltelektro.no">hei@voltelektro.no</a></li>
-          <li><a href="#">Industriveien 4, [By]</a></li>
-          <li><a href="#">Man–Fre: 07–17</a></li>
-          <li><a href="#">Akutt: 24/7</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Volt Elektro · Org.nr. 123 456 789 · DSB-registrert</p>
-      <p style="color:#222;">Nettside av <a href="https://dmarketing.no" style="color:#333;text-decoration:none;">Dietrichs Marketing</a></p>
     </div>
   </footer>
 
   <script>
-    // Preloader
-    setTimeout(() => {
-      document.getElementById('preloader').classList.add('done');
-      setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 900);
-    }, 1100);
-
-    // Navbar scroll
+    setTimeout(() => { document.getElementById('preloader').classList.add('done'); setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 900); }, 1100);
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // Hamburger
-    function toggleNav() {
-      document.getElementById('hamburger').classList.toggle('open');
-      document.getElementById('navOverlay').classList.toggle('open');
-      document.body.style.overflow = document.getElementById('navOverlay').classList.contains('open') ? 'hidden' : '';
-    }
-    function closeNav() {
-      document.getElementById('hamburger').classList.remove('open');
-      document.getElementById('navOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href').slice(1);
-        if (!id) return;
-        const el = document.getElementById(id);
-        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
-      });
-    });
-
-    // IntersectionObserver
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+    function toggleNav() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('navOverlay').classList.toggle('open'); document.body.style.overflow = document.getElementById('navOverlay').classList.contains('open') ? 'hidden' : ''; }
+    function closeNav() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+    document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); } }); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Ticker duplicate
-    const ticker = document.getElementById('ticker');
-    ticker.innerHTML += ticker.innerHTML;
-
-    // Form submit
-    function submitForm(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.textContent = 'Sender...';
-      btn.disabled = true;
-      setTimeout(() => {
-        document.getElementById('contactForm').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-      }, 1200);
-    }
+    const ticker = document.getElementById('ticker'); ticker.innerHTML += ticker.innerHTML;
+    function submitForm(e) { e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.textContent = 'Sender...'; btn.disabled = true; setTimeout(() => { document.getElementById('contactForm').style.display = 'none'; document.getElementById('formSuccess').style.display = 'block'; }, 1200); }
   </script>
 </body>
 </html>

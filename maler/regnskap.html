@@ -1,887 +1,502 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nord Regnskap | Regnskapsbyrå i Oslo</title>
-  <meta name="description" content="Autorisert regnskapsbyrå i Oslo. Vi tar hånd om regnskap, lønn, MVA og årsoppgjør så du kan fokusere på vekst. Gratis konsultasjon.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Regnskap — Regnskapsbyrå i [By]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black:     #050505;
-      --white:     #F5F5F5;
-      --primary:   #0339f8;
-      --secondary: #1c1c1c;
-      --dark-gray: #404040;
-      --container: 1200px;
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --text: #050505;
+      --muted: #888;
+      --primary: #0339f8;
+      --primary-soft: #0339f812;
+      --border: rgba(0,0,0,0.08);
+      --dark: #050505;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Archivo', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
-    img  { max-width: 100%; display: block; }
-    a    { text-decoration: none; color: inherit; }
+    body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    h1 { font-size: clamp(2.8rem, 7vw, 6.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
-    h2 { font-size: clamp(2rem, 5vw, 4rem);     font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
-    h3 { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-weight: 600; line-height: 1.2; }
-    h4 { font-size: 1.05rem; font-weight: 600; }
-    h5 { font-size: 0.9rem; font-weight: 400; }
-    h6 { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--dark-gray); }
-    p  { font-size: 1rem; line-height: 1.7; color: #aaa; }
-
-    .outline         { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.5px var(--white); }
-    .outline-primary { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.5px var(--primary); }
-
-    .container  { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
-    .section    { padding: 112px 0; }
-
-    /* PRELOADER */
-    #preloader { position: fixed; inset: 0; z-index: 9999; display: flex; pointer-events: none; }
-    .pre-panel { flex: 1; background: var(--black); transition: transform 0.9s cubic-bezier(0.76,0,0.24,1); }
+    #preloader { position: fixed; inset: 0; z-index: 9999; display: flex; }
+    .pre-panel { width: 50%; height: 100%; background: var(--primary); transition: transform 0.8s cubic-bezier(0.77,0,0.175,1); }
     #preloader.done .pre-panel.left  { transform: translateX(-100%); }
     #preloader.done .pre-panel.right { transform: translateX(100%); }
-    .pre-logo {
-      position: fixed; inset: 0; z-index: 10000;
-      display: flex; align-items: center; justify-content: center; pointer-events: none;
-    }
-    .pre-circle {
-      width: 60px; height: 60px; border: 2px solid var(--primary); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      animation: spinIn 0.8s ease forwards;
-    }
-    .pre-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; }
-    @keyframes spinIn { from{transform:rotate(-180deg) scale(0);opacity:0} to{transform:rotate(0) scale(1);opacity:1} }
-    #preloader.done .pre-logo { opacity: 0; transition: opacity 0.3s; }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; padding: 28px 0; transition: background 0.3s, padding 0.3s; }
-    nav.scrolled { background: rgba(5,5,5,0.92); backdrop-filter: blur(12px); padding: 18px 0; }
-    .nav-inner { max-width: var(--container); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; gap: 4px; align-items: baseline; }
-    .nav-logo span:first-child { font-size: 1.05rem; font-weight: 700; }
-    .nav-logo span:last-child  { font-size: 1.05rem; font-weight: 300; color: var(--dark-gray); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-consult {
-      font-size: 0.85rem; font-weight: 600;
-      border: 1px solid #333; padding: 9px 20px; color: var(--white);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .nav-consult:hover { border-color: var(--primary); color: var(--primary); }
-    .hamburger-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 6px; }
-    .hamburger-btn span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: all 0.3s; }
-    .hamburger-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
-    .hamburger-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s, padding 0.3s, box-shadow 0.3s; }
+    nav.scrolled { background: rgba(245,245,245,0.96); backdrop-filter: blur(12px); padding: 14px 24px; box-shadow: 0 1px 0 var(--border); }
+    .nav-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; }
+    .nav-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .nav-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--text); letter-spacing: -0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--primary); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-    .nav-overlay {
-      position: fixed; inset: 0; z-index: 998; background: var(--black);
-      display: flex; flex-direction: column; justify-content: center; padding: 0 48px;
-      transform: translateY(-100%); transition: transform 0.7s cubic-bezier(0.76,0,0.24,1);
-    }
-    .nav-overlay.open { transform: translateY(0); }
-    .nav-overlay-item {
-      display: flex; align-items: center; gap: 20px;
-      padding: 18px 0; border-bottom: 1px solid #111; transition: opacity 0.2s;
-    }
-    .nav-overlay-item:hover { opacity: 0.6; }
-    .nav-overlay-num  { font-size: 0.7rem; color: var(--dark-gray); letter-spacing: 0.1em; }
-    .nav-overlay-text {
-      font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
-      -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #444;
-      transition: -webkit-text-stroke-color 0.2s;
-    }
-    .nav-overlay-item:hover .nav-overlay-text { -webkit-text-stroke-color: var(--white); }
+    .nav-overlay { position: fixed; inset: 0; z-index: 99; background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 0 40px; clip-path: inset(0 0 100% 0); transition: clip-path 0.6s cubic-bezier(0.77,0,0.175,1); }
+    .nav-overlay.open { clip-path: inset(0 0 0% 0); }
+    .overlay-links { list-style: none; }
+    .overlay-links li { display: flex; align-items: baseline; gap: 16px; border-top: 1px solid #ffffff0a; padding: 16px 0; }
+    .overlay-links li:last-child { border-bottom: 1px solid #ffffff0a; }
+    .overlay-num { font-size: 0.7rem; color: #444; font-weight: 500; }
+    .overlay-links a { font-size: clamp(2rem,6vw,3.5rem); font-weight: 700; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px #f5f5f5; text-decoration: none; transition: color 0.2s; }
+    .overlay-links a:hover { color: #f5f5f5; }
 
-    /* HERO */
-    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; padding-bottom: 80px; position: relative; overflow: hidden; }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em;
-      color: var(--primary); border: 1px solid var(--primary); padding: 6px 14px; margin-bottom: 36px;
-    }
-    .hero-tag-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    .hero-title { margin-bottom: 28px; }
-    .hero-title .block { display: block; }
-    .hero-sub { font-size: 1.05rem; max-width: 440px; margin-bottom: 44px; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    /* HERO — split med dashboard-mockup */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 48px 80px 24px; max-width: 600px; margin-left: auto; }
+    .hero-tag { display: inline-block; border: 1px solid var(--primary); color: var(--primary); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 28px; width: fit-content; }
+    .hero h1 { font-size: clamp(2.4rem,4vw,4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 20px; }
+    .hero h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--text); }
+    .hero-sub { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.7; margin-bottom: 36px; max-width: 400px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { background: var(--primary); color: #fff; padding: 14px 28px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost { background: transparent; color: var(--text); padding: 14px 28px; border-radius: 4px; border: 1.5px solid var(--border); font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: var(--text); }
+    .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .hero-stat-num { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); }
+    .hero-stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--primary); color: var(--white);
-      font-family: 'Archivo', sans-serif; font-size: 0.9rem; font-weight: 600;
-      padding: 15px 30px; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--white);
-      font-family: 'Archivo', sans-serif; font-size: 0.9rem; font-weight: 600;
-      padding: 14px 30px; border: 1px solid #333; cursor: pointer; transition: border-color 0.2s;
-    }
-    .btn-outline:hover { border-color: var(--white); }
+    /* Dashboard mockup */
+    .hero-right { display: flex; align-items: center; justify-content: center; background: var(--primary); padding: 48px 40px; }
+    .dashboard { background: var(--surface); border-radius: 12px; padding: 24px; width: 100%; max-width: 420px; box-shadow: 0 24px 64px rgba(0,0,0,0.2); }
+    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .dash-title { font-size: 0.78rem; font-weight: 700; color: var(--text); }
+    .dash-badge { background: #00c97720; color: #00c977; font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+    .dash-metric { background: var(--bg); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+    .dash-metric-label { font-size: 0.68rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .dash-metric-value { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text); }
+    .dash-metric-change { font-size: 0.7rem; color: #00c977; font-weight: 600; margin-top: 2px; }
+    .dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .dash-mini { background: var(--bg); border-radius: 8px; padding: 14px; }
+    .dash-mini-label { font-size: 0.65rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .dash-mini-val { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
+    .dash-bar-wrap { background: var(--bg); border-radius: 8px; padding: 16px; }
+    .dash-bar-label { font-size: 0.68rem; color: var(--muted); font-weight: 600; margin-bottom: 10px; }
+    .dash-bars { display: flex; align-items: flex-end; gap: 6px; height: 48px; }
+    .dash-bar { flex: 1; border-radius: 3px 3px 0 0; background: var(--primary); opacity: 0.2; }
+    .dash-bar.active { opacity: 1; }
 
-    .btn-slide {
-      display: inline-flex; align-items: center; gap: 10px; overflow: hidden;
-      background: var(--primary); color: var(--white);
-      font-family: 'Archivo', sans-serif; font-size: 0.9rem; font-weight: 600;
-      padding: 15px 30px; border: none; cursor: pointer;
-    }
-    .btn-slide-inner { display: flex; flex-direction: column; height: 1.2em; overflow: hidden; }
-    .btn-slide-inner span { transition: transform 0.35s cubic-bezier(0.76,0,0.24,1); display: block; }
-    .btn-slide:hover .btn-slide-inner span { transform: translateY(-100%); }
+    .ticker-wrap { overflow: hidden; background: var(--dark); padding: 14px 0; }
+    .ticker { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+    .ticker-item { display: inline-flex; align-items: center; gap: 20px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #555; padding: 0 40px; }
+    .ticker-item span { color: var(--primary); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* Hero visual — dashboard mockup */
-    .hero-visual { position: relative; }
-    .dashboard-card {
-      background: var(--secondary); border: 1px solid #1e1e1e; border-radius: 4px;
-      padding: 28px; margin-bottom: 2px;
-    }
-    .dashboard-card:first-child { margin-top: 80px; }
-    .dash-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 8px; }
-    .dash-value { font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1; }
-    .dash-change { font-size: 0.8rem; color: #4caf50; margin-top: 4px; }
-    .dash-chart { display: flex; align-items: flex-end; gap: 4px; height: 60px; margin-top: 16px; }
-    .dash-bar {
-      flex: 1; background: #1a1a1a; border-radius: 2px;
-      transition: background 0.2s;
-      position: relative;
-    }
-    .dash-bar.active { background: var(--primary); }
-    .dash-bar::after { content: ''; position: absolute; top: 0; left: 0; right: 0; background: rgba(3,57,248,0.15); }
-    .dashboard-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .hero-accent {
-      position: absolute; top: 0; right: -16px;
-      width: 3px; height: 120px; background: var(--primary);
-    }
+    .trust-bar { background: var(--surface); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+    .trust-item { display: flex; align-items: center; gap: 16px; padding: 28px 40px; flex: 1; min-width: 200px; border-right: 1px solid var(--border); }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .trust-title { font-size: 0.88rem; font-weight: 700; }
+    .trust-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 
-    /* TRUST BAR */
-    #trust { border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 44px 0; }
-    .trust-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
-    .trust-item { display: flex; flex-direction: column; gap: 4px; }
-    .trust-num { font-size: 2rem; font-weight: 700; color: var(--white); }
-    .trust-lbl { font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 0.08em; }
+    .section { padding: 96px 24px; max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
+    .section-title { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
+    .section-title .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
+    .section-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin-bottom: 48px; }
 
-    /* TICKER */
-    .ticker-wrap { overflow: hidden; padding: 20px 0; border-bottom: 1px solid #1a1a1a; }
-    .ticker-track { display: flex; gap: 48px; animation: ticker 22s linear infinite; white-space: nowrap; }
-    .ticker-item { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #3a3a3a; flex-shrink: 0; }
-    .ticker-dot  { color: var(--primary); }
-    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* SERVICES */
-    .section-label { margin-bottom: 16px; }
-    .section-title { margin-bottom: 64px; }
-    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: #111; }
-    .service-card {
-      background: var(--black); padding: 44px 36px; position: relative; overflow: hidden; transition: background 0.3s;
-    }
-    .service-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-      background: var(--primary); transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
-    }
-    .service-card:hover { background: #0a0a0a; }
-    .service-card:hover::after { transform: scaleX(1); }
-    .service-num  { font-size: 0.7rem; color: var(--primary); letter-spacing: 0.1em; margin-bottom: 20px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+    .service-card { background: var(--surface); border: 1px solid var(--border); padding: 32px 28px; border-radius: 8px; transition: box-shadow 0.3s, transform 0.3s; }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
     .service-icon { font-size: 2rem; margin-bottom: 16px; }
-    .service-card h3 { margin-bottom: 10px; font-size: 1.2rem; }
-    .service-card p  { font-size: 0.88rem; line-height: 1.65; }
-    .service-arrow { position: absolute; top: 36px; right: 36px; font-size: 1rem; color: #2a2a2a; transition: color 0.3s, transform 0.3s; }
-    .service-card:hover .service-arrow { color: var(--primary); transform: translate(3px,-3px); }
+    .service-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
 
-    /* HOW IT WORKS */
-    #how { background: var(--secondary); }
-    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: #141414; }
-    .step { background: var(--secondary); padding: 48px 36px; position: relative; }
-    .step-num {
-      font-size: 4.5rem; font-weight: 700; line-height: 1;
-      -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #252525;
-      margin-bottom: 24px;
-    }
-    .step h3 { margin-bottom: 12px; font-size: 1.15rem; }
-    .step-connector { position: absolute; top: 50%; right: -1px; width: 2px; height: 48px; background: var(--primary); transform: translateY(-50%); }
-    .step:last-child .step-connector { display: none; }
+    .how-section { background: var(--dark); padding: 80px 24px; }
+    .how-inner { max-width: 1200px; margin: 0 auto; }
+    .how-section .section-label { color: var(--primary); }
+    .how-section .section-title { color: #f5f5f5; }
+    .how-section .section-title .outline { -webkit-text-stroke: 1.5px #f5f5f5; }
+    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; }
+    .how-step { background: #0f0f0f; padding: 40px 32px; }
+    .how-step-num { font-size: 4rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--primary); letter-spacing: -0.06em; line-height: 1; margin-bottom: 20px; }
+    .how-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: #f5f5f5; }
+    .how-step p { font-size: 0.82rem; color: #666; line-height: 1.7; }
 
-    /* PRICING */
-    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: #111; }
-    .pricing-card {
-      background: var(--black); padding: 44px 36px; position: relative;
-      transition: background 0.3s; display: flex; flex-direction: column;
-    }
-    .pricing-card.featured { background: var(--primary); }
-    .pricing-badge {
-      display: inline-block; font-size: 0.68rem; text-transform: uppercase;
-      letter-spacing: 0.1em; padding: 4px 10px; border: 1px solid #333;
-      color: #666; margin-bottom: 24px; align-self: flex-start;
-    }
-    .pricing-card.featured .pricing-badge { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); }
-    .pricing-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
-    .pricing-sub { font-size: 0.85rem; color: #777; margin-bottom: 28px; }
-    .pricing-card.featured .pricing-sub { color: rgba(255,255,255,0.7); }
-    .pricing-price { margin-bottom: 32px; }
-    .pricing-amount { font-size: 2.8rem; font-weight: 700; color: var(--white); line-height: 1; }
-    .pricing-card.featured .pricing-amount { color: var(--white); }
-    .pricing-period { font-size: 0.8rem; color: #666; }
-    .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.65); }
-    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; margin-bottom: 36px; }
-    .pricing-features li { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: #bbb; }
+    /* Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .pricing-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 8px; padding: 36px 28px; position: relative; transition: box-shadow 0.3s; }
+    .pricing-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .pricing-card.featured { border-color: var(--primary); box-shadow: 0 8px 32px var(--primary-soft); }
+    .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; white-space: nowrap; }
+    .pricing-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .pricing-desc { font-size: 0.78rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+    .pricing-price { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+    .pricing-period { font-size: 0.75rem; color: var(--muted); margin-bottom: 24px; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: var(--text); }
     .pricing-features li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
-    .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.85); }
-    .pricing-card.featured .pricing-features li::before { color: rgba(255,255,255,0.9); }
-    .pricing-cta {
-      display: inline-flex; justify-content: center; align-items: center; gap: 8px;
-      font-family: 'Archivo', sans-serif; font-size: 0.88rem; font-weight: 600;
-      padding: 14px 24px; border: 1px solid #222; color: var(--white);
-      transition: border-color 0.2s; cursor: pointer; background: transparent;
-    }
-    .pricing-cta:hover { border-color: var(--primary); }
-    .pricing-card.featured .pricing-cta {
-      background: var(--white); color: var(--primary); border-color: var(--white);
-    }
-    .pricing-card.featured .pricing-cta:hover { background: rgba(255,255,255,0.9); }
+    .pricing-cta { display: block; text-align: center; padding: 12px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+    .pricing-cta.primary { background: var(--primary); color: #fff; }
+    .pricing-cta.outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+    .pricing-cta:hover { opacity: 0.85; }
 
-    /* TESTIMONIALS */
-    #testimonials { background: var(--secondary); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: #141414; }
-    .testimonial-card { background: var(--secondary); padding: 36px; }
-    .stars { color: var(--primary); font-size: 0.95rem; margin-bottom: 16px; letter-spacing: 2px; }
-    .testimonial-card blockquote { font-size: 0.9rem; color: #ccc; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
-    .reviewer { display: flex; align-items: center; gap: 12px; }
-    .reviewer-avatar {
-      width: 40px; height: 40px; border-radius: 50%; background: #2a2a2a;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem; color: var(--primary); font-weight: 700; flex-shrink: 0;
-    }
-    .reviewer-name  { font-size: 0.88rem; font-weight: 600; color: var(--white); }
-    .reviewer-title { font-size: 0.72rem; color: #666; }
-
-    /* ABOUT / TEAM */
     .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-visual { position: relative; }
-    .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 2px; filter: brightness(0.75); }
-    .about-stat-card {
-      position: absolute; bottom: -20px; right: -20px;
-      background: var(--primary); padding: 24px 28px; text-align: center;
-    }
-    .about-stat-num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
-    .about-stat-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.06em; }
-    .about-content h6 { margin-bottom: 16px; }
-    .about-content h2 { margin-bottom: 24px; }
-    .about-content p  { margin-bottom: 28px; }
-    .about-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
-    .about-list li { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; color: #bbb; }
-    .about-list li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
-    .certifications { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
-    .cert-badge {
-      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
-      border: 1px solid #2a2a2a; padding: 8px 14px; color: #666;
-    }
+    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 4px; }
+    .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .about-certs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .cert-badge { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
 
-    /* CTA */
-    #cta { position: relative; overflow: hidden; }
-    .cta-inner { text-align: center; max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
-    .cta-inner h6 { margin-bottom: 24px; }
-    .cta-inner h2 { margin-bottom: 16px; }
-    .cta-inner p  { margin-bottom: 44px; font-size: 1.05rem; }
-    .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    .cta-bg-text {
-      position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
-      font-size: clamp(4rem, 12vw, 11rem); font-weight: 700; white-space: nowrap;
-      -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #111;
-      pointer-events: none; user-select: none;
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .testimonial { background: var(--surface); border: 1px solid var(--border); padding: 28px; border-radius: 8px; }
+    .test-stars { color: #f5a623; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
+    .test-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .test-author { display: flex; align-items: center; gap: 12px; }
+    .test-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .test-name { font-size: 0.82rem; font-weight: 700; }
+    .test-meta { font-size: 0.72rem; color: var(--muted); }
 
-    /* CONTACT */
-    #contact { background: var(--secondary); }
-    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-info h6 { margin-bottom: 16px; }
-    .contact-info h2 { margin-bottom: 20px; }
-    .contact-info p  { margin-bottom: 36px; }
-    .contact-details { display: flex; flex-direction: column; gap: 20px; }
-    .contact-detail { display: flex; align-items: center; gap: 14px; }
-    .c-icon { font-size: 1.1rem; color: var(--primary); flex-shrink: 0; }
-    .c-text h5 { color: var(--white); font-size: 0.9rem; font-weight: 600; }
-    .c-text p  { font-size: 0.82rem; margin: 0; }
-    form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .contact-inner { max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-left h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
+    .contact-left h2 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
+    .contact-left > p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .contact-details { display: flex; flex-direction: column; gap: 18px; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 14px; }
+    .contact-icon { width: 38px; height: 38px; border-radius: 6px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+    .contact-info-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .contact-info-val { font-size: 0.88rem; font-weight: 600; }
+    .contact-info-val a { color: var(--text); text-decoration: none; }
+    .contact-info-val a:hover { color: var(--primary); }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #666; }
-    .form-group input, .form-group textarea, .form-group select {
-      background: var(--black); border: 1px solid #222;
-      color: var(--white); font-family: 'Archivo', sans-serif;
-      font-size: 0.88rem; padding: 13px 16px; outline: none;
-      transition: border-color 0.2s; -webkit-appearance: none;
-    }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-group select option { background: var(--black); }
+    .form-group label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .form-group input, .form-group select, .form-group textarea { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); padding: 12px 14px; border-radius: 6px; font-family: 'Archivo',sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit { background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 14px; font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .form-submit:hover { opacity: 0.85; }
+    .form-success { display: none; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 6px; padding: 16px; text-align: center; font-size: 0.88rem; color: var(--primary); }
 
-    /* FOOTER */
-    footer { border-top: 1px solid #1a1a1a; padding: 44px 0; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-    .footer-logo span:first-child { font-size: 0.95rem; font-weight: 700; }
-    .footer-logo span:last-child  { font-size: 0.95rem; font-weight: 300; color: #555; }
-    .footer-links { display: flex; gap: 28px; }
-    .footer-links a { font-size: 0.82rem; color: #555; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { font-size: 0.78rem; color: #3a3a3a; }
+    .site-footer { background: var(--dark); color: #f5f5f5; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 56px 24px 32px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; margin-bottom: 14px; }
+    .footer-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: #f5f5f5; }
+    .footer-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1px #f5f5f5; }
+    .footer-brand p { font-size: 0.82rem; color: #555; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.82rem; color: #555; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #f5f5f5; }
+    .footer-bottom { border-top: 1px solid #ffffff08; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 0.78rem; color: #333; }
 
-    /* REVEAL */
-    .reveal { opacity:0; transform:translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .hero-inner     { grid-template-columns: 1fr; }
-      .about-inner    { grid-template-columns: 1fr; }
-      .about-stat-card { right: 0; }
-      .contact-inner  { grid-template-columns: 1fr; }
-      .trust-grid     { grid-template-columns: repeat(2,1fr); }
-      .services-grid  { grid-template-columns: repeat(2,1fr); }
-      .pricing-grid   { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
-    }
-    @media (max-width: 768px) {
-      h1 { font-size: 2.8rem; }
-      h2 { font-size: 2rem; }
-      .section { padding: 72px 0; }
-      .services-grid     { grid-template-columns: 1fr; }
-      .steps-grid        { grid-template-columns: 1fr; }
-      .step-connector    { display: none; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { padding: 48px 24px; }
+      .hero-left { padding: 80px 24px 32px; max-width: 100%; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .how-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; }
-      .form-row          { grid-template-columns: 1fr; }
-      .nav-consult       { display: none; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
     }
   </style>
 </head>
 <body>
-
-  <!-- PRELOADER -->
-  <div id="preloader">
-    <div class="pre-panel left"></div>
-    <div class="pre-panel right"></div>
-  </div>
-  <div class="pre-logo" id="preloader-logo">
-    <div class="pre-circle"><div class="pre-dot"></div></div>
-  </div>
-
-  <!-- NAVIGATION -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo"><span>Nord</span><span>Regnskap</span></a>
-      <div class="nav-right">
-        <a href="#contact" class="nav-consult">Gratis konsultasjon</a>
-        <button class="hamburger-btn" id="hamburger" aria-label="Meny">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
+  <div id="preloader"><div class="pre-panel left"></div><div class="pre-panel right"></div></div>
 
   <div class="nav-overlay" id="navOverlay">
-    <div class="nav-overlay-items" style="display:flex;flex-direction:column;gap:4px">
-      <a href="#services"     class="nav-overlay-item"><span class="nav-overlay-num">01</span><span class="nav-overlay-text">Tjenester</span></a>
-      <a href="#how"          class="nav-overlay-item"><span class="nav-overlay-num">02</span><span class="nav-overlay-text">Prosessen</span></a>
-      <a href="#pricing"      class="nav-overlay-item"><span class="nav-overlay-num">03</span><span class="nav-overlay-text">Priser</span></a>
-      <a href="#about"        class="nav-overlay-item"><span class="nav-overlay-num">04</span><span class="nav-overlay-text">Om oss</span></a>
-      <a href="#contact"      class="nav-overlay-item"><span class="nav-overlay-num">05</span><span class="nav-overlay-text">Kontakt</span></a>
-    </div>
+    <ul class="overlay-links">
+      <li><span class="overlay-num">01</span><a href="#tjenester" onclick="closeNav()">Tjenester</a></li>
+      <li><span class="overlay-num">02</span><a href="#slik-jobber-vi" onclick="closeNav()">Slik jobber vi</a></li>
+      <li><span class="overlay-num">03</span><a href="#priser" onclick="closeNav()">Priser</a></li>
+      <li><span class="overlay-num">04</span><a href="#om-oss" onclick="closeNav()">Om oss</a></li>
+      <li><span class="overlay-num">05</span><a href="#kontakt" onclick="closeNav()">Kontakt</a></li>
+    </ul>
   </div>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <div class="hero-tag"><span class="hero-tag-dot"></span> Autorisert regnskapsfører</div>
-          <div class="hero-title">
-            <h1>
-              <span class="block">Vi tar</span>
-              <span class="block outline">regnskapet</span>
-              <span class="block">du tar veksten</span>
-            </h1>
+  <nav id="navbar">
+    <a href="#" class="nav-logo"><span>Nexus</span><span>Regnskap</span></a>
+    <div class="nav-links">
+      <a href="#tjenester">Tjenester</a>
+      <a href="#priser">Priser</a>
+      <a href="#om-oss">Om oss</a>
+    </div>
+    <a href="#kontakt" class="nav-cta">Gratis samtale</a>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag reveal">Autorisert regnskapsbyrå i [By]</div>
+      <h1 class="reveal">Vi tar regnskapet —<br/><span class="outline">du tar veksten</span></h1>
+      <p class="hero-sub reveal">Autoriserte regnskapsførere med fast månedspris og full digitalisering. Alltid tilgjengelige for spørsmål.</p>
+      <div class="hero-actions reveal">
+        <a href="#kontakt" class="btn-primary">Gratis konsultasjon</a>
+        <a href="#priser" class="btn-ghost">Se priser</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="hero-stat"><div class="hero-stat-num">120+</div><div class="hero-stat-label">Aktive klienter</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">12+</div><div class="hero-stat-label">År i bransjen</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4.9 ★</div><div class="hero-stat-label">Google-vurdering</div></div>
+      </div>
+    </div>
+    <div class="hero-right reveal">
+      <div class="dashboard">
+        <div class="dash-header">
+          <span class="dash-title">Økonomirapport — Oktober</span>
+          <span class="dash-badge">↑ 18% vs. forrige mnd</span>
+        </div>
+        <div class="dash-metric">
+          <div class="dash-metric-label">Omsetning MTD</div>
+          <div class="dash-metric-value">842 400 kr</div>
+          <div class="dash-metric-change">↑ 12.4% fra september</div>
+        </div>
+        <div class="dash-row">
+          <div class="dash-mini">
+            <div class="dash-mini-label">Utestående</div>
+            <div class="dash-mini-val">64 200 kr</div>
           </div>
-          <p class="hero-sub">Nord Regnskap håndterer regnskap, lønn, MVA og årsoppgjør for over 120 bedrifter. Du fokuserer på det du er god på — vi tar resten.</p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn-slide">
-              <span class="btn-slide-inner"><span>Gratis konsultasjon</span><span>Gratis konsultasjon</span></span>
-              <span>→</span>
-            </a>
-            <a href="#pricing" class="btn-outline">Se priser</a>
+          <div class="dash-mini">
+            <div class="dash-mini-label">MVA neste frist</div>
+            <div class="dash-mini-val">10. des</div>
           </div>
         </div>
-
-        <!-- Dashboard visual -->
-        <div class="hero-visual reveal reveal-delay-2">
-          <div class="hero-accent"></div>
-          <div class="dashboard-card">
-            <div class="dash-label">Resultat hittil i år</div>
-            <div class="dash-value">842 300 kr</div>
-            <div class="dash-change">↑ 18.4% fra i fjor</div>
-            <div class="dash-chart">
-              <div class="dash-bar" style="height:40%"></div>
-              <div class="dash-bar" style="height:55%"></div>
-              <div class="dash-bar" style="height:48%"></div>
-              <div class="dash-bar" style="height:70%"></div>
-              <div class="dash-bar" style="height:60%"></div>
-              <div class="dash-bar" style="height:85%"></div>
-              <div class="dash-bar active" style="height:100%"></div>
-            </div>
-          </div>
-          <div class="dashboard-row">
-            <div class="dashboard-card" style="margin-bottom:0">
-              <div class="dash-label">Ubetalte fakturaer</div>
-              <div class="dash-value" style="font-size:1.4rem">3</div>
-              <div class="dash-change" style="color:#ff6b6b">↑ Forfaller snart</div>
-            </div>
-            <div class="dashboard-card" style="margin-bottom:0">
-              <div class="dash-label">MVA-frist</div>
-              <div class="dash-value" style="font-size:1.4rem">14 dager</div>
-              <div class="dash-change">✓ Klar til innlevering</div>
-            </div>
+        <div class="dash-bar-wrap">
+          <div class="dash-bar-label">Månedlig omsetning — 2024</div>
+          <div class="dash-bars">
+            <div class="dash-bar" style="height:55%;"></div>
+            <div class="dash-bar" style="height:60%;"></div>
+            <div class="dash-bar" style="height:70%;"></div>
+            <div class="dash-bar" style="height:65%;"></div>
+            <div class="dash-bar" style="height:75%;"></div>
+            <div class="dash-bar" style="height:80%;"></div>
+            <div class="dash-bar" style="height:72%;"></div>
+            <div class="dash-bar" style="height:85%;"></div>
+            <div class="dash-bar" style="height:90%;"></div>
+            <div class="dash-bar active" style="height:100%;"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TICKER -->
   <div class="ticker-wrap">
-    <div class="ticker-track">
-      <span class="ticker-item">Løpende regnskap <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Lønnskjøring <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">MVA-rapportering <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Årsoppgjør <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Styrearbeid <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Budsjettering <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Autorisert regnskapsfører <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Løpende regnskap <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Lønnskjøring <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">MVA-rapportering <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Årsoppgjør <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Styrearbeid <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Budsjettering <span class="ticker-dot">•</span></span>
-      <span class="ticker-item">Autorisert regnskapsfører <span class="ticker-dot">•</span></span>
+    <div class="ticker" id="ticker">
+      <div class="ticker-item"><span>✦</span> Løpende regnskap</div>
+      <div class="ticker-item"><span>✦</span> Lønnskjøring</div>
+      <div class="ticker-item"><span>✦</span> MVA-rapportering</div>
+      <div class="ticker-item"><span>✦</span> Årsoppgjør</div>
+      <div class="ticker-item"><span>✦</span> Skattemelding</div>
+      <div class="ticker-item"><span>✦</span> Rådgivning</div>
+      <div class="ticker-item"><span>✦</span> Løpende regnskap</div>
+      <div class="ticker-item"><span>✦</span> Lønnskjøring</div>
+      <div class="ticker-item"><span>✦</span> MVA-rapportering</div>
+      <div class="ticker-item"><span>✦</span> Årsoppgjør</div>
+      <div class="ticker-item"><span>✦</span> Skattemelding</div>
+      <div class="ticker-item"><span>✦</span> Rådgivning</div>
     </div>
   </div>
 
-  <!-- TRUST BAR -->
-  <section id="trust">
-    <div class="container">
-      <div class="trust-grid">
-        <div class="trust-item reveal">
-          <span class="trust-num">120+</span>
-          <span class="trust-lbl">Aktive klienter</span>
-        </div>
-        <div class="trust-item reveal reveal-delay-1">
-          <span class="trust-num">12 år</span>
-          <span class="trust-lbl">I bransjen</span>
-        </div>
-        <div class="trust-item reveal reveal-delay-2">
-          <span class="trust-num">24t</span>
-          <span class="trust-lbl">Responstid</span>
-        </div>
-        <div class="trust-item reveal reveal-delay-3">
-          <span class="trust-num">100%</span>
-          <span class="trust-lbl">Digitalt &amp; papirløst</span>
+  <div class="trust-bar reveal">
+    <div class="trust-item"><div class="trust-icon">🏅</div><div><div class="trust-title">Autorisert regnskapsfører</div><div class="trust-sub">NARF-godkjent</div></div></div>
+    <div class="trust-item"><div class="trust-icon">👥</div><div><div class="trust-title">120+ klienter</div><div class="trust-sub">Fra enkeltpersonforetak til AS</div></div></div>
+    <div class="trust-item"><div class="trust-icon">💻</div><div><div class="trust-title">100% digitalt</div><div class="trust-sub">Tripletex, Fiken, Visma</div></div></div>
+    <div class="trust-item"><div class="trust-icon">⚡</div><div><div class="trust-title">Rask respons</div><div class="trust-sub">Svar innen 2 timer</div></div></div>
+  </div>
+
+  <section class="section" id="tjenester">
+    <div class="section-label reveal">Tjenester</div>
+    <h2 class="section-title reveal">Alt innen <span class="outline">økonomi</span></h2>
+    <p class="section-sub reveal">Vi tar oss av alt det administrative — så du kan fokusere på det du er best på.</p>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="service-icon">📊</div><div class="service-name">Løpende regnskap</div><div class="service-desc">Kontinuerlig bokføring, kontoavstemming og månedlige rapporter. Du har alltid oversikt.</div></div>
+      <div class="service-card reveal"><div class="service-icon">👥</div><div class="service-name">Lønn & personal</div><div class="service-desc">Lønnskjøring, A-melding, feriepenger og reiseregninger — vi håndterer hele lønnsprosessen.</div></div>
+      <div class="service-card reveal"><div class="service-icon">📋</div><div class="service-name">MVA & skatt</div><div class="service-desc">Korrekt MVA-håndtering, terminoppgaver og skattemelding levert til rett tid.</div></div>
+      <div class="service-card reveal"><div class="service-icon">📁</div><div class="service-name">Årsoppgjør</div><div class="service-desc">Komplett årsregnskap, årsberetning og innlevering til Brønnøysund.</div></div>
+      <div class="service-card reveal"><div class="service-icon">💡</div><div class="service-name">Rådgivning</div><div class="service-desc">Strategisk regnskap, budsjettering, likviditetsstyring og skatteplanlegging.</div></div>
+      <div class="service-card reveal"><div class="service-icon">🏢</div><div class="service-name">Bedriftsetablering</div><div class="service-desc">Hjelp til å stifte AS eller ENK, registrering og oppstart av regnskapet.</div></div>
+    </div>
+  </section>
+
+  <section class="how-section" id="slik-jobber-vi">
+    <div class="how-inner">
+      <div class="section-label reveal">Slik jobber vi</div>
+      <h2 class="section-title reveal">Enkelt og <span class="outline">oversiktlig</span></h2>
+      <div class="how-grid">
+        <div class="how-step reveal"><div class="how-step-num">01</div><h3>Onboarding</h3><p>Vi setter opp systemet, overfører historikk og kobler deg til riktig regnskapsprogram. Klar på 2 dager.</p></div>
+        <div class="how-step reveal"><div class="how-step-num">02</div><h3>Løpende arbeid</h3><p>Du sender bilag digitalt — vi tar oss av resten. Månedlige rapporter og fast kontaktperson.</p></div>
+        <div class="how-step reveal"><div class="how-step-num">03</div><h3>Rapportering</h3><p>Kvartalsvise gjennomganger og årsoppgjør. Du er alltid oppdatert på bedriftens økonomi.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="priser">
+    <div class="section-label reveal">Priser</div>
+    <h2 class="section-title reveal">Fast pris — <span class="outline">ingen overraskelser</span></h2>
+    <p class="section-sub reveal">Alle pakker inkluderer dedikert regnskapsfører og ubegrenset support via e-post.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Basis</div>
+        <div class="pricing-desc">For enkeltpersonforetak og små AS med begrenset aktivitet</div>
+        <div class="pricing-price">2 490 kr</div>
+        <div class="pricing-period">per måned inkl. mva</div>
+        <ul class="pricing-features">
+          <li>Løpende bokføring</li>
+          <li>MVA-rapportering</li>
+          <li>Årsoppgjør</li>
+          <li>Skattemelding</li>
+          <li>E-post support</li>
+        </ul>
+        <a href="#kontakt" class="pricing-cta outline">Kom i gang</a>
+      </div>
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Mest populær</div>
+        <div class="pricing-name">Vekst</div>
+        <div class="pricing-desc">For voksende AS med ansatte og løpende behov for rådgivning</div>
+        <div class="pricing-price">4 990 kr</div>
+        <div class="pricing-period">per måned inkl. mva</div>
+        <ul class="pricing-features">
+          <li>Alt i Basis</li>
+          <li>Lønnskjøring (opptil 5)</li>
+          <li>Kvartalsvise møter</li>
+          <li>Budsjettering</li>
+          <li>Rådgivning inkludert</li>
+        </ul>
+        <a href="#kontakt" class="pricing-cta primary">Kom i gang</a>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-desc">For større bedrifter med komplekse behov og konsolidering</div>
+        <div class="pricing-price">Avtale</div>
+        <div class="pricing-period">skreddersydd pris</div>
+        <ul class="pricing-features">
+          <li>Alt i Vekst</li>
+          <li>Ubegrenset lønn</li>
+          <li>Månedlige møter</li>
+          <li>Konsernregnskap</li>
+          <li>Dedikert team</li>
+        </ul>
+        <a href="#kontakt" class="pricing-cta outline">Ta kontakt</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="om-oss">
+    <div class="about-inner">
+      <div class="reveal">
+        <img class="about-img" src="bilder/regnskap/about.jpg" onerror="this.src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=80'" alt="Nexus Regnskap team" />
+      </div>
+      <div class="reveal">
+        <div class="section-label">Om oss</div>
+        <h2 class="section-title">Din partner<br/>for <span class="outline">vekst</span></h2>
+        <p>Nexus Regnskap ble etablert i [By] i 2012. Vi er i dag 8 autoriserte regnskapsførere og betjener 120+ bedrifter i hele regionen.</p>
+        <p>Vi tror på langsiktige relasjoner. Din dedikerte regnskapsfører kjenner bedriften din godt og er alltid tilgjengelig for spørsmål — ikke bare på frister.</p>
+        <p>Alle våre systemer er fulldigitaliserte. Vi bruker Tripletex, Fiken og Visma, og tilpasser oss det systemet du allerede bruker.</p>
+        <div class="about-certs">
+          <div class="cert-badge">✓ NARF-godkjent</div>
+          <div class="cert-badge">✓ Tripletex Partner</div>
+          <div class="cert-badge">✓ Visma Autorisert</div>
+          <div class="cert-badge">✓ Fiken Partner</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="section">
-    <div class="container">
-      <h6 class="section-label reveal">Hva vi gjør</h6>
-      <h2 class="section-title reveal">Tjenester som <span class="outline-primary">frigjør tid</span></h2>
-      <div class="services-grid">
-        <div class="service-card reveal">
-          <div class="service-num">01</div>
-          <div class="service-icon">📊</div>
-          <h3>Løpende regnskap</h3>
-          <p>Vi sørger for at bilag bokføres korrekt og til rett tid. Alltid oppdatert oversikt via delt tilgang til regnskapssystemet.</p>
-          <span class="service-arrow">↗</span>
+  <section class="section" id="anmeldelser">
+    <div class="section-label reveal">Anmeldelser</div>
+    <h2 class="section-title reveal">Hva kundene <span class="outline">sier</span></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Endelig en regnskapsfører som er proaktiv! De varsler meg om frister, gir råd uten at jeg spør og er alltid tilgjengelige. Skulle ønske jeg byttet tidligere."</div><div class="test-author"><div class="test-avatar">MN</div><div><div class="test-name">Martin Nilsen</div><div class="test-meta">Daglig leder · Google</div></div></div></div>
+      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Nexus hjalp oss med bedriftsetablering og har fulgt oss siden starten. Oversiktlig rapportering og rask respons på alle spørsmål. Anbefales!"</div><div class="test-author"><div class="test-avatar">SR</div><div><div class="test-name">Sara Rønning</div><div class="test-meta">Grunder · Google</div></div></div></div>
+      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Byttet fra et stort firma til Nexus — enorm forskjell. Personlig service, fast pris og alltid korrekte tall. Sparer tid og penger hvert år."</div><div class="test-author"><div class="test-avatar">TH</div><div><div class="test-name">Tor Halvorsen</div><div class="test-meta">Eiendomsinvestor · Google</div></div></div></div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="kontakt">
+    <div class="contact-inner">
+      <div class="contact-left reveal">
+        <div class="section-label">Kontakt</div>
+        <h2>Book en gratis<br/><span class="outline">konsultasjon</span></h2>
+        <p>Uforpliktende samtale om ditt regnskapsbehov. Vi gir deg et tilbud innen 24 timer.</p>
+        <div class="contact-details">
+          <div class="contact-detail"><div class="contact-icon">📞</div><div><div class="contact-info-label">Telefon</div><div class="contact-info-val"><a href="tel:+4712345678">+47 123 45 678</a></div></div></div>
+          <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-info-label">E-post</div><div class="contact-info-val"><a href="mailto:hei@nexusregnskap.no">hei@nexusregnskap.no</a></div></div></div>
+          <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-info-label">Adresse</div><div class="contact-info-val">Næringsveien 12, [By]</div></div></div>
+          <div class="contact-detail"><div class="contact-icon">🕐</div><div><div class="contact-info-label">Åpningstider</div><div class="contact-info-val">Man–Fre 08–16</div></div></div>
         </div>
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-num">02</div>
-          <div class="service-icon">👥</div>
-          <h3>Lønnskjøring</h3>
-          <p>Vi håndterer lønn, feriepenger, skattetrekk og A-melding. Presist og til rett tid — hver gang, uten unntak.</p>
-          <span class="service-arrow">↗</span>
-        </div>
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-num">03</div>
-          <div class="service-icon">📋</div>
-          <h3>MVA &amp; skatt</h3>
-          <p>Vi leverer alle MVA-meldinger til rett tid og sørger for at du betaler korrekt skatt — og ikke mer enn nødvendig.</p>
-          <span class="service-arrow">↗</span>
-        </div>
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-num">04</div>
-          <div class="service-icon">📁</div>
-          <h3>Årsoppgjør</h3>
-          <p>Komplett årsregnskap, årsberetning og skattemelding. Vi koordinerer med revisor og leverer alt i tide.</p>
-          <span class="service-arrow">↗</span>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-num">05</div>
-          <div class="service-icon">📈</div>
-          <h3>Rådgivning</h3>
-          <p>Budsjettering, likviditetsprognose og strategisk rådgivning. Vi er mer enn et regnskapsbyrå — vi er din sparringspartner.</p>
-          <span class="service-arrow">↗</span>
-        </div>
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-num">06</div>
-          <div class="service-icon">🏢</div>
-          <h3>Stiftelse &amp; oppstart</h3>
-          <p>Hjelp til å sette opp AS, registrere i Brønnøysund og etablere gode rutiner fra dag én. Riktig fra start.</p>
-          <span class="service-arrow">↗</span>
-        </div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group"><label>Fornavn</label><input type="text" placeholder="Ola" required /></div>
+            <div class="form-group"><label>Etternavn</label><input type="text" placeholder="Nordmann" required /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+47 xxx xx xxx" required /></div>
+            <div class="form-group"><label>E-post</label><input type="email" placeholder="din@bedrift.no" required /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Bedriftsnavn</label><input type="text" placeholder="Bedriften AS" /></div>
+            <div class="form-group"><label>Org.form</label>
+              <select><option value="" disabled selected>Velg</option><option>AS</option><option>ENK</option><option>ANS/DA</option><option>Annet</option></select>
+            </div>
+          </div>
+          <div class="form-group"><label>Hva trenger du hjelp med?</label>
+            <select><option value="" disabled selected>Velg tjeneste</option><option>Løpende regnskap</option><option>Lønn & personal</option><option>MVA & skatt</option><option>Årsoppgjør</option><option>Rådgivning</option><option>Bedriftsetablering</option><option>Annet</option></select>
+          </div>
+          <div class="form-group"><label>Melding</label><textarea placeholder="Fortell litt om bedriften og hva du trenger hjelp med..."></textarea></div>
+          <button type="submit" class="form-submit" id="submitBtn">Send forespørsel</button>
+        </form>
+        <div class="form-success" id="formSuccess">✓ Takk! Vi tar kontakt innen 24 timer med et tilbud.</div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how" class="section">
-    <div class="container">
-      <h6 class="section-label reveal">Enkel overgang</h6>
-      <h2 class="section-title reveal">Slik kommer <span class="outline">du i gang</span></h2>
-      <div class="steps-grid">
-        <div class="step reveal">
-          <div class="step-num">01</div>
-          <h3>Gratis konsultasjon</h3>
-          <p>Vi starter med en uforpliktende prat om din bedrift, dine behov og hva du ønsker ut av et regnskapsbyrå. Ingen binding.</p>
-          <div class="step-connector"></div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo"><span>Nexus</span><span>Regnskap</span></a>
+          <p>Autorisert regnskapsbyrå i [By] — vi hjelper 120+ bedrifter med regnskap, lønn og rådgivning.</p>
         </div>
-        <div class="step reveal reveal-delay-1">
-          <div class="step-num">02</div>
-          <h3>Skreddersydd tilbud</h3>
-          <p>Vi sender et klart tilbud med fast månedspris. Ingen overraskelser, ingen skjulte kostnader. Du vet akkurat hva du betaler.</p>
-          <div class="step-connector"></div>
-        </div>
-        <div class="step reveal reveal-delay-2">
-          <div class="step-num">03</div>
-          <h3>Vi tar over — du slipper å tenke</h3>
-          <p>Vi henter dokumentasjon fra forrige byrå, setter opp systemer og tar over fra neste periode. Smertefritt og raskt.</p>
-        </div>
+        <div class="footer-col"><h4>Tjenester</h4><ul><li><a href="#tjenester">Løpende regnskap</a></li><li><a href="#tjenester">Lønn & personal</a></li><li><a href="#tjenester">MVA & skatt</a></li><li><a href="#tjenester">Årsoppgjør</a></li><li><a href="#tjenester">Rådgivning</a></li></ul></div>
+        <div class="footer-col"><h4>Kontakt</h4><ul><li><a href="tel:+4712345678">+47 123 45 678</a></li><li><a href="mailto:hei@nexusregnskap.no">hei@nexusregnskap.no</a></li><li><a href="#">Næringsveien 12, [By]</a></li><li><a href="#">Man–Fre: 08–16</a></li></ul></div>
       </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="section">
-    <div class="container">
-      <h6 class="section-label reveal" style="text-align:center">Transparent prising</h6>
-      <h2 class="section-title reveal" style="text-align:center">Velg pakken som <span class="outline-primary">passer deg</span></h2>
-      <div class="pricing-grid">
-        <div class="pricing-card reveal">
-          <div class="pricing-badge">Liten bedrift</div>
-          <h3>Basis</h3>
-          <p class="pricing-sub">For ENK og AS med lavt bilagsvolum</p>
-          <div class="pricing-price">
-            <div class="pricing-amount">2 490 kr</div>
-            <div class="pricing-period">/ måned inkl. mva</div>
-          </div>
-          <ul class="pricing-features">
-            <li>Løpende bokføring (t.o.m. 50 bilag)</li>
-            <li>MVA-innlevering</li>
-            <li>Årsoppgjør</li>
-            <li>E-post support</li>
-          </ul>
-          <a href="#contact" class="pricing-cta">Kom i gang →</a>
-        </div>
-        <div class="pricing-card featured reveal reveal-delay-1">
-          <div class="pricing-badge">Mest populær</div>
-          <h3>Vekst</h3>
-          <p class="pricing-sub">For veksende AS med ansatte</p>
-          <div class="pricing-price">
-            <div class="pricing-amount">4 990 kr</div>
-            <div class="pricing-period">/ måned inkl. mva</div>
-          </div>
-          <ul class="pricing-features">
-            <li>Løpende bokføring (t.o.m. 200 bilag)</li>
-            <li>Lønnskjøring (t.o.m. 5 ansatte)</li>
-            <li>MVA &amp; A-melding</li>
-            <li>Årsoppgjør + styredokumenter</li>
-            <li>Månedlig rapportmøte</li>
-            <li>Telefon- og e-postsupport</li>
-          </ul>
-          <a href="#contact" class="pricing-cta">Kom i gang →</a>
-        </div>
-        <div class="pricing-card reveal reveal-delay-2">
-          <div class="pricing-badge">Større bedrift</div>
-          <h3>Pro</h3>
-          <p class="pricing-sub">Skreddersydd for din bedrift</p>
-          <div class="pricing-price">
-            <div class="pricing-amount">Pris etter avtale</div>
-            <div class="pricing-period">&nbsp;</div>
-          </div>
-          <ul class="pricing-features">
-            <li>Ubegrenset bilagsvolum</li>
-            <li>Lønnskjøring alle ansatte</li>
-            <li>Dedikert regnskapsfører</li>
-            <li>Rådgivning &amp; budsjettering</li>
-            <li>Revisorkoordinering</li>
-            <li>Prioritert support</li>
-          </ul>
-          <a href="#contact" class="pricing-cta">Ta kontakt →</a>
-        </div>
-      </div>
-      <p style="text-align:center; margin-top:32px; font-size:0.82rem; color:#555;">Alle priser er inkl. mva. Ingen bindingstid etter første 3 måneder.</p>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="about-inner">
-        <div class="about-visual reveal">
-          <img
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=700&auto=format&fit=crop&q=80"
-            alt="Nord Regnskap team"
-            class="about-img"
-          >
-          <div class="about-stat-card">
-            <div class="about-stat-num">2012</div>
-            <div class="about-stat-lbl">Etablert</div>
-          </div>
-        </div>
-        <div class="about-content reveal reveal-delay-1">
-          <h6>Om Nord Regnskap</h6>
-          <h2>Autorisert, <span class="outline-primary">digitalt og dedikert</span></h2>
-          <p>Vi er et team på 6 autoriserte regnskapsførere med base i Oslo. Siden 2012 har vi hjulpet over 300 bedrifter med å ha kontroll på tallene.</p>
-          <p>Vi bruker moderne skybaserte systemer (Tripletex, Visma, Fiken) og kan koble oss sømløst på der du allerede er. Bytter du fra et annet byrå — vi tar oss av hele overgangen.</p>
-          <ul class="about-list">
-            <li>Autorisert regnskapsfører (NARF-godkjent)</li>
-            <li>Dedikert kontaktperson — alltid samme person</li>
-            <li>Svar innen 24 timer på hverdager</li>
-            <li>100% digitalt — ingen papir og permer</li>
-            <li>Ingen bindingstid etter 3 måneder</li>
-          </ul>
-          <a href="#contact" class="btn-primary">Book gratis konsultasjon →</a>
-          <div class="certifications">
-            <span class="cert-badge">NARF-godkjent</span>
-            <span class="cert-badge">Tripletex Partner</span>
-            <span class="cert-badge">Visma Autorisert</span>
-            <span class="cert-badge">Fiken Partner</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="section">
-    <div class="container">
-      <h6 class="section-label reveal">Hva klientene sier</h6>
-      <h2 class="section-title reveal">Ekte <span class="outline">tilbakemeldinger</span></h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal">
-          <div class="stars">★★★★★</div>
-          <blockquote>"Byttet til Nord Regnskap for ett år siden og angrer ikke et sekund. Responsivt, presis og alltid i forkant av frister. Endelig kan jeg fokusere på å drive bedriften!"</blockquote>
-          <div class="reviewer">
-            <div class="reviewer-avatar">J</div>
-            <div><div class="reviewer-name">Jonas Bakke</div><div class="reviewer-title">Daglig leder, Bakke Bygg AS</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal reveal-delay-1">
-          <div class="stars">★★★★★</div>
-          <blockquote>"De oppdaget skattefradrag vi hadde gått glipp av i årevis. Spart oss for 40 000 kr bare i det første året. Profesjonelle og kunnskapsrike."</blockquote>
-          <div class="reviewer">
-            <div class="reviewer-avatar">C</div>
-            <div><div class="reviewer-name">Camilla Strand</div><div class="reviewer-title">Eier, Strand Konsult ENK</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal reveal-delay-2">
-          <div class="stars">★★★★★</div>
-          <blockquote>"Overgangen fra forrige byrå var smertefri. Nord Regnskap tok seg av alt og vi var operative igjen uten avbrudd. Trygt å ha dem i ryggen."</blockquote>
-          <div class="reviewer">
-            <div class="reviewer-avatar">A</div>
-            <div><div class="reviewer-name">Anders Holm</div><div class="reviewer-title">Gründer, Holm Digital AS</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="cta" class="section">
-    <div class="container">
-      <div class="cta-inner">
-        <h6>Klar for en frisk start?</h6>
-        <h2 class="reveal">Gratis <span class="outline-primary">konsultasjon</span></h2>
-        <p class="reveal">30 minutter. Ingen forpliktelser. Vi kartlegger ditt behov og gir deg en uforpliktende prisvurdering.</p>
-        <div class="cta-actions reveal">
-          <a href="#contact" class="btn-primary">Book gratis konsultasjon →</a>
-          <a href="tel:+4799999999" class="btn-outline">📞 Ring oss</a>
-        </div>
-      </div>
-    </div>
-    <div class="cta-bg-text">REGNSKAP</div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="contact-inner">
-        <div class="contact-info reveal">
-          <h6>Kom i gang</h6>
-          <h2>Book din <span class="outline-primary">gratis samtale</span></h2>
-          <p>Fyll ut skjemaet og vi ringer deg innen én virkedag for en uforpliktende prat om dine behov og en prisvurdering.</p>
-          <div class="contact-details">
-            <div class="contact-detail">
-              <span class="c-icon">📞</span>
-              <div class="c-text"><h5>Telefon</h5><p>22 00 00 00 (Man–fre 08–16)</p></div>
-            </div>
-            <div class="contact-detail">
-              <span class="c-icon">✉️</span>
-              <div class="c-text"><h5>E-post</h5><p>post@nordregnskap.no</p></div>
-            </div>
-            <div class="contact-detail">
-              <span class="c-icon">📍</span>
-              <div class="c-text"><h5>Kontor</h5><p>Storgata 10, 0155 Oslo</p></div>
-            </div>
-            <div class="contact-detail">
-              <span class="c-icon">⏱️</span>
-              <div class="c-text"><h5>Responstid</h5><p>Svar innen 24 timer på hverdager</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="reveal reveal-delay-1">
-          <form onsubmit="handleSubmit(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Ditt navn</label>
-                <input type="text" placeholder="Ola Nordmann" required>
-              </div>
-              <div class="form-group">
-                <label>Telefon</label>
-                <input type="tel" placeholder="999 99 999" required>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>E-post</label>
-                <input type="email" placeholder="ola@bedrift.no" required>
-              </div>
-              <div class="form-group">
-                <label>Bedriftsnavn</label>
-                <input type="text" placeholder="Ola Nordmann AS">
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Hva trenger du hjelp med?</label>
-              <select>
-                <option value="">Velg tjeneste...</option>
-                <option>Løpende regnskap</option>
-                <option>Lønnskjøring</option>
-                <option>Årsoppgjør</option>
-                <option>Bytte av regnskapsbyrå</option>
-                <option>Oppstart av ny bedrift</option>
-                <option>Rådgivning</option>
-                <option>Annet</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Antall ansatte</label>
-              <select>
-                <option>Kun meg (ENK/soloprenør)</option>
-                <option>1–5 ansatte</option>
-                <option>6–15 ansatte</option>
-                <option>16–50 ansatte</option>
-                <option>50+ ansatte</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Tilleggsinfo</label>
-              <textarea placeholder="Fortell oss gjerne litt om situasjonen din, gjeldende regnskapssystem eller andre ting vi bør vite..."></textarea>
-            </div>
-            <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
-              Send forespørsel — gratis og uforpliktende →
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-logo"><span>Nord</span><span>Regnskap</span></div>
-        <nav class="footer-links">
-          <a href="#services">Tjenester</a>
-          <a href="#pricing">Priser</a>
-          <a href="#about">Om oss</a>
-          <a href="#contact">Kontakt</a>
-          <a href="#">Personvern</a>
-        </nav>
-        <div class="footer-copy">© 2025 Nord Regnskap AS · Org.nr 123 456 789</div>
+      <div class="footer-bottom">
+        <p>© 2025 Nexus Regnskap AS · Org.nr. 123 456 789 · NARF-autorisert</p>
+        <p>Nettside av <a href="https://dmarketing.no" style="color:#555;text-decoration:none;">Dietrichs Marketing</a></p>
       </div>
     </div>
   </footer>
 
   <script>
-    // PRELOADER
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('preloader').classList.add('done');
-        document.getElementById('preloader-logo').classList.add('done');
-        setTimeout(() => {
-          document.getElementById('preloader').style.display = 'none';
-          document.getElementById('preloader-logo').style.display = 'none';
-        }, 1000);
-      }, 1200);
-    });
-
-    // NAVBAR
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // HAMBURGER
-    const hamburger = document.getElementById('hamburger');
-    const navOverlay = document.getElementById('navOverlay');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      navOverlay.classList.toggle('open');
-      document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
-    });
-    navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      navOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }));
-
-    // SCROLL REVEAL
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
+    setTimeout(() => { document.getElementById('preloader').classList.add('done'); setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 900); }, 1100);
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+    function toggleNav() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('navOverlay').classList.toggle('open'); document.body.style.overflow = document.getElementById('navOverlay').classList.contains('open') ? 'hidden' : ''; }
+    function closeNav() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+    document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); } }); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // SMOOTH SCROLL
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-      });
-    });
-
-    // FORM
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type=submit]');
-      btn.textContent = '✓ Sendt! Vi ringer deg innen én virkedag.';
-      btn.style.background = '#1a7a1a';
-      btn.disabled = true;
-    }
+    const ticker = document.getElementById('ticker'); ticker.innerHTML += ticker.innerHTML;
+    function submitForm(e) { e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.textContent = 'Sender...'; btn.disabled = true; setTimeout(() => { document.getElementById('contactForm').style.display = 'none'; document.getElementById('formSuccess').style.display = 'block'; }, 1200); }
   </script>
 </body>
 </html>
