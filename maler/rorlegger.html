@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hansen VVS | Rørlegger i Oslo</title>
+  <meta name="description" content="Rask og pålitelig rørlegger i Oslo. Akutt utrykning, baderoms-renovering og VVS-tjenester. Ring oss nå for gratis befaring.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & ROOT ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:      #050505;
+      --white:      #F5F5F5;
+      --primary:    #0339f8;
+      --secondary:  #1c1c1c;
+      --dark-gray:  #404040;
+      --shadow:     #0339f833;
+      --container:  1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Archivo', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────────────── */
+    h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+    h3 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; line-height: 1.2; }
+    h4 { font-size: 1.25rem; font-weight: 600; }
+    h5 { font-size: 1rem; font-weight: 400; }
+    h6 { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--dark-gray); }
+    p  { font-size: 1rem; font-weight: 400; line-height: 1.7; color: #aaa; }
+
+    .outline {
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1.5px var(--white);
+    }
+    .outline-primary {
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1.5px var(--primary);
+    }
+    .text-primary { color: var(--primary); }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────── */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section { padding: 112px 0; }
+    .section-sm { padding: 72px 0; }
+
+    /* ─── PRELOADER ─────────────────────────────────────────────── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; pointer-events: none;
+    }
+    .pre-panel {
+      flex: 1;
+      background: var(--black);
+      transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .pre-panel.left  { transform-origin: left; }
+    .pre-panel.right { transform-origin: right; }
+    .pre-logo {
+      position: fixed; inset: 0; z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .pre-circle {
+      width: 64px; height: 64px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: spinIn 0.8s ease forwards;
+    }
+    .pre-dot {
+      width: 8px; height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+    @keyframes spinIn {
+      from { transform: rotate(-180deg) scale(0); opacity: 0; }
+      to   { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    #preloader.done .pre-panel.left  { transform: translateX(-100%); }
+    #preloader.done .pre-panel.right { transform: translateX(100%); }
+    #preloader.done .pre-logo        { opacity: 0; transition: opacity 0.3s; }
+
+    /* ─── NAVIGATION ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      padding: 28px 0;
+      display: flex; align-items: center;
+      transition: background 0.3s;
+    }
+    nav.scrolled { background: rgba(5,5,5,0.92); backdrop-filter: blur(12px); padding: 18px 0; }
+    .nav-inner {
+      max-width: var(--container);
+      margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      display: flex; gap: 4px; align-items: baseline;
+    }
+    .nav-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .nav-logo span:last-child  { font-size: 1.1rem; font-weight: 300; color: var(--dark-gray); }
+    .nav-cta {
+      display: flex; align-items: center; gap: 24px;
+    }
+    .nav-phone {
+      font-size: 0.85rem; font-weight: 600; color: var(--white);
+      border: 1px solid #333; padding: 8px 16px; border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-phone:hover { border-color: var(--primary); color: var(--primary); }
+    .hamburger-btn {
+      display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+      padding: 8px; background: none; border: none;
+    }
+    .hamburger-btn span {
+      display: block; width: 24px; height: 1.5px;
+      background: var(--white); transition: all 0.3s;
+    }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* fullscreen menu */
+    .nav-overlay {
+      position: fixed; inset: 0; z-index: 998;
+      background: var(--black);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 48px;
+      transform: translateY(-100%);
+      transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .nav-overlay.open { transform: translateY(0); }
+    .nav-overlay-items { display: flex; flex-direction: column; gap: 8px; }
+    .nav-overlay-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid #1a1a1a;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .nav-overlay-item:hover { opacity: 0.6; }
+    .nav-overlay-num { font-size: 0.7rem; color: var(--dark-gray); font-weight: 500; letter-spacing: 0.1em; }
+    .nav-overlay-text {
+      font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #555;
+      transition: -webkit-text-stroke-color 0.2s;
+    }
+    .nav-overlay-item:hover .nav-overlay-text { -webkit-text-stroke-color: var(--white); }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 120px; padding-bottom: 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--primary);
+      border: 1px solid var(--primary); padding: 6px 14px; border-radius: 2px;
+      margin-bottom: 32px;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero-title { margin-bottom: 32px; }
+    .hero-title .line { display: block; }
+    .hero-subtitle { margin-bottom: 48px; max-width: 420px; font-size: 1.05rem; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--primary); color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      padding: 16px 32px; border: none; cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      overflow: hidden; position: relative;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      padding: 15px 32px; border: 1px solid #333; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); }
+
+    /* Sliding button text */
+    .btn-slide {
+      display: inline-flex; align-items: center; gap: 10px;
+      overflow: hidden; position: relative;
+      background: var(--primary); color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      padding: 16px 32px; border: none; cursor: pointer;
+    }
+    .btn-slide-text { display: flex; flex-direction: column; height: 1.2em; overflow: hidden; }
+    .btn-slide-text span { transition: transform 0.35s cubic-bezier(0.76,0,0.24,1); display: block; }
+    .btn-slide:hover .btn-slide-text span { transform: translateY(-100%); }
+
+    /* Hero image side */
+    .hero-visual {
+      position: relative; height: 560px;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 2px;
+      filter: brightness(0.75);
+    }
+    .hero-img-cover {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--primary)22 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-stat-card {
+      position: absolute; bottom: 32px; left: -32px;
+      background: var(--secondary); padding: 24px 28px;
+      border-left: 3px solid var(--primary);
+    }
+    .hero-stat-number { font-size: 2.5rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .hero-stat-label  { font-size: 0.8rem; color: #777; margin-top: 4px; }
+    .hero-stat-card-2 {
+      position: absolute; top: 32px; right: -24px;
+      background: var(--secondary); padding: 20px 24px;
+      border-left: 3px solid var(--primary);
+    }
+
+    /* ─── TRUST BAR ─────────────────────────────────────────────── */
+    #trust {
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 48px 0;
+    }
+    .trust-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .trust-item { display: flex; flex-direction: column; gap: 4px; }
+    .trust-number { font-size: 2rem; font-weight: 700; color: var(--white); }
+    .trust-label  { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ─── TICKER ─────────────────────────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden; padding: 24px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .ticker-track {
+      display: flex; gap: 48px;
+      animation: ticker 20s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #444; flex-shrink: 0;
+    }
+    .ticker-dot { color: var(--primary); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SERVICES ──────────────────────────────────────────────── */
+    .section-label { margin-bottom: 16px; }
+    .section-title { margin-bottom: 64px; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2px; background: #111;
+    }
+    .service-card {
+      background: var(--black); padding: 48px 40px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .service-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--primary);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover { background: #0c0c0c; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num { font-size: 0.7rem; color: var(--primary); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 24px; }
+    .service-icon { font-size: 2.5rem; margin-bottom: 20px; }
+    .service-card h3 { margin-bottom: 12px; font-size: 1.4rem; }
+    .service-card p { font-size: 0.9rem; line-height: 1.65; }
+    .service-arrow {
+      position: absolute; top: 40px; right: 40px;
+      font-size: 1.2rem; color: #333;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .service-card:hover .service-arrow { color: var(--primary); transform: translate(4px, -4px); }
+
+    /* ─── HOW IT WORKS ──────────────────────────────────────────── */
+    #how { background: var(--secondary); }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: #141414;
+    }
+    .step {
+      background: var(--secondary); padding: 48px 40px;
+      position: relative;
+    }
+    .step-num {
+      font-size: 4rem; font-weight: 700; line-height: 1;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #2a2a2a;
+      margin-bottom: 24px;
+    }
+    .step h3 { margin-bottom: 12px; font-size: 1.2rem; }
+    .step-connector {
+      position: absolute; top: 50%; right: -1px;
+      width: 2px; height: 48px; background: var(--primary);
+      transform: translateY(-50%);
+    }
+    .step:last-child .step-connector { display: none; }
+
+    /* ─── ABOUT ─────────────────────────────────────────────────── */
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-img-wrapper { position: relative; }
+    .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 2px; filter: brightness(0.8); }
+    .about-badge {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--primary); padding: 28px 32px;
+      text-align: center;
+    }
+    .about-badge-num { font-size: 2.5rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .about-badge-txt { font-size: 0.75rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.08em; }
+    .about-content { padding-left: 16px; }
+    .about-content h2 { margin-bottom: 24px; }
+    .about-content p { margin-bottom: 32px; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+    .about-list li { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: #bbb; }
+    .about-list li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+
+    /* ─── TESTIMONIALS ──────────────────────────────────────────── */
+    #testimonials { background: var(--secondary); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: #141414;
+    }
+    .testimonial-card {
+      background: var(--secondary); padding: 40px;
+    }
+    .stars { color: var(--primary); font-size: 1rem; margin-bottom: 20px; letter-spacing: 2px; }
+    .testimonial-card blockquote {
+      font-size: 0.95rem; color: #ccc; line-height: 1.7;
+      margin-bottom: 28px; font-style: italic;
+    }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #333; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--primary); font-weight: 700;
+      flex-shrink: 0;
+    }
+    .reviewer-name  { font-size: 0.9rem; font-weight: 600; color: var(--white); }
+    .reviewer-title { font-size: 0.75rem; color: #666; }
+
+    /* ─── CTA SECTION ────────────────────────────────────────────── */
+    #cta { padding: 120px 0; overflow: hidden; }
+    .cta-inner { text-align: center; max-width: 800px; margin: 0 auto; }
+    .cta-inner h6 { margin-bottom: 24px; }
+    .cta-title { margin-bottom: 16px; }
+    .cta-subtitle { margin-bottom: 48px; font-size: 1.1rem; }
+    .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .cta-large-text {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      bottom: -20px; white-space: nowrap;
+      font-size: clamp(4rem, 12vw, 12rem); font-weight: 700;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px #111;
+      pointer-events: none; user-select: none; z-index: 0;
+    }
+    #cta { position: relative; }
+
+    /* ─── CONTACT FORM ───────────────────────────────────────────── */
+    #contact { background: var(--secondary); }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 24px; }
+    .contact-info p  { margin-bottom: 40px; }
+    .contact-details { display: flex; flex-direction: column; gap: 20px; }
+    .contact-detail { display: flex; align-items: center; gap: 16px; }
+    .contact-icon { font-size: 1.2rem; color: var(--primary); flex-shrink: 0; }
+    .contact-detail-text h5 { color: var(--white); font-size: 0.95rem; font-weight: 600; }
+    .contact-detail-text p  { font-size: 0.85rem; margin: 0; }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #777; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--black); border: 1px solid #222;
+      color: var(--white); font-family: 'Archivo', sans-serif;
+      font-size: 0.9rem; padding: 14px 16px;
+      outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--primary); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select option { background: var(--black); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 48px 0;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo span:first-child { font-size: 1rem; font-weight: 700; }
+    .footer-logo span:last-child  { font-size: 1rem; font-weight: 300; color: #555; }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a { font-size: 0.85rem; color: #666; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 0.8rem; color: #444; }
+
+    /* ─── ANIMATIONS (scroll-triggered) ─────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { height: 360px; }
+      .hero-stat-card { left: 0; }
+      .hero-stat-card-2 { right: 0; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-badge { right: 0; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step-connector { display: none; }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 3rem; }
+      h2 { font-size: 2.2rem; }
+      .section { padding: 72px 0; }
+      .hero-inner { gap: 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-phone { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="pre-panel left"></div>
+    <div class="pre-panel right"></div>
+  </div>
+  <div class="pre-logo" id="preloader-logo">
+    <div class="pre-circle"><div class="pre-dot"></div></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span>Hansen</span><span>VVS</span>
+      </a>
+      <div class="nav-cta">
+        <a href="tel:+4799999999" class="nav-phone">📞 999 99 999</a>
+        <button class="hamburger-btn" id="hamburger" aria-label="Meny">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay">
+    <div class="nav-overlay-items">
+      <a href="#services" class="nav-overlay-item">
+        <span class="nav-overlay-num">01</span>
+        <span class="nav-overlay-text">Tjenester</span>
+      </a>
+      <a href="#about" class="nav-overlay-item">
+        <span class="nav-overlay-num">02</span>
+        <span class="nav-overlay-text">Om oss</span>
+      </a>
+      <a href="#testimonials" class="nav-overlay-item">
+        <span class="nav-overlay-num">03</span>
+        <span class="nav-overlay-text">Referanser</span>
+      </a>
+      <a href="#contact" class="nav-overlay-item">
+        <span class="nav-overlay-num">04</span>
+        <span class="nav-overlay-text">Kontakt</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge"><span></span> Tilgjengelig 24/7</div>
+          <div class="hero-title">
+            <h1><span class="line">Rask</span><span class="line outline">&amp; pålitelig</span><span class="line">rørlegger</span></h1>
+          </div>
+          <p class="hero-subtitle">Vi løser alle typer rørlegger- og VVS-oppgaver i Oslo og omegn. Akutt utrykning, baderoms-renovering og forebyggende vedlikehold.</p>
+          <div class="hero-actions">
+            <a href="tel:+4799999999" class="btn-slide">
+              <span>📞</span>
+              <span class="btn-slide-text"><span>Ring oss nå</span><span>Ring oss nå</span></span>
+            </a>
+            <a href="#contact" class="btn-outline">Book gratis befaring →</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80"
+            alt="Rørlegger i arbeid"
+            class="hero-img"
+          >
+          <div class="hero-img-cover"></div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-number">2 timer</div>
+            <div class="hero-stat-label">Gjennomsnittlig responstid</div>
+          </div>
+          <div class="hero-stat-card-2">
+            <div class="hero-stat-number">⭐ 4.9</div>
+            <div class="hero-stat-label">Google-rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item">Akutt utrykning <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Baderoms-renovering <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Varmtvann &amp; bereder <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Kjøkken VVS <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Lekkasjesøk <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Gulvvarme <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Sertifisert &amp; forsikret <span class="ticker-dot">•</span></span>
+      <!-- repeat for seamless loop -->
+      <span class="ticker-item">Akutt utrykning <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Baderoms-renovering <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Varmtvann &amp; bereder <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Kjøkken VVS <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Lekkasjesøk <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Gulvvarme <span class="ticker-dot">•</span></span>
+      <span class="ticker-item">Sertifisert &amp; forsikret <span class="ticker-dot">•</span></span>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <section id="trust">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item reveal">
+          <span class="trust-number">15+</span>
+          <span class="trust-label">År med erfaring</span>
+        </div>
+        <div class="trust-item reveal reveal-delay-1">
+          <span class="trust-number">1 200+</span>
+          <span class="trust-label">Fornøyde kunder</span>
+        </div>
+        <div class="trust-item reveal reveal-delay-2">
+          <span class="trust-number">2 t</span>
+          <span class="trust-label">Gjennomsnittlig responstid</span>
+        </div>
+        <div class="trust-item reveal reveal-delay-3">
+          <span class="trust-number">100%</span>
+          <span class="trust-label">Garanti på arbeidet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <h6 class="section-label reveal">Hva vi tilbyr</h6>
+      <h2 class="section-title reveal">Tjenester som <span class="outline-primary">løser problemet</span></h2>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-num">01</div>
+          <div class="service-icon">🚨</div>
+          <h3>Akutt utrykning</h3>
+          <p>Vannlekkasje, brutt rør eller annet akutt? Vi er på stedet innen 2 timer — dag og natt, helg og helligdag.</p>
+          <span class="service-arrow">↗</span>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-num">02</div>
+          <div class="service-icon">🚿</div>
+          <h3>Baderoms-renovering</h3>
+          <p>Totalrenovering eller deloppgradering av bad. Vi planlegger, koordinerer og leverer nøkkelferdig resultat.</p>
+          <span class="service-arrow">↗</span>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-num">03</div>
+          <div class="service-icon">🔥</div>
+          <h3>Varmtvann &amp; bereder</h3>
+          <p>Installasjon og bytte av varmtvannsbereder, varmepumpe og gulvvarme. Vi finner den løsningen som passer ditt hjem.</p>
+          <span class="service-arrow">↗</span>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-num">04</div>
+          <div class="service-icon">🍳</div>
+          <h3>Kjøkken VVS</h3>
+          <p>Rørleggerarbeid i forbindelse med kjøkkenoppussing — fra avløp og vanninntak til oppvaskmaskin og kjøleskap.</p>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section">
+    <div class="container">
+      <h6 class="section-label reveal">Enkel prosess</h6>
+      <h2 class="section-title reveal">Slik <span class="outline">fungerer det</span></h2>
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <h3>Ta kontakt</h3>
+          <p>Ring oss eller fyll ut skjemaet. Vi svarer innen én time og avtaler tidspunkt for befaring eller akutt utrykning.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <h3>Vi kommer til deg</h3>
+          <p>En av våre sertifiserte rørleggere møter deg på avtalt tidspunkt. Vi gir deg et klart tilbud uten skjulte kostnader.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <h3>Jobb utført — garanti</h3>
+          <p>Vi utfører arbeidet raskt og ryddig. Alt arbeid er garantert i 5 år, og vi sørger for at alt er i orden før vi forlater.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-img-wrapper reveal">
+          <img
+            src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=700&auto=format&fit=crop&q=80"
+            alt="Hansen VVS team"
+            class="about-img"
+          >
+          <div class="about-badge">
+            <div class="about-badge-num">2009</div>
+            <div class="about-badge-txt">Etablert</div>
+          </div>
+        </div>
+        <div class="about-content reveal reveal-delay-1">
+          <h6>Om oss</h6>
+          <h2>Lokalt firma — <span class="outline-primary">store resultater</span></h2>
+          <p>Hansen VVS har siden 2009 vært Oslos foretrukne rørlegger for private og næringskunder. Vi er et lokalt, familiedrevet firma med et team på 12 sertifiserte rørleggere.</p>
+          <p>Vi tror på enkle ting: rask respons, ærlig pris og arbeid vi kan stå inne for. Derfor gir vi 5 års garanti på alt vi gjør.</p>
+          <ul class="about-list">
+            <li>Masterrørlegger-sertifisert</li>
+            <li>Godkjent av Mesterbrev</li>
+            <li>Fullt forsikret — trygt for deg</li>
+            <li>Miljøsertifisert Svanemerke-bedrift</li>
+            <li>5 års garanti på alle jobber</li>
+          </ul>
+          <a href="#contact" class="btn-primary">Book gratis befaring</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h6 class="section-label reveal">Hva kundene sier</h6>
+      <h2 class="section-title reveal">Ekte <span class="outline">tilbakemeldinger</span></h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Hansen VVS reddet oss da vi fikk en vannlekkasje en lørdag natt. De var her innen 90 minutter og fikset problemet raskt. Utrolig service!"</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">K</div>
+            <div>
+              <div class="reviewer-name">Kari Nordmann</div>
+              <div class="reviewer-title">Huseier, Frogner</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Brukte Hansen VVS til totalrenovering av badet. Profesjonelt, ryddig og til avtalt pris. Vil ikke bruke noen andre! Anbefales på det sterkeste."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">T</div>
+            <div>
+              <div class="reviewer-name">Thomas Berg</div>
+              <div class="reviewer-title">Boligeier, Majorstuen</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Byttet varmtvannsbereder og installerte gulvvarme på kjøkkenet. Prisen var lavere enn konkurrentene og jobben ble levert på dagen de lovte."</blockquote>
+          <div class="reviewer">
+            <div class="reviewer-avatar">L</div>
+            <div>
+              <div class="reviewer-name">Line Haugen</div>
+              <div class="reviewer-title">Leilighetseier, Grünerløkka</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <h6>Klar til å starte?</h6>
+        <h2 class="cta-title reveal">La oss løse <span class="outline-primary">problemet ditt</span></h2>
+        <p class="cta-subtitle reveal">Gratis befaring — ingen forpliktelser. Vi gir deg et klart tilbud samme dag.</p>
+        <div class="cta-actions reveal">
+          <a href="tel:+4799999999" class="btn-primary">📞 Ring oss nå — 999 99 999</a>
+          <a href="#contact" class="btn-outline">Send oss en melding →</a>
+        </div>
+      </div>
+    </div>
+    <div class="cta-large-text">VVS</div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-info reveal">
+          <h6>Kontakt oss</h6>
+          <h2>Book din <span class="outline-primary">gratis befaring</span></h2>
+          <p>Fyll ut skjemaet, så tar vi kontakt innen én time på hverdager. For akutte problemer — ring direkte!</p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <span class="contact-icon">📞</span>
+              <div class="contact-detail-text">
+                <h5>Telefon</h5>
+                <p>999 99 999 (Tilgjengelig 24/7 for akutt)</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-detail-text">
+                <h5>E-post</h5>
+                <p>post@hansenvvs.no</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-icon">📍</span>
+              <div class="contact-detail-text">
+                <h5>Serviceområde</h5>
+                <p>Oslo, Akershus og Østfold</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-detail-text">
+                <h5>Åpningstider</h5>
+                <p>Man–fre 07–18 · Akutt: 24/7</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Navn</label>
+                <input type="text" id="name" placeholder="Ola Nordmann" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" placeholder="999 99 999" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">E-post</label>
+              <input type="email" id="email" placeholder="ola@epost.no" required>
+            </div>
+            <div class="form-group">
+              <label for="service">Tjeneste</label>
+              <select id="service">
+                <option value="">Velg tjeneste...</option>
+                <option>Akutt utrykning</option>
+                <option>Baderoms-renovering</option>
+                <option>Varmtvann / bereder</option>
+                <option>Kjøkken VVS</option>
+                <option>Annet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Beskriv jobben</label>
+              <textarea id="message" placeholder="Fortell oss litt om hva som skal gjøres..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+              Send forespørsel →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span>Hansen</span><span>VVS</span>
+        </div>
+        <nav class="footer-links">
+          <a href="#services">Tjenester</a>
+          <a href="#about">Om oss</a>
+          <a href="#contact">Kontakt</a>
+          <a href="#">Personvern</a>
+        </nav>
+        <div class="footer-copy">© 2025 Hansen VVS AS · Org.nr 123 456 789</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── PRELOADER ──
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('done');
+        document.getElementById('preloader-logo').classList.add('done');
+        setTimeout(() => {
+          document.getElementById('preloader').style.display = 'none';
+          document.getElementById('preloader-logo').style.display = 'none';
+        }, 1000);
+      }, 1200);
+    });
+
+    // ── NAVBAR SCROLL ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── HAMBURGER MENU ──
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navOverlay.classList.toggle('open');
+      document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
+    });
+    navOverlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── SCROLL REVEAL ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── SMOOTH SCROLL ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // ── FORM SUBMIT ──
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.textContent = '✓ Sendt! Vi tar kontakt snart.';
+      btn.style.background = '#1a7a1a';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
