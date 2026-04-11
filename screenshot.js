@@ -9,7 +9,7 @@ const outDir = path.join(malDir, 'temporary_screenshots');
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-const all = ['elektriker.html', 'rorlegger.html', 'tannlege.html', 'frisor.html', 'regnskap.html', 'index.html'];
+const all = ['elektriker.html', 'rorlegger.html', 'tannlege.html', 'frisor.html', 'regnskap.html', 'barber.html', 'index.html'];
 
 const targets = process.argv[2] === 'all'
   ? all
