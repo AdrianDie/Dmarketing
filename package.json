@@ -1,0 +1,24 @@
+{
+  "name": "dmarketing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdrianDie/Dmarketing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdrianDie/Dmarketing/issues"
+  },
+  "homepage": "https://github.com/AdrianDie/Dmarketing#readme",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^24.40.0"
+  }
+}

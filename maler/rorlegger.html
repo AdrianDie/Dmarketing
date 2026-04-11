@@ -3,384 +3,492 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VVS Proff — Rørlegger i [By]</title>
+  <title>RørMester AS — Rørlegger i [By]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: '#0F4C81',
+            'brand-light': '#1E6DB5',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.9/dist/motion.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #f5f5f5;
-      --surface: #ffffff;
-      --text: #050505;
-      --muted: #888;
-      --primary: #0339f8;
-      --primary-soft: #0339f812;
-      --border: rgba(0,0,0,0.08);
-      --dark: #050505;
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Outfit', sans-serif; }
+    #nav { transition: background 0.3s, box-shadow 0.3s; }
+    #nav.scrolled { background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); box-shadow: 0 1px 0 #E4E4E7; }
+    .card-hover { transition: box-shadow 0.2s, transform 0.2s; }
+    .card-hover:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-2px); }
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(220,38,38,0); }
+      100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-
-    #preloader { position: fixed; inset: 0; z-index: 9999; display: flex; }
-    .pre-panel { width: 50%; height: 100%; background: var(--primary); transition: transform 0.8s cubic-bezier(0.77,0,0.175,1); }
-    #preloader.done .pre-panel.left  { transform: translateX(-100%); }
-    #preloader.done .pre-panel.right { transform: translateX(100%); }
-
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s, padding 0.3s, box-shadow 0.3s; }
-    nav.scrolled { background: rgba(245,245,245,0.96); backdrop-filter: blur(12px); padding: 14px 24px; box-shadow: 0 1px 0 var(--border); }
-    .nav-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; }
-    .nav-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-    .nav-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--text); letter-spacing: -0.02em; }
-    .nav-right { display: flex; align-items: center; gap: 14px; }
-    .nav-phone { font-size: 0.82rem; font-weight: 600; color: var(--text); text-decoration: none; }
-    .nav-phone:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
-    .nav-cta:hover { opacity: 0.85; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-
-    .nav-overlay { position: fixed; inset: 0; z-index: 99; background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 0 40px; clip-path: inset(0 0 100% 0); transition: clip-path 0.6s cubic-bezier(0.77,0,0.175,1); }
-    .nav-overlay.open { clip-path: inset(0 0 0% 0); }
-    .overlay-links { list-style: none; }
-    .overlay-links li { display: flex; align-items: baseline; gap: 16px; border-top: 1px solid #ffffff0a; padding: 16px 0; }
-    .overlay-links li:last-child { border-bottom: 1px solid #ffffff0a; }
-    .overlay-num { font-size: 0.7rem; color: #444; font-weight: 500; }
-    .overlay-links a { font-size: clamp(2rem,6vw,3.5rem); font-weight: 700; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px #f5f5f5; text-decoration: none; transition: color 0.2s; }
-    .overlay-links a:hover { color: #f5f5f5; }
-
-    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
-    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 48px 80px 24px; max-width: 600px; margin-left: auto; }
-    .hero-tag { display: inline-block; border: 1px solid var(--primary); color: var(--primary); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 28px; width: fit-content; }
-    .hero h1 { font-size: clamp(2.6rem,4.5vw,4.5rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 20px; }
-    .hero h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--text); }
-    .hero-sub { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.7; margin-bottom: 36px; max-width: 400px; }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn-primary { background: var(--primary); color: #fff; padding: 14px 28px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
-    .btn-primary:hover { opacity: 0.85; }
-    .btn-ghost { background: transparent; color: var(--text); padding: 14px 28px; border-radius: 4px; border: 1.5px solid var(--border); font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: border-color 0.2s; }
-    .btn-ghost:hover { border-color: var(--text); }
-    .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); flex-wrap: wrap; }
-    .hero-stat-num { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); }
-    .hero-stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-    .hero-right { position: relative; overflow: hidden; background: #e0e0e0; }
-    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-card { position: absolute; bottom: 32px; left: 32px; background: var(--surface); border-radius: 8px; padding: 16px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
-    .hero-card-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-    .hero-card-value { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; color: var(--primary); }
-    .hero-card-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-    .ticker-wrap { overflow: hidden; background: var(--dark); padding: 14px 0; }
-    .ticker { display: flex; animation: ticker 28s linear infinite; white-space: nowrap; }
-    .ticker-item { display: inline-flex; align-items: center; gap: 20px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #555; padding: 0 40px; }
-    .ticker-item span { color: var(--primary); }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    .trust-bar { background: var(--surface); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
-    .trust-item { display: flex; align-items: center; gap: 16px; padding: 28px 40px; flex: 1; min-width: 200px; border-right: 1px solid var(--border); }
-    .trust-item:last-child { border-right: none; }
-    .trust-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .trust-title { font-size: 0.88rem; font-weight: 700; }
-    .trust-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-    .section { padding: 96px 24px; max-width: 1200px; margin: 0 auto; }
-    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
-    .section-title { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
-    .section-title .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
-    .section-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin-bottom: 48px; }
-
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
-    .service-card { background: var(--surface); border: 1px solid var(--border); padding: 32px 28px; border-radius: 8px; transition: box-shadow 0.3s, transform 0.3s; }
-    .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
-    .service-icon { font-size: 2rem; margin-bottom: 16px; }
-    .service-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-    .service-tag { display: inline-block; margin-top: 14px; font-size: 0.7rem; font-weight: 700; color: var(--primary); background: var(--primary-soft); padding: 4px 10px; border-radius: 4px; }
-
-    .how-section { background: var(--dark); padding: 80px 24px; }
-    .how-inner { max-width: 1200px; margin: 0 auto; }
-    .how-section .section-label { color: var(--primary); }
-    .how-section .section-title { color: #f5f5f5; }
-    .how-section .section-title .outline { -webkit-text-stroke: 1.5px #f5f5f5; }
-    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; }
-    .how-step { background: #0f0f0f; padding: 40px 32px; }
-    .how-step-num { font-size: 4rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--primary); letter-spacing: -0.06em; line-height: 1; margin-bottom: 20px; }
-    .how-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: #f5f5f5; }
-    .how-step p { font-size: 0.82rem; color: #666; line-height: 1.7; }
-
-    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img-wrap { position: relative; }
-    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 4px; }
-    .about-badge { position: absolute; bottom: -16px; right: -16px; background: var(--primary); color: #fff; padding: 24px; text-align: center; border-radius: 4px; }
-    .about-badge-num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
-    .about-badge-text { font-size: 0.7rem; margin-top: 4px; opacity: 0.9; }
-    .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
-    .about-certs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .cert-badge { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
-
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .testimonial { background: var(--surface); border: 1px solid var(--border); padding: 28px; border-radius: 8px; }
-    .test-stars { color: #f5a623; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
-    .test-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .test-author { display: flex; align-items: center; gap: 12px; }
-    .test-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-    .test-name { font-size: 0.82rem; font-weight: 700; }
-    .test-meta { font-size: 0.72rem; color: var(--muted); }
-
-    .contact-section { background: var(--surface); border-top: 1px solid var(--border); }
-    .contact-inner { max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-left h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
-    .contact-left h2 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
-    .contact-left > p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
-    .contact-details { display: flex; flex-direction: column; gap: 18px; }
-    .contact-detail { display: flex; align-items: flex-start; gap: 14px; }
-    .contact-icon { width: 38px; height: 38px; border-radius: 6px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
-    .contact-info-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-    .contact-info-val { font-size: 0.88rem; font-weight: 600; }
-    .contact-info-val a { color: var(--text); text-decoration: none; }
-    .contact-info-val a:hover { color: var(--primary); }
-    .contact-form { display: flex; flex-direction: column; gap: 14px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-    .form-group input, .form-group select, .form-group textarea { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); padding: 12px 14px; border-radius: 6px; font-family: 'Archivo',sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit { background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 14px; font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
-    .form-submit:hover { opacity: 0.85; }
-    .form-success { display: none; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 6px; padding: 16px; text-align: center; font-size: 0.88rem; color: var(--primary); }
-
-    .site-footer { background: var(--dark); color: #f5f5f5; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 56px 24px 32px; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
-    .footer-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; margin-bottom: 14px; }
-    .footer-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: #f5f5f5; }
-    .footer-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1px #f5f5f5; }
-    .footer-brand p { font-size: 0.82rem; color: #555; line-height: 1.7; max-width: 280px; }
-    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 16px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { font-size: 0.82rem; color: #555; text-decoration: none; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: #f5f5f5; }
-    .footer-bottom { border-top: 1px solid #ffffff08; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .footer-bottom p { font-size: 0.78rem; color: #333; }
-
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { height: 380px; }
-      .hero-left { padding: 80px 24px 48px; max-width: 100%; }
-      .about-inner { grid-template-columns: 1fr; gap: 48px; }
-      .how-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .hamburger { display: flex; }
-      .nav-phone { display: none; }
-    }
-    @media (max-width: 600px) {
-      .form-row { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
-    }
+    .pulse { animation: pulse-ring 2s infinite; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.9); }
   </style>
 </head>
 <body>
-  <div id="preloader"><div class="pre-panel left"></div><div class="pre-panel right"></div></div>
 
-  <div class="nav-overlay" id="navOverlay">
-    <ul class="overlay-links">
-      <li><span class="overlay-num">01</span><a href="#tjenester" onclick="closeNav()">Tjenester</a></li>
-      <li><span class="overlay-num">02</span><a href="#slik-fungerer-det" onclick="closeNav()">Slik fungerer det</a></li>
-      <li><span class="overlay-num">03</span><a href="#om-oss" onclick="closeNav()">Om oss</a></li>
-      <li><span class="overlay-num">04</span><a href="#anmeldelser" onclick="closeNav()">Anmeldelser</a></li>
-      <li><span class="overlay-num">05</span><a href="#kontakt" onclick="closeNav()">Kontakt</a></li>
-    </ul>
-  </div>
-
-  <nav id="navbar">
-    <a href="#" class="nav-logo"><span>VVS</span><span>Proff</span></a>
-    <div class="nav-right">
-      <a href="tel:+4712345678" class="nav-phone">📞 +47 123 45 678</a>
-      <a href="#kontakt" class="nav-cta">Book befaring</a>
+<!-- NAV -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="#" class="font-display font-700 text-lg tracking-tight text-[#09090B]">
+      Rør<span style="color:#0F4C81">Mester</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+      <a href="#tjenester" class="hover:text-[#09090B] transition-colors">Tjenester</a>
+      <a href="#om" class="hover:text-[#09090B] transition-colors">Om oss</a>
+      <a href="#priser" class="hover:text-[#09090B] transition-colors">Priser</a>
+      <a href="#kontakt" class="hover:text-[#09090B] transition-colors">Kontakt</a>
     </div>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-tag reveal">Rørlegger & VVS i [By]</div>
-      <h1 class="reveal">Rask &<br/><span class="outline">pålitelig</span><br/>rørlegger</h1>
-      <p class="hero-sub reveal">Sertifisert mesterbedrift — tilgjengelig 24/7 ved akutte rørleggerproblemer. Vi rykker ut samme dag.</p>
-      <div class="hero-actions reveal">
-        <a href="tel:+4712345678" class="btn-primary">📞 Ring nå</a>
-        <a href="#kontakt" class="btn-ghost">Book befaring</a>
-      </div>
-      <div class="hero-stats reveal">
-        <div class="hero-stat"><div class="hero-stat-num">20+</div><div class="hero-stat-label">Års erfaring</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">3 500+</div><div class="hero-stat-label">Oppdrag utført</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">4.9 ★</div><div class="hero-stat-label">Google-vurdering</div></div>
-      </div>
-    </div>
-    <div class="hero-right reveal">
-      <img class="hero-img" src="bilder/rorlegger/hero.jpg" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80'" alt="Rørlegger på jobb" />
-      <div class="hero-card">
-        <div class="hero-card-label">Akutt respons</div>
-        <div class="hero-card-value">2 timer</div>
-        <div class="hero-card-sub">Garantert utrykning</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ticker-wrap">
-    <div class="ticker" id="ticker">
-      <div class="ticker-item"><span>✦</span> Akutt utrykning</div>
-      <div class="ticker-item"><span>✦</span> Badroms-renovering</div>
-      <div class="ticker-item"><span>✦</span> Varmtvann & bereder</div>
-      <div class="ticker-item"><span>✦</span> Kjøkken & avløp</div>
-      <div class="ticker-item"><span>✦</span> Gulvvarme</div>
-      <div class="ticker-item"><span>✦</span> Sertifisert mesterbedrift</div>
-      <div class="ticker-item"><span>✦</span> Akutt utrykning</div>
-      <div class="ticker-item"><span>✦</span> Badroms-renovering</div>
-      <div class="ticker-item"><span>✦</span> Varmtvann & bereder</div>
-      <div class="ticker-item"><span>✦</span> Kjøkken & avløp</div>
-      <div class="ticker-item"><span>✦</span> Gulvvarme</div>
-      <div class="ticker-item"><span>✦</span> Sertifisert mesterbedrift</div>
+    <div class="flex items-center gap-3">
+      <a href="tel:+4712345678" class="hidden sm:flex items-center gap-2 bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-lg pulse hover:bg-red-700 transition-colors">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Vannlekkasje? Ring nå
+      </a>
+      <a href="#kontakt" class="bg-[#0F4C81] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#1E6DB5] transition-colors">
+        Få tilbud
+      </a>
     </div>
   </div>
+</nav>
 
-  <div class="trust-bar reveal">
-    <div class="trust-item"><div class="trust-icon">🏆</div><div><div class="trust-title">Sertifisert mesterbedrift</div><div class="trust-sub">Godkjent av Mesterbrev</div></div></div>
-    <div class="trust-item"><div class="trust-icon">📅</div><div><div class="trust-title">20+ år erfaring</div><div class="trust-sub">Lokalt firma siden 2004</div></div></div>
-    <div class="trust-item"><div class="trust-icon">⚡</div><div><div class="trust-title">Akutt 24/7</div><div class="trust-sub">Utrykning innen 2 timer</div></div></div>
-    <div class="trust-item"><div class="trust-icon">🛡️</div><div><div class="trust-title">Garanti på arbeid</div><div class="trust-sub">5 års håndverksgaranti</div></div></div>
-  </div>
+<!-- HERO — Asymmetrisk: tekst venstre, bilde overlapper -->
+<section class="relative min-h-screen flex items-center pt-14 overflow-hidden bg-white">
+  <!-- Background blob -->
+  <div class="absolute top-1/2 right-0 w-[600px] h-[600px] -translate-y-1/2 translate-x-1/4" style="background: radial-gradient(circle, rgba(15,76,129,0.06) 0%, transparent 70%);"></div>
 
-  <section class="section" id="tjenester">
-    <div class="section-label reveal">Tjenester</div>
-    <h2 class="section-title reveal">Vi løser <span class="outline">alle</span> rørleggeroppdrag</h2>
-    <p class="section-sub reveal">Fra akutte lekkasjer til store renoveringer — vi har kompetansen og utstyret.</p>
-    <div class="services-grid">
-      <div class="service-card reveal"><div class="service-icon">🚨</div><div class="service-name">Akutt utrykning</div><div class="service-desc">Vannlekkasje, rørbrudd eller kloakkstopp? Vi rykker ut 24/7 og løser problemet raskt.</div><div class="service-tag">24/7 tilgjengelig</div></div>
-      <div class="service-card reveal"><div class="service-icon">🚿</div><div class="service-name">Baderoms-renovering</div><div class="service-desc">Komplett renovering av bad — fra riving til ferdig sluttresultat med alle VVS-installasjoner.</div><div class="service-tag">Mest populær</div></div>
-      <div class="service-card reveal"><div class="service-icon">🔥</div><div class="service-name">Varmtvann & bereder</div><div class="service-desc">Bytte av varmtvannbereder, varmepumpe-bereder og installasjon av nytt varmtvannsanlegg.</div></div>
-      <div class="service-card reveal"><div class="service-icon">🍽️</div><div class="service-name">Kjøkken & avløp</div><div class="service-desc">Nytt kjøkken, bytting av kran, tetting av avløpsstopp og ledningsarbeid.</div></div>
-      <div class="service-card reveal"><div class="service-icon">🌡️</div><div class="service-name">Gulvvarme</div><div class="service-desc">Installasjon av vannbåren gulvvarme og elektrisk gulvvarme i alle rom.</div></div>
-      <div class="service-card reveal"><div class="service-icon">🏗️</div><div class="service-name">Nybygg & rehab</div><div class="service-desc">Komplett VVS for nybygg og totalrehabiliteringer — vi følger prosjektet fra start til slutt.</div></div>
-    </div>
-  </section>
+  <div class="max-w-6xl mx-auto px-6 w-full">
+    <div class="grid md:grid-cols-2 gap-12 items-center py-24">
+      <!-- Left text -->
+      <div>
+        <div data-animate class="inline-flex items-center gap-2 bg-zinc-50 border border-zinc-200 text-xs font-medium text-zinc-600 px-3 py-1.5 rounded-full mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+          Rørlegger i [By] — responstid under 2 timer
+        </div>
 
-  <section class="how-section" id="slik-fungerer-det">
-    <div class="how-inner">
-      <div class="section-label reveal">Slik fungerer det</div>
-      <h2 class="section-title reveal">Fra <span class="outline">problem</span> til løsning</h2>
-      <div class="how-grid">
-        <div class="how-step reveal"><div class="how-step-num">01</div><h3>Ring eller kontakt oss</h3><p>Ta kontakt via telefon eller skjema. Vi svarer umiddelbart ved akutte situasjoner — døgnet rundt.</p></div>
-        <div class="how-step reveal"><div class="how-step-num">02</div><h3>Gratis befaring & tilbud</h3><p>Vi kommer på befaring og gir deg et skriftlig tilbud uten skjulte kostnader. Ingen bindinger.</p></div>
-        <div class="how-step reveal"><div class="how-step-num">03</div><h3>Jobb utført — garanti</h3><p>Vi utfører arbeidet ryddig og presist. Du får 5 års garanti på alt arbeid vi leverer.</p></div>
+        <h1 data-animate class="font-display font-extrabold text-5xl md:text-6xl leading-[0.95] tracking-[-0.03em] text-[#09090B] mb-6">
+          Rørlegger du<br/>
+          <span style="color:#0F4C81">ringer først</span>
+        </h1>
+
+        <p data-animate class="text-lg text-zinc-500 leading-relaxed mb-8 max-w-md">
+          RørMester løser alt fra akutte lekkasjer til baderomsmontasje og varmtvannstank. Sertifisert, forsikret og alltid til fast pris.
+        </p>
+
+        <div data-animate class="flex flex-col sm:flex-row gap-3 mb-10">
+          <a href="#kontakt" class="bg-[#0F4C81] text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-[#1E6DB5] transition-all hover:scale-[1.02] text-sm text-center" style="transition: transform 0.15s, background 0.15s, box-shadow 0.15s; &:hover { box-shadow: 0 0 20px rgba(15,76,129,0.3); }">
+            Få gratis tilbud
+          </a>
+          <a href="tel:+4712345678" class="flex items-center justify-center gap-2 border border-zinc-200 text-[#09090B] font-semibold px-7 py-3.5 rounded-lg hover:border-zinc-400 transition-colors text-sm">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            123 45 678
+          </a>
+        </div>
+
+        <div data-animate class="flex flex-wrap gap-5 text-sm text-zinc-500">
+          <span class="flex items-center gap-2">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            VVS-sertifikat
+          </span>
+          <span class="flex items-center gap-2">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Respons under 2t
+          </span>
+          <span class="flex items-center gap-2">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="2"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            4.8 / 5 — 200+ kunder
+          </span>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section" id="om-oss">
-    <div class="about-inner">
-      <div class="about-img-wrap reveal">
-        <img class="about-img" src="bilder/rorlegger/about.jpg" onerror="this.src='https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80'" alt="VVS Proff team" />
-        <div class="about-badge"><div class="about-badge-num">20</div><div class="about-badge-text">Års erfaring</div></div>
-      </div>
-      <div class="about-text reveal">
-        <div class="section-label">Om oss</div>
-        <h2 class="section-title">Lokalt firma —<br/><span class="outline">faglig tyngde</span></h2>
-        <p>VVS Proff ble startet i [By] i 2004 av mesterbrevholder Erik Hansen. Vi er i dag 12 fast ansatte rørleggere og betjener private og næringsliv i hele regionen.</p>
-        <p>Vi er stolt av å levere håndverk av høyeste kvalitet. Alle installasjoner utføres i henhold til gjeldende norske normer, og vi gir 5 års garanti på alt arbeid.</p>
-        <div class="about-certs">
-          <div class="cert-badge">✓ Mesterbrev</div>
-          <div class="cert-badge">✓ Forsikret</div>
-          <div class="cert-badge">✓ Autorisert</div>
-          <div class="cert-badge">✓ NHO-medlem</div>
+      <!-- Right — hero image overlapping -->
+      <div data-animate class="relative">
+        <div class="relative rounded-2xl overflow-hidden aspect-[3/4] shadow-2xl">
+          <img
+            src="bilder/rorlegger/hero.jpg"
+            onerror="this.src='https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80'"
+            alt="Rørlegger på jobb"
+            class="w-full h-full object-cover"
+          />
+          <!-- Floating stat card -->
+          <div class="absolute -bottom-6 -left-6 glass rounded-xl p-4 shadow-lg">
+            <div class="text-xs text-zinc-400 mb-1">Akutt respons</div>
+            <div class="font-display font-bold text-2xl" style="color:#0F4C81">~90 min</div>
+            <div class="text-xs text-zinc-400 mt-0.5">i [By]sentrum</div>
+          </div>
+          <!-- Floating review -->
+          <div class="absolute top-4 -right-4 glass rounded-xl px-3 py-2 shadow-lg">
+            <div class="text-yellow-400 text-xs mb-0.5">★★★★★</div>
+            <div class="text-xs text-zinc-600 font-medium">"Rask og ryddig!"</div>
+            <div class="text-xs text-zinc-400">– Pernille M.</div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="anmeldelser">
-    <div class="section-label reveal">Anmeldelser</div>
-    <h2 class="section-title reveal">Hva kundene <span class="outline">sier</span></h2>
-    <div class="testimonials-grid">
-      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Fikk hjelp innen to timer ved vannlekkasje på badet. Rask, ryddig og profesjonell jobb. Forklarte tydelig hva som var feil. Kan varmt anbefales!"</div><div class="test-author"><div class="test-avatar">KJ</div><div><div class="test-name">Kari Johansen</div><div class="test-meta">Boligeier · Google</div></div></div></div>
-      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Totalrenovering av to bad — flott resultat til avtalt pris. Holdt tidsplan og kommuniserte godt underveis. Kommer til å bruke dem igjen."</div><div class="test-author"><div class="test-avatar">TO</div><div><div class="test-name">Thomas Olsen</div><div class="test-meta">Boligeier · Google</div></div></div></div>
-      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Byttet varmtvannbereder raskt og til god pris. Veldig hyggelig og ryddig fagarbeider. Fikk tid neste dag — jobben ble gjort på et par timer. Topp service!"</div><div class="test-author"><div class="test-avatar">LB</div><div><div class="test-name">Line Berg</div><div class="test-meta">Leilighetseier · Google</div></div></div></div>
+<!-- STATS -->
+<section class="border-y border-zinc-200 bg-[#FAFAFA]">
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <div data-stagger class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl" style="color:#0F4C81">12+</div>
+        <div class="text-sm text-zinc-500 mt-1">År i bransjen</div>
+      </div>
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl" style="color:#0F4C81">1 800+</div>
+        <div class="text-sm text-zinc-500 mt-1">Oppdrag fullført</div>
+      </div>
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl" style="color:#0F4C81">4.8★</div>
+        <div class="text-sm text-zinc-500 mt-1">Google-snitt</div>
+      </div>
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl" style="color:#0F4C81">24/7</div>
+        <div class="text-sm text-zinc-500 mt-1">Akuttberedskap</div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="contact-section" id="kontakt">
-    <div class="contact-inner">
-      <div class="contact-left reveal">
-        <div class="section-label">Kontakt</div>
-        <h2>Book din<br/><span class="outline">rørlegger</span></h2>
-        <p>Fyll ut skjemaet — vi kontakter deg innen 2 timer. Akutte henvendelser besvares umiddelbart på telefon.</p>
-        <div class="contact-details">
-          <div class="contact-detail"><div class="contact-icon">📞</div><div><div class="contact-info-label">Telefon (akutt 24/7)</div><div class="contact-info-val"><a href="tel:+4712345678">+47 123 45 678</a></div></div></div>
-          <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-info-label">E-post</div><div class="contact-info-val"><a href="mailto:hei@vvsproff.no">hei@vvsproff.no</a></div></div></div>
-          <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-info-label">Adresse</div><div class="contact-info-val">Håndverkerveien 8, [By]</div></div></div>
-          <div class="contact-detail"><div class="contact-icon">🕐</div><div><div class="contact-info-label">Åpningstider</div><div class="contact-info-val">Man–Fre 07–17 · Akutt: 24/7</div></div></div>
+<!-- TJENESTER — BENTO -->
+<section id="tjenester" class="py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="mb-12">
+      <p class="text-sm font-semibold tracking-widest uppercase mb-3" style="color:#0F4C81">Tjenester</p>
+      <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B]">Hva vi fikser for deg</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+      <!-- Akutt — 8 cols -->
+      <div data-animate class="card-hover md:col-span-8 bg-white border border-zinc-100 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-red-50 blur-2xl"></div>
+        <div class="relative">
+          <span class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 pulse">
+            <span class="w-1.5 h-1.5 bg-red-500 rounded-full inline-block"></span>
+            24/7 beredskap
+          </span>
+          <h3 class="font-display font-bold text-2xl mb-3">Akutt rørlegger</h3>
+          <p class="text-zinc-500 leading-relaxed mb-6 max-w-md">Vannlekkasje, sprukket rør eller toalett som ikke fungerer? Vi er på plass raskt — uansett tid på døgnet.</p>
+          <a href="tel:+4712345678" class="inline-flex items-center gap-2 bg-red-600 text-white font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-red-700 transition-colors">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Ring 123 45 678
+          </a>
         </div>
       </div>
-      <div class="reveal">
-        <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
-          <div class="form-row">
-            <div class="form-group"><label>Fornavn</label><input type="text" placeholder="Ola" required /></div>
-            <div class="form-group"><label>Etternavn</label><input type="text" placeholder="Nordmann" required /></div>
+
+      <!-- Baderomsrenovering — 4 cols -->
+      <div data-animate class="card-hover md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(15,76,129,0.08)">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="1.8"><path d="M4 12h16M4 12a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Baderomsrenovering</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Komplett montasje av servanter, dusjer, badekar og flisarbeid.</p>
+      </div>
+
+      <!-- Varmtvann — 4 cols -->
+      <div data-animate class="card-hover md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(15,76,129,0.08)">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Varmtvannstank</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Bytte, installasjon og service av varmtvannsberedere og varmepumper.</p>
+      </div>
+
+      <!-- Avløp — 4 cols -->
+      <div data-animate class="card-hover md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(15,76,129,0.08)">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="1.8"><path d="M12 22V12M12 12C12 7 7 4 3 6M12 12c0-5 5-8 9-6"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Avløp & kloakk</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Rørinspeksjon, spyling og utbedring av tette avløp og kloakk.</p>
+      </div>
+
+      <!-- Næring — 8 cols, navy -->
+      <div data-animate class="card-hover md:col-span-8 rounded-2xl p-8 relative overflow-hidden" style="background:#0F172A; color:white;">
+        <div class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl" style="background:rgba(15,76,129,0.15)"></div>
+        <div class="relative">
+          <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4" style="background:rgba(255,255,255,0.1); color:rgba(147,197,253,1)">
+            Bedrift & borettslag
+          </span>
+          <h3 class="font-display font-bold text-2xl mb-3">Servicekontrakter</h3>
+          <p class="leading-relaxed mb-6 max-w-md" style="color:rgba(255,255,255,0.6)">Fast rørlegger for borettslag, eiendomsforvaltere og næringslokaler. Prioritert respons og faste priser.</p>
+          <a href="#kontakt" class="inline-flex items-center gap-2 font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors" style="background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+            Be om serviceavtale →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OM OSS -->
+<section id="om" class="py-24 px-6 bg-[#F8FAFC] border-y border-zinc-100">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div data-animate class="relative order-2 md:order-1">
+        <div class="rounded-2xl overflow-hidden aspect-[4/3]">
+          <img
+            src="bilder/rorlegger/about.jpg"
+            onerror="this.src='https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80'"
+            alt="RørMester team"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <!-- Floating card -->
+        <div class="absolute -bottom-5 -right-5 glass rounded-xl p-4 shadow-lg">
+          <div class="flex gap-3 items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-display font-bold text-sm flex-shrink-0" style="background:#0F4C81">TH</div>
+            <div>
+              <div class="font-semibold text-sm text-[#09090B]">Tor Erik Hansen</div>
+              <div class="text-xs text-zinc-500">Daglig leder & mester</div>
+            </div>
           </div>
-          <div class="form-row">
-            <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+47 xxx xx xxx" required /></div>
-            <div class="form-group"><label>E-post</label><input type="email" placeholder="din@epost.no" required /></div>
+        </div>
+      </div>
+      <div class="order-1 md:order-2">
+        <div data-animate>
+          <p class="text-sm font-semibold tracking-widest uppercase mb-3" style="color:#0F4C81">Om oss</p>
+          <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B] mb-6">Solid håndverk siden 2013</h2>
+          <p class="text-zinc-500 text-lg leading-relaxed mb-4">RørMester er et lokalt VVS-firma i [By] med et team på 6 mesterbrev-sertifiserte rørleggere.</p>
+          <p class="text-zinc-500 leading-relaxed mb-8">Vi tror på ærlighet, transparent prising og at vi rydder opp etter oss. Alle jobber dokumenteres med bilde og rapport.</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white border border-zinc-100 rounded-xl p-4">
+              <div class="font-display font-bold text-2xl mb-1" style="color:#0F4C81">1 800+</div>
+              <div class="text-xs text-zinc-500">Oppdrag fullført</div>
+            </div>
+            <div class="bg-white border border-zinc-100 rounded-xl p-4">
+              <div class="font-display font-bold text-2xl mb-1" style="color:#0F4C81">4.8★</div>
+              <div class="text-xs text-zinc-500">Google-snitt</div>
+            </div>
           </div>
-          <div class="form-group"><label>Tjeneste</label>
-            <select required><option value="" disabled selected>Velg tjeneste</option><option>Akutt utrykning</option><option>Baderoms-renovering</option><option>Varmtvann & bereder</option><option>Kjøkken & avløp</option><option>Gulvvarme</option><option>Nybygg & rehab</option><option>Annet</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRISER -->
+<section id="priser" class="py-24 px-6 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <div data-animate class="text-center mb-12">
+      <p class="text-sm font-semibold tracking-widest uppercase mb-3" style="color:#0F4C81">Priser</p>
+      <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B]">Faste priser — ingen overraskelser</h2>
+    </div>
+    <div data-stagger class="grid md:grid-cols-3 gap-6">
+      <div class="card-hover bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="text-sm text-zinc-400 mb-2">Timepris</div>
+        <div class="font-display font-bold text-3xl text-[#09090B] mb-1">950 kr<span class="text-base font-normal text-zinc-400">/t</span></div>
+        <p class="text-zinc-500 text-sm leading-relaxed mt-3">Standard timebasert jobb. Gjelder de fleste vedlikeholdsoppgaver.</p>
+      </div>
+      <div class="card-hover border-2 rounded-2xl p-8 relative" style="border-color:#0F4C81; background:rgba(15,76,129,0.03)">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full text-white" style="background:#0F4C81">Mest populær</span>
+        </div>
+        <div class="text-sm text-zinc-400 mb-2">Fastpris baderomsoppgradering</div>
+        <div class="font-display font-bold text-3xl text-[#09090B] mb-1">Fra 14 900 kr</div>
+        <p class="text-zinc-500 text-sm leading-relaxed mt-3">Komplett rørleggeroppdrag inkl. montasje av servant, dusj og toalett.</p>
+      </div>
+      <div class="card-hover bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="text-sm text-zinc-400 mb-2">Akutt utrykning</div>
+        <div class="font-display font-bold text-3xl text-[#09090B] mb-1">1 490 kr<span class="text-base font-normal text-zinc-400"> flat</span></div>
+        <p class="text-zinc-500 text-sm leading-relaxed mt-3">Fast utrykningstillegg kveld/helg. Timepris tilkommer etter ankomst.</p>
+      </div>
+    </div>
+    <p class="text-center text-sm text-zinc-400 mt-6">Alle priser eks. mva. Tilbud tilpasses ditt oppdrag uten ekstra kostnad.</p>
+  </div>
+</section>
+
+<!-- ANMELDELSER -->
+<section class="py-24 px-6 bg-[#F8FAFC] border-t border-zinc-100">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="text-center mb-12">
+      <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B]">Hva kundene sier</h2>
+      <div class="flex items-center justify-center gap-1 mt-4">
+        <span class="text-yellow-400 text-xl">★★★★★</span>
+        <span class="text-zinc-500 text-sm ml-2">4.8 / 5 basert på 200+ Google-anmeldelser</span>
+      </div>
+    </div>
+    <div data-stagger class="grid md:grid-cols-3 gap-6">
+      <div class="card-hover bg-white border border-zinc-100 rounded-2xl p-6">
+        <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Hadde vannlekkasje kl. 22 på kvelden. RørMester var hos oss på 80 minutter. Fantastisk service og hyggelig å ha inne."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-500">AO</div>
+          <div>
+            <div class="text-sm font-medium">Anne-Lise Olsen</div>
+            <div class="text-xs text-zinc-400">Privatperson, [By]</div>
           </div>
-          <div class="form-group"><label>Adresse</label><input type="text" placeholder="Storgata 1, [By]" /></div>
-          <div class="form-group"><label>Beskriv behovet</label><textarea placeholder="Beskriv gjerne hva som er feil..."></textarea></div>
-          <button type="submit" class="form-submit" id="submitBtn">Send forespørsel</button>
+        </div>
+      </div>
+      <div class="card-hover bg-white border border-zinc-100 rounded-2xl p-6">
+        <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Totalrenovering av badet med RørMester. Alt ble gjort til avtalt pris og frist. Nydelig resultat!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-500">SO</div>
+          <div>
+            <div class="text-sm font-medium">Stian Olsen</div>
+            <div class="text-xs text-zinc-400">Boligeier, [By]</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-hover bg-white border border-zinc-100 rounded-2xl p-6">
+        <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Bruker RørMester som fast leverandør for borettslaget vårt. Alltid pålitelige, dokumenterer alt, og ryddige."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-500">LB</div>
+          <div>
+            <div class="text-sm font-medium">Lars Bratten</div>
+            <div class="text-xs text-zinc-400">Styreleder, borettslag</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="py-24 px-6 bg-white border-t border-zinc-100">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div data-animate>
+        <p class="text-sm font-semibold tracking-widest uppercase mb-3" style="color:#0F4C81">Kontakt</p>
+        <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B] mb-4">La oss hjelpe deg</h2>
+        <p class="text-zinc-500 leading-relaxed mb-8">Beskriv jobben så gir vi deg et skriftlig tilbud innen 24 timer. Gratis og uforpliktende.</p>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-9 h-9 bg-zinc-50 border border-zinc-200 rounded-lg flex items-center justify-center">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="text-zinc-400 text-xs">Telefon (akutt 24/7)</div>
+              <div class="font-medium text-[#09090B]">123 45 678</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-9 h-9 bg-zinc-50 border border-zinc-200 rounded-lg flex items-center justify-center">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="#0F4C81" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="text-zinc-400 text-xs">E-post</div>
+              <div class="font-medium text-[#09090B]">hei@rormester.no</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-animate>
+        <form class="bg-white border border-zinc-200 rounded-2xl p-8 space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-zinc-500 mb-1.5">Fornavn</label>
+              <input type="text" placeholder="Ola" class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81] transition-colors" />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-zinc-500 mb-1.5">Telefon</label>
+              <input type="tel" placeholder="123 45 678" class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81] transition-colors" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-500 mb-1.5">Hva trenger du hjelp med?</label>
+            <select class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#0F4C81] text-zinc-600">
+              <option>Velg tjeneste...</option>
+              <option>Akutt lekkasje</option>
+              <option>Baderomsrenovering</option>
+              <option>Varmtvannstank</option>
+              <option>Avløp / kloakk</option>
+              <option>Serviceavtale bedrift</option>
+              <option>Annet</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-500 mb-1.5">Beskriv jobben</label>
+            <textarea rows="3" placeholder="Hva er problemet og når passer det..." class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81] transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full text-white font-semibold py-3 rounded-lg text-sm transition-all hover:opacity-90 hover:scale-[1.01]" style="background:#0F4C81">
+            Send forespørsel →
+          </button>
+          <p class="text-xs text-zinc-400 text-center">Gratis tilbud innen 24 timer</p>
         </form>
-        <div class="form-success" id="formSuccess">✓ Takk! Vi tar kontakt innen 2 timer.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#" class="footer-logo"><span>VVS</span><span>Proff</span></a>
-          <p>Sertifisert mesterbedrift i [By] — rørlegger og VVS-tjenester for private og næringsliv siden 2004.</p>
-        </div>
-        <div class="footer-col"><h4>Tjenester</h4><ul><li><a href="#tjenester">Akutt utrykning</a></li><li><a href="#tjenester">Baderoms-renovering</a></li><li><a href="#tjenester">Varmtvann & bereder</a></li><li><a href="#tjenester">Kjøkken & avløp</a></li><li><a href="#tjenester">Gulvvarme</a></li></ul></div>
-        <div class="footer-col"><h4>Kontakt</h4><ul><li><a href="tel:+4712345678">+47 123 45 678</a></li><li><a href="mailto:hei@vvsproff.no">hei@vvsproff.no</a></li><li><a href="#">Håndverkerveien 8, [By]</a></li><li><a href="#">Man–Fre: 07–17</a></li><li><a href="#">Akutt: 24/7</a></li></ul></div>
+<!-- FOOTER -->
+<footer class="bg-[#0F172A] text-white py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div class="font-display font-bold text-xl mb-3">Rør<span style="color:#1E6DB5">Mester</span></div>
+        <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(255,255,255,0.5)">Sertifisert rørlegger i [By] siden 2013. Vi er lokalas håndverkere du kan stole på.</p>
+        <a href="tel:+4712345678" class="inline-flex items-center gap-2 mt-5 bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors pulse">
+          Ring ved akutt — 123 45 678
+        </a>
       </div>
-      <div class="footer-bottom">
-        <p>© 2025 VVS Proff · Mesterbrevnr. 123456</p>
-        <p>Nettside av <a href="https://dmarketing.no" style="color:#555;text-decoration:none;">Dietrichs Marketing</a></p>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.3)">Tjenester</div>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.6)">
+          <li><a href="#" class="hover:text-white transition-colors">Akutt rørlegger</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Baderomsrenovering</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Varmtvannstank</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Avløp & kloakk</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Servicekontrakter</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,0.3)">Kontakt</div>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.6)">
+          <li>123 45 678</li>
+          <li>hei@rormester.no</li>
+          <li>Eksempelgata 5, [By]</li>
+          <li class="pt-2 text-xs" style="color:rgba(255,255,255,0.3)">Org.nr: 987 654 321</li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="border-t pt-6 flex flex-col sm:flex-row justify-between items-center gap-3" style="border-color:rgba(255,255,255,0.1)">
+      <div class="text-xs" style="color:rgba(255,255,255,0.3)">© 2025 RørMester AS. Alle rettigheter reservert.</div>
+      <div class="flex gap-4 text-xs" style="color:rgba(255,255,255,0.3)">
+        <a href="#" class="hover:text-white/60 transition-colors">Personvern</a>
+        <a href="#" class="hover:text-white/60 transition-colors">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-  <script>
-    setTimeout(() => { document.getElementById('preloader').classList.add('done'); setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 900); }, 1100);
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
-    function toggleNav() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('navOverlay').classList.toggle('open'); document.body.style.overflow = document.getElementById('navOverlay').classList.contains('open') ? 'hidden' : ''; }
-    function closeNav() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); document.body.style.overflow = ''; }
-    document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); } }); });
-    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    const ticker = document.getElementById('ticker'); ticker.innerHTML += ticker.innerHTML;
-    function submitForm(e) { e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.textContent = 'Sender...'; btn.disabled = true; setTimeout(() => { document.getElementById('contactForm').style.display = 'none'; document.getElementById('formSuccess').style.display = 'block'; }, 1200); }
-  </script>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  window.addEventListener('load', () => {
+    if (typeof Motion === 'undefined') return;
+    const { inView, animate } = Motion;
+    inView('[data-animate]', ({ target }) => {
+      animate(target, { opacity: [0,1], y: [24,0] }, { duration: 0.5, easing: [0.25,0.46,0.45,0.94] });
+    });
+    inView('[data-stagger]', ({ target }) => {
+      animate(target.querySelectorAll(':scope > *'), { opacity: [0,1], y: [20,0] }, { duration: 0.4, delay: animate.stagger(0.08) });
+    });
+  });
+</script>
 </body>
 </html>

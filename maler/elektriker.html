@@ -3,381 +3,552 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Volt Elektro — Elektriker i [By]</title>
+  <title>ElektroGruppen AS — Elektriker i [By]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: '#2563EB',
+            'brand-dark': '#1D4ED8',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.9/dist/motion.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #f5f5f5;
-      --surface: #ffffff;
-      --text: #050505;
-      --muted: #888;
-      --primary: #0339f8;
-      --primary-soft: #0339f812;
-      --border: rgba(0,0,0,0.08);
-      --dark: #050505;
+    :root { --brand: #2563EB; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Syne', sans-serif; }
+
+    /* Dot grid */
+    .dot-grid {
+      background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
+      background-size: 24px 24px;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    #preloader { position: fixed; inset: 0; z-index: 9999; display: flex; }
-    .pre-panel { width: 50%; height: 100%; background: var(--primary); transition: transform 0.8s cubic-bezier(0.77,0,0.175,1); }
-    #preloader.done .pre-panel.left  { transform: translateX(-100%); }
-    #preloader.done .pre-panel.right { transform: translateX(100%); }
+    /* Nav scroll effect handled by JS */
+    #nav { transition: background 0.3s, box-shadow 0.3s; }
+    #nav.scrolled { background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); box-shadow: 0 1px 0 #E4E4E7; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; transition: background 0.3s, padding 0.3s, box-shadow 0.3s; }
-    nav.scrolled { background: rgba(245,245,245,0.96); backdrop-filter: blur(12px); padding: 14px 24px; box-shadow: 0 1px 0 var(--border); }
-    .nav-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; }
-    .nav-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-    .nav-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--text); letter-spacing: -0.02em; }
-    .nav-right { display: flex; align-items: center; gap: 14px; }
-    .nav-phone { font-size: 0.82rem; font-weight: 600; color: var(--text); text-decoration: none; }
-    .nav-phone:hover { color: var(--primary); }
-    .nav-cta { background: var(--primary); color: #fff; padding: 10px 22px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
-    .nav-cta:hover { opacity: 0.85; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+    /* Bento card hover */
+    .bento-card { transition: box-shadow 0.2s, transform 0.2s; }
+    .bento-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-2px); }
 
-    .nav-overlay { position: fixed; inset: 0; z-index: 99; background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 0 40px; clip-path: inset(0 0 100% 0); transition: clip-path 0.6s cubic-bezier(0.77,0,0.175,1); }
-    .nav-overlay.open { clip-path: inset(0 0 0% 0); }
-    .overlay-links { list-style: none; }
-    .overlay-links li { display: flex; align-items: baseline; gap: 16px; border-top: 1px solid #ffffff0a; padding: 16px 0; }
-    .overlay-links li:last-child { border-bottom: 1px solid #ffffff0a; }
-    .overlay-num { font-size: 0.7rem; color: #444; font-weight: 500; }
-    .overlay-links a { font-size: clamp(2rem,6vw,3.5rem); font-weight: 700; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px #f5f5f5; text-decoration: none; transition: color 0.2s; }
-    .overlay-links a:hover { color: #f5f5f5; }
-
-    /* HERO — full image med lys overlay */
-    .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 0 24px; padding-top: 80px; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background-image: url('bilder/elektriker/hero-bg.jpg'); background-size: cover; background-position: center; }
-    .hero-bg::after { content: ''; position: absolute; inset: 0; background: rgba(245,245,245,0.88); }
-    .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
-
-    .emergency-badge { display: inline-flex; align-items: center; gap: 8px; background: #ff3b30; color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; margin-bottom: 24px; }
-    .emergency-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-
-    .hero h1 { font-size: clamp(3rem,7vw,6rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 24px; max-width: 800px; }
-    .hero h1 .outline { color: transparent; -webkit-text-stroke: 3px var(--text); }
-    .hero-sub { font-size: 1.05rem; color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
-    .btn-emergency { display: inline-flex; align-items: center; gap: 8px; background: #ff3b30; color: #fff; padding: 16px 32px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 1rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
-    .btn-emergency:hover { opacity: 0.9; }
-    .btn-book { background: var(--primary); color: #fff; padding: 16px 32px; border-radius: 4px; font-family: 'Archivo',sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
-    .btn-book:hover { opacity: 0.85; }
-    .btn-ghost { background: transparent; color: var(--text); padding: 16px 28px; border-radius: 4px; border: 1.5px solid rgba(0,0,0,0.2); font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: border-color 0.2s; }
-    .btn-ghost:hover { border-color: var(--text); }
-    .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
-    .hero-stat-num { font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); }
-    .hero-stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
-
-    .ticker-wrap { overflow: hidden; background: var(--dark); padding: 14px 0; }
-    .ticker { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
-    .ticker-item { display: inline-flex; align-items: center; gap: 20px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #555; padding: 0 40px; }
-    .ticker-item span { color: var(--primary); }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    .trust-bar { background: var(--surface); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
-    .trust-item { display: flex; align-items: center; gap: 16px; padding: 28px 40px; flex: 1; min-width: 220px; border-right: 1px solid var(--border); }
-    .trust-item:last-child { border-right: none; }
-    .trust-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .trust-title { font-size: 0.88rem; font-weight: 700; }
-    .trust-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-    .section { padding: 96px 24px; max-width: 1200px; margin: 0 auto; }
-    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
-    .section-title { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
-    .section-title .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
-    .section-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 500px; margin-bottom: 48px; }
-
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
-    .service-card { background: var(--surface); border: 1px solid var(--border); padding: 32px 28px; border-radius: 8px; transition: box-shadow 0.3s, transform 0.3s; }
-    .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
-    .service-num { font-size: 0.68rem; font-weight: 700; color: var(--primary); letter-spacing: 0.1em; margin-bottom: 12px; }
-    .service-icon { font-size: 2rem; margin-bottom: 16px; }
-    .service-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-    .service-tag { display: inline-block; margin-top: 14px; font-size: 0.7rem; font-weight: 700; color: var(--primary); background: var(--primary-soft); padding: 4px 10px; border-radius: 4px; }
-
-    .how-section { background: var(--dark); padding: 80px 24px; }
-    .how-inner { max-width: 1200px; margin: 0 auto; }
-    .how-section .section-label { color: var(--primary); }
-    .how-section .section-title { color: #f5f5f5; }
-    .how-section .section-title .outline { -webkit-text-stroke: 1.5px #f5f5f5; }
-    .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; }
-    .how-step { background: #0f0f0f; padding: 40px 32px; }
-    .how-step-num { font-size: 4rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--primary); letter-spacing: -0.06em; line-height: 1; margin-bottom: 20px; }
-    .how-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: #f5f5f5; }
-    .how-step p { font-size: 0.82rem; color: #666; line-height: 1.7; }
-
-    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-img-wrap { position: relative; }
-    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 4px; }
-    .about-badge { position: absolute; bottom: -16px; right: -16px; background: var(--primary); color: #fff; padding: 24px; text-align: center; border-radius: 4px; }
-    .about-badge-num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
-    .about-badge-text { font-size: 0.7rem; margin-top: 4px; opacity: 0.9; }
-    .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
-    .about-certs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .cert-badge { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
-
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .testimonial { background: var(--surface); border: 1px solid var(--border); padding: 28px; border-radius: 8px; }
-    .test-stars { color: #f5a623; font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
-    .test-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .test-author { display: flex; align-items: center; gap: 12px; }
-    .test-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-    .test-name { font-size: 0.82rem; font-weight: 700; }
-    .test-meta { font-size: 0.72rem; color: var(--muted); }
-
-    .contact-section { background: var(--surface); border-top: 1px solid var(--border); }
-    .contact-inner { max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-left h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px; }
-    .contact-left h2 .outline { color: transparent; -webkit-text-stroke: 1.5px var(--text); }
-    .contact-left > p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
-    .contact-details { display: flex; flex-direction: column; gap: 18px; }
-    .contact-detail { display: flex; align-items: flex-start; gap: 14px; }
-    .contact-icon { width: 38px; height: 38px; border-radius: 6px; background: var(--primary-soft); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
-    .contact-info-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-    .contact-info-val { font-size: 0.88rem; font-weight: 600; }
-    .contact-info-val a { color: var(--text); text-decoration: none; }
-    .contact-info-val a:hover { color: var(--primary); }
-    .contact-form { display: flex; flex-direction: column; gap: 14px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-    .form-group input, .form-group select, .form-group textarea { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); padding: 12px 14px; border-radius: 6px; font-family: 'Archivo',sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; width: 100%; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit { background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 14px; font-family: 'Archivo',sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
-    .form-submit:hover { opacity: 0.85; }
-    .form-success { display: none; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 6px; padding: 16px; text-align: center; font-size: 0.88rem; color: var(--primary); }
-
-    .site-footer { background: var(--dark); color: #f5f5f5; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 56px 24px 32px; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
-    .footer-logo { display: flex; align-items: baseline; gap: 6px; text-decoration: none; margin-bottom: 14px; }
-    .footer-logo span:first-child { font-size: 1.1rem; font-weight: 700; color: #f5f5f5; }
-    .footer-logo span:last-child { font-size: 1.1rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1px #f5f5f5; }
-    .footer-brand p { font-size: 0.82rem; color: #555; line-height: 1.7; max-width: 280px; }
-    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #444; margin-bottom: 16px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { font-size: 0.82rem; color: #555; text-decoration: none; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: #f5f5f5; }
-    .footer-bottom { border-top: 1px solid #ffffff08; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .footer-bottom p { font-size: 0.78rem; color: #333; }
-
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 900px) {
-      .about-inner { grid-template-columns: 1fr; gap: 48px; }
-      .how-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .hamburger { display: flex; }
-      .nav-phone { display: none; }
+    /* Emergency pulse */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(220,38,38,0); }
+      100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
     }
-    @media (max-width: 600px) {
-      .form-row { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .hero-stats { gap: 24px; }
+    .pulse { animation: pulse-ring 2s infinite; }
+
+    /* Process step line */
+    .process-line::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(50% + 24px);
+      width: calc(100% - 48px);
+      height: 1px;
+      background: #E4E4E7;
     }
+    @media (max-width: 767px) { .process-line::after { display: none; } }
+
+    /* Glassmorphism */
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.8); }
   </style>
 </head>
 <body>
-  <div id="preloader"><div class="pre-panel left"></div><div class="pre-panel right"></div></div>
 
-  <div class="nav-overlay" id="navOverlay">
-    <ul class="overlay-links">
-      <li><span class="overlay-num">01</span><a href="#tjenester" onclick="closeNav()">Tjenester</a></li>
-      <li><span class="overlay-num">02</span><a href="#slik-jobber-vi" onclick="closeNav()">Slik jobber vi</a></li>
-      <li><span class="overlay-num">03</span><a href="#om-oss" onclick="closeNav()">Om oss</a></li>
-      <li><span class="overlay-num">04</span><a href="#anmeldelser" onclick="closeNav()">Anmeldelser</a></li>
-      <li><span class="overlay-num">05</span><a href="#kontakt" onclick="closeNav()">Kontakt</a></li>
-    </ul>
-  </div>
-
-  <nav id="navbar">
-    <a href="#" class="nav-logo"><span>Volt</span><span>Elektro</span></a>
-    <div class="nav-right">
-      <a href="tel:+4712345678" class="nav-phone">📞 +47 123 45 678</a>
-      <a href="#kontakt" class="nav-cta">Book elektriker</a>
+<!-- NAV -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="#" class="font-display font-700 text-lg tracking-tight text-[#09090B]">
+      Elektro<span class="text-brand">Gruppen</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+      <a href="#tjenester" class="hover:text-[#09090B] transition-colors">Tjenester</a>
+      <a href="#om" class="hover:text-[#09090B] transition-colors">Om oss</a>
+      <a href="#prosess" class="hover:text-[#09090B] transition-colors">Slik jobber vi</a>
+      <a href="#kontakt" class="hover:text-[#09090B] transition-colors">Kontakt</a>
     </div>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  </nav>
-
-  <section class="hero" id="hero">
-    <div class="hero-bg" style="background-image:url('bilder/elektriker/hero-bg.jpg');"></div>
-    <div class="hero-content">
-      <div class="emergency-badge reveal">Akutt utrykning 24/7</div>
-      <h1 class="reveal">Din elektriker<br/>i <span class="outline">[By]</span></h1>
-      <p class="hero-sub reveal">DSB-registrert elektrikerfirma med over 15 års erfaring. Vi tar oppdrag i hele [By] og omegn — fra sikringsskap til solceller.</p>
-      <div class="hero-actions reveal">
-        <a href="tel:+4712345678" class="btn-emergency">⚡ Ring nå — 24/7</a>
-        <a href="#kontakt" class="btn-book">Book befaring</a>
-        <a href="#tjenester" class="btn-ghost">Se tjenester</a>
-      </div>
-      <div class="hero-stats reveal">
-        <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Års erfaring</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">2 400+</div><div class="hero-stat-label">Oppdrag utført</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">4.9 ★</div><div class="hero-stat-label">Google-vurdering</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">4t</div><div class="hero-stat-label">Responstid akutt</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ticker-wrap">
-    <div class="ticker" id="ticker">
-      <div class="ticker-item"><span>⚡</span> Akutt utrykning</div>
-      <div class="ticker-item"><span>⚡</span> Sikringsskap</div>
-      <div class="ticker-item"><span>⚡</span> EL-bil ladestasjon</div>
-      <div class="ticker-item"><span>⚡</span> Solcelleanlegg</div>
-      <div class="ticker-item"><span>⚡</span> Smarthjem</div>
-      <div class="ticker-item"><span>⚡</span> Nybygg & rehab</div>
-      <div class="ticker-item"><span>⚡</span> Akutt utrykning</div>
-      <div class="ticker-item"><span>⚡</span> Sikringsskap</div>
-      <div class="ticker-item"><span>⚡</span> EL-bil ladestasjon</div>
-      <div class="ticker-item"><span>⚡</span> Solcelleanlegg</div>
-      <div class="ticker-item"><span>⚡</span> Smarthjem</div>
-      <div class="ticker-item"><span>⚡</span> Nybygg & rehab</div>
+    <div class="flex items-center gap-3">
+      <a href="tel:+4712345678" class="hidden sm:flex items-center gap-2 bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-lg pulse hover:bg-red-700 transition-colors">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Akutt? Ring nå
+      </a>
+      <a href="#kontakt" class="bg-brand text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-brand-dark transition-colors">
+        Få tilbud
+      </a>
     </div>
   </div>
+</nav>
 
-  <div class="trust-bar reveal">
-    <div class="trust-item"><div class="trust-icon">⚡</div><div><div class="trust-title">DSB-registrert</div><div class="trust-sub">Godkjent elsikkerhetsbedrift</div></div></div>
-    <div class="trust-item"><div class="trust-icon">🛡️</div><div><div class="trust-title">Forsikret & garantert</div><div class="trust-sub">Ansvarsforsikring 10 MNOK</div></div></div>
-    <div class="trust-item"><div class="trust-icon">📋</div><div><div class="trust-title">Komplett dokumentasjon</div><div class="trust-sub">Samsvarserklæring inkludert</div></div></div>
-    <div class="trust-item"><div class="trust-icon">⏱️</div><div><div class="trust-title">Rask respons</div><div class="trust-sub">Akutt utrykning innen 4 timer</div></div></div>
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center justify-center dot-grid pt-14 overflow-hidden">
+  <!-- Radial fade overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-[#FAFAFA]/60 via-transparent to-[#FAFAFA]"></div>
+
+  <div class="relative z-10 text-center max-w-4xl mx-auto px-6 py-32">
+    <!-- Badge -->
+    <div data-animate class="inline-flex items-center gap-2 bg-white border border-zinc-200 text-xs font-medium text-zinc-600 px-3 py-1.5 rounded-full mb-8 shadow-sm">
+      <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+      Tilgjengelig i dag — [By] og omegn
+    </div>
+
+    <h1 data-animate class="font-display font-extrabold text-6xl md:text-7xl leading-[0.95] tracking-[-0.04em] text-[#09090B] mb-6">
+      Elektriker du<br/>
+      <span class="text-brand">kan stole på</span>
+    </h1>
+
+    <p data-animate class="text-lg text-zinc-500 max-w-xl mx-auto mb-10 leading-relaxed">
+      Profesjonell elektriker i [By]. Vi tar alt fra sikringsskap og nye installasjoner til akuttoppdrag. Sertifisert, rask, og til fast pris.
+    </p>
+
+    <div data-animate class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#kontakt" class="bg-brand text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-brand-dark transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(37,99,235,0.35)] text-sm">
+        Få gratis tilbud
+      </a>
+      <a href="tel:+4712345678" class="flex items-center justify-center gap-2 border border-zinc-200 text-[#09090B] font-semibold px-7 py-3.5 rounded-lg hover:border-zinc-400 transition-colors text-sm">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        123 45 678
+      </a>
+    </div>
+
+    <!-- Trust signals -->
+    <div data-animate class="flex flex-wrap gap-6 justify-center mt-14 text-sm text-zinc-500">
+      <span class="flex items-center gap-2">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        El-sertifikat
+      </span>
+      <span class="flex items-center gap-2">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Responstid under 2t
+      </span>
+      <span class="flex items-center gap-2">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        4.9 / 5 — 140+ anmeldelser
+      </span>
+      <span class="flex items-center gap-2">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Fast pris — ingen skjulte kostnader
+      </span>
+    </div>
   </div>
+</section>
 
-  <section class="section" id="tjenester">
-    <div class="section-label reveal">Tjenester</div>
-    <h2 class="section-title reveal">Alt innen <span class="outline">elektro</span></h2>
-    <p class="section-sub reveal">Fra enkle reparasjoner til komplette elektroanlegg for bolig og næring.</p>
-    <div class="services-grid">
-      <div class="service-card reveal"><div class="service-num">01</div><div class="service-icon">⚡</div><div class="service-name">Akutt utrykning</div><div class="service-desc">Strømbrudd, kortslutning eller elektrisk fare? Vi rykker ut 24/7 og er på plass innen 4 timer.</div><div class="service-tag">24/7 tilgjengelig</div></div>
-      <div class="service-card reveal"><div class="service-num">02</div><div class="service-icon">🔌</div><div class="service-name">Sikringsskap & kurser</div><div class="service-desc">Oppgradering av sikringsskap, nye kurser, jordfeilautomat og kapasitetsutvidelse.</div><div class="service-tag">Vanligst oppdrag</div></div>
-      <div class="service-card reveal"><div class="service-num">03</div><div class="service-icon">🚗</div><div class="service-name">EL-bil ladestasjon</div><div class="service-desc">Installasjon av elbil-ladepunkt hjemme eller på kontor. Alle merker. Enova-støtte.</div><div class="service-tag">Enova-støtte</div></div>
-      <div class="service-card reveal"><div class="service-num">04</div><div class="service-icon">☀️</div><div class="service-name">Solcelleanlegg</div><div class="service-desc">Design, installasjon og nettilkobling av solcelleanlegg for privatboliger og næringsbygg.</div><div class="service-tag">Spar strøm</div></div>
-      <div class="service-card reveal"><div class="service-num">05</div><div class="service-icon">🏠</div><div class="service-name">Smarthjem</div><div class="service-desc">Intelligent styring av lys, varme og sikkerhet. Kompatibelt med Google Home og Apple Home.</div></div>
-      <div class="service-card reveal"><div class="service-num">06</div><div class="service-icon">🏗️</div><div class="service-name">Nybygg & renovering</div><div class="service-desc">Komplett elektroanlegg for nye bygg og totalrehabiliteringer. Nøkkelferdig med samsvarserklæring.</div></div>
-    </div>
-  </section>
-
-  <section class="how-section" id="slik-jobber-vi">
-    <div class="how-inner">
-      <div class="section-label reveal">Slik jobber vi</div>
-      <h2 class="section-title reveal">Enkelt fra start <span class="outline">til slutt</span></h2>
-      <div class="how-grid">
-        <div class="how-step reveal"><div class="how-step-num">01</div><h3>Ta kontakt</h3><p>Ring oss direkte eller fyll ut kontaktskjemaet. Vi svarer innen 2 timer — raskere ved akutt situasjon.</p></div>
-        <div class="how-step reveal"><div class="how-step-num">02</div><h3>Gratis befaring & tilbud</h3><p>Vi kommer på befaring og gir et skriftlig tilbud uten skjulte kostnader. Ingen bindinger.</p></div>
-        <div class="how-step reveal"><div class="how-step-num">03</div><h3>Jobb utført & dokumentert</h3><p>Vi utfører arbeidet ryddig og profesjonelt, og leverer fullstendig samsvarserklæring.</p></div>
+<!-- STATS BAR -->
+<section class="border-y border-zinc-200 bg-white">
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <div data-stagger class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl text-brand">15+</div>
+        <div class="text-sm text-zinc-500 mt-1">År med erfaring</div>
+      </div>
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl text-brand">2 400+</div>
+        <div class="text-sm text-zinc-500 mt-1">Oppdrag fullført</div>
+      </div>
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl text-brand">4.9★</div>
+        <div class="text-sm text-zinc-500 mt-1">Google-snitt</div>
+      </div>
+      <div class="text-center">
+        <div class="font-display font-extrabold text-4xl text-brand">24/7</div>
+        <div class="text-sm text-zinc-500 mt-1">Akuttberedskap</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="om-oss">
-    <div class="about-inner">
-      <div class="about-img-wrap reveal">
-        <img class="about-img" src="bilder/elektriker/about.jpg" onerror="this.src='https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=700&q=80'" alt="Volt Elektro team" />
-        <div class="about-badge"><div class="about-badge-num">15</div><div class="about-badge-text">Års erfaring</div></div>
+<!-- TJENESTER — BENTO GRID -->
+<section id="tjenester" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="mb-12">
+      <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-3">Tjenester</p>
+      <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B]">Alt du trenger av elektriker</h2>
+    </div>
+
+    <!-- 12-col bento grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+      <!-- Large card: Akutt (8 cols) -->
+      <div data-animate class="bento-card md:col-span-8 bg-white border border-zinc-100 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-48 h-48 bg-red-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="relative">
+          <span class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 pulse">
+            <span class="w-1.5 h-1.5 bg-red-500 rounded-full inline-block"></span>
+            Tilgjengelig nå
+          </span>
+          <h3 class="font-display font-bold text-2xl mb-3">Akutt elektriker</h3>
+          <p class="text-zinc-500 leading-relaxed mb-6 max-w-md">Kortslutning, sikringsbrudd eller strøm som ikke virker? Vi er på plass innen 2 timer — også kvelder og helger.</p>
+          <a href="tel:+4712345678" class="inline-flex items-center gap-2 bg-red-600 text-white font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-red-700 transition-colors">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Ring 123 45 678
+          </a>
+        </div>
       </div>
-      <div class="about-text reveal">
-        <div class="section-label">Om oss</div>
-        <h2 class="section-title">Lokalt firma —<br/><span class="outline">faglig tyngde</span></h2>
-        <p>Volt Elektro ble startet i [By] i 2009 og er i dag et av de mest anerkjente elektrikerfirmaene i regionen. Vi er 8 fast ansatte elektrikere med spesialisering innen bolig, næring og fornybar energi.</p>
-        <p>Alle våre elektrikere er DSB-godkjente og jobber etter gjeldende norske normer og standarder. Vi leverer alltid komplett samsvarserklæring.</p>
-        <p>Som lokalt firma kjenner vi [By] godt, og vi er opptatt av å bygge varige relasjoner — ikke bare ta ett oppdrag.</p>
-        <div class="about-certs">
-          <div class="cert-badge">✓ DSB-registrert</div>
-          <div class="cert-badge">✓ Lavenergiprogrammet</div>
-          <div class="cert-badge">✓ Enova-godkjent</div>
-          <div class="cert-badge">✓ NELFO-medlem</div>
+
+      <!-- Small card: Sikringsskap (4 cols) -->
+      <div data-animate class="bento-card md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center mb-4">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M12 10v3M9 8.5L12 10l3-1.5"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Sikringsskap</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Oppgradering, bytte og kontroll av el-tavle. Inkl. RCD-vern og jordfeil.</p>
+      </div>
+
+      <!-- Small card: Nybygg (4 cols) -->
+      <div data-animate class="bento-card md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center mb-4">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Nybygg & rehabilitering</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Komplett el-anlegg for nye bygg, tilbygg og totalrehabilitering.</p>
+      </div>
+
+      <!-- Small card: EV-lader (4 cols) -->
+      <div data-animate class="bento-card md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mb-4">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#16A34A" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">EV-lader installasjon</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Hjemmelader og borettslag-løsninger. Vi er sertifisert partner for Easee og Zaptec.</p>
+      </div>
+
+      <!-- Medium card: Smarthjem (4 cols) -->
+      <div data-animate class="bento-card md:col-span-4 bg-white border border-zinc-100 rounded-2xl p-8">
+        <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center mb-4">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#7C3AED" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Smarthjem</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Integrasjon av styresystemer, dimming, og automatisering. Kompatibelt med Google Home og Apple HomeKit.</p>
+      </div>
+
+      <!-- Wide card: Næringsbygg (8 cols) -->
+      <div data-animate class="bento-card md:col-span-8 bg-[#0F172A] text-white border border-zinc-800 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand/10 rounded-full blur-3xl"></div>
+        <div class="relative">
+          <span class="inline-flex items-center gap-2 bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+            B2B
+          </span>
+          <h3 class="font-display font-bold text-2xl mb-3">Næringsbygg & industri</h3>
+          <p class="text-white/60 leading-relaxed mb-6 max-w-md">Fast serviceavtale for bedrifter. Prioritert responstid, dedikert kontakt, og komplett dokumentasjon.</p>
+          <a href="#kontakt" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-white/20 transition-colors">
+            Ta kontakt →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OM OSS -->
+<section id="om" class="py-24 px-6 bg-white border-y border-zinc-100">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div data-animate>
+          <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-3">Om oss</p>
+          <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B] mb-6">
+            Lokal elektriker med<br/>15 år i [By]
+          </h2>
+          <p class="text-zinc-500 text-lg leading-relaxed mb-6">
+            ElektroGruppen ble grunnlagt i [By] i 2009. Vi er et team på 8 sertifiserte elektrikere som kjenner [By]s eldre bygningsmasse og modernere boligbygg like godt.
+          </p>
+          <p class="text-zinc-500 leading-relaxed mb-8">
+            Vi har gjennomgående høy kvalitet på alt vi leverer — fra enkle utskiftinger til komplette el-anlegg for næringsbygg. Alle oppdrag dokumenteres og rapporteres i henhold til NEK 400.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div class="flex items-center gap-2 text-sm text-zinc-600">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              DSB-autorisert
+            </div>
+            <div class="flex items-center gap-2 text-sm text-zinc-600">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Forsikret og ansvarlig
+            </div>
+            <div class="flex items-center gap-2 text-sm text-zinc-600">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              NEK 400 dokumentasjon
+            </div>
+            <div class="flex items-center gap-2 text-sm text-zinc-600">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Garanti på alt arbeid
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-animate>
+        <div class="relative rounded-2xl overflow-hidden aspect-[4/3]">
+          <img
+            src="bilder/elektriker/about.jpg"
+            onerror="this.src='https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80'"
+            alt="ElektroGruppen team"
+            class="w-full h-full object-cover"
+          />
+          <!-- Glass overlay card -->
+          <div class="absolute bottom-4 left-4 right-4 glass rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-brand rounded-full flex items-center justify-center text-white font-display font-bold text-sm flex-shrink-0">JH</div>
+              <div>
+                <div class="font-semibold text-sm text-[#09090B]">Jan Henrik Haugen</div>
+                <div class="text-xs text-zinc-500">Daglig leder & masterlektriker</div>
+              </div>
+              <div class="ml-auto text-brand font-display font-bold text-sm">4.9★</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="anmeldelser">
-    <div class="section-label reveal">Anmeldelser</div>
-    <h2 class="section-title reveal">Hva kundene <span class="outline">sier</span></h2>
-    <div class="testimonials-grid">
-      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Fikk hjelp samme dag med strømbrudd i kjelleren. Ryddig, rask og profesjonell jobb. Forklarte alt de gjorde underveis. Anbefales på det sterkeste!"</div><div class="test-author"><div class="test-avatar">AS</div><div><div class="test-name">Anders Strand</div><div class="test-meta">Boligeier · Google</div></div></div></div>
-      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Installerte elbil-lader og oppgraderte sikringsskapet. Meget profesjonell jobb til god pris. Kom presis og leverte komplett dokumentasjon. 10/10!"</div><div class="test-author"><div class="test-avatar">KR</div><div><div class="test-name">Kristin Røed</div><div class="test-meta">Eneboligeier · Google</div></div></div></div>
-      <div class="testimonial reveal"><div class="test-stars">★★★★★</div><div class="test-text">"Bruker Volt Elektro på alle bygg i firmaet. Alltid på tid, alltid ryddig arbeid. God kommunikasjon og samsvarserklæring på alle jobber."</div><div class="test-author"><div class="test-avatar">PH</div><div><div class="test-name">Per Halvorsen</div><div class="test-meta">Byggherre · Google</div></div></div></div>
+<!-- PROSESS -->
+<section id="prosess" class="py-24 px-6 bg-[#F8FAFC]">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="text-center mb-16">
+      <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-3">Slik jobber vi</p>
+      <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B]">Fra kontakt til ferdig oppdrag</h2>
     </div>
-  </section>
+    <div data-stagger class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="relative process-line text-center">
+        <div class="w-10 h-10 bg-brand text-white font-display font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">1</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Kontakt oss</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Ring, send e-post, eller fyll ut skjema. Vi svarer innen 2 timer på hverdager.</p>
+      </div>
+      <div class="relative process-line text-center">
+        <div class="w-10 h-10 bg-brand text-white font-display font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">2</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Befaring & tilbud</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Vi avtaler en gratis befaring og gir deg et skriftlig fastpristilbud innen 24 timer.</p>
+      </div>
+      <div class="relative process-line text-center">
+        <div class="w-10 h-10 bg-brand text-white font-display font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">3</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Utførelse</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Oppdrag utføres ryddig og punktlig. Vi holder deg oppdatert underveis.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-10 h-10 bg-brand text-white font-display font-bold text-lg rounded-full flex items-center justify-center mx-auto mb-4">4</div>
+        <h3 class="font-display font-semibold text-lg mb-2">Dokumentasjon</h3>
+        <p class="text-zinc-500 text-sm leading-relaxed">Du mottar NEK 400-dokumentasjon og garantibevis på e-post.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="contact-section" id="kontakt">
-    <div class="contact-inner">
-      <div class="contact-left reveal">
-        <div class="section-label">Kontakt</div>
-        <h2>Book din<br/><span class="outline">elektriker</span></h2>
-        <p>Fyll ut skjemaet — vi kontakter deg innen 2 timer. Akutte henvendelser besvares umiddelbart på telefon.</p>
-        <div class="contact-details">
-          <div class="contact-detail"><div class="contact-icon">📞</div><div><div class="contact-info-label">Telefon (akutt 24/7)</div><div class="contact-info-val"><a href="tel:+4712345678">+47 123 45 678</a></div></div></div>
-          <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-info-label">E-post</div><div class="contact-info-val"><a href="mailto:hei@voltelektro.no">hei@voltelektro.no</a></div></div></div>
-          <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-info-label">Adresse</div><div class="contact-info-val">Industriveien 4, [By]</div></div></div>
-          <div class="contact-detail"><div class="contact-icon">🕐</div><div><div class="contact-info-label">Åpningstider</div><div class="contact-info-val">Man–Fre 07–17 · Akutt: 24/7</div></div></div>
+<!-- ANMELDELSER -->
+<section class="py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="text-center mb-12">
+      <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-3">Anmeldelser</p>
+      <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B]">Hva kundene sier</h2>
+      <div class="flex items-center justify-center gap-1 mt-4">
+        <span class="text-yellow-400 text-xl">★★★★★</span>
+        <span class="text-zinc-500 text-sm ml-2">4.9 / 5 basert på 140 Google-anmeldelser</span>
+      </div>
+    </div>
+    <div data-stagger class="grid md:grid-cols-3 gap-6">
+      <div class="bento-card bg-white border border-zinc-100 rounded-2xl p-6">
+        <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Rask respons på akuttoppdraget. Var hos oss innen 90 minutter og fikset alt på en gang. Ryddige og profesjonelle."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-500">KB</div>
+          <div>
+            <div class="text-sm font-medium text-[#09090B]">Kari Bergstrom</div>
+            <div class="text-xs text-zinc-400">Privatperson, [By]</div>
+          </div>
         </div>
       </div>
-      <div class="reveal">
-        <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
-          <div class="form-row">
-            <div class="form-group"><label>Fornavn</label><input type="text" placeholder="Ola" required /></div>
-            <div class="form-group"><label>Etternavn</label><input type="text" placeholder="Nordmann" required /></div>
+      <div class="bento-card bg-white border border-zinc-100 rounded-2xl p-6">
+        <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Installerte EV-lader på to timer. Prisen var akkurat som tilbudet og de ryddet etter seg. Varmt anbefalt!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-500">MH</div>
+          <div>
+            <div class="text-sm font-medium text-[#09090B]">Magnus Halvorsen</div>
+            <div class="text-xs text-zinc-400">Privatperson, [By]</div>
           </div>
-          <div class="form-row">
-            <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+47 xxx xx xxx" required /></div>
-            <div class="form-group"><label>E-post</label><input type="email" placeholder="din@epost.no" required /></div>
+        </div>
+      </div>
+      <div class="bento-card bg-white border border-zinc-100 rounded-2xl p-6">
+        <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Har brukt ElektroGruppen på tre prosjekter nå. Alltid på tid, alltid god dokumentasjon og konkurransedyktige priser."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center text-xs font-semibold text-zinc-500">TN</div>
+          <div>
+            <div class="text-sm font-medium text-[#09090B]">Tone Nilsen</div>
+            <div class="text-xs text-zinc-400">Borettslag, [By]</div>
           </div>
-          <div class="form-group"><label>Hva trenger du hjelp med?</label>
-            <select required><option value="" disabled selected>Velg tjeneste</option><option>Akutt utrykning</option><option>Sikringsskap & kurser</option><option>EL-bil ladestasjon</option><option>Solcelleanlegg</option><option>Smarthjem</option><option>Nybygg & renovering</option><option>Annet</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="py-24 px-6 bg-[#F8FAFC] border-t border-zinc-100">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div data-animate>
+        <p class="text-brand text-sm font-semibold tracking-widest uppercase mb-3">Kontakt oss</p>
+        <h2 class="font-display font-bold text-4xl tracking-tight text-[#09090B] mb-4">Klar for et tilbud?</h2>
+        <p class="text-zinc-500 leading-relaxed mb-8">Fyll ut skjema så kontakter vi deg innen 2 timer på hverdager. Akutt? Ring direkte.</p>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-9 h-9 bg-white border border-zinc-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="text-zinc-400 text-xs">Telefon (akutt 24/7)</div>
+              <div class="font-medium text-[#09090B]">123 45 678</div>
+            </div>
           </div>
-          <div class="form-group"><label>Adresse for oppdraget</label><input type="text" placeholder="Storgata 1, [By]" /></div>
-          <div class="form-group"><label>Beskriv behovet</label><textarea placeholder="Beskriv gjerne hva som er feil eller hva du ønsker utført..."></textarea></div>
-          <button type="submit" class="form-submit" id="submitBtn">Send forespørsel</button>
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-9 h-9 bg-white border border-zinc-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="text-zinc-400 text-xs">E-post</div>
+              <div class="font-medium text-[#09090B]">kontakt@elektrogruppen.no</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 text-sm">
+            <div class="w-9 h-9 bg-white border border-zinc-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+            </div>
+            <div>
+              <div class="text-zinc-400 text-xs">Adresse</div>
+              <div class="font-medium text-[#09090B]">Eksempelgata 12, [By]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-animate>
+        <form class="bg-white border border-zinc-200 rounded-2xl p-8 space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-zinc-500 mb-1.5">Fornavn</label>
+              <input type="text" placeholder="Ola" class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-colors" />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-zinc-500 mb-1.5">Etternavn</label>
+              <input type="text" placeholder="Nordmann" class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-colors" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-500 mb-1.5">Telefon</label>
+            <input type="tel" placeholder="123 45 678" class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-500 mb-1.5">Hva trenger du hjelp med?</label>
+            <select class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand text-zinc-600">
+              <option>Velg tjeneste...</option>
+              <option>Akuttoppdrag</option>
+              <option>Sikringsskap</option>
+              <option>EV-lader</option>
+              <option>Nybygg / rehabilitering</option>
+              <option>Smarthjem</option>
+              <option>Næringsbygg</option>
+              <option>Annet</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-zinc-500 mb-1.5">Beskriv oppdraget</label>
+            <textarea rows="3" placeholder="Fortell kort om hva du trenger..." class="w-full border border-zinc-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-brand text-white font-semibold py-3 rounded-lg text-sm hover:bg-brand-dark transition-all hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:scale-[1.01]">
+            Send forespørsel →
+          </button>
+          <p class="text-xs text-zinc-400 text-center">Vi kontakter deg innen 2 timer på hverdager</p>
         </form>
-        <div class="form-success" id="formSuccess">✓ Takk! Vi tar kontakt innen 2 timer for å avtale tidspunkt.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#" class="footer-logo"><span>Volt</span><span>Elektro</span></a>
-          <p>DSB-registrert elektrikerfirma i [By] — elektriske installasjoner og reparasjoner for private og næringsliv.</p>
+<!-- FOOTER -->
+<footer class="bg-[#0F172A] text-white py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div class="font-display font-bold text-xl mb-3">Elektro<span class="text-brand">Gruppen</span></div>
+        <p class="text-white/50 text-sm leading-relaxed max-w-xs">Sertifisert elektriker i [By] siden 2009. Vi leverer kvalitet, trygghet og rask respons.</p>
+        <div class="flex gap-3 mt-5">
+          <a href="tel:+4712345678" class="bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors pulse">
+            Ring nå — Akutt
+          </a>
         </div>
-        <div class="footer-col"><h4>Tjenester</h4><ul><li><a href="#tjenester">Akutt utrykning</a></li><li><a href="#tjenester">Sikringsskap</a></li><li><a href="#tjenester">EL-bil ladestasjon</a></li><li><a href="#tjenester">Solcelleanlegg</a></li><li><a href="#tjenester">Smarthjem</a></li></ul></div>
-        <div class="footer-col"><h4>Kontakt</h4><ul><li><a href="tel:+4712345678">+47 123 45 678</a></li><li><a href="mailto:hei@voltelektro.no">hei@voltelektro.no</a></li><li><a href="#">Industriveien 4, [By]</a></li><li><a href="#">Man–Fre: 07–17</a></li><li><a href="#">Akutt: 24/7</a></li></ul></div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2025 Volt Elektro · Org.nr. 123 456 789 · DSB-registrert</p>
-        <p>Nettside av <a href="https://dmarketing.no" style="color:#555;text-decoration:none;">Dietrichs Marketing</a></p>
+      <div>
+        <div class="text-white/30 text-xs font-semibold tracking-widest uppercase mb-4">Tjenester</div>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li><a href="#" class="hover:text-white transition-colors">Akutt elektriker</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Sikringsskap</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">EV-lader</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Nybygg & rehabilitering</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Smarthjem</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Næringsbygg</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-white/30 text-xs font-semibold tracking-widest uppercase mb-4">Kontakt</div>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li>123 45 678</li>
+          <li>kontakt@elektrogruppen.no</li>
+          <li>Eksempelgata 12, [By]</li>
+          <li class="pt-2 text-white/30 text-xs">Org.nr: 123 456 789</li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div class="text-white/30 text-xs">© 2025 ElektroGruppen AS. Alle rettigheter reservert.</div>
+      <div class="flex gap-4 text-xs text-white/30">
+        <a href="#" class="hover:text-white/60 transition-colors">Personvern</a>
+        <a href="#" class="hover:text-white/60 transition-colors">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-  <script>
-    setTimeout(() => { document.getElementById('preloader').classList.add('done'); setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 900); }, 1100);
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
-    function toggleNav() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('navOverlay').classList.toggle('open'); document.body.style.overflow = document.getElementById('navOverlay').classList.contains('open') ? 'hidden' : ''; }
-    function closeNav() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); document.body.style.overflow = ''; }
-    document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const id = a.getAttribute('href').slice(1); if (!id) return; const el = document.getElementById(id); if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); } }); });
-    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    const ticker = document.getElementById('ticker'); ticker.innerHTML += ticker.innerHTML;
-    function submitForm(e) { e.preventDefault(); const btn = document.getElementById('submitBtn'); btn.textContent = 'Sender...'; btn.disabled = true; setTimeout(() => { document.getElementById('contactForm').style.display = 'none'; document.getElementById('formSuccess').style.display = 'block'; }, 1200); }
-  </script>
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Motion.js animations
+  window.addEventListener('load', () => {
+    if (typeof Motion === 'undefined') return;
+    const { inView, animate } = Motion;
+
+    inView('[data-animate]', ({ target }) => {
+      animate(target,
+        { opacity: [0, 1], y: [24, 0] },
+        { duration: 0.5, easing: [0.25, 0.46, 0.45, 0.94] }
+      );
+    });
+
+    inView('[data-stagger]', ({ target }) => {
+      animate(
+        target.querySelectorAll(':scope > *'),
+        { opacity: [0, 1], y: [20, 0] },
+        { duration: 0.4, delay: animate.stagger(0.08) }
+      );
+    });
+  });
+</script>
 </body>
 </html>
