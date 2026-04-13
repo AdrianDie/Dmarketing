@@ -27,6 +27,17 @@
     .font-display { font-family: 'Cormorant Garamond', serif; }
     #nav { transition: background 0.3s, box-shadow 0.3s; }
     #nav.scrolled { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); box-shadow: 0 1px 0 #E4E4E7; }
+    /* Nav CTA — to forhåndsdefinerte tilstander (unngår Tailwind CDN re-injeksjon) */
+    #nav-cta {
+      font-size: 0.875rem; font-weight: 500;
+      padding: 0.5rem 1rem; border-radius: 0.5rem;
+      transition: background 0.3s, color 0.3s;
+      text-decoration: none;
+    }
+    #nav-cta.cta-light { background: #fff; color: #09090B; }
+    #nav-cta.cta-light:hover { background: #f4f4f5; }
+    #nav-cta.cta-dark  { background: #09090B; color: #fff; }
+    #nav-cta.cta-dark:hover  { background: #27272a; }
     .card-hover { transition: box-shadow 0.2s, transform 0.2s; }
     .card-hover:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-2px); }
     .glass { background: rgba(255,255,255,0.78); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.85); }
@@ -71,7 +82,7 @@
       <a href="#team" class="hover:text-white transition-colors">Teamet</a>
       <a href="#kontakt" class="hover:text-white transition-colors">Book time</a>
     </div>
-    <a href="#kontakt" class="bg-white text-[#09090B] text-sm font-medium px-4 py-2 rounded-lg hover:bg-zinc-100 transition-colors" id="nav-cta">
+    <a href="#kontakt" id="nav-cta" class="cta-light">
       Book nå
     </a>
   </div>
@@ -233,7 +244,7 @@
         <img src="bilder/frisor/galleri-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=75'" alt="Galleri 1" class="w-full object-cover" />
       </div>
       <div class="masonry-item rounded-xl overflow-hidden">
-        <img src="bilder/frisor/galleri-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1595163153849-8c15aab4c0c2?w=500&q=75'" alt="Galleri 2" class="w-full object-cover" />
+        <img src="bilder/frisor/galleri-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=500&q=75'" alt="Galleri 2" class="w-full object-cover" />
       </div>
       <div class="masonry-item rounded-xl overflow-hidden">
         <img src="bilder/frisor/galleri-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=500&q=75'" alt="Galleri 3" class="w-full object-cover" />
@@ -451,16 +462,11 @@
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY > 80;
     nav.classList.toggle('scrolled', scrolled);
-    if (scrolled) {
-      navLogo.style.color = '#09090B';
-      navLinks.style.color = '#52525B';
-      navCta.className = 'bg-[#09090B] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-zinc-800 transition-colors';
-    } else {
-      navLogo.style.color = 'white';
-      navLinks.style.color = 'rgba(255,255,255,0.8)';
-      navCta.className = 'bg-white text-[#09090B] text-sm font-medium px-4 py-2 rounded-lg hover:bg-zinc-100 transition-colors';
-    }
-  });
+    navLogo.style.color = scrolled ? '#09090B' : 'white';
+    navLinks.style.color = scrolled ? '#52525B' : 'rgba(255,255,255,0.8)';
+    navCta.classList.toggle('cta-dark', scrolled);
+    navCta.classList.toggle('cta-light', !scrolled);
+  }, { passive: true });
 
   window.addEventListener('load', () => {
     if (typeof Motion === 'undefined') return;

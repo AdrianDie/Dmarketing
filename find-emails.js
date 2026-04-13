@@ -26,13 +26,43 @@ if (!fs.existsSync(filePath)) {
 }
 
 const EMAIL_REGEX = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
-const IGNORE = ['@example', '@sentry', '@gmail', 'wix.', 'wordpress.', 'google.', 'schema.org', 'w3.org', 'sentry.io'];
+
+// Domener/mønstre som aldri er ekte kontaktadresser
+const IGNORE_DOMAIN = [
+  '@example', '@sentry', '@gmail.com', '@yahoo.', '@hotmail.',
+  'wix.', 'wordpress.', 'google.', 'schema.org', 'w3.org',
+  'sentry.io', '@2x.', 'jquery', 'bootstrap', 'cloudflare',
+  'fontawesome', 'webflow.', 'squarespace.',
+];
+
+// Placeholder-prefixer som er ubrukelige for outreach
+const IGNORE_PREFIX = [
+  'noreply', 'no-reply', 'donotreply', 'do-not-reply',
+  'mailer-daemon', 'bounce', 'unsubscribe', 'bruker',
+  'user', 'epost', 'email', 'mail', 'test', 'hjelp@',
+];
 
 function extractEmails(html) {
   const matches = html.match(EMAIL_REGEX) || [];
-  return [...new Set(matches)].filter(e =>
-    !IGNORE.some(ig => e.includes(ig))
-  );
+  return [...new Set(matches)].filter(e => {
+    const lower = e.toLowerCase();
+    if (IGNORE_DOMAIN.some(ig => lower.includes(ig))) return false;
+    const prefix = lower.split('@')[0];
+    if (IGNORE_PREFIX.some(p => prefix === p || prefix.startsWith(p))) return false;
+    return true;
+  });
+}
+
+// Ranger e-poster: direkte kontakter > generiske
+function rankEmail(email) {
+  const prefix = email.toLowerCase().split('@')[0];
+  // Direkte person-epost (fornavn.etternavn e.l.)
+  if (/^[a-z]+\.[a-z]+/.test(prefix)) return 0;
+  // Rolle-epost som faktisk når noen
+  if (['daglig.leder', 'leder', 'sjef', 'owner'].includes(prefix)) return 1;
+  // Generiske men gyldige
+  if (['post', 'kontakt', 'contact', 'info', 'firmapost'].includes(prefix)) return 2;
+  return 3;
 }
 
 async function fetchText(url, timeout = 8000) {
@@ -73,7 +103,10 @@ async function findEmail(website) {
     }
   }
 
-  return [...new Set(found)].slice(0, 2).join(' | ');
+  const unique = [...new Set(found)];
+  // Sorter: direkte person-epost først, generiske sist
+  unique.sort((a, b) => rankEmail(a) - rankEmail(b));
+  return unique.slice(0, 2).join(' | ');
 }
 
 function parseCsv(content) {
