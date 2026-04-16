@@ -1,4 +1,4 @@
-# Frisør — E-postmaler
+# Bilverksted — E-postmaler
 # Variabler: {{company_name}} {{by}} {{mal_url}}
 
 ---
@@ -6,15 +6,17 @@
 ## E-post 1 (Dag 1)
 
 **Emne A:** Flere kunder til {{company_name}}?
-**Emne B:** Nettside + Google-kunder til frisører i {{by}}
+**Emne B:** Nettside + Google-kunder til bilverksteder i {{by}}
 
 ---
 
 Hei,
 
-Folk i {{by}} som søker etter ny frisør booker nesten alltid den første salongene de ser på Google.
+Bilister i {{by}} som trenger verksted googler det — og booker det første stedet de finner.
 
-Vi hjelper frisørsalonger å få den plassen — med en profesjonell nettside og lokale Google-annonser.
+De uavhengige verkstedene som taper kunder gjør det ikke fordi de er dårligere enn Mekonomen. De vises bare ikke.
+
+Vi hjelper lokale bilverksteder å vinne den plassen, med profesjonell nettside og lokale Google-annonser.
 
 Ferdig design til dere:
 → {{mal_url}}
@@ -28,7 +30,7 @@ Mvh
 Adrian Dietrich
 Dietrichs Marketing — 934 39 278
 
-**PS:** Vi hjalp nylig en bedrift med å hente inn 600 000 kr fra 124 000 kr i annonsebudsjett. En fast kunde som kommer hver 6. uke er lett verdt 10 000+ kr i året — annonsering betaler seg.
+**PS:** Vi hjalp nylig en bedrift med å hente inn 600 000 kr fra 124 000 kr i annonsebudsjett. En fast kunde som kommer til service og dekkskift hvert år er lett verdt 8 000–15 000 kr — annonsering betaler seg raskt.
 
 ---
 
@@ -43,9 +45,9 @@ Hei,
 Ville høre om dere fikk tid til å se på designet jeg sendte:
 → {{mal_url}}
 
-Mange frisørsalonger fyller timene via Instagram og anbefalinger — men de som vinner på Google får de nye kundene som ikke kjenner noen ennå.
+Det jeg ser oftest: lokale verksteder med dyktige mekanikere og gode priser, men kundene finner dem ikke på Google. De går til kjeden som vises øverst — ikke fordi den er bedre, men fordi den er synlig.
 
-Det er den gruppen vi hjelper dere å nå.
+Det er enkelt å fikse.
 
 Mvh
 Adrian

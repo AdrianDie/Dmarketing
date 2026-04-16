@@ -1,77 +1,73 @@
-# Regnskap — E-post maler
+# Regnskap — E-postmaler
+# Variabler: {{company_name}} {{by}} {{mal_url}}
+
+---
 
 ## E-post 1 (Dag 1)
 
-**Emne (A):** Ferdig nettside til {{contact.NAVN}}
-**Emne (B):** Profesjonell nettside for regnskapsbyrå
+**Emne A:** Flere kunder til {{company_name}}?
+**Emne B:** Nettside + Google-kunder til regnskapsbyråer i {{by}}
 
 ---
 
 Hei,
 
-Jeg heter Adrian og driver Dietrichs Marketing.
+Bedriftseiere i {{by}} som leter etter regnskapsfører starter som regel på Google. Den som vises øverst, vinner kunden.
 
-Jeg har laget et ferdig design til en nettside for regnskapsbyrå — profesjonell, tillitsskapende og optimalisert for Google.
+Vi hjelper regnskapsbyråer å vinne den plassen — med profesjonell nettside og lokale Google-annonser.
 
-Se utkastet her:
-{{contact.MAL_URL}}
+Ferdig design til dere:
+→ {{mal_url}}
 
-Tilpasses med navn, kontaktinfo og tjenesteliste. Pris: 7 500 kr, levert innen 5 dager.
+Nettside: 1 000 kr oppsett + 750 kr/mnd vedlikehold.
+Google Ads: alt styrt for dere fra 3 500 kr/mnd.
 
-Passer det med en rask prat?
+Passer det med 15 min denne uken?
 
 Mvh
 Adrian Dietrich
-Dietrichs Marketing
-adrian@dmarketing.no
+Dietrichs Marketing — 934 39 278
+
+**PS:** Vi hjalp nylig en bedrift med å hente inn 600 000 kr fra 124 000 kr i annonsebudsjett. En ny regnskapskunde er lett verdt 20 000–50 000 kr over tid — annonsering betaler seg raskt.
 
 ---
 
-## E-post 2 (Dag 3)
+## E-post 2 (Dag 4)
 
-**Emne:** Re: Nettside til {{contact.NAVN}}
-
----
-
-Hei igjen,
-
-Oppfølging på utkastet jeg sendte: {{contact.MAL_URL}}
-
-Vil du at jeg tilpasser det til dere?
-
-Mvh Adrian
+**Emne:** {{company_name}} — fikk dere sett på dette?
 
 ---
 
-## E-post 3 (Dag 7) — Breakup
+Hei,
 
-**Emne:** Siste melding fra meg
+Ville høre om dere fikk sett på designet jeg sendte:
+→ {{mal_url}}
+
+Det jeg ser oftest: regnskapsbyråer med god kompetanse og lojale kunder, men ingen digital synlighet. Nye kunder finner dem ikke — og går til konkurrenten som vises på Google.
+
+Det er raskt og enkelt å fikse.
+
+Mvh
+Adrian
+
+**PS:** Nettside levert på 5 dager. Ingen bindingstid på annonser.
 
 ---
 
-Hei — dette er siste henvendelse.
+## E-post 3 (Dag 8)
 
-Tilbudet gjelder: {{contact.MAL_URL}} — 7 500 kr, klar på 5 dager.
+**Emne:** Siste melding — {{company_name}}
+
+---
+
+Hei,
+
+Siste melding fra meg.
+
+Designet ligger her hvis behovet melder seg:
+→ {{mal_url}}
+
+Vi tar inn 2–3 nye kunder per måned — svar når dere er klare.
 
 Lykke til!
-Adrian Dietrich, Dietrichs Marketing
-
----
-
-## VIP-versjon — Uten nettside
-
-**Emne:** {{contact.NAVN}} mangler digital tilstedeværelse
-
----
-
-Hei,
-
-Jeg la merke til at {{contact.NAVN}} ikke har nettside. For et regnskapsbyrå er dette et tapt salgsargument — mange bedriftseiere googler regnskapsfører før de ringer.
-
-Ferdig design: {{contact.MAL_URL}}
-
-7 500 kr, levert innen 5 dager. Ta gjerne en kikk.
-
-Mvh
-Adrian Dietrich
-Dietrichs Marketing
+Adrian — 934 39 278

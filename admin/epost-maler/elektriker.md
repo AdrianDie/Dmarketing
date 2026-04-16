@@ -1,91 +1,75 @@
-# Elektriker — E-post maler
+# Elektriker — E-postmaler
+# Variabler: {{company_name}} {{by}} {{mal_url}}
 
-## E-post 1 (Dag 1) — Hoved-e-post
+---
 
-**Emne (A):** Ferdig nettside til {{contact.NAVN}} — ta en titt?
-**Emne (B):** Utkast til nettside for {{contact.NAVN}}
+## E-post 1 (Dag 1)
+
+**Emne A:** Flere kunder til {{company_name}}?
+**Emne B:** Nettside + Google-kunder til elektrikere i {{by}}
 
 ---
 
 Hei,
 
-Jeg heter Adrian og driver Dietrichs Marketing.
+Elektrikere i {{by}} mister kunder hver dag til konkurrenter som vises øverst på Google.
 
-Jeg har laget et ferdig design til en nettside for elektrikerbedrifter — og tenkte det kunne passe for dere.
+Vi fikser det — med en ferdig nettside og Google-annonser satt opp for dere.
 
-Du kan se utkastet her:
-{{contact.MAL_URL}}
+Jeg har allerede laget et design:
+→ {{mal_url}}
 
-Siden er klar til å tilpasses med deres navn, tlf og tjenester. Pris: 7 500 kr, levert innen 5 dager.
+Nettside (4 sider): 3 000 kr oppsett + 750 kr/mnd vedlikehold.
+Google Ads: vi tar oss av alt fra 3 500 kr/mnd.
 
-Hadde det passet med en rask prat på 15 min?
+Passer det med 15 min prat denne uken?
 
 Mvh
 Adrian Dietrich
-Dietrichs Marketing
-adrian@dmarketing.no
+Dietrichs Marketing — 934 39 278
+
+**PS:** Vi hjalp nylig en håndverksbedrift med å hente inn 600 000 kr i omsetning fra 124 000 kr i annonsebudsjett. Samme modell tilbyr vi dere.
 
 ---
 
-## E-post 2 (Dag 3) — Oppfølging
+## E-post 2 (Dag 4)
 
-**Emne:** Re: Nettside til {{contact.NAVN}}
+**Emne:** {{company_name}} — fikk dere sett på dette?
 
 ---
 
-Hei igjen,
+Hei,
 
-Bare en rask oppfølging til e-posten jeg sendte tidligere i uken.
+Ville bare høre om dere fikk sett på nettsidedesignet jeg sendte:
+→ {{mal_url}}
 
-Lenken til designet: {{contact.MAL_URL}}
+En rask sjekk: søk på "elektriker {{by}}" på Google akkurat nå. Vises dere på side 1?
 
-Har du noen spørsmål, eller ønsker du at jeg tilpasser designet med farger og logo fra dere?
+Hvis ikke, er det penger som går til konkurrentene hver eneste dag.
+
+Vi setter opp nettside og annonser — dere fokuserer på jobben.
 
 Mvh
 Adrian
 
----
-
-## E-post 3 (Dag 7) — Breakup
-
-**Emne:** Siste melding fra meg
+**PS:** Ingen bindingstid på annonseringen. Prøv én måned og se resultatet.
 
 ---
 
-Hei,
+## E-post 3 (Dag 8)
 
-Forstår at dere har mye å gjøre. Dette er siste gang jeg tar kontakt.
-
-Hvis dere noen gang trenger en profesjonell nettside — tilbudet på 7 500 kr gjelder fortsatt.
-
-Design: {{contact.MAL_URL}}
-
-Lykke til videre!
-
-Mvh
-Adrian Dietrich
-Dietrichs Marketing
-
----
-
-## VIP-versjon (Dag 1) — Bedrifter UTEN nettside
-
-**Emne:** {{contact.NAVN}} fortjener en nettside
+**Emne:** Siste melding — {{company_name}}
 
 ---
 
 Hei,
 
-Jeg søkte opp elektrikere i [BY] og la merke til at {{contact.NAVN}} ikke har nettside — men har
-{{contact.RATING}} stjerner på Google og mange fornøyde kunder.
+Siste melding fra meg — skjønner at dere er travle.
 
-Det betyr at folk ser anmeldelsene, men ikke finner frem til dere når de googler "elektriker [BY]".
+Hvis behovet for flere kunder melder seg: nettsidedesignet ligger her:
+→ {{mal_url}}
 
-Jeg har laget et ferdig design dere kan se her:
-{{contact.MAL_URL}}
+Vi tar inn 2–3 nye kunder per måned. Vil dere ha en plass, er det bare å svare.
 
-7 500 kr, levert innen 5 dager. Vil dere ta en kikk?
-
-Mvh
-Adrian Dietrich
-Dietrichs Marketing
+Lykke til!
+Adrian — 934 39 278

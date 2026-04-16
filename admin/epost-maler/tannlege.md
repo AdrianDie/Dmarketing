@@ -1,79 +1,73 @@
-# Tannlege — E-post maler
+# Tannlege — E-postmaler
+# Variabler: {{company_name}} {{by}} {{mal_url}}
+
+---
 
 ## E-post 1 (Dag 1)
 
-**Emne (A):** Ferdig nettside til {{contact.NAVN}}
-**Emne (B):** Nettside-utkast for tannlegekontor
+**Emne A:** Flere pasienter til {{company_name}}?
+**Emne B:** Nettside + Google-pasienter til tannleger i {{by}}
 
 ---
 
 Hei,
 
-Jeg heter Adrian og driver Dietrichs Marketing.
+Pasienter i {{by}} som søker etter ny tannlege går nesten alltid til den første de finner på Google.
 
-Jeg har laget et ferdig design til en nettside for tannlegekontorer — tilpasset for å konvertere besøkende til pasienter.
+Vi hjelper tannlegeklinikker å vinne den plassen — med profesjonell nettside og lokale Google-annonser.
 
-Se utkastet her:
-{{contact.MAL_URL}}
+Ferdig design til dere:
+→ {{mal_url}}
 
-Siden tilpasses med navn, kontaktinfo, behandlingstilbud og timebestilling. Pris: 7 500 kr, levert innen 5 dager.
+Nettside: 1 000 kr oppsett + 750 kr/mnd vedlikehold.
+Google Ads: alt styrt for dere fra 3 500 kr/mnd.
 
-Passer det med en kort prat?
+Passer det med 15 min denne uken?
 
 Mvh
 Adrian Dietrich
-Dietrichs Marketing
-adrian@dmarketing.no
+Dietrichs Marketing — 934 39 278
+
+**PS:** Vi hjalp nylig en bedrift med å hente inn 600 000 kr fra 124 000 kr i annonsebudsjett. En ny pasient er lett verdt 5 000–20 000 kr over tid — annonsering betaler seg raskt.
 
 ---
 
-## E-post 2 (Dag 3)
+## E-post 2 (Dag 4)
 
-**Emne:** Re: Nettside til {{contact.NAVN}}
-
----
-
-Hei igjen,
-
-Sendte en e-post tidligere i uken om nettside-utkastet: {{contact.MAL_URL}}
-
-Ønsker du at jeg tilpasser det til deres logo og farger?
-
-Mvh Adrian
-
----
-
-## E-post 3 (Dag 7) — Breakup
-
-**Emne:** Siste melding
+**Emne:** {{company_name}} — fikk dere sett på dette?
 
 ---
 
 Hei,
 
-Dette er siste gang jeg kontakter dere om dette.
+Ville høre om dere fikk tid til å se på designet:
+→ {{mal_url}}
 
-Hvis behovet oppstår: {{contact.MAL_URL}} — 7 500 kr, klar på 5 dager.
+En ting jeg ofte ser: tannlegeklinikker med god kvalitet og fornøyde pasienter som likevel ikke vises på Google fordi nettsiden er utdatert eller ikke-eksisterende.
+
+Det er enkelt å fikse — og utbyttet er stort.
+
+Mvh
+Adrian
+
+**PS:** Nettside ferdig på 5 dager. Ingen bindingstid på annonser.
+
+---
+
+## E-post 3 (Dag 8)
+
+**Emne:** Siste melding — {{company_name}}
+
+---
+
+Hei,
+
+Siste melding fra meg.
+
+Designet ligger her hvis behovet melder seg:
+→ {{mal_url}}
+
+Vi tar inn 2–3 nye kunder per måned — svar når dere er klare.
 
 Lykke til!
-Adrian Dietrich, Dietrichs Marketing
-
----
-
-## VIP-versjon — Uten nettside
-
-**Emne:** Pasienter finner ikke {{contact.NAVN}} på nett
-
----
-
-Hei,
-
-Jeg søkte etter tannleger i [BY] og la merke til at {{contact.NAVN}} ikke har nettside. Med gode anmeldelser på Google er det synd at potensielle pasienter ikke finner dere.
-
-Jeg har laget et ferdig design: {{contact.MAL_URL}}
-
-7 500 kr, levert innen 5 dager. Interessert i en rask prat?
-
-Mvh
-Adrian Dietrich
-Dietrichs Marketing
+Adrian — 934 39 278

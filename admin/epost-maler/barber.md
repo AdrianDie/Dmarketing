@@ -1,77 +1,71 @@
-# Barber — E-post maler
+# Barber — E-postmaler
+# Variabler: {{company_name}} {{by}} {{mal_url}}
+
+---
 
 ## E-post 1 (Dag 1)
 
-**Emne (A):** Ferdig nettside til {{contact.NAVN}}
-**Emne (B):** Nettside-utkast for barbershop
+**Emne A:** Flere kunder til {{company_name}}?
+**Emne B:** Nettside + Google-kunder til barberer i {{by}}
 
 ---
 
 Hei,
 
-Jeg heter Adrian og driver Dietrichs Marketing.
+Menn i {{by}} som leter etter ny barber booker som regel den første de finner på Google — ikke den beste.
 
-Jeg har laget et ferdig design til en nettside for barbershoper — med timebestilling og en look som matcher stilen.
+Vi hjelper barbersalonger å vinne den plassen, med profesjonell nettside og lokale Google-annonser.
 
-Se utkastet her:
-{{contact.MAL_URL}}
+Ferdig design til dere:
+→ {{mal_url}}
 
-Tilpasses med navn, kontaktinfo og prisliste. Pris: 7 500 kr, levert innen 5 dager.
+Nettside: 1 000 kr oppsett + 750 kr/mnd vedlikehold.
+Google Ads: alt styrt for dere fra 3 500 kr/mnd.
 
-Passer det med en rask prat?
+15 min prat denne uken?
 
 Mvh
 Adrian Dietrich
-Dietrichs Marketing
-adrian@dmarketing.no
+Dietrichs Marketing — 934 39 278
+
+**PS:** Vi hjalp nylig en bedrift med å hente inn 600 000 kr fra 124 000 kr i annonsebudsjett. En fast barberkunde som kommer annenhver uke er lett verdt 8 000–12 000 kr i året.
 
 ---
 
-## E-post 2 (Dag 3)
+## E-post 2 (Dag 4)
 
-**Emne:** Re: Nettside til {{contact.NAVN}}
-
----
-
-Hei igjen,
-
-Bare en rask oppfølging: {{contact.MAL_URL}}
-
-Vil du at jeg tilpasser designet?
-
-Mvh Adrian
+**Emne:** {{company_name}} — fikk dere sett på dette?
 
 ---
 
-## E-post 3 (Dag 7) — Breakup
+Hei,
 
-**Emne:** Siste melding
+Ville høre om dere fikk tid til å se på designet jeg sendte:
+→ {{mal_url}}
+
+Barbersalonger lever på faste kunder og anbefalinger — men de nye kundene som ikke kjenner noen, de går til Google. Det er de vi hjelper dere å fange.
+
+Mvh
+Adrian
+
+**PS:** Nettside klar på 5 dager. Ingen bindingstid på annonser.
 
 ---
 
-Hei — dette er siste gang.
+## E-post 3 (Dag 8)
 
-Tilbudet gjelder fortsatt: {{contact.MAL_URL}} — 7 500 kr.
+**Emne:** Siste melding — {{company_name}}
+
+---
+
+Hei,
+
+Siste melding fra meg.
+
+Designet ligger her om behovet melder seg:
+→ {{mal_url}}
+
+Vi tar inn 2–3 nye kunder per måned — svar gjerne når timingen passer.
 
 Lykke til!
-Adrian Dietrich, Dietrichs Marketing
-
----
-
-## VIP-versjon — Uten nettside
-
-**Emne:** {{contact.NAVN}} har ikke nettside — her er et ferdig forslag
-
----
-
-Hei,
-
-Jeg la merke til at {{contact.NAVN}} ikke har nettside, men har gode anmeldelser på Google. Det er mange kunder som ikke finner dere.
-
-Ferdig design: {{contact.MAL_URL}}
-
-7 500 kr, klar på 5 dager. Interessert?
-
-Mvh
-Adrian Dietrich
-Dietrichs Marketing
+Adrian — 934 39 278

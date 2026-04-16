@@ -1,82 +1,73 @@
-# Rørlegger — E-post maler
+# Rørlegger — E-postmaler
+# Variabler: {{company_name}} {{by}} {{mal_url}}
+
+---
 
 ## E-post 1 (Dag 1)
 
-**Emne (A):** Ferdig nettside til {{contact.NAVN}} — ta en titt?
-**Emne (B):** Utkast til nettside for rørlegger i [BY]
+**Emne A:** Flere kunder til {{company_name}}?
+**Emne B:** Nettside + Google-kunder til rørleggere i {{by}}
 
 ---
 
 Hei,
 
-Jeg heter Adrian og driver Dietrichs Marketing.
+Når noen i {{by}} får vannlekkasje kl. 23 og søker "rørlegger {{by}}" på Google — vises {{company_name}}?
 
-Jeg har laget et ferdig design til en nettside for rørleggerbedrifter — og tenkte det kunne passe for dere.
+Vi hjelper rørleggerbedrifter å vises øverst og få inn de kundene.
 
-Se utkastet her:
-{{contact.MAL_URL}}
+Ferdig design til dere her:
+→ {{mal_url}}
 
-Siden tilpasses med navn, kontaktinfo og tjenester. Pris: 7 500 kr, levert innen 5 dager.
+Nettside (4 sider): 3 000 kr oppsett + 750 kr/mnd vedlikehold.
+Google Ads: alt satt opp og styrt for dere fra 3 500 kr/mnd.
 
-Hadde det passet med en rask prat på 15 min?
+15 min prat denne uken?
 
 Mvh
 Adrian Dietrich
-Dietrichs Marketing
-adrian@dmarketing.no
+Dietrichs Marketing — 934 39 278
+
+**PS:** En håndverksbedrift vi jobber med hentet inn 600 000 kr fra 124 000 kr i annonsebudsjett. Samme opplegg tilbyr vi dere.
 
 ---
 
-## E-post 2 (Dag 3)
+## E-post 2 (Dag 4)
 
-**Emne:** Re: Nettside til {{contact.NAVN}}
-
----
-
-Hei igjen,
-
-Bare en rask oppfølging. Lenken til designet: {{contact.MAL_URL}}
-
-Har du spørsmål, eller ønsker du at jeg tilpasser det med logo og farger?
-
-Mvh Adrian
-
----
-
-## E-post 3 (Dag 7) — Breakup
-
-**Emne:** Siste melding fra meg
+**Emne:** {{company_name}} — fikk dere sett på dette?
 
 ---
 
 Hei,
 
-Dette er siste gang jeg tar kontakt.
+Sendte dere et nettsidedesign tidligere denne uken:
+→ {{mal_url}}
 
-Hvis behovet for nettside oppstår — tilbudet på 7 500 kr gjelder: {{contact.MAL_URL}}
+Rørleggere er blant bransjene med høyest søkevolum på Google lokalt. Folk søker når de trenger det — og de ringer den første de finner.
+
+Vi sørger for at det er dere de finner.
+
+Mvh
+Adrian
+
+**PS:** Nettside klar på 5 dager. Ingen bindingstid på annonser.
+
+---
+
+## E-post 3 (Dag 8)
+
+**Emne:** Siste melding — {{company_name}}
+
+---
+
+Hei,
+
+Siste melding fra meg.
+
+Hvis behovet for flere kunder dukker opp — design ligger her:
+→ {{mal_url}}
+
+Vi tar inn 2–3 nye kunder per måned. Svar når dere er klare.
 
 Lykke til!
-
-Mvh Adrian Dietrich, Dietrichs Marketing
-
----
-
-## VIP-versjon — Uten nettside
-
-**Emne:** {{contact.NAVN}} mangler nettside — jeg har et ferdig utkast
-
----
-
-Hei,
-
-Jeg så at {{contact.NAVN}} har gode anmeldelser på Google, men ikke har nettside.
-
-Mange kunder googler "rørlegger [BY]" og velger den første bedriften med en skikkelig side.
-
-Jeg har laget et ferdig design: {{contact.MAL_URL}}
-
-7 500 kr, levert innen 5 dager. Interessert?
-
-Mvh
-Adrian Dietrich
-Dietrichs Marketing
+Adrian — 934 39 278
