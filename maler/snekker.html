@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TreVerk — Snekker i [By]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Manrope', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: '#B45309',
+            'brand-light': '#D97706',
+            'brand-soft': '#FEF3C7',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.9/dist/motion.js"></script>
+
+  <style>
+    * { -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #0F172A; }
+    .f-display { font-family: 'Manrope', sans-serif; }
+
+    #nav { transition: background .25s, box-shadow .25s; }
+    #nav.scrolled { background: rgba(255,255,255,.92); backdrop-filter: blur(16px); box-shadow: 0 1px 0 #E2E8F0; }
+
+    .bg-grid {
+      background-color: #fff;
+      background-image:
+        linear-gradient(rgba(226,232,240,.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226,232,240,.6) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .bento {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .bento:hover { box-shadow: 0 12px 40px rgba(180,83,9,.10); transform: translateY(-3px); }
+
+    .glass-img { position: relative; border-radius: 20px; overflow: hidden; }
+    .glass-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(15,23,42,.32));
+      pointer-events: none;
+    }
+
+    .step-line::after {
+      content: '';
+      position: absolute;
+      top: 18px; left: calc(50% + 22px);
+      width: calc(100% - 44px); height: 1px;
+      background: #E2E8F0;
+    }
+    @media(max-width:767px){ .step-line::after{ display:none; } }
+  </style>
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon">
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────────── -->
+<nav id="nav" class="fixed top-0 inset-x-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="#" class="f-display font-bold text-[15px] tracking-tight text-slate-900">
+      Tre<span class="text-brand">Verk</span>
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-[13px] font-medium text-slate-500">
+      <a href="#tjenester" class="hover:text-slate-900 transition-colors">Tjenester</a>
+      <a href="#om"        class="hover:text-slate-900 transition-colors">Om oss</a>
+      <a href="#prosess"   class="hover:text-slate-900 transition-colors">Prosess</a>
+      <a href="#kontakt"   class="hover:text-slate-900 transition-colors">Kontakt</a>
+    </div>
+    <a href="#kontakt"
+       class="bg-brand text-white text-[13px] font-semibold px-4 py-2 rounded-lg hover:bg-brand-light transition-colors">
+      Få befaring
+    </a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<section class="bg-grid relative overflow-hidden">
+  <div class="pointer-events-none absolute inset-0"
+       style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0) 0%, #fff 100%)"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pt-40 pb-28 text-center">
+
+    <div data-animate class="inline-flex items-center gap-2 bg-white border border-slate-200 shadow-sm text-[12px] font-medium text-slate-500 px-4 py-2 rounded-full mb-10">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+      Tilgjengelig for nye oppdrag — [By] og omegn
+    </div>
+
+    <h1 data-animate
+        class="f-display font-extrabold text-6xl md:text-7xl lg:text-8xl tracking-tight text-slate-900 leading-[1.0] mb-7"
+        style="letter-spacing: -0.04em">
+      Snekker du<br/>
+      <span class="text-brand">kan stole på</span>
+    </h1>
+
+    <p data-animate class="text-lg text-slate-500 max-w-lg mx-auto leading-relaxed mb-12">
+      Erfaren snekker i [By]. Kjøkken, bad, terrasse og tilbygg — til fast pris og med 5 års garantei.
+    </p>
+
+    <div data-animate class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#kontakt"
+         class="bg-brand text-white f-display font-semibold px-8 py-4 rounded-xl text-[14px] hover:bg-brand-light hover:shadow-[0_0_30px_rgba(180,83,9,.30)] hover:scale-[1.02] transition-all">
+        Få gratis befaring
+      </a>
+      <a href="tel:+4712345678"
+         class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-700 f-display font-semibold px-8 py-4 rounded-xl text-[14px] hover:border-slate-400 hover:scale-[1.01] transition-all">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        123 45 678
+      </a>
+    </div>
+
+    <div data-animate class="flex flex-wrap justify-center gap-7 mt-16 text-[13px] text-slate-400">
+      <span class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        Mesterbrev
+      </span>
+      <span class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        5 års garanti
+      </span>
+      <span class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        4.8 / 5 — 90+ anmeldelser
+      </span>
+      <span class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Fast pris — alltid
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS ─────────────────────────────────────────────── -->
+<section class="border-y border-slate-100">
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <div data-stagger class="grid grid-cols-2 md:grid-cols-4 gap-10">
+      <div class="text-center">
+        <div class="f-display font-extrabold text-[42px] text-brand leading-none">18+</div>
+        <div class="text-[13px] text-slate-400 mt-2">År med erfaring</div>
+      </div>
+      <div class="text-center">
+        <div class="f-display font-extrabold text-[42px] text-brand leading-none">1 200</div>
+        <div class="text-[13px] text-slate-400 mt-2">Oppdrag fullført</div>
+      </div>
+      <div class="text-center">
+        <div class="f-display font-extrabold text-[42px] text-brand leading-none">4.8</div>
+        <div class="text-[13px] text-slate-400 mt-2">Google-snitt</div>
+      </div>
+      <div class="text-center">
+        <div class="f-display font-extrabold text-[42px] text-brand leading-none">5 år</div>
+        <div class="text-[13px] text-slate-400 mt-2">Garanti på arbeid</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TJENESTER ─────────────────────────────────────────── -->
+<section id="tjenester" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div data-animate class="mb-14">
+      <p class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-3">Tjenester</p>
+      <h2 class="f-display font-extrabold text-4xl tracking-tight text-slate-900">
+        Alt du trenger av snekker
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
+      <div data-animate class="bento md:col-span-8 p-9 relative overflow-hidden">
+        <div class="absolute inset-0 rounded-[20px]" style="background: linear-gradient(135deg, #FFFBEB 0%, #fff 60%)"></div>
+        <div class="relative">
+          <div class="inline-flex items-center gap-2 text-[11px] font-semibold text-amber-700 bg-amber-50 border border-amber-100 px-3 py-1.5 rounded-full mb-5">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block"></span>
+            Mest bestilt
+          </div>
+          <h3 class="f-display font-bold text-2xl text-slate-900 mb-3">Kjøkken & bad</h3>
+          <p class="text-slate-500 text-[14px] leading-relaxed max-w-sm mb-7">
+            Totalrenovering eller kun skap og benkeplate? Vi planlegger, leverer og monterer fra A til Å — med fast pris fra start.
+          </p>
+          <a href="#kontakt"
+             class="inline-flex items-center gap-2 bg-brand text-white text-[13px] font-semibold px-5 py-2.5 rounded-lg hover:bg-brand-light transition-colors">
+            Få gratis befaring →
+          </a>
+        </div>
+      </div>
+
+      <div data-animate class="bento md:col-span-4 p-8">
+        <div class="w-10 h-10 bg-brand-soft rounded-xl flex items-center justify-center mb-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="f-display font-bold text-[17px] text-slate-900 mb-2">Tilbygg & påbygg</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Mer plass til familien. Vi håndterer søknad, grunnmur og ferdigstillelse.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div data-animate class="bento p-8">
+        <div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center mb-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3 class="f-display font-bold text-[17px] text-slate-900 mb-2">Terrasse & uteplass</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Terrasse, gjerde, carport og utebod. Trykkimpregnert eller komposittmateriale.</p>
+      </div>
+
+      <div data-animate class="bento p-8">
+        <div class="w-10 h-10 bg-brand-soft rounded-xl flex items-center justify-center mb-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8"><path d="M2 20h20M4 20V10l8-6 8 6v10"/></svg>
+        </div>
+        <h3 class="f-display font-bold text-[17px] text-slate-900 mb-2">Takarbeid</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Tekking, isolasjon og takvindu. Vi sikrer huset mot fukt og kulde.</p>
+      </div>
+
+      <div data-animate class="bento p-8">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,92,246,.08)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+        </div>
+        <h3 class="f-display font-bold text-[17px] text-slate-900 mb-2">Innredning & skap</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Garderobeløsninger, bokhyller og skråtak-innredning tilpasset ditt hjem.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <div data-animate class="bento md:col-span-4 p-8">
+        <div class="w-10 h-10 bg-brand-soft rounded-xl flex items-center justify-center mb-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3 class="f-display font-bold text-[17px] text-slate-900 mb-2">Rehabilitering</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Oppussing av eldre bolig? Vi setter den i stand fra kjeller til loft.</p>
+      </div>
+
+      <div data-animate class="bento md:col-span-8 p-9 relative overflow-hidden" style="background: linear-gradient(135deg, #FEF3C7 0%, #FFFBF0 60%, #fff 100%)">
+        <div class="relative">
+          <span class="inline-flex text-[11px] font-semibold text-brand bg-white border border-amber-200 px-3 py-1.5 rounded-full mb-5">
+            Næring & borettslag
+          </span>
+          <h3 class="f-display font-bold text-2xl text-slate-900 mb-3">Større prosjekter</h3>
+          <p class="text-slate-500 text-[14px] leading-relaxed max-w-sm mb-7">Fast snekker for borettslag og næringsbygg. Vedlikehold, oppgradering og prosjektledelse.</p>
+          <a href="#kontakt" class="inline-flex items-center gap-2 bg-brand text-white text-[13px] font-semibold px-5 py-2.5 rounded-lg hover:bg-brand-light transition-colors">
+            Ta kontakt →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OM OSS ─────────────────────────────────────────────── -->
+<section id="om" class="py-28 px-6" style="background:#F8FAFC">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-20 items-center">
+      <div data-animate class="order-2 md:order-1">
+        <div class="glass-img aspect-[4/3]">
+          <img
+            src="bilder/snekker/snekker-main.jpg"
+            onerror="this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80'"
+            alt="TreVerk team"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute bottom-5 left-5 right-5 z-10"
+               style="background:rgba(255,255,255,.82); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.9); border-radius:14px; padding:16px;">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-brand rounded-full flex items-center justify-center text-white f-display font-bold text-sm flex-shrink-0">TH</div>
+              <div class="flex-1">
+                <div class="f-display font-semibold text-[13px] text-slate-900">Thomas Haugen</div>
+                <div class="text-[12px] text-slate-500">Daglig leder & mesterbrev</div>
+              </div>
+              <div class="text-brand f-display font-bold text-[13px]">4.8 ★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-1 md:order-2">
+        <div data-animate>
+          <p class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-3">Om oss</p>
+          <h2 class="f-display font-extrabold text-4xl tracking-tight text-slate-900 mb-6" style="letter-spacing:-.03em">
+            Lokal snekker<br/>siden 2006
+          </h2>
+          <p class="text-slate-500 text-[16px] leading-relaxed mb-5">
+            TreVerk er et team på 6 håndverkere med mesterbrev som har jobbet i [By] i nesten 20 år. Vi kjenner lokale byggeforskrifter og har et bredt nettverk av underleverandører.
+          </p>
+          <p class="text-slate-500 text-[14px] leading-relaxed mb-8">
+            Alle oppdrag leveres med skriftlig garanti og ferdigattest der det kreves. Ingen skjulte kostnader.
+          </p>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="border border-slate-200 rounded-2xl p-5">
+              <div class="f-display font-extrabold text-[28px] text-brand leading-none">1 200+</div>
+              <div class="text-[12px] text-slate-400 mt-1">Oppdrag fullført</div>
+            </div>
+            <div class="border border-slate-200 rounded-2xl p-5">
+              <div class="f-display font-extrabold text-[28px] text-brand leading-none">4.8 ★</div>
+              <div class="text-[12px] text-slate-400 mt-1">Google-snitt</div>
+            </div>
+            <div class="border border-slate-200 rounded-2xl p-5">
+              <div class="f-display font-extrabold text-[28px] text-brand leading-none">18 år</div>
+              <div class="text-[12px] text-slate-400 mt-1">I bransjen</div>
+            </div>
+            <div class="border border-slate-200 rounded-2xl p-5">
+              <div class="f-display font-extrabold text-[28px] text-brand leading-none">5 år</div>
+              <div class="text-[12px] text-slate-400 mt-1">Garanti</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROSESS ───────────────────────────────────────────── -->
+<section id="prosess" class="py-28 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div data-animate class="text-center mb-16">
+      <p class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-3">Prosess</p>
+      <h2 class="f-display font-extrabold text-4xl tracking-tight text-slate-900" style="letter-spacing:-.03em">
+        Fra befaring til ferdig prosjekt
+      </h2>
+    </div>
+    <div data-stagger class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="relative step-line text-center">
+        <div class="w-9 h-9 bg-brand text-white f-display font-bold text-[15px] rounded-full flex items-center justify-center mx-auto mb-5">1</div>
+        <h3 class="f-display font-semibold text-[15px] text-slate-900 mb-2">Gratis befaring</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Vi kommer hjem til deg og ser på oppdraget. Ingen skjulte avgifter.</p>
+      </div>
+      <div class="relative step-line text-center">
+        <div class="w-9 h-9 bg-brand text-white f-display font-bold text-[15px] rounded-full flex items-center justify-center mx-auto mb-5">2</div>
+        <h3 class="f-display font-semibold text-[15px] text-slate-900 mb-2">Fastpristilbud</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Skriftlig tilbud innen 48 timer. Prisen endrer seg ikke.</p>
+      </div>
+      <div class="relative step-line text-center">
+        <div class="w-9 h-9 bg-brand text-white f-display font-bold text-[15px] rounded-full flex items-center justify-center mx-auto mb-5">3</div>
+        <h3 class="f-display font-semibold text-[15px] text-slate-900 mb-2">Utførelse</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Ryddig arbeid, punkt til punkt. Vi holder deg oppdatert underveis.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-9 h-9 bg-brand text-white f-display font-bold text-[15px] rounded-full flex items-center justify-center mx-auto mb-5">4</div>
+        <h3 class="f-display font-semibold text-[15px] text-slate-900 mb-2">Garanti & overtakelse</h3>
+        <p class="text-slate-500 text-[13px] leading-relaxed">Skriftlig garanti og ferdigattest. Du er trygg i 5 år.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ANMELDELSER ───────────────────────────────────────── -->
+<section class="py-28 px-6" style="background:#F8FAFC">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="text-center mb-14">
+      <p class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-3">Anmeldelser</p>
+      <h2 class="f-display font-extrabold text-4xl tracking-tight text-slate-900" style="letter-spacing:-.03em">Hva kundene sier</h2>
+      <div class="flex items-center justify-center gap-2 mt-5">
+        <span class="text-yellow-400 text-lg">★★★★★</span>
+        <span class="text-[13px] text-slate-400">4.8 / 5 basert på 90 Google-anmeldelser</span>
+      </div>
+    </div>
+    <div data-stagger class="grid md:grid-cols-3 gap-5">
+      <div class="bento p-7">
+        <div class="text-yellow-400 text-[13px] mb-4">★★★★★</div>
+        <p class="text-slate-600 text-[13px] leading-relaxed mb-5">"Ny terrasse på 40m² ble ferdig på tre dager. Perfekt håndverk og ryddig arbeidsplass. Ville brukt dem igjen uten å nøle."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-[11px] font-semibold text-slate-500">EL</div>
+          <div>
+            <div class="text-[13px] font-medium text-slate-900">Erik Larsen</div>
+            <div class="text-[11px] text-slate-400">Huseier, [By]</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento p-7">
+        <div class="text-yellow-400 text-[13px] mb-4">★★★★★</div>
+        <p class="text-slate-600 text-[13px] leading-relaxed mb-5">"Totalrenovering av bad. Holder tidsplan, fast pris som avtalt og resultatet er fantastisk. Profesjonell fra start til slutt."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-[11px] font-semibold text-slate-500">AH</div>
+          <div>
+            <div class="text-[13px] font-medium text-slate-900">Anne Holmberg</div>
+            <div class="text-[11px] text-slate-400">Privatperson, [By]</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento p-7">
+        <div class="text-yellow-400 text-[13px] mb-4">★★★★★</div>
+        <p class="text-slate-600 text-[13px] leading-relaxed mb-5">"TreVerk har gjort jobber for borettslaget vårt tre ganger. Alltid punktlig, god kommunikasjon og fair pris."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-[11px] font-semibold text-slate-500">MK</div>
+          <div>
+            <div class="text-[13px] font-medium text-slate-900">Mari Kristiansen</div>
+            <div class="text-[11px] text-slate-400">Styreleder, borettslag</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── KONTAKT ───────────────────────────────────────────── -->
+<section id="kontakt" class="py-28 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-20 items-start">
+      <div data-animate>
+        <p class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-3">Kontakt</p>
+        <h2 class="f-display font-extrabold text-4xl tracking-tight text-slate-900 mb-5" style="letter-spacing:-.03em">Klar for befaring?</h2>
+        <p class="text-slate-500 text-[15px] leading-relaxed mb-10">Fyll ut skjema — vi kontakter deg innen 24 timer for å avtale gratis befaring.</p>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wide">Telefon</div>
+              <div class="f-display font-semibold text-[15px] text-slate-900">123 45 678</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wide">E-post</div>
+              <div class="f-display font-semibold text-[15px] text-slate-900">kontakt@treverk.no</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wide">Adresse</div>
+              <div class="f-display font-semibold text-[15px] text-slate-900">Eksempelgata 12, [By]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-animate>
+        <form class="border border-slate-200 rounded-2xl p-8 space-y-4 bg-white">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-2">Fornavn</label>
+              <input type="text" placeholder="Ola" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-[14px] text-slate-900 placeholder-slate-300 focus:outline-none focus:border-brand focus:ring-2 focus:ring-amber-100 transition-all" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-2">Etternavn</label>
+              <input type="text" placeholder="Nordmann" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-[14px] text-slate-900 placeholder-slate-300 focus:outline-none focus:border-brand focus:ring-2 focus:ring-amber-100 transition-all" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-2">Telefon</label>
+            <input type="tel" placeholder="123 45 678" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-[14px] text-slate-900 placeholder-slate-300 focus:outline-none focus:border-brand focus:ring-2 focus:ring-amber-100 transition-all" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-2">Hva trenger du?</label>
+            <select class="w-full border border-slate-200 rounded-xl px-4 py-3 text-[14px] text-slate-500 focus:outline-none focus:border-brand transition-all">
+              <option>Velg tjeneste...</option>
+              <option>Kjøkken</option>
+              <option>Bad</option>
+              <option>Terrasse & uteplass</option>
+              <option>Tilbygg / påbygg</option>
+              <option>Takarbeid</option>
+              <option>Innredning & skap</option>
+              <option>Rehabilitering</option>
+              <option>Annet</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-2">Beskriv oppdraget</label>
+            <textarea rows="3" placeholder="Fortell kort om hva du trenger..." class="w-full border border-slate-200 rounded-xl px-4 py-3 text-[14px] text-slate-900 placeholder-slate-300 focus:outline-none focus:border-brand focus:ring-2 focus:ring-amber-100 transition-all resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-brand text-white f-display font-semibold py-3.5 rounded-xl text-[14px] hover:bg-brand-light hover:shadow-[0_0_24px_rgba(180,83,9,.25)] hover:scale-[1.01] transition-all">
+            Send forespørsel →
+          </button>
+          <p class="text-[12px] text-slate-400 text-center">Vi kontakter deg innen 24 timer</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer style="background:#0F172A" class="text-white py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div class="f-display font-bold text-[18px] mb-3">Tre<span style="color:#D97706">Verk</span></div>
+        <p class="text-[13px] leading-relaxed max-w-xs" style="color:rgba(255,255,255,.45)">Sertifisert snekker i [By] siden 2006. Kvalitetsarbeid med garanti.</p>
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,.3)">Tjenester</div>
+        <ul class="space-y-2 text-[13px]" style="color:rgba(255,255,255,.55)">
+          <li><a href="#" class="hover:text-white transition-colors">Kjøkken & bad</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Terrasse & uteplass</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Tilbygg & påbygg</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Takarbeid</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Rehabilitering</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-4" style="color:rgba(255,255,255,.3)">Kontakt</div>
+        <ul class="space-y-2 text-[13px]" style="color:rgba(255,255,255,.55)">
+          <li>123 45 678</li>
+          <li>kontakt@treverk.no</li>
+          <li>Eksempelgata 12, [By]</li>
+          <li class="pt-2 text-[12px]" style="color:rgba(255,255,255,.25)">Org.nr: 123 456 789</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t pt-6 flex flex-col sm:flex-row justify-between items-center gap-3" style="border-color:rgba(255,255,255,.08)">
+      <div class="text-[12px]" style="color:rgba(255,255,255,.25)">© 2025 TreVerk AS</div>
+      <div class="flex gap-5 text-[12px]" style="color:rgba(255,255,255,.25)">
+        <a href="#" class="hover:text-white/60 transition-colors">Personvern</a>
+        <a href="#" class="hover:text-white/60 transition-colors">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  });
+  window.addEventListener('load', () => {
+    if (typeof Motion === 'undefined') return;
+    const { inView, animate } = Motion;
+    inView('[data-animate]', ({ target }) => {
+      animate(target, { opacity: [0, 1], y: [28, 0] }, { duration: 0.55, easing: [0.25, 0.46, 0.45, 0.94] });
+    });
+    inView('[data-stagger]', ({ target }) => {
+      animate(target.querySelectorAll(':scope > *'), { opacity: [0, 1], y: [20, 0] }, { duration: 0.4, delay: animate.stagger(0.09) });
+    });
+  });
+</script>
+</body>
+</html>

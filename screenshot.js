@@ -19,6 +19,9 @@ const all = [
   { file: 'regnskap.html',    out: 'regnskap' },
   { file: 'barber.html',      out: 'barber' },
   { file: 'bilverksted.html', out: 'bilverksted' },
+  { file: 'snekker.html',     out: 'snekker-onepage' },
+  { file: 'malerfirma.html',  out: 'malerfirma-onepage' },
+  { file: 'psykolog.html',    out: 'psykolog-onepage' },
   // Flerside maler — hero of index.html
   { file: 'elektriker/index.html',  out: 'elektriker-flerside' },
   { file: 'rorlegger/index.html',   out: 'rorlegger-flerside' },
