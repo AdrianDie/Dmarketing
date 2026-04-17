@@ -19,8 +19,8 @@ Vi fikser det — med en ferdig nettside og Google-annonser satt opp for dere.
 Jeg har allerede laget et design:
 → {{mal_url}}
 
-Nettside (4 sider): 3 000 kr oppsett + 750 kr/mnd vedlikehold.
-Google Ads: vi tar oss av alt fra 3 500 kr/mnd.
+Nettside (4 sider): 4 990 kr oppsett + 490 kr/mnd vedlikehold.
+Google Ads: vi tar oss av alt fra 2 500 kr/mnd.
 
 Passer det med 15 min prat denne uken?
 

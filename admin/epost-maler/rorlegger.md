@@ -19,8 +19,8 @@ Vi hjelper rørleggerbedrifter å vises øverst og få inn de kundene.
 Ferdig design til dere her:
 → {{mal_url}}
 
-Nettside (4 sider): 3 000 kr oppsett + 750 kr/mnd vedlikehold.
-Google Ads: alt satt opp og styrt for dere fra 3 500 kr/mnd.
+Nettside (4 sider): 4 990 kr oppsett + 490 kr/mnd vedlikehold.
+Google Ads: alt satt opp og styrt for dere fra 2 500 kr/mnd.
 
 15 min prat denne uken?
 

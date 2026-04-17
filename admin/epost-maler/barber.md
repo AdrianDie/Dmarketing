@@ -19,8 +19,8 @@ Vi hjelper barbersalonger å vinne den plassen, med profesjonell nettside og lok
 Ferdig design til dere:
 → {{mal_url}}
 
-Nettside: 1 000 kr oppsett + 750 kr/mnd vedlikehold.
-Google Ads: alt styrt for dere fra 3 500 kr/mnd.
+Nettside: 1 000 kr oppsett + 490 kr/mnd vedlikehold.
+Google Ads: alt styrt for dere fra 2 500 kr/mnd.
 
 15 min prat denne uken?
 
