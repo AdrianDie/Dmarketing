@@ -5,11 +5,14 @@ Oppdatert: April 2026
 
 ## Hva er dette systemet?
 
-En halvautomatisert salgsmaskin som selger ferdige nettsidemaler til norske småbedrifter
-via kald e-post. Systemet finner potensielle kunder, kvalifiserer dem, finner kontaktinfo
+En halvautomatisert salgsmaskin som selger AI-tjenester til norske småbedrifter (elektriker, rørlegger,
+snekker osv.) via kald e-post. Systemet finner potensielle kunder, kvalifiserer dem, finner kontaktinfo
 og sender personaliserte e-poster automatisk.
 
-Du gjør: svare på leads som er interessert.
+**Primærprodukt (April 2026):** AI-telefonsvarer (1 990 kr/mnd) — norsktalende AI tar samtaler,
+kvalifiserer kunder og booker direkte i kalenderen. Nettsider selges som inngang til abonnement, ikke som primærprodukt.
+
+Du gjør: svare på leads som er interessert, booke demo, onboarde kunder.
 Maskinen gjør: alt annet.
 
 ---
@@ -69,43 +72,44 @@ Maskinen gjør: alt annet.
 
 | Komponent | Status |
 |---|---|
-| Lead-database | ✅ 7 632 leads across 310 CSV-filer |
-| E-post warmup | 🔄 14-dagers warmup pågår |
+| Lead-database | ✅ 7 632 leads, 310 CSV-filer |
+| E-poster på leads | ⚠️ 915/7 632 har e-post — kjør find-emails-batch.js |
+| AI-scoring på leads | ⏳ Kjør rescore-leads.js for ny ai_score/ai_label |
+| E-post warmup | 🔄 14-dagers warmup pågår (sjekk Instantly) |
 | Instantly-kampanjer | ⏳ Settes opp etter warmup |
-| Nettsidemaler (one-page) | ✅ 10 bransjer ferdig |
-| Nettsidemaler (flerside) | ✅ 6 bransjer ferdig |
-| find-emails.js på nye leads | ⏳ Ikke kjørt ennå |
+| Nettsidemaler | ✅ 10 one-page + 6 flerside |
+| **AI-telefonsvarer landingsside** | ✅ maler/ai-telefon/index.html |
+| **Prisside** | ✅ maler/priser.html |
+| **E-postmaler v2 (AI-vinkel)** | ✅ admin/epost-maler-v2/ |
+| **Agent-konfigurasjon** | ✅ agent-config/elektriker.json + rorlegger.json |
+| **Teknisk oppsett-guide** | ✅ ai-telefon/SETUP.md |
+| **Salgsmanual** | ✅ admin/SALGSMANUAL.md |
+| **First-sale sjekkliste** | ✅ admin/FIRST_SALE_CHECKLIST.md |
+| Vapi-konto | ⏳ Ikke opprettet — se FIRST_SALE_CHECKLIST.md |
+| ElevenLabs-konto | ⏳ Ikke opprettet |
+| Cal.com-konto | ⏳ Ikke opprettet |
+| Twilio-konto | ⏳ Ikke opprettet |
 
 ---
 
-## Priser — Anbefalt justering
+## Prisstruktur (gjeldende)
 
-**Problemet med 7 500 kr:** For høyt for kald e-post til småbedrifter.
-De vet ikke hvem du er. De har ikke sett kvaliteten din.
-Det første møtet handler om å senke terskelen, ikke maksimere engangsbetalingen.
-Pengene er i recurring — ikke engangssalget.
-
-### Anbefalt prisstruktur
-
-| Produkt | Pris | Recurring |
+| Produkt | Engangspris | Månedspris |
 |---|---|---|
-| One-page mal | **2 990 kr** | 490 kr/mnd |
-| Flerside mal (4 sider) | **4 990 kr** | 490 kr/mnd |
-| Google Ads-pakke (tillegg) | — | 2 500–4 500 kr/mnd |
-| SEO-innhold (tillegg) | — | 1 500 kr/mnd |
+| One-page nettside | 2 990 kr | — |
+| Flerside nettside (4 sider) | 4 990 kr | — |
+| AI-telefonsvarer (standalone) | 2 490 kr oppsett | **1 990 kr/mnd** |
+| SYNLIG (nettside + GBP + rapport) | 2 990 kr | 1 490 kr/mnd |
+| VOKSENDE (nettside + AI-telefon + SEO) | 2 990 + 2 490 kr | **3 990 kr/mnd** |
+| VEKSTPAKKE (alt + Google Ads + AI-chat) | 4 990 + 2 490 kr | 7 990 kr/mnd |
 
-**Hvorfor lavere engangspris:**
-- 2 990 kr er innenfor impulskjøpsgrensen for småbedrifter
-- Recurring er der inntjeningen skjer: 490 kr/mnd × 20 kunder = 9 800 kr/mnd passiv
-- Google Ads-forvaltning er det virkelige produktet — nettsiden er inngangsdøren
-
-**Potensielt mnd-inntekt med 20 kunder:**
+**Potensielt mnd-inntekt med 20 kunder (realistisk mix):**
 ```
-20 × 490 kr vedlikehold          =  9 800 kr/mnd
- 8 × 2 500 kr Google Ads         = 20 000 kr/mnd
- 4 × 1 500 kr SEO                =  6 000 kr/mnd
+12 × SYNLIG (1 490 kr)           = 17 880 kr/mnd
+ 6 × VOKSENDE (3 990 kr)         = 23 940 kr/mnd
+ 2 × VEKSTPAKKE (7 990 kr)       = 15 980 kr/mnd
 ─────────────────────────────────────────────────
-Total recurring                  = 35 800 kr/mnd
+Total recurring                  = 57 800 kr/mnd
 ```
 
 ---
@@ -157,23 +161,26 @@ I stedet for å ta betalt separat for Google Ads-budsjettet, tilby en alt-i-ett 
 
 ## Hva du bør gjøre nå (prioritert rekkefølge)
 
-### Uke 1 — Teknisk setup
-- [ ] Kjør `node find-emails.js` på de 7 632 nye leads-filene
-- [ ] Sett opp Instantly-kampanjer (én per bransje, bruk bransjemal-URL)
-- [ ] Oppdater Calendly-lenke i alle maler
-- [ ] Legg inn riktige kampanje-IDer i `.env`
+Se `admin/FIRST_SALE_CHECKLIST.md` for detaljert sjekkliste.
 
-### Uke 2–3 — Første utsendelse
-- [ ] Vent til warmup er ferdig
-- [ ] Start med elektriker og rørlegger (størst volum, høyest betalingsvillighet)
-- [ ] Send maks 30 e-poster/dag de første to ukene
-- [ ] Overvåk open rate (mål: >40%) og reply rate (mål: >2%)
+### Steg 1 — Leads (gjør dette i dag)
+- [ ] Kjør `node rescore-leads.js` for å oppdatere AI-score på alle leads
+- [ ] Start `node find-emails-batch.js` (kjøres over natten — tar tid)
 
-### Uke 4+ — Optimaliser og selg
-- [ ] A/B test emnelinjer (kjør to varianter mot hverandre)
-- [ ] Når første kunder er inne: be om Google-anmeldelse
-- [ ] Upsell Google Ads til alle kunder som allerede betaler for vedlikehold
-- [ ] Vurder LinkedIn-outreach parallelt med e-post (særlig for B2B-bransjer)
+### Steg 2 — Verktøy (2–4 timer)
+- [ ] Opprett Vapi-konto + norsk nummer
+- [ ] Koble ElevenLabs norsk stemme
+- [ ] Opprett Cal.com booking-side
+- [ ] Sett opp Twilio SMS + Make.com webhook
+
+### Steg 3 — Demo-agent (1 time)
+- [ ] Bygg Vapi-assistent fra `agent-config/elektriker.json`
+- [ ] Test: ring inn og fullfør booking
+
+### Steg 4 — Outreach (1 time etter warmup)
+- [ ] Sett opp Instantly-kampanje med `admin/epost-maler-v2/elektriker.md`
+- [ ] Last opp leads med ai_label VIP/God + e-post
+- [ ] Last opp `maler/ai-telefon/index.html` til dmarketing.no
 
 ---
 
@@ -233,22 +240,30 @@ Dmarketing/
 
 ```bash
 # Lead-generering
-node run-all.js                     # Kjør alle 310 kombinasjoner
-node leads.js elektriker Oslo 60    # Manuell: én bransje/by
-node find-emails.js leads/elektriker-oslo.csv  # Scrape e-poster
+node run-all.js                          # Kjør alle 310 kombinasjoner
+node leads.js elektriker Oslo 60         # Manuell: én bransje/by
+node find-emails.js leads/elektriker-oslo.csv  # Scrape e-poster (én fil)
+
+# E-post-batch (NYTT)
+node find-emails-batch.js                # Scrape e-poster på ALLE CSV-filer (over natten)
+node find-emails-batch.js --dry-run      # Se hva som mangler uten å kjøre
+
+# AI-scoring (NYTT — for AI-telefonsvarer-kampanjen)
+node rescore-leads.js                    # Legg til ai_score + ai_label på alle leads
+node rescore-leads.js --summary          # Vis fordeling uten å skrive til fil
 
 # Pipeline
-node pipeline.js                    # Kjør neste pending oppgave
-node pipeline.js --all              # Kjør alle pending
+node pipeline.js                         # Kjør neste pending oppgave
+node pipeline.js --all                   # Kjør alle pending
 
 # Administrasjon
-node backlog.js                     # Vis status på køen
-node backlog.js reset               # Start ny runde
-node filter-leads.js                # Rens CSV etter nye filtre
+node backlog.js                          # Vis status på køen
+node backlog.js reset                    # Start ny runde
+node filter-leads.js                     # Rens CSV etter nye filtre
 
 # Screenshots
-node screenshot.js all              # Ta hero-screenshot av alle maler
-node screenshot.js elektriker.html  # Ta screenshot av én mal
+node screenshot.js all                   # Ta hero-screenshot av alle maler
+node screenshot.js elektriker.html       # Ta screenshot av én mal
 ```
 
 ---
