@@ -3596,7 +3596,7 @@ blockquote {
 
 .heading-6.logo-2 {
   color: var(--transparent);
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: .5px;
   -webkit-text-stroke-color: var(--white);
   max-height: none;
   margin-top: 0;
@@ -5177,7 +5177,7 @@ blockquote {
 
   .heading-6.logo-2 {
     color: var(--transparent);
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: .5px;
     -webkit-text-stroke-color: var(--white);
     align-self: auto;
     width: auto;
