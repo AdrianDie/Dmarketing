@@ -88,15 +88,15 @@
       to { stroke-dashoffset: 0; }
     }
     .timeline-path {
-      stroke-dasharray: 400;
-      stroke-dashoffset: 400;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
     }
     .timeline-visible .timeline-path {
-      animation: draw-path 1.4s ease-out forwards;
+      animation: draw-path 1.0s ease-out forwards;
     }
-    .timeline-visible .timeline-path:nth-child(1) { animation-delay: 0.1s; }
-    .timeline-visible .timeline-path:nth-child(2) { animation-delay: 0.3s; }
-    .timeline-visible .timeline-path:nth-child(3) { animation-delay: 1.2s; }
+    .timeline-visible .timeline-path:nth-of-type(1) { animation-delay: 0.1s; }
+    .timeline-visible .timeline-path:nth-of-type(2) { animation-delay: 0.3s; }
+    .timeline-visible .timeline-path:nth-of-type(3) { animation-delay: 0.9s; }
 
     /* Mobile menu */
     .menu-overlay { transition: opacity 0.25s, visibility 0.25s; }
@@ -374,38 +374,19 @@
       <!-- ============================================== -->
       <!-- TIDSLINJE: kundereisen fra start til evig loop  -->
       <!-- ============================================== -->
-      <div data-animate class="mt-20 bg-white border border-zinc-200 rounded-3xl p-6 md:p-12 overflow-hidden">
-        <div class="text-center mb-10">
+      <div data-animate class="mt-20 bg-white border border-zinc-200 rounded-3xl p-6 md:p-10">
+        <div class="text-center mb-10 md:mb-12">
           <p class="text-xs font-semibold tracking-widest uppercase text-blue-600 mb-2">Reisen din</p>
           <h3 class="font-display font-extrabold text-2xl md:text-4xl tracking-[-0.02em] text-[#09090B]">
             Fra dag 1 til evig oppdaterbar
           </h3>
         </div>
 
-        <!-- ETAPPE 1+2: To grener som forenes -->
-        <div class="relative max-w-3xl mx-auto">
+        <!-- ETAPPE 1: To valg-kort -->
+        <div class="max-w-3xl mx-auto relative">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12 relative z-10">
 
-          <!-- SVG: linjer som forener seg -->
-          <svg id="timeline-svg" class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 600 280" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="lineGrad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#2563EB" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="#2563EB" stop-opacity="1"/>
-              </linearGradient>
-            </defs>
-            <!-- venstre gren ned-høyre -->
-            <path class="timeline-path" d="M 150 60 Q 150 160, 300 200" stroke="url(#lineGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- høyre gren ned-venstre -->
-            <path class="timeline-path" d="M 450 60 Q 450 160, 300 200" stroke="url(#lineGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- felles linje ned -->
-            <path class="timeline-path" d="M 300 200 L 300 270" stroke="#2563EB" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          </svg>
-
-          <!-- To valg-kort på toppen -->
-          <div class="grid grid-cols-2 gap-4 md:gap-12 mb-32 md:mb-40 relative">
-
-            <!-- Valg A -->
-            <div class="bg-white border-2 border-zinc-200 rounded-2xl p-5 md:p-6 hover:border-blue-300 transition-colors relative">
+            <div class="bg-white border-2 border-zinc-200 rounded-2xl p-5 md:p-6 hover:border-blue-400 transition-colors">
               <div class="flex items-center gap-2 mb-3">
                 <span class="font-mono text-[10px] text-zinc-400">A</span>
                 <span class="text-[10px] font-bold uppercase tracking-widest text-blue-600">Etappe 1 · Valg A</span>
@@ -419,8 +400,7 @@
               <p class="text-xs text-zinc-500 leading-relaxed">Har du allerede en nettside? Vi flytter innholdet inn i et superrask Astro-system. Du beholder design og merkevare.</p>
             </div>
 
-            <!-- Valg B -->
-            <div class="bg-white border-2 border-zinc-200 rounded-2xl p-5 md:p-6 hover:border-blue-300 transition-colors relative">
+            <div class="bg-white border-2 border-zinc-200 rounded-2xl p-5 md:p-6 hover:border-blue-400 transition-colors">
               <div class="flex items-center gap-2 mb-3">
                 <span class="font-mono text-[10px] text-zinc-400">B</span>
                 <span class="text-[10px] font-bold uppercase tracking-widest text-blue-600">Etappe 1 · Valg B</span>
@@ -434,37 +414,54 @@
               <p class="text-xs text-zinc-500 leading-relaxed">Start helt på nytt med en moderne, konverteringsoptimert side bygget for din bransje. Ferdig på under 7 dager.</p>
             </div>
 
-            <!-- "ELLER"-badge midt mellom -->
-            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-zinc-200 shadow-sm z-10">
+            <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 items-center justify-center w-11 h-11 rounded-full bg-white border-2 border-zinc-200 shadow-sm">
               <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Eller</span>
             </div>
           </div>
+        </div>
 
-          <!-- Etappe 2: AI-oppsett -->
-          <div class="flex justify-center mb-12 relative z-10">
-            <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl p-6 md:p-7 max-w-md w-full shadow-xl">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Etappe 2 · Felles for begge</span>
+        <!-- Y-FORK SVG (eksplisitt høyde, kobler til AI-oppsett) -->
+        <div class="max-w-3xl mx-auto" style="height: 90px; margin-top: -2px;">
+          <svg id="timeline-svg" width="100%" height="100%" viewBox="0 0 600 90" preserveAspectRatio="none" aria-hidden="true">
+            <!-- Venstre gren: starter ved x=150 (under venstre kort), kurver til midten -->
+            <path class="timeline-path" d="M 150 0 C 150 50, 300 40, 300 80" stroke="#2563EB" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.85"/>
+            <!-- Høyre gren: starter ved x=450, kurver til midten -->
+            <path class="timeline-path" d="M 450 0 C 450 50, 300 40, 300 80" stroke="#2563EB" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.85"/>
+            <!-- Pil ned mot AI-boks -->
+            <path class="timeline-path" d="M 300 75 L 300 88 M 295 83 L 300 88 L 305 83" stroke="#2563EB" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <!-- ETAPPE 2: AI-oppsett -->
+        <div class="flex justify-center mb-12">
+          <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl p-6 md:p-7 max-w-md w-full shadow-xl">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-blue-200">Etappe 2 · Felles for begge</span>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 l1.8 4.7 L18.5 9.5 l-4.7 1.8 L12 16 l-1.8-4.7 L5.5 9.5 l4.7-1.8 z"/>
+                  <path d="M19 14 l0.7 1.8 L21.5 16.5 l-1.8 0.7 L19 19 l-0.7-1.8 L16.5 16.5 l1.8-0.7 z"/>
+                </svg>
               </div>
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 3 l1.8 4.7 L18.5 9.5 l-4.7 1.8 L12 16 l-1.8-4.7 L5.5 9.5 l4.7-1.8 z"/>
-                    <path d="M19 14 l0.7 1.8 L21.5 16.5 l-1.8 0.7 L19 19 l-0.7-1.8 L16.5 16.5 l1.8-0.7 z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="font-display font-bold text-lg md:text-xl mb-1.5">AI-oppsett & intro</h4>
-                  <p class="text-sm text-white/85 leading-relaxed">Vi konfigurerer din private Claude AI-webmaster med din bedrifts kontekst, og du får en 15-minutters videogjennomgang.</p>
-                </div>
+              <div>
+                <h4 class="font-display font-bold text-lg md:text-xl mb-1.5">AI-oppsett & intro</h4>
+                <p class="text-sm text-white/85 leading-relaxed">Vi konfigurerer din private Claude AI-webmaster med din bedrifts kontekst, og du får en 15-minutters videogjennomgang.</p>
               </div>
             </div>
           </div>
+        </div>
 
+        <!-- Bro-pil mellom AI-oppsett og loop -->
+        <div class="flex justify-center mb-2">
+          <svg width="14" height="40" viewBox="0 0 14 40" fill="none">
+            <path d="M7 0 L7 32 M2 27 L7 32 L12 27" stroke="#2563EB" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
         </div>
 
         <!-- ETAPPE 3: LOOPEN -->
-        <div class="mt-16 md:mt-20 max-w-2xl mx-auto">
+        <div class="max-w-2xl mx-auto">
           <div class="text-center mb-8">
             <p class="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">Etappe 3 · For evig</p>
             <h4 class="font-display font-extrabold text-xl md:text-3xl tracking-tight text-[#09090B]">
@@ -473,84 +470,83 @@
             <p class="text-sm text-zinc-500 mt-2 max-w-md mx-auto">Slik oppdaterer du nettsiden — om og om igjen, helt på egenhånd.</p>
           </div>
 
-          <!-- Sirkulær loop-diagram -->
-          <div class="relative mx-auto" style="width: 100%; max-width: 460px; aspect-ratio: 1;">
+          <!-- Sirkulær loop-diagram (kvadrat container, nodene posisjoneres med trig på sirkelens omkrets) -->
+          <div class="relative mx-auto" style="width: 100%; max-width: 480px; aspect-ratio: 1;">
 
-            <!-- Roterende sirkel-bakgrunn -->
-            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 460 460" aria-hidden="true">
-              <defs>
-                <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"/>
-                  <stop offset="50%" stop-color="#2563EB" stop-opacity="1"/>
-                  <stop offset="100%" stop-color="#2563EB" stop-opacity="0.25"/>
-                </linearGradient>
-              </defs>
-              <!-- Hovedsirkel -->
-              <circle cx="230" cy="230" r="160" stroke="#E4E4E7" stroke-width="1" stroke-dasharray="4 6" fill="none"/>
-              <!-- Roterende segment (animert) -->
-              <circle id="loop-arc" cx="230" cy="230" r="160" stroke="url(#loopGrad)" stroke-width="3" fill="none"
-                stroke-dasharray="180 1005" stroke-linecap="round"
-                style="transform-origin: 230px 230px;">
-                <animateTransform attributeName="transform" type="rotate" from="0 230 230" to="360 230 230" dur="8s" repeatCount="indefinite"/>
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 480 480" aria-hidden="true">
+              <!-- Hovedsirkel (dashed) -->
+              <circle cx="240" cy="240" r="170" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3 6" fill="none"/>
+              <!-- Roterende blå segment som indikerer evig syklus -->
+              <circle cx="240" cy="240" r="170" stroke="#2563EB" stroke-width="3" fill="none"
+                stroke-dasharray="120 950" stroke-linecap="round" opacity="0.85"
+                style="transform-origin: 240px 240px;">
+                <animateTransform attributeName="transform" type="rotate" from="-90 240 240" to="270 240 240" dur="6s" repeatCount="indefinite"/>
               </circle>
-
-              <!-- Pil-arrowheads ved 12, 4, 8 (cw flow) -->
-              <g fill="#2563EB">
-                <polygon points="230,62 224,72 236,72" transform="rotate(30 230 230)"/>
-                <polygon points="230,62 224,72 236,72" transform="rotate(150 230 230)"/>
-                <polygon points="230,62 224,72 236,72" transform="rotate(270 230 230)"/>
-              </g>
             </svg>
 
-            <!-- Senter-ikon: bedriften -->
-            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            <!-- Senter: Din bedrift -->
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#09090B] text-white flex items-center justify-center shadow-lg">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/>
                 </svg>
               </div>
               <span class="mt-2 text-[10px] font-bold uppercase tracking-wider text-zinc-500">Din bedrift</span>
             </div>
 
-            <!-- Loop-noder (3 stk: top, bottom-right, bottom-left) -->
-            <!-- Node 1 (Top) — Du chatter med AI -->
-            <div class="absolute" style="left: 50%; top: 0; transform: translate(-50%, -50%);">
-              <div class="bg-white border-2 border-blue-600 rounded-xl px-3 py-2 md:px-4 md:py-3 shadow-md w-32 md:w-40 text-center">
-                <div class="flex items-center justify-center gap-1.5 mb-1">
+            <!-- Node 1: 12 o'clock (top) — Du chatter med AI -->
+            <!-- Posisjon: cx=50%, cy=(240-170)/480 = 14.6% -->
+            <div class="absolute left-1/2 z-20" style="top: 14.6%; transform: translate(-50%, -50%);">
+              <div class="bg-white border-2 border-blue-600 rounded-xl px-3 py-2 md:px-4 md:py-2.5 shadow-md w-36 md:w-44 text-center">
+                <div class="flex items-center justify-center gap-1.5 mb-0.5">
                   <span class="font-mono text-[9px] text-blue-600 font-bold">01</span>
                   <span class="w-1 h-1 rounded-full bg-blue-600"></span>
                 </div>
-                <div class="text-[11px] md:text-xs font-display font-bold text-[#09090B] leading-tight">Du chatter med AI</div>
-                <div class="text-[10px] text-zinc-500 mt-0.5 hidden md:block">"Legg til nytt tilbud"</div>
+                <div class="text-[12px] md:text-sm font-display font-bold text-[#09090B] leading-tight">Du chatter med AI</div>
+                <div class="text-[10px] text-zinc-500 mt-0.5">"Legg til nytt tilbud"</div>
               </div>
             </div>
 
-            <!-- Node 2 (Bottom-right) — AI lager koden -->
-            <div class="absolute" style="right: 0; top: 75%; transform: translate(50%, -50%);">
-              <div class="bg-white border-2 border-blue-600 rounded-xl px-3 py-2 md:px-4 md:py-3 shadow-md w-32 md:w-40 text-center">
-                <div class="flex items-center justify-center gap-1.5 mb-1">
+            <!-- Node 2: 4 o'clock (bottom-right) — AI lager koden -->
+            <!-- 4 o'clock: angle 60° fra vertikal høyre. cx = 240 + 170*sin(60) ≈ 240+147 = 387, cy = 240+170*cos(60) ≈ 325. % av 480: left=80.6%, top=67.7% -->
+            <div class="absolute z-20" style="left: 80.6%; top: 67.7%; transform: translate(-50%, -50%);">
+              <div class="bg-white border-2 border-blue-600 rounded-xl px-3 py-2 md:px-4 md:py-2.5 shadow-md w-36 md:w-44 text-center">
+                <div class="flex items-center justify-center gap-1.5 mb-0.5">
                   <span class="font-mono text-[9px] text-blue-600 font-bold">02</span>
                   <span class="w-1 h-1 rounded-full bg-blue-600"></span>
                 </div>
-                <div class="text-[11px] md:text-xs font-display font-bold text-[#09090B] leading-tight">AI lager koden</div>
-                <div class="text-[10px] text-zinc-500 mt-0.5 hidden md:block">Bare lim inn</div>
+                <div class="text-[12px] md:text-sm font-display font-bold text-[#09090B] leading-tight">AI lager koden</div>
+                <div class="text-[10px] text-zinc-500 mt-0.5">Bare lim inn</div>
               </div>
             </div>
 
-            <!-- Node 3 (Bottom-left) — Live på 60 sek -->
-            <div class="absolute" style="left: 0; top: 75%; transform: translate(-50%, -50%);">
-              <div class="bg-[#0B1F4A] text-white border-2 border-blue-500 rounded-xl px-3 py-2 md:px-4 md:py-3 shadow-md w-32 md:w-40 text-center">
-                <div class="flex items-center justify-center gap-1.5 mb-1">
+            <!-- Node 3: 8 o'clock (bottom-left) — Live på 60 sek -->
+            <div class="absolute z-20" style="left: 19.4%; top: 67.7%; transform: translate(-50%, -50%);">
+              <div class="bg-[#0B1F4A] text-white border-2 border-blue-500 rounded-xl px-3 py-2 md:px-4 md:py-2.5 shadow-md w-36 md:w-44 text-center">
+                <div class="flex items-center justify-center gap-1.5 mb-0.5">
                   <span class="font-mono text-[9px] text-blue-300 font-bold">03</span>
                   <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-400 pulse-dot"></span>
                 </div>
-                <div class="text-[11px] md:text-xs font-display font-bold leading-tight">Live på 60 sek</div>
-                <div class="text-[10px] text-white/60 mt-0.5 hidden md:block">Atomic deploy</div>
+                <div class="text-[12px] md:text-sm font-display font-bold leading-tight">Live på 60 sek</div>
+                <div class="text-[10px] text-white/60 mt-0.5">Atomic deploy</div>
               </div>
             </div>
+
+            <!-- Pile mellom noder (small SVG arrowheads positioned in the gaps) -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 480 480" aria-hidden="true">
+              <!-- Pil 1→2 (cw, høyre side, ved ~3 o'clock): på sirkel ved angle=60°, tangent peker ned-venstre cw ⇒ ned-høyre -->
+              <g fill="#2563EB">
+                <!-- Plasser en arrowhead litt før node 2, peker mot node 2 (cw) -->
+                <polygon points="0,-5 8,0 0,5" transform="translate(410, 238) rotate(60)"/>
+                <!-- Pil 2→3 (cw, bunn ved 6 o'clock), peker venstre -->
+                <polygon points="0,-5 8,0 0,5" transform="translate(240, 412) rotate(180)"/>
+                <!-- Pil 3→1 (cw, venstre side ved ~9 o'clock), peker opp -->
+                <polygon points="0,-5 8,0 0,5" transform="translate(70, 238) rotate(-60)"/>
+              </g>
+            </svg>
           </div>
 
-          <p class="text-center text-xs text-zinc-400 mt-6 max-w-md mx-auto">Loopen kjører så ofte du vil — for alltid. <strong class="text-[#09090B]">Ingen byrå, ingen venting, ingen faktura.</strong></p>
+          <p class="text-center text-xs text-zinc-400 mt-8 max-w-md mx-auto">Loopen kjører så ofte du vil — for alltid. <strong class="text-[#09090B]">Ingen byrå, ingen venting, ingen faktura.</strong></p>
         </div>
       </div>
     </div>
