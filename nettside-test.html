@@ -29,15 +29,15 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
 
-    /* Logo (matcher hovedsiden — horisontal, omvendt på mørk bakgrunn) */
+    /* Logo (matcher hovedsiden — horisontal) */
     .logo-row { display: inline-flex; align-items: baseline; gap: 0.6rem; line-height: 1; }
     .logo-row .logo-solid {
-      font-family: 'Archivo', sans-serif; font-weight: 800; letter-spacing: -0.01em;
-      font-size: clamp(22px, 3.2vw, 38px); color: #FFFFFF; text-transform: uppercase; line-height: 1;
+      font-family: 'Archivo', sans-serif; font-weight: 700; letter-spacing: -0.01em;
+      font-size: clamp(22px, 3.2vw, 36px); color: #09090B; text-transform: uppercase; line-height: 1;
     }
     .logo-row .logo-outline {
-      font-family: 'Archivo', sans-serif; font-weight: 700; letter-spacing: 0.02em;
-      font-size: clamp(22px, 3.2vw, 38px); color: transparent; -webkit-text-stroke: 1px #FFFFFF;
+      font-family: 'Archivo', sans-serif; font-weight: 600; letter-spacing: 0.02em;
+      font-size: clamp(22px, 3.2vw, 36px); color: transparent; -webkit-text-stroke: 1px #09090B;
       text-transform: uppercase; line-height: 1;
     }
 
@@ -108,19 +108,19 @@
   <!-- ============================================== -->
   <!-- NAV (matcher hovedsiden, men omvendt: svart bg) -->
   <!-- ============================================== -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-black">
-    <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-zinc-100">
+    <div class="w-full px-8 md:px-16 lg:px-20 h-16 md:h-20 flex items-center justify-between">
       <a href="index.html" class="logo-row" aria-label="Dietrichs Marketing">
         <span class="logo-solid">Dietrichs</span>
         <span class="logo-outline">Marketing</span>
       </a>
 
       <!-- Meny-knapp (åpner overlay) -->
-      <button id="menu-btn" class="flex items-center gap-3 text-white text-xs md:text-sm font-medium uppercase tracking-[0.2em]" aria-label="Åpne meny">
+      <button id="menu-btn" class="flex items-center gap-3 text-[#09090B] text-xs md:text-sm font-medium uppercase tracking-[0.2em]" aria-label="Åpne meny">
         <span id="menu-btn-label">Meny</span>
         <span id="menu-btn-icon" class="flex flex-col gap-1.5">
-          <span class="block w-7 h-px bg-white"></span>
-          <span class="block w-7 h-px bg-white"></span>
+          <span class="block w-7 h-px bg-[#09090B]"></span>
+          <span class="block w-7 h-px bg-[#09090B]"></span>
         </span>
       </button>
     </div>
