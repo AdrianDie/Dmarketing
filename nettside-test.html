@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nettside-Testen — Finn ut hvor mye du overbetaler | Dietrichs Marketing</title>
-  <meta name="description" content="Svar på 5 raske spørsmål og finn ut nøyaktig hvor mye du overbetaler for nettsiden din i dag. 100% gratis, tar under 3 minutter.">
-  <meta property="og:title" content="Nettside-Testen — Finn ut hvor mye du overbetaler">
-  <meta property="og:description" content="Under 3 minutter. Gratis. Skreddersydd rapport på skjermen.">
+  <title>AI-Webmaster — Eier nettsiden, oppdater med AI, spar 36 000 kr/år | Dietrichs Marketing</title>
+  <meta name="description" content="Slipp byrået. Eier nettsiden 100 %. Oppdater innhold på 60 sekunder med AI. Bedrifter sparer i snitt 36 000 kr i året. Ta den gratis 3-minutters testen.">
+  <meta property="og:title" content="AI-Webmaster — Eier nettsiden, spar 36 000 kr/år">
+  <meta property="og:description" content="Slipp byrået. 0 kr i månedsavgifter. Oppdater på 60 sekunder med AI.">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
         fontFamily: {
-          display: ['Syne', 'sans-serif'],
+          display: ['Archivo', 'sans-serif'],
           body: ['Inter', 'sans-serif'],
         }
       } }
@@ -21,13 +21,23 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.9/dist/motion.js"></script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
 
   <style>
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
-    .font-display { font-family: 'Syne', sans-serif; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+
+    /* Logo (matcher hovedsiden) */
+    .logo-stack { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+    .logo-line-1 { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 22px; color: #09090B; letter-spacing: -0.02em; line-height: 1; }
+    .logo-line-2 {
+      font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; line-height: 1;
+      color: transparent; -webkit-text-stroke: 0.6px #09090B; letter-spacing: 0.04em;
+      margin-top: 4px; margin-left: 2px;
+    }
+
     .dot-grid {
       background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
       background-size: 24px 24px;
@@ -41,158 +51,412 @@
     .glow-cta { transition: all 0.18s ease; }
     .glow-cta:hover { transform: scale(1.02); box-shadow: 0 0 32px rgba(37,99,235,0.4); }
     .glow-cta-light:hover { transform: scale(1.02); box-shadow: 0 0 32px rgba(255,255,255,0.25); }
+
+    /* Outline-text (Webflow-stil headline-aksent) */
+    .outline-text {
+      color: transparent;
+      -webkit-text-stroke: 1.5px #09090B;
+    }
+    .outline-text-blue {
+      color: transparent;
+      -webkit-text-stroke: 1.5px #2563EB;
+    }
+
+    /* Pulserende prikk for "Live"-indikator */
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    }
+    .pulse-dot { animation: pulse-dot 2s infinite; }
+
+    /* Counter-tall */
+    .counter { font-variant-numeric: tabular-nums; }
+
+    /* Diagram-pil-animasjon */
+    @keyframes flow-arrow {
+      0% { transform: translateX(-4px); opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { transform: translateX(4px); opacity: 0.4; }
+    }
+    .flow-arrow { animation: flow-arrow 1.8s ease-in-out infinite; }
+
+    /* Mobile menu */
+    .menu-overlay { transition: opacity 0.25s, visibility 0.25s; }
+    .menu-overlay.hidden-menu { opacity: 0; visibility: hidden; pointer-events: none; }
   </style>
 </head>
 <body>
 
-  <!-- NAV (logo only — ingen escape hatches) -->
-  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 border-b border-zinc-100">
-    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center">
-      <a href="nettside-test.html" class="font-display font-bold text-base text-[#09090B] tracking-tight">Dietrichs Marketing</a>
+  <!-- ============================================== -->
+  <!-- NAV (matcher hovedsiden: 2-linje logo + meny)   -->
+  <!-- ============================================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/85 border-b border-zinc-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="logo-stack" aria-label="Dietrichs Marketing">
+        <span class="logo-line-1">Dietrichs</span>
+        <span class="logo-line-2">marketing</span>
+      </a>
+
+      <!-- Desktop meny -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-700">
+        <a href="index.html" class="hover:text-blue-600 transition-colors">Forside</a>
+        <a href="tjenester.html" class="hover:text-blue-600 transition-colors">Tjenester</a>
+        <a href="maler/index.html" class="hover:text-blue-600 transition-colors">Maler</a>
+        <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Kontakt</a>
+        <a href="#test" class="inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg glow-cta">
+          Ta testen
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Mobile meny-knapp -->
+      <button id="menu-btn" class="md:hidden flex items-center gap-2 text-sm font-medium text-zinc-700" aria-label="Åpne meny">
+        <span>Meny</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </nav>
 
+  <!-- Mobile menu overlay -->
+  <div id="menu-overlay" class="menu-overlay hidden-menu fixed inset-0 z-40 bg-white pt-20 px-6 flex flex-col gap-1">
+    <a href="index.html" class="block py-4 border-b border-zinc-100 font-display font-semibold text-2xl text-[#09090B]">01 — Forside</a>
+    <a href="tjenester.html" class="block py-4 border-b border-zinc-100 font-display font-semibold text-2xl text-[#09090B]">02 — Tjenester</a>
+    <a href="maler/index.html" class="block py-4 border-b border-zinc-100 font-display font-semibold text-2xl text-[#09090B]">03 — Maler</a>
+    <a href="kontakt.html" class="block py-4 border-b border-zinc-100 font-display font-semibold text-2xl text-[#09090B]">04 — Kontakt</a>
+    <a href="#test" class="mt-6 inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-semibold px-6 py-4 rounded-xl glow-cta">
+      Ta nettside-testen
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
   <!-- ============================================== -->
-  <!-- SEKSJON 1: HOOK                                 -->
+  <!-- SEKSJON 1: HERO                                 -->
   <!-- ============================================== -->
-  <header class="dot-grid pt-20">
-    <div class="bg-gradient-to-b from-[#FAFAFA]/60 to-[#FAFAFA]">
-      <div class="max-w-4xl mx-auto px-6 pt-10 pb-14 md:pt-14 md:pb-16 text-center">
+  <header class="dot-grid pt-16">
+    <div class="bg-gradient-to-b from-[#FAFAFA]/50 to-[#FAFAFA]">
+      <div class="max-w-6xl mx-auto px-6 pt-12 pb-16 md:pt-16 md:pb-20">
 
-        <div data-animate>
-          <div class="inline-flex items-center gap-2 bg-white border border-zinc-200 text-xs font-medium text-zinc-500 px-3 py-1.5 rounded-full mb-6 shadow-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block"></span>
-            Gratis test · Under 3 minutter · Umiddelbart resultat
-          </div>
+        <div class="grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
 
-          <h1 class="font-display font-extrabold text-[1.875rem] sm:text-[2.25rem] md:text-[2.75rem] leading-[1.12] tracking-[-0.03em] text-[#09090B] mb-6">
-            Frustrert over at du betaler i dyre dommer for nettsiden din —
-            <span class="text-blue-600 whitespace-nowrap">men venter dagevis</span>
-            på at byrået skal bytte ut ett enkelt bilde?
-          </h1>
-
-          <p class="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed">
-            Svar på 5 raske spørsmål og finn ut nøyaktig hvor mye du overbetaler for nettsiden din i dag — og om bedriften din er klar for å ta 100&nbsp;% kontroll selv ved hjelp av AI.
-          </p>
-        </div>
-
-        <div data-animate class="flex flex-col items-center gap-3 mt-8">
-          <a href="/test"
-             class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl text-base glow-cta">
-            Start testen gratis nå
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-          <p class="text-xs text-zinc-400">100&nbsp;% gratis · Tar under 3 minutter · Ingen e-post kreves</p>
-        </div>
-
-        <!-- Quiz-preview mock (visualiserer hva testen er) -->
-        <div data-animate class="mt-10 max-w-md mx-auto">
-          <div class="bg-white border border-zinc-200 rounded-2xl p-5 shadow-md text-left">
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-[11px] font-semibold tracking-widest uppercase text-blue-600">Spørsmål 2 av 5</span>
-              <div class="flex gap-1">
-                <span class="w-6 h-1 rounded-full bg-blue-600"></span>
-                <span class="w-6 h-1 rounded-full bg-blue-600"></span>
-                <span class="w-6 h-1 rounded-full bg-zinc-200"></span>
-                <span class="w-6 h-1 rounded-full bg-zinc-200"></span>
-                <span class="w-6 h-1 rounded-full bg-zinc-200"></span>
-              </div>
+          <!-- Venstre: tekst -->
+          <div data-animate>
+            <div class="inline-flex items-center gap-2 bg-white border border-zinc-200 text-xs font-medium text-zinc-600 px-3 py-1.5 rounded-full mb-6 shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block pulse-dot"></span>
+              Ny tjeneste · Autopilot Web 2026
             </div>
-            <p class="font-display font-bold text-lg text-[#09090B] mb-4 leading-snug">
-              Hvor mye betaler du i månedlig vedlikehold på nettsiden din i dag?
+
+            <h1 class="font-display font-extrabold text-[2rem] sm:text-[2.5rem] md:text-[3.25rem] leading-[1.05] tracking-[-0.03em] text-[#09090B] mb-6">
+              Eier nettsiden 100 %.<br>
+              Oppdater med <span class="text-blue-600">AI</span>.<br>
+              <span class="outline-text">Spar 36 000 kr/år.</span>
+            </h1>
+
+            <p class="text-base md:text-lg text-zinc-600 leading-relaxed mb-8 max-w-xl">
+              Vi bygger en superrask nettside med din egen <strong class="text-[#09090B]">AI-webmaster</strong>. Oppdater innhold på 60 sekunder — uten kode, uten byrå, uten månedsavgifter.
             </p>
-            <div class="space-y-2">
-              <div class="flex items-center gap-3 border border-zinc-200 rounded-lg px-4 py-2.5 text-sm text-zinc-600 hover:border-blue-600 transition-colors cursor-default">
-                <span class="w-4 h-4 rounded-full border-2 border-zinc-300"></span>
-                Under 500 kr
-              </div>
-              <div class="flex items-center gap-3 border-2 border-blue-600 bg-blue-50/50 rounded-lg px-4 py-2.5 text-sm font-medium text-[#09090B] cursor-default">
-                <span class="w-4 h-4 rounded-full border-[5px] border-blue-600"></span>
-                500 – 2&nbsp;000 kr
-              </div>
-              <div class="flex items-center gap-3 border border-zinc-200 rounded-lg px-4 py-2.5 text-sm text-zinc-600 hover:border-blue-600 transition-colors cursor-default">
-                <span class="w-4 h-4 rounded-full border-2 border-zinc-300"></span>
-                Over 2&nbsp;000 kr
-              </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+              <a href="#test"
+                 class="inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-semibold px-7 py-4 rounded-xl text-base glow-cta whitespace-nowrap">
+                Ta gratis testen
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#hvordan-fungerer-det"
+                 class="inline-flex items-center justify-center gap-2 border border-zinc-300 text-[#09090B] font-semibold px-7 py-4 rounded-xl text-base hover:border-zinc-500 transition-colors whitespace-nowrap">
+                Se hvordan det fungerer
+              </a>
+            </div>
+
+            <!-- De-risking-strip -->
+            <div class="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs text-zinc-500">
+              <span class="flex items-center gap-1.5">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+                100&nbsp;% eierskap
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+                0 kr i månedsavgifter
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+                Ingen binding
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+                Skuddsikkert system
+              </span>
             </div>
           </div>
-          <p class="text-xs text-zinc-400 mt-3">Slik ser et typisk spørsmål ut. Ingen tekniske forkunnskaper kreves.</p>
+
+          <!-- Høyre: visuelt diagram (chat → live nettside) -->
+          <div data-animate class="relative">
+            <div class="bg-white border border-zinc-200 rounded-2xl shadow-xl overflow-hidden">
+              <!-- Browser-bar -->
+              <div class="flex items-center gap-1.5 px-4 py-3 border-b border-zinc-100 bg-[#FAFAFA]">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                <div class="ml-3 text-[11px] text-zinc-400 font-mono">claude.ai</div>
+              </div>
+              <!-- Chat-mock -->
+              <div class="p-5 space-y-3 text-sm">
+                <div class="flex justify-end">
+                  <div class="bg-blue-600 text-white px-4 py-2.5 rounded-2xl rounded-br-md max-w-[85%]">
+                    Endre åpningstid fredager til 08–14, og legg til tilbud på varmepumper.
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <div class="w-7 h-7 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">AI</div>
+                  <div class="bg-zinc-100 text-zinc-800 px-4 py-2.5 rounded-2xl rounded-bl-md text-[13px]">
+                    Ferdig. Oppdaterte nettsiden — endringer er live om <strong>~30 sekunder</strong>.
+                  </div>
+                </div>
+              </div>
+              <!-- Pil ned + Live -->
+              <div class="flex flex-col items-center pb-2">
+                <svg class="flow-arrow" width="20" height="32" viewBox="0 0 20 32" fill="none">
+                  <path d="M10 4v22m0 0l-6-6m6 6l6-6" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <!-- Live preview -->
+              <div class="border-t border-zinc-100 bg-gradient-to-br from-blue-50 to-white px-5 py-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 pulse-dot"></span>
+                    Live
+                  </span>
+                  <span class="text-[11px] text-zinc-400 font-mono">rorlegger-stavanger.no</span>
+                </div>
+                <p class="font-display font-bold text-base text-[#09090B] leading-tight">Åpningstider</p>
+                <p class="text-xs text-zinc-600 mt-1">Mandag–torsdag 08–16 · <strong class="text-blue-600">Fredag 08–14</strong></p>
+                <p class="text-xs text-zinc-600 mt-1.5">🔥 <strong>Tilbud:</strong> Varmepumpe-installasjon</p>
+              </div>
+            </div>
+            <p class="text-center text-xs text-zinc-400 mt-4">Slik oppdaterer kunden nettsiden sin på under 60 sekunder.</p>
+          </div>
+
         </div>
       </div>
     </div>
   </header>
 
   <!-- ============================================== -->
-  <!-- SEKSJON 2: VERDIFORSLAG                         -->
+  <!-- SEKSJON 2: BESPARELSE-STAT (animert tall)       -->
   <!-- ============================================== -->
   <section class="py-20 md:py-24 px-6 bg-white border-t border-zinc-100">
-    <div class="max-w-5xl mx-auto">
-      <div data-animate class="text-center mb-14">
-        <p class="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-3">Hva du får ut av testen</p>
-        <h2 class="font-display font-bold text-3xl md:text-4xl tracking-[-0.02em] text-[#09090B]">
-          Dette avslører testen om din nettside:
+    <div class="max-w-4xl mx-auto text-center">
+      <div data-animate>
+        <p class="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-4">Besparelse i snitt</p>
+        <h2 class="font-display font-extrabold text-6xl md:text-8xl tracking-[-0.04em] text-[#09090B] leading-none mb-3">
+          <span id="counter" class="counter">0</span><span class="text-blue-600"> kr</span>
         </h2>
-        <p class="text-zinc-500 mt-4 max-w-2xl mx-auto leading-relaxed">
-          Vi måler tre kritiske områder rundt nettsiden til bedriften din:
+        <p class="text-lg md:text-xl text-zinc-600 max-w-2xl mx-auto leading-relaxed mb-8">
+          Det norske bedrifter i snitt sparer <strong class="text-[#09090B]">i året</strong> ved å gå fra tradisjonell webbyrå-modell til AI-webmaster.
         </p>
-      </div>
 
-      <div data-stagger class="grid md:grid-cols-3 gap-6">
-
-        <div class="bg-white border border-zinc-100 rounded-2xl p-7 card-hover">
-          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="6" width="20" height="13" rx="2"/>
-              <path d="M2 10h20"/>
-              <circle cx="17" cy="14.5" r="1.2" fill="#2563EB" stroke="none"/>
-            </svg>
+        <div class="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left mt-10">
+          <div class="bg-[#FAFAFA] border border-zinc-100 rounded-xl p-5">
+            <div class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1">Månedsavgift byrå</div>
+            <div class="font-display font-bold text-2xl text-[#09090B]">~2&nbsp;500 kr</div>
+            <div class="text-xs text-zinc-500 mt-1">Per måned, evig.</div>
           </div>
-          <h3 class="font-semibold text-lg mb-2 text-[#09090B]">Dine skjulte web-kostnader</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed">
-            Vi analyserer din nåværende løsning og avslører hvor mye du egentlig kaster bort på unødvendige månedlige vedlikeholdsavgifter og trege plattformer som WordPress eller Wix.
-          </p>
-        </div>
-
-        <div class="bg-white border border-zinc-100 rounded-2xl p-7 card-hover">
-          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2 L4 14 h7 l-1 8 9-12 h-7 z"/>
-            </svg>
+          <div class="bg-[#FAFAFA] border border-zinc-100 rounded-xl p-5">
+            <div class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1">Endringer/timeavgift</div>
+            <div class="font-display font-bold text-2xl text-[#09090B]">~6&nbsp;000 kr</div>
+            <div class="text-xs text-zinc-500 mt-1">Per år, i snitt.</div>
           </div>
-          <h3 class="font-semibold text-lg mb-2 text-[#09090B]">Din Google-hastighet</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed">
-            Vi sjekker om den tekniske grunnmuren din faktisk skader rangeringen din på Google — og koster deg kunder du burde ha hatt.
-          </p>
-        </div>
-
-        <div class="bg-white border border-zinc-100 rounded-2xl p-7 card-hover">
-          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3 l1.8 4.7 L18.5 9.5 l-4.7 1.8 L12 16 l-1.8-4.7 L5.5 9.5 l4.7-1.8 z"/>
-              <path d="M19 14 l0.7 1.8 L21.5 16.5 l-1.8 0.7 L19 19 l-0.7-1.8 L16.5 16.5 l1.8-0.7 z"/>
-            </svg>
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+            <div class="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">Med AI-Webmaster</div>
+            <div class="font-display font-bold text-2xl text-blue-600">0 kr</div>
+            <div class="text-xs text-zinc-500 mt-1">I månedsavgift. Punktum.</div>
           </div>
-          <h3 class="font-semibold text-lg mb-2 text-[#09090B]">Din "AI-Klarhet"</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed">
-            Finn ut om bedriften din er en god kandidat for <em>Autopilot Web</em> — et system hvor du eier nettsiden 100&nbsp;% og oppdaterer innholdet på under 60 sekunder med AI.
-          </p>
         </div>
-
-      </div>
-
-      <div data-animate class="text-center mt-14">
-        <a href="/test"
-           class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-7 py-3.5 rounded-xl text-sm glow-cta">
-          Start testen gratis nå
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <p class="text-xs text-zinc-400 mt-3">100&nbsp;% gratis · Tar under 3 minutter</p>
       </div>
     </div>
   </section>
 
   <!-- ============================================== -->
-  <!-- SEKSJON 3: MANIFEST                             -->
+  <!-- SEKSJON 3: DIAGRAM (gammel vs ny modell)        -->
+  <!-- ============================================== -->
+  <section id="hvordan-fungerer-det" class="py-24 md:py-28 px-6 bg-[#FAFAFA] border-t border-zinc-100">
+    <div class="max-w-6xl mx-auto">
+      <div data-animate class="text-center mb-14">
+        <p class="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-3">Sammenlign modellene</p>
+        <h2 class="font-display font-extrabold text-3xl md:text-5xl tracking-[-0.03em] text-[#09090B] leading-tight">
+          Tradisjonell webbyrå <span class="outline-text">vs</span> AI-Webmaster
+        </h2>
+      </div>
+
+      <div data-stagger class="grid md:grid-cols-2 gap-5">
+
+        <!-- Tradisjonell -->
+        <div class="bg-white border border-zinc-200 rounded-2xl p-7 md:p-8 relative">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><path d="M9 9l6 6m0-6l-6 6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-red-600">Slik er det i dag</div>
+              <h3 class="font-display font-bold text-xl text-[#09090B]">Tradisjonell webbyrå-modell</h3>
+            </div>
+          </div>
+          <ul class="space-y-3 text-sm text-zinc-700">
+            <li class="flex gap-3"><span class="text-red-500 font-bold flex-shrink-0">✕</span> <span><strong>2 500 kr/mnd</strong> i månedsavgift — evig</span></li>
+            <li class="flex gap-3"><span class="text-red-500 font-bold flex-shrink-0">✕</span> <span><strong>3–7 dagers ventetid</strong> for én liten endring</span></li>
+            <li class="flex gap-3"><span class="text-red-500 font-bold flex-shrink-0">✕</span> <span>Du <strong>eier ikke</strong> koden eller designet</span></li>
+            <li class="flex gap-3"><span class="text-red-500 font-bold flex-shrink-0">✕</span> <span>WordPress/Wix — <strong>treg</strong> på Google</span></li>
+            <li class="flex gap-3"><span class="text-red-500 font-bold flex-shrink-0">✕</span> <span>Faktura for hver e-post du sender</span></li>
+          </ul>
+          <div class="mt-6 pt-5 border-t border-zinc-100 text-sm">
+            <span class="text-zinc-500">Total kostnad år 1: </span>
+            <strong class="font-display text-2xl text-[#09090B]">~36 000 kr</strong>
+          </div>
+        </div>
+
+        <!-- AI-Webmaster -->
+        <div class="bg-[#0B1F4A] text-white border border-blue-500/30 rounded-2xl p-7 md:p-8 relative shadow-2xl">
+          <div class="absolute -top-3 right-6 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Ny modell</div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 bg-blue-500/20 rounded-xl flex items-center justify-center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 l1.8 4.7 L18.5 9.5 l-4.7 1.8 L12 16 l-1.8-4.7 L5.5 9.5 l4.7-1.8 z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-blue-300">Slik gjør vi det</div>
+              <h3 class="font-display font-bold text-xl text-white">AI-Webmaster</h3>
+            </div>
+          </div>
+          <ul class="space-y-3 text-sm text-white/85">
+            <li class="flex gap-3"><span class="text-green-400 font-bold flex-shrink-0">✓</span> <span><strong class="text-white">0 kr/mnd</strong> — engangskjøp, ferdig</span></li>
+            <li class="flex gap-3"><span class="text-green-400 font-bold flex-shrink-0">✓</span> <span><strong class="text-white">60 sekunder</strong> — fra chat-melding til live</span></li>
+            <li class="flex gap-3"><span class="text-green-400 font-bold flex-shrink-0">✓</span> <span><strong class="text-white">100 % eierskap</strong> — du eier koden</span></li>
+            <li class="flex gap-3"><span class="text-green-400 font-bold flex-shrink-0">✓</span> <span>Astro + GitHub Pages — <strong class="text-white">lyn-rask</strong></span></li>
+            <li class="flex gap-3"><span class="text-green-400 font-bold flex-shrink-0">✓</span> <span>Snakk med din AI på norsk — ingen kode</span></li>
+          </ul>
+          <div class="mt-6 pt-5 border-t border-white/10 text-sm">
+            <span class="text-white/60">Total kostnad år 1: </span>
+            <strong class="font-display text-2xl text-white">9 900 kr</strong>
+            <span class="text-white/50 text-xs">(engangs)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Flow-diagram under -->
+      <div data-animate class="mt-16 bg-white border border-zinc-200 rounded-2xl p-8 md:p-10">
+        <h3 class="font-display font-bold text-xl md:text-2xl text-center text-[#09090B] mb-8">Slik fungerer det i praksis</h3>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-2">
+
+          <div class="flex-1 text-center max-w-[200px]">
+            <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center mb-4">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">Steg 1</div>
+            <h4 class="font-display font-bold text-base text-[#09090B] mb-1">Chat med din AI</h4>
+            <p class="text-xs text-zinc-500 leading-relaxed">"Endre åpningstid fredag til 08–14"</p>
+          </div>
+
+          <svg class="hidden md:block flow-arrow flex-shrink-0" width="40" height="14" viewBox="0 0 40 14" fill="none">
+            <path d="M2 7h36m0 0l-5-5m5 5l-5 5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="md:hidden flow-arrow" width="14" height="40" viewBox="0 0 14 40" fill="none">
+            <path d="M7 2v36m0 0l-5-5m5 5l5-5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="flex-1 text-center max-w-[200px]">
+            <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center mb-4">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+              </svg>
+            </div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-1">Steg 2</div>
+            <h4 class="font-display font-bold text-base text-[#09090B] mb-1">AI lager koden</h4>
+            <p class="text-xs text-zinc-500 leading-relaxed">Ferdig markdown — bare lim inn</p>
+          </div>
+
+          <svg class="hidden md:block flow-arrow flex-shrink-0" width="40" height="14" viewBox="0 0 40 14" fill="none">
+            <path d="M2 7h36m0 0l-5-5m5 5l-5 5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="md:hidden flow-arrow" width="14" height="40" viewBox="0 0 14 40" fill="none">
+            <path d="M7 2v36m0 0l-5-5m5 5l5-5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="flex-1 text-center max-w-[200px]">
+            <div class="w-16 h-16 mx-auto bg-green-50 rounded-2xl flex items-center justify-center mb-4">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>
+              </svg>
+            </div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-green-600 mb-1">Steg 3</div>
+            <h4 class="font-display font-bold text-base text-[#09090B] mb-1">Live på 60 sek</h4>
+            <p class="text-xs text-zinc-500 leading-relaxed">Atomic deploy — siden går aldri ned</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SEKSJON 4: VERDIFORSLAG                         -->
+  <!-- ============================================== -->
+  <section class="py-20 md:py-24 px-6 bg-white border-t border-zinc-100">
+    <div class="max-w-5xl mx-auto">
+      <div data-animate class="text-center mb-14">
+        <p class="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-3">Hva du faktisk får</p>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-[-0.02em] text-[#09090B]">
+          Tre frigjøringer du får dagen vi leverer:
+        </h2>
+      </div>
+
+      <div data-stagger class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-white border border-zinc-200 rounded-2xl p-7 card-hover">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2 text-[#09090B]">Frihet fra månedsavgift</h3>
+          <p class="text-zinc-600 text-sm leading-relaxed">
+            Engangskostnad. <strong class="text-[#09090B]">0 kr</strong> til oss etterpå. Du betaler kun for ditt eget domene (~150 kr/år).
+          </p>
+        </div>
+
+        <div class="bg-white border border-zinc-200 rounded-2xl p-7 card-hover">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2 L4 14 h7 l-1 8 9-12 h-7 z"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2 text-[#09090B]">Frihet fra ventetid</h3>
+          <p class="text-zinc-600 text-sm leading-relaxed">
+            Trenger du å endre en pris klokken 23? Gjør det selv. På <strong class="text-[#09090B]">60 sekunder</strong>. Ingen byrå-mailer.
+          </p>
+        </div>
+
+        <div class="bg-white border border-zinc-200 rounded-2xl p-7 card-hover">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2 text-[#09090B]">Frihet fra avhengighet</h3>
+          <p class="text-zinc-600 text-sm leading-relaxed">
+            Du eier koden, designet, innholdet. <strong class="text-[#09090B]">100 %</strong>. Ingen som kan "låse" deg ute.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SEKSJON 5: MANIFEST                             -->
   <!-- ============================================== -->
   <section class="py-24 md:py-28 px-6 bg-[#FAFAFA] border-t border-zinc-100">
     <div class="max-w-3xl mx-auto">
@@ -201,12 +465,11 @@
 
         <p class="text-xs font-semibold tracking-widest uppercase text-blue-600 mb-4">Manifest</p>
 
-        <h2 class="font-display font-bold text-3xl md:text-[2.5rem] leading-[1.1] tracking-[-0.02em] text-[#09090B] mb-8">
+        <h2 class="font-display font-extrabold text-3xl md:text-[2.25rem] leading-[1.1] tracking-[-0.02em] text-[#09090B] mb-8">
           Hvorfor tradisjonelle webbyråer snart er historie
           <span class="text-zinc-400">— og hvorfor det er gode nyheter for deg.</span>
         </h2>
 
-        <!-- Headshot + intro -->
         <div class="flex items-start gap-5 mb-8">
           <img src="images/adrian-headshot.jpg"
                onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Adrian+Dietrichs&background=09090B&color=fff&size=160&font-size=0.4&bold=true';"
@@ -218,13 +481,11 @@
         </div>
 
         <div class="space-y-5 text-[17px] leading-[1.75] text-zinc-700">
-
           <p>
-            Akkurat nå skjer det et jordskjelv i min bransje — et skifte som kommer til å endre alt: Kunstig intelligens har gjort det mulig for <strong class="text-[#09090B]">hvem som helst, helt uten teknisk erfaring, å gjøre det som tidligere krevde dyre utviklere.</strong>
+            Akkurat nå skjer det et jordskjelv i min bransje: Kunstig intelligens har gjort det mulig for <strong class="text-[#09090B]">hvem som helst, helt uten teknisk erfaring, å gjøre det som tidligere krevde dyre utviklere.</strong>
           </p>
-
           <p>
-            Tidligere måtte du betale i dyre dommer for at en "ekspert" som meg skulle oppdatere, kode eller vedlikeholde nettsiden din. Ikke nå lenger. Med riktig AI-oppsett kan bedriften din i dag oppfylle alle sine tekniske behov helt på egenhånd. <strong class="text-[#09090B]">Kvaliteten er den samme — men prislappen og ventetiden er borte.</strong>
+            Tidligere måtte du betale i dyre dommer for at en "ekspert" skulle oppdatere nettsiden din. Ikke nå lenger. Med riktig AI-oppsett dekker bedriften din alle tekniske behov selv. <strong class="text-[#09090B]">Kvaliteten er den samme — men prislappen og ventetiden er borte.</strong>
           </p>
 
           <div class="border-l-2 border-blue-600 pl-5 my-8">
@@ -234,34 +495,15 @@
           </div>
 
           <p>
-            Å la et byrå beholde kontrollen over nettsiden din i 2026 er rett og slett dårlig butikk. Det er en "no-brainer" å ta eierskapet tilbake. AI demokratiserer webutvikling, og det skjer utrolig raskt.
-          </p>
-
-          <p>
             Bedriftene som forstår dette nå, kutter enorme kostnader og får et forsprang. De som tviholder på de gamle, dyre vedlikeholdsavtalene sine, havner bakpå.
           </p>
-
-          <p>
-            Fordi jeg forstår teknologien under panseret, vet jeg at denne utviklingen er <em>uunngåelig</em>. Spørsmålet er ikke <em>om</em> du kommer til å bruke AI som din egen webmaster — bare <em>når</em>.
-          </p>
-
           <p class="text-[#09090B] font-medium">
-            Jeg laget denne testen for å vise deg nøyaktig hvor enkelt du kan ta steget inn i fremtiden — og hvor mye penger du kaster bort på å la være.
+            Jeg laget denne testen for å vise deg hvor enkelt du kan ta steget — og hvor mye penger du kaster bort på å la være.
           </p>
         </div>
 
-        <div class="mt-10 pt-8 border-t border-zinc-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div class="text-sm text-zinc-500">
-            <span class="font-semibold text-[#09090B]">Adrian Dietrichs</span> · Dataingeniør & grunnlegger, Dietrichs Marketing
-          </div>
-          <div class="flex flex-col items-start sm:items-end gap-1">
-            <a href="/test"
-               class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl text-sm glow-cta whitespace-nowrap">
-              Start testen gratis nå
-              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </a>
-            <p class="text-xs text-zinc-400">Under 3 minutter · 100&nbsp;% gratis</p>
-          </div>
+        <div class="mt-10 pt-8 border-t border-zinc-100 text-sm text-zinc-500">
+          <span class="font-semibold text-[#09090B]">Adrian Dietrichs</span> · Dataingeniør & grunnlegger, Dietrichs Marketing
         </div>
       </div>
 
@@ -269,66 +511,90 @@
   </section>
 
   <!-- ============================================== -->
-  <!-- SEKSJON 4: SISTE CTA — MØRK KONTRAST-FINALE     -->
+  <!-- SEKSJON 6: TESTEN                               -->
   <!-- ============================================== -->
-  <section class="dot-grid-dark bg-[#0B1F4A] text-white py-24 md:py-32 px-6 border-t border-zinc-100">
-    <div class="max-w-3xl mx-auto text-center">
-      <div data-animate>
-        <p class="text-sm font-semibold tracking-widest uppercase text-blue-300 mb-4">Siste sjanse</p>
+  <section id="test" class="dot-grid-dark bg-[#0B1F4A] text-white py-24 md:py-32 px-6">
+    <div class="max-w-4xl mx-auto">
 
-        <h2 class="font-display font-extrabold text-4xl md:text-5xl tracking-[-0.03em] text-white mb-6 leading-[1.1]">
-          Finn ut hvor du står
+      <div data-animate class="text-center mb-12">
+        <p class="text-sm font-semibold tracking-widest uppercase text-blue-300 mb-4">3-minutters scorecard</p>
+        <h2 class="font-display font-extrabold text-4xl md:text-5xl tracking-[-0.03em] text-white mb-5 leading-[1.1]">
+          Er bedriften din klar for AI-Webmaster?
         </h2>
-        <p class="text-white/70 text-lg leading-relaxed mb-12 max-w-xl mx-auto">
-          <strong class="text-white">9 av 10 bedrifter betaler for mye for nettsiden sin.</strong> Ta testen gratis og få fasiten på under 3 minutter.
+        <p class="text-white/70 text-lg leading-relaxed max-w-2xl mx-auto">
+          <strong class="text-white">9 av 10 bedrifter betaler for mye for nettsiden sin.</strong> Svar på 5 enkle spørsmål og få fasiten — på under 3 minutter.
         </p>
+      </div>
 
-        <div data-stagger class="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-12 text-left">
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
-            <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M12 7v5l3 3"/>
-              </svg>
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+
+        <!-- Quiz-preview-mock -->
+        <div data-animate>
+          <div class="bg-white text-[#09090B] border border-zinc-200 rounded-2xl p-5 shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-semibold tracking-widest uppercase text-blue-600">Spørsmål 2 av 5</span>
+              <div class="flex gap-1">
+                <span class="w-6 h-1 rounded-full bg-blue-600"></span>
+                <span class="w-6 h-1 rounded-full bg-blue-600"></span>
+                <span class="w-6 h-1 rounded-full bg-zinc-200"></span>
+                <span class="w-6 h-1 rounded-full bg-zinc-200"></span>
+                <span class="w-6 h-1 rounded-full bg-zinc-200"></span>
+              </div>
             </div>
-            <div class="font-semibold text-sm text-white mb-1">Under 3 minutter</div>
-            <div class="text-xs text-white/60 leading-relaxed">5 enkle spørsmål, ingen tekniske forkunnskaper.</div>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
-            <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 13l4 4L19 7"/>
-              </svg>
+            <p class="font-display font-bold text-lg text-[#09090B] mb-4 leading-snug">
+              Hvor mye betaler du i månedlig vedlikehold på nettsiden din?
+            </p>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3 border border-zinc-200 rounded-lg px-4 py-2.5 text-sm text-zinc-600">
+                <span class="w-4 h-4 rounded-full border-2 border-zinc-300"></span>
+                Under 500 kr
+              </div>
+              <div class="flex items-center gap-3 border-2 border-blue-600 bg-blue-50/50 rounded-lg px-4 py-2.5 text-sm font-medium text-[#09090B]">
+                <span class="w-4 h-4 rounded-full border-[5px] border-blue-600"></span>
+                500 – 2&nbsp;000 kr
+              </div>
+              <div class="flex items-center gap-3 border border-zinc-200 rounded-lg px-4 py-2.5 text-sm text-zinc-600">
+                <span class="w-4 h-4 rounded-full border-2 border-zinc-300"></span>
+                Over 2&nbsp;000 kr
+              </div>
             </div>
-            <div class="font-semibold text-sm text-white mb-1">100&nbsp;% gratis</div>
-            <div class="text-xs text-white/60 leading-relaxed">Ingen kortinformasjon. Ingen skjult mersalg.</div>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm">
-            <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center mb-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 3v18h18"/>
-                <path d="M7 14l4-4 3 3 5-6"/>
-              </svg>
-            </div>
-            <div class="font-semibold text-sm text-white mb-1">Resultat på skjermen</div>
-            <div class="text-xs text-white/60 leading-relaxed">Skreddersydd rapport og konkrete anbefalinger.</div>
           </div>
         </div>
 
-        <a href="/test"
-           class="inline-flex items-center gap-2 bg-white text-[#0B1F4A] font-semibold px-9 py-4 rounded-xl text-base glow-cta-light transition-all">
-          Start testen gratis nå
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
+        <!-- CTA + features -->
+        <div data-stagger class="space-y-3">
+          <div class="flex items-start gap-3 text-white/80">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><strong class="text-white">Under 3 minutter</strong> · 5 enkle spørsmål</div>
+          </div>
+          <div class="flex items-start gap-3 text-white/80">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M5 13l4 4L19 7"/></svg>
+            <div><strong class="text-white">100 % gratis</strong> · Ingen kortinformasjon</div>
+          </div>
+          <div class="flex items-start gap-3 text-white/80">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+            <div><strong class="text-white">Skreddersydd rapport</strong> · Direkte på skjermen</div>
+          </div>
+          <div class="flex items-start gap-3 text-white/80">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M3 12a9 9 0 0118 0v0a9 9 0 01-18 0v0z"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
+            <div><strong class="text-white">Ingen e-post kreves</strong> · Helt anonymt</div>
+          </div>
 
-        <p class="text-xs text-white/50 mt-5">
-          Under 3 minutter · Ingen forpliktelser · Ingen e-post kreves
-        </p>
+          <div class="pt-6">
+            <a href="/test"
+               class="inline-flex items-center gap-2 bg-white text-[#0B1F4A] font-semibold px-9 py-4 rounded-xl text-base glow-cta-light transition-all w-full sm:w-auto justify-center">
+              Start testen gratis nå
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <p class="text-xs text-white/50 mt-3">Tar under 3 minutter · Umiddelbart resultat</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER (kun copyright + org.nr) -->
+  <!-- FOOTER -->
   <footer class="bg-[#0F172A] text-white py-8 px-6">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40">
       <div>© 2026 Dietrichs Marketing</div>
@@ -339,22 +605,31 @@
   <!-- FLOATING CTA -->
   <div id="floating-cta"
        style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);z-index:999;opacity:0;transition:opacity 0.35s,transform 0.35s;pointer-events:none;">
-    <a href="/test"
+    <a href="#test"
        style="display:inline-flex;align-items:center;gap:10px;background:#1D4ED8;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:14px 24px;border-radius:50px;box-shadow:0 8px 32px rgba(29,78,216,0.4);text-decoration:none;white-space:nowrap;">
       <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      Start testen gratis nå
+      Ta gratis testen
       <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:2px 8px;font-size:11px;font-weight:500;">3 min</span>
     </a>
   </div>
 
   <script>
+    // Mobile meny
+    (function () {
+      const btn = document.getElementById('menu-btn');
+      const overlay = document.getElementById('menu-overlay');
+      if (!btn || !overlay) return;
+      btn.addEventListener('click', () => overlay.classList.toggle('hidden-menu'));
+      overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => overlay.classList.add('hidden-menu')));
+    })();
+
     // Floating CTA
     (function () {
       const bar = document.getElementById('floating-cta');
       if (!bar) return;
       let visible = false;
       window.addEventListener('scroll', function () {
-        const show = window.scrollY > 500;
+        const show = window.scrollY > 600;
         if (show === visible) return;
         visible = show;
         bar.style.opacity = show ? '1' : '0';
@@ -365,15 +640,41 @@
       }, { passive: true });
     })();
 
+    // Counter-animasjon
+    (function () {
+      const el = document.getElementById('counter');
+      if (!el) return;
+      const target = 36000;
+      let started = false;
+      const animate = () => {
+        if (started) return;
+        started = true;
+        const duration = 1800;
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const v = Math.floor(eased * target);
+          el.textContent = v.toLocaleString('no-NO');
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) animate(); });
+      }, { threshold: 0.4 });
+      io.observe(el);
+    })();
+
     // Scroll-reveal
     window.addEventListener('load', () => {
       if (typeof Motion === 'undefined') return;
       const { inView, animate } = Motion;
       inView('[data-animate]', ({ target }) => {
-        animate(target, { opacity: [0,1], y: [24,0] }, { duration: 0.5, easing: [0.25,0.46,0.45,0.94] });
+        animate(target, { opacity: [0,1], y: [24,0] }, { duration: 0.55, easing: [0.25,0.46,0.45,0.94] });
       });
       inView('[data-stagger]', ({ target }) => {
-        animate(target.querySelectorAll(':scope > *'), { opacity: [0,1], y: [20,0] }, { duration: 0.4, delay: animate.stagger(0.08) });
+        animate(target.querySelectorAll(':scope > *'), { opacity: [0,1], y: [20,0] }, { duration: 0.45, delay: animate.stagger(0.1) });
       });
     });
   </script>
