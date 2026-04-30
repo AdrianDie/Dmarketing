@@ -161,6 +161,17 @@
     /* Mobile menu */
     .menu-overlay { transition: opacity 0.25s, visibility 0.25s; }
     .menu-overlay.hidden-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* Meny-lenke hover (Webflow-stil: stroke → fill slide-up) */
+    .nav-link { display: inline-block; overflow: hidden; line-height: 1; vertical-align: bottom; }
+    .nav-link-inner {
+      display: flex; flex-direction: column;
+      transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    .nav-link-stroke { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.7); }
+    .nav-link-fill { color: #60A5FA; }
+    .group:hover .nav-link-inner { transform: translateY(-50%); }
+    .group:hover .nav-link-num { color: #60A5FA; transition: color 0.4s ease; }
   </style>
 </head>
 <body>
@@ -203,29 +214,59 @@
     <div class="max-w-7xl mx-auto pt-10 md:pt-16 pb-10">
       <p class="text-xs uppercase tracking-[0.3em] text-white/40 mb-8">Navigasjon</p>
       <div class="flex flex-col gap-2 md:gap-3">
-        <a href="index.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10 hover:text-blue-400 transition-colors">
-          <span class="font-mono text-sm text-white/40 group-hover:text-blue-400">01</span>
-          <span class="font-display font-extrabold text-3xl md:text-5xl tracking-tight">Forside</span>
+        <a href="index.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
+          <span class="nav-link-num font-mono text-sm text-white/40">01</span>
+          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
+            <span class="nav-link-inner">
+              <span class="nav-link-stroke">Forside</span>
+              <span class="nav-link-fill">Forside</span>
+            </span>
+          </span>
         </a>
-        <a href="tjenester.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10 hover:text-blue-400 transition-colors">
-          <span class="font-mono text-sm text-white/40 group-hover:text-blue-400">02</span>
-          <span class="font-display font-extrabold text-3xl md:text-5xl tracking-tight">Tjenester</span>
+        <a href="tjenester.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
+          <span class="nav-link-num font-mono text-sm text-white/40">02</span>
+          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
+            <span class="nav-link-inner">
+              <span class="nav-link-stroke">Tjenester</span>
+              <span class="nav-link-fill">Tjenester</span>
+            </span>
+          </span>
         </a>
-        <a href="kontakt.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10 hover:text-blue-400 transition-colors">
-          <span class="font-mono text-sm text-white/40 group-hover:text-blue-400">03</span>
-          <span class="font-display font-extrabold text-3xl md:text-5xl tracking-tight">Kontakt</span>
+        <a href="kontakt.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
+          <span class="nav-link-num font-mono text-sm text-white/40">03</span>
+          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
+            <span class="nav-link-inner">
+              <span class="nav-link-stroke">Kontakt</span>
+              <span class="nav-link-fill">Kontakt</span>
+            </span>
+          </span>
         </a>
-        <a href="maler/index.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10 hover:text-blue-400 transition-colors">
-          <span class="font-mono text-sm text-white/40 group-hover:text-blue-400">04</span>
-          <span class="font-display font-extrabold text-3xl md:text-5xl tracking-tight">Maler</span>
+        <a href="maler/index.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
+          <span class="nav-link-num font-mono text-sm text-white/40">04</span>
+          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
+            <span class="nav-link-inner">
+              <span class="nav-link-stroke">Maler</span>
+              <span class="nav-link-fill">Maler</span>
+            </span>
+          </span>
         </a>
-        <a href="#priser" class="group flex items-baseline gap-6 py-3 border-b border-white/10 hover:text-blue-400 transition-colors">
-          <span class="font-mono text-sm text-white/40 group-hover:text-blue-400">05</span>
-          <span class="font-display font-extrabold text-3xl md:text-5xl tracking-tight">Priser & pakker</span>
+        <a href="#priser" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
+          <span class="nav-link-num font-mono text-sm text-white/40">05</span>
+          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
+            <span class="nav-link-inner">
+              <span class="nav-link-stroke">Priser &amp; pakker</span>
+              <span class="nav-link-fill">Priser &amp; pakker</span>
+            </span>
+          </span>
         </a>
-        <a href="#signup" class="group flex items-baseline gap-6 py-3 border-b border-white/10 hover:text-blue-400 transition-colors">
-          <span class="font-mono text-sm text-white/40 group-hover:text-blue-400">06</span>
-          <span class="font-display font-extrabold text-3xl md:text-5xl tracking-tight">Få demo-videoen 07.05</span>
+        <a href="#signup" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
+          <span class="nav-link-num font-mono text-sm text-white/40">06</span>
+          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
+            <span class="nav-link-inner">
+              <span class="nav-link-stroke">Få demo-videoen 07.05</span>
+              <span class="nav-link-fill">Få demo-videoen 07.05</span>
+            </span>
+          </span>
         </a>
       </div>
     </div>
