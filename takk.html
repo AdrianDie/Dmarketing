@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Takk! Din plass er reservert | Dietrichs Marketing</title>
+  <meta name="description" content="Takk for at du satte deg på listen. Demo-videoen sendes ut torsdag 07.05.">
+  <meta name="robots" content="noindex,nofollow">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+    .logo-row { display: inline-flex; align-items: baseline; gap: 0.6rem; line-height: 1; }
+    .logo-row .logo-solid {
+      font-family: 'Archivo', sans-serif; font-weight: 700; letter-spacing: -0.01em;
+      font-size: clamp(22px, 3.2vw, 36px); color: #09090B; text-transform: uppercase; line-height: 1;
+    }
+    .logo-row .logo-outline {
+      font-family: 'Archivo', sans-serif; font-weight: 600; letter-spacing: 0.02em;
+      font-size: clamp(22px, 3.2vw, 36px); color: transparent; -webkit-text-stroke: 1px #09090B;
+      text-transform: uppercase; line-height: 1;
+    }
+    .outline-text { color: transparent; -webkit-text-stroke: 1.5px #09090B; }
+    .dot-grid {
+      background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    @keyframes check-pop {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .check-pop { animation: check-pop 0.6s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
+  </style>
+</head>
+<body class="dot-grid min-h-screen flex flex-col">
+
+  <!-- NAV -->
+  <nav class="bg-white border-b border-zinc-100">
+    <div class="w-full px-8 md:px-16 lg:px-20 h-16 md:h-20 flex items-center justify-between">
+      <a href="index.html" class="logo-row" aria-label="Dietrichs Marketing">
+        <span class="logo-solid">Dietrichs</span>
+        <span class="logo-outline">Marketing</span>
+      </a>
+      <a href="nettside-test.html" class="text-xs md:text-sm font-medium uppercase tracking-[0.2em] text-zinc-500 hover:text-[#09090B] transition-colors">← Tilbake</a>
+    </div>
+  </nav>
+
+  <!-- INNHOLD -->
+  <main class="flex-1 flex items-center justify-center px-6 py-20 md:py-32">
+    <div class="max-w-2xl mx-auto text-center">
+
+      <!-- Sjekkmark-animasjon -->
+      <div class="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-green-50 border-2 border-green-500 rounded-full mb-10 check-pop">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+
+      <p class="text-sm font-semibold tracking-widest uppercase text-blue-600 mb-4">Bekreftet</p>
+      <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.03em] leading-[1.05] text-[#09090B] mb-6">
+        Takk!<br>
+        <span class="outline-text">Din plass er reservert.</span>
+      </h1>
+
+      <p class="text-base md:text-lg text-zinc-600 leading-relaxed mb-12 max-w-lg mx-auto">
+        Din personlige lenke til demo-videoen sendes til din innboks senest <strong class="text-[#09090B]">torsdag 07.05</strong>.
+      </p>
+
+      <!-- Hva får du -->
+      <div class="bg-white border border-zinc-200 rounded-3xl p-7 md:p-10 text-left shadow-sm mb-10">
+        <h2 class="font-display font-bold text-lg md:text-xl text-[#09090B] mb-5 text-center">I videoen vil du se:</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-sm md:text-base text-zinc-700 leading-relaxed">
+              Hvordan vi <strong class="text-[#09090B]">eliminerer månedlige byråkostnader.</strong>
+            </span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-sm md:text-base text-zinc-700 leading-relaxed">
+              Hvor enkelt du tar <strong class="text-[#09090B]">full kontroll over din egen nettside.</strong>
+            </span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-blue-50 rounded-full flex items-center justify-center mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="text-sm md:text-base text-zinc-700 leading-relaxed">
+              Hvordan AI-webmasteren <strong class="text-[#09090B]">gjør endringer for deg på minutter.</strong>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-base text-zinc-700 mb-3">
+        Du vil også motta en <strong class="text-[#09090B]">oversikt over våre prispakker</strong> sammen med videoen.
+      </p>
+      <p class="text-sm text-zinc-500 mb-10">Hold utkikk i innboksen!</p>
+
+      <p class="text-sm text-zinc-400">
+        Skrev du feil e-post? <a href="nettside-test.html#signup" class="text-blue-600 hover:underline font-medium">Klikk her for å endre</a>
+      </p>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0F172A] text-white py-8 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40">
+      <div>© 2026 Dietrichs Marketing</div>
+      <div>Org.nr 932 612 583</div>
+    </div>
+  </footer>
+
+</body>
+</html>
