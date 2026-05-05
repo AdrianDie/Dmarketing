@@ -116,20 +116,32 @@
 
 ---
 
-## SCENE 5 — HVA *DU* GJØR (3:30 – 4:15)
+## SCENE 5 — REISEN OG DET VI GJØR (3:30 – 4:30)
 
-[SKJERM] Tre store steg på skjermen, ett om gangen.
+[SKJERM] Vis **reise-diagrammet** (eksportert PNG fra `demo-video-diagram.md`, "Reisen — full"). Tre kolonner: rød i dag → blå arbeid → grønn ferdig.
 
-**Voice-over:**
-> "Her er hele jobben din.
+**Voice-over (zoomer langsomt fra venstre til høyre):**
+> "La meg vise deg reisen.
 >
-> **Steg 1.** Du svarer på fem spørsmål. Bedriftsnavn, by, telefonnummer, logo, og en farge du liker. Det tar deg ti minutter på e-post. Resten henter vi selv fra Google og din eksisterende nettside.
+> Til venstre — der du er i dag. Treg eller utdatert nettside. Faktura for hver endring. Faste månedsavgifter. Du venter dager på selv den enkleste justering. Og koden — den eier du ikke engang.
 >
-> **Steg 2.** Du venter fem til syv dager. I den tiden bygger vi nettsiden, designer den for din bransje, og setter opp AI-motoren med all relevant kontekst om bedriften din.
+> I midten — det vi gjør, i løpet av fem til syv dager. Og det er litt mye, så bli med:
 >
-> **Steg 3.** Du får en kvarters videogjennomgang fra meg. Jeg viser deg hvordan du chatter, ser preview, og publiserer. Etter det er du selvgående.
+> Vi registrerer domenet i ditt navn. Setter opp et GitHub-repo du eier hundre prosent. Kobler det til Cloudflare-hosting som er superrask globalt. Og vi setter opp preview-systemet du så i sted.
 >
-> Total tidsbruk fra deg: **under én time.** Resten er mitt ansvar. Og hver gang du gjør en endring etterpå — du ser den i preview først. Du kan ikke ødelegge nettsiden."
+> Vi designer en bransje-tilpasset side fra bunnen. Vi flytter inn alt innholdet fra din gamle side. Vi setter opp logo, farger, typografi. Vi optimaliserer alle bildene.
+>
+> Vi gjør hele SEO-grunnmuren — meta-tags, schema, sitemap. Vi sørger for at siden din scorer 95 av 100 på Google sin egen ytelses-test. Og vi setter opp AI-motoren med all kontekst om din bedrift, og en tone som matcher hvordan *du* skriver.
+>
+> Til slutt får du fem opplæringsvideoer, en personlig gjennomgang med meg, og en måned støtte etter levering.
+>
+> Sytten konkrete leveranser. På sju dager."
+
+[SKJERM] Pause på høyre kolonne.
+
+> "Til høyre — det du har fra dag åtte og for alltid. Hundre prosent eierskap. Null kroner i måneden til meg. Endringer på under nitti sekunder. Og du kan aldri ødelegge noe — alt går gjennom preview først.
+>
+> Og hva er din innsats i hele dette? Du svarer på fem spørsmål. Det tar ti minutter. Resten er mitt ansvar."
 
 ---
 
@@ -186,9 +198,9 @@
 | 2 Ramme | 0:30 | 0:55 |
 | 3 Smerte | 0:35 | 1:30 |
 | 4 Demo | 2:00 | 3:30 |
-| 5 Du gjør | 0:45 | 4:15 |
-| 6 Pris | 0:45 | 5:00 |
-| 7 CTA | 0:30 | 5:30 |
-| 8 P.S. | 0:15 | 5:45 |
+| 5 Reisen | 1:00 | 4:30 |
+| 6 Pris | 0:45 | 5:15 |
+| 7 CTA | 0:30 | 5:45 |
+| 8 P.S. | 0:15 | 6:00 |
 
-Mål: 5:30. Ekstra 15 sek = buffer.
+Mål: 6:00. Hvis det føles for langt: kutt Scene 3 til 25 sek og kombiner Scene 7+8 til 35 sek totalt = 5:30.

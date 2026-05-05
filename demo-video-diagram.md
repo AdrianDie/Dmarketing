@@ -138,6 +138,190 @@ GitHub renderer mermaid automatisk. Når du har pushet denne filen til GitHub:
 
 ---
 
+---
+
+## Reisen — fra dagens nettside til AI-Webmaster
+
+**Brukes i Scene 5 (det vi gjør for deg) + på salgs-siden + i pakkeforslag-PDF.**
+
+Dette er det viktigste diagrammet for å selge — det viser konkret hva kunden får for pengene.
+
+```mermaid
+flowchart LR
+    subgraph IDAG [" 🔴 DER DU ER I DAG "]
+        direction TB
+        I1["📉 Treg eller utdatert nettside"]
+        I2["💸 Faktura for hver endring<br/>1 500–7 500 kr"]
+        I3["📅 Faste månedsavgifter<br/>1 500 kr/mnd"]
+        I4["⏳ Venter 2–7 dager<br/>på enkleste endring"]
+        I5["🔒 Eier ikke koden<br/>låst til byrået"]
+    end
+
+    subgraph JOBB [" 🔵 VI GJØR JOBBEN — 5 til 7 dager "]
+        direction TB
+
+        subgraph INFRA ["1. Infrastruktur "]
+            J1["Domene registrert<br/>i ditt navn"]
+            J2["GitHub-repo<br/>du eier 100 %"]
+            J3["Cloudflare hosting<br/>(superrask globalt)"]
+            J4["Preview-system<br/>satt opp"]
+        end
+
+        subgraph DESIGN ["2. Design og innhold "]
+            J5["Bransje-tilpasset<br/>Astro-mal"]
+            J6["Innhold overført<br/>fra gammel side"]
+            J7["Logo, farger,<br/>typografi"]
+            J8["Bilder optimalisert<br/>og redigert"]
+        end
+
+        subgraph SEO ["3. SEO og ytelse "]
+            J9["Meta-tags og<br/>schema-markup"]
+            J10["Sitemap +<br/>robots.txt"]
+            J11["Lighthouse 95+<br/>(Google-vennlig)"]
+        end
+
+        subgraph AI_MOTOR ["4. AI-motor "]
+            J12["Claude konfigurert<br/>med din bedrifts­kontekst"]
+            J13["«Tone of voice»<br/>så AI skriver som deg"]
+            J14["Bransje-instrukser<br/>(rørlegger / klinikk / etc)"]
+        end
+
+        subgraph OPPLAERING ["5. Opplæring og overlevering "]
+            J15["5 opplærings­videoer<br/>(~28 min totalt)"]
+            J16["15-min personlig<br/>gjennomgang"]
+            J17["1 mnd inkludert<br/>support"]
+        end
+    end
+
+    subgraph FERDIG [" 🟢 FRA DAG 8 — DU EIER ALT, FOR ALLTID "]
+        direction TB
+        F1["✓ 100 % eierskap<br/>til kode + innhold"]
+        F2["✓ 0 kr/mnd til oss<br/>— for alltid"]
+        F3["✓ Endringer på<br/>under 90 sekunder"]
+        F4["✓ Privat preview<br/>før alt går live"]
+        F5["✓ Selvgående —<br/>du trenger aldri ringe noen"]
+    end
+
+    IDAG ==> JOBB ==> FERDIG
+
+    classDef pain fill:#FEE2E2,stroke:#DC2626,color:#991B1B,stroke-width:1.5px
+    classDef work fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A,stroke-width:1.5px
+    classDef win fill:#DCFCE7,stroke:#16A34A,color:#166534,stroke-width:1.5px
+
+    class I1,I2,I3,I4,I5 pain
+    class J1,J2,J3,J4,J5,J6,J7,J8,J9,J10,J11,J12,J13,J14,J15,J16,J17 work
+    class F1,F2,F3,F4,F5 win
+
+    style IDAG fill:#FEF2F2,stroke:#FCA5A5,color:#991B1B
+    style JOBB fill:#EFF6FF,stroke:#93C5FD,color:#1E3A8A
+    style FERDIG fill:#F0FDF4,stroke:#86EFAC,color:#166534
+    style INFRA fill:#FFFFFF,stroke:#93C5FD,color:#1E3A8A
+    style DESIGN fill:#FFFFFF,stroke:#93C5FD,color:#1E3A8A
+    style SEO fill:#FFFFFF,stroke:#93C5FD,color:#1E3A8A
+    style AI_MOTOR fill:#FFFFFF,stroke:#93C5FD,color:#1E3A8A
+    style OPPLAERING fill:#FFFFFF,stroke:#93C5FD,color:#1E3A8A
+```
+
+**17 konkrete leveranser** i mellom-fasen. Det er det som gjør 12 900 kr til en åpenbar deal — kunden ser alt arbeidet som gjøres for dem.
+
+---
+
+## Forenklet versjon av reisen (for video-bruk)
+
+Hvis fullversjonen blir for tett på skjerm, bruk denne kompakte:
+
+```mermaid
+flowchart LR
+    A["🔴 <b>Der du er i dag</b><br/>━━━━━━━━━━<br/>Treg side<br/>Dyre endringer<br/>Faste månedsavgifter<br/>Avhengig av byrå"]
+
+    B["🔵 <b>Vi jobber 5–7 dager</b><br/>━━━━━━━━━━<br/>Domene + hosting<br/>Bransje-tilpasset design<br/>SEO-grunnmur<br/>AI-motor med din kontekst<br/>5 opplæringsvideoer<br/>1 mnd support"]
+
+    C["🟢 <b>Du eier alt for alltid</b><br/>━━━━━━━━━━<br/>100 % eierskap<br/>0 kr/mnd til oss<br/>Endringer på 90 sek<br/>Preview før live<br/>Selvgående"]
+
+    A ==> B ==> C
+
+    classDef pain fill:#FEE2E2,stroke:#DC2626,color:#991B1B,stroke-width:2px
+    classDef work fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A,stroke-width:2px
+    classDef win fill:#DCFCE7,stroke:#16A34A,color:#166534,stroke-width:2px
+
+    class A pain
+    class B work
+    class C win
+```
+
+---
+
+## Hva om kunden lurer på hva som er forskjellen mellom pakkene?
+
+Bruk denne — viser hvilke av de 17 leveransene som er med i hver pakke:
+
+```mermaid
+flowchart TB
+    subgraph GDS [" 💼 Gjør-det-selv — 1 900 kr "]
+        G1["Astro-mal du installerer selv"]
+        G2["Videokurs (5 videoer)"]
+        G3["100 % eierskap"]
+    end
+
+    subgraph DG [" 🏗️ Digital Grunnmur — 7 900 kr "]
+        DG1["Alt fra Gjør-det-selv +"]
+        DG2["Vi bygger og lanserer"]
+        DG3["Inntil 3 undersider"]
+        DG4["Logo, farger, typografi"]
+        DG5["Grunnleggende SEO"]
+        DG6["Eget domene oppsatt"]
+    end
+
+    subgraph PRO [" ⭐ Autopilot Pro — 12 900 kr "]
+        P1["Alt fra Digital Grunnmur +"]
+        P2["Inntil 7 undersider"]
+        P3["Integrasjoner: booking, Maps"]
+        P4["Skreddersydd AI-motor"]
+        P5["Tone of voice-instrukser"]
+        P6["Avansert opplæring"]
+        P7["1 mnd inkludert support"]
+    end
+
+    subgraph PREM [" 💎 Premium — fra 24 900 kr "]
+        PR1["Alt fra Autopilot Pro +"]
+        PR2["Inntil 15 undersider"]
+        PR3["Spesialdesignede komponenter"]
+        PR4["Avanserte integrasjoner"]
+        PR5["CRM-kobling (HubSpot etc)"]
+        PR6["Dedikert prosjektleder"]
+    end
+
+    classDef tier1 fill:#F4F4F5,stroke:#71717A,color:#09090B
+    classDef tier2 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+    classDef tier3 fill:#0B1F4A,stroke:#60A5FA,color:#FFFFFF
+    classDef tier4 fill:#FEF3C7,stroke:#F59E0B,color:#92400E
+
+    class G1,G2,G3 tier1
+    class DG1,DG2,DG3,DG4,DG5,DG6 tier2
+    class P1,P2,P3,P4,P5,P6,P7 tier3
+    class PR1,PR2,PR3,PR4,PR5,PR6 tier4
+
+    style GDS fill:#FAFAFA,stroke:#D4D4D8
+    style DG fill:#EFF6FF,stroke:#93C5FD
+    style PRO fill:#1E40AF,stroke:#60A5FA,color:#FFFFFF
+    style PREM fill:#FFFBEB,stroke:#FDE68A
+```
+
+---
+
+# Hvilken versjon bruker du hvor?
+
+| Versjon | Brukes i |
+|---|---|
+| **Hovedversjon (preview-loop)** | Scene 5 i demo-video + opplæringsvideo 01 |
+| **Forenklet (preview-loop)** | Scene 1 (visuelt anker) eller intro-thumbnail |
+| **Sammenligning gammel/ny** | Scene 3 (alternativ til faktura-bildet) |
+| **Reisen — full** | **Scene 5** (det vi gjør) + salgsside + pakkeforslag-PDF |
+| **Reisen — forenklet** | Scene 5 hvis full er for tett |
+| **Pakke-forskjeller** | Scene 6 (priser) + pakkeforslag-PDF |
+
+---
+
 # Hvis du vil tilpasse
 
 Endre tekst direkte i mermaid-koden over, eller åpne i [mermaid.live](https://mermaid.live) og rediger der med live-preview. Når du er fornøyd, kopier tilbake hit og commit.
