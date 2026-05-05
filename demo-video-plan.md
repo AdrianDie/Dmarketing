@@ -1,9 +1,9 @@
 # Demo-video — AI-Webmaster
 
 **Mål:** Konvertere 800 leads (sendt via Instantly.ai) til samtaler.
-**Lengde:** 4–6 minutter, helst under 6.
+**Lengde:** 6:30–6:45 minutter.
 **Slipp-dato lovet i e-post:** torsdag 7. mai 2026.
-**Kjernebudskap:** Du eier alt. Du chatter for å oppdatere — ser endringen på preview før den går live. 0 kr/mnd. Vi gjør all jobben — din innsats er under én time.
+**Kjernebudskap:** Du eier alt. Du chatter for å oppdatere — ser endringen på preview før den går live. 0 kr/mnd. Vi gjør all jobben — din innsats er **30 minutter, fordelt over 7 dager**.
 
 **Demo-side:** dmarketing.no (din egen nettside). Autentisitet > fiktiv side. Seer kan verifisere selv.
 
@@ -59,14 +59,14 @@ Snakkende hode. Kort.
 
 ---
 
-## Scene 4 — LIVE DEMO, IKKE-KLIPPET (1:30 – 3:30) ⭐ HOVEDSCENEN
-Skjermopptak på **dmarketing.no**, **én tagning**, ingen klipping av tid.
+## Scene 4 — LIVE DEMO, IKKE-KLIPPET (1:30 – 4:15) ⭐ HOVEDSCENEN
+Skjermopptak på **dmarketing.no**, **én tagning**, ingen klipping av tid. Realistisk timing: 3 endringer × ~50 sek = 2:30, pluss intro/outro = 2:45.
 
 Tre oppdateringer på rad. For hver: chat → preview-link → "publiser" → live.
 
 1. **Endre tekst:** "Endre hovedoverskriften på forsiden til 'Vi bygger AI-nettsider for norske bedrifter'."
 2. **Legge til seksjon:** "Legg til en kundeanmeldelse fra 'Kari Hansen, Frisør Stavanger' nederst på ai-webmaster-siden."
-3. **Endre pris:** "Sett prisen på Autopilot Pro fra 12 900 tilbake til 12 500." *(eller annet — du velger)*
+3. **Endre undertekst:** "Endre underteksten på Autopilot Pro fra 'Komplett kontroll' til 'Komplett kontroll · 1 mnd inkludert support'." *(viktig: ikke endre selve prisbeløpene live, ellers ser dmarketing.no rart ut for besøkende rett etter videoen er publisert)*
 
 Vis preview-URL og live-URL side ved side i to nettleserfaner. La klokken gå.
 
@@ -78,23 +78,22 @@ Vis preview-URL og live-URL side ved side i to nettleserfaner. La klokken gå.
 
 ---
 
-## Scene 5 — HVA *DU* GJØR (3:30 – 4:15)
-Liste på skjerm. Voice-over.
+## Scene 5 — PROSESSEN VI KJØRER (4:15 – 5:15)
+[SKJERM] Vis migrasjons- og leveransediagram (eksportert SVG fra `demo-video-diagram.md`).
 
-**Steg 1 — Du svarer på 5 spørsmål** (~10 min, e-post/skjema):
-Bedriftsnavn, by, telefon, logo, farge. Resten henter vi.
+Voice-over leser de 6 fasene og 23 leveransene høyt mens kameraet panorerer ned. Avslutter med kundens egen 3-stegs innsats:
 
-**Steg 2 — Du venter 5–7 dager.**
-Vi bygger, designer, setter opp AI-motoren med din bedrifts kontekst.
+> "Din innsats: tre korte handlinger.
+> — Du svarer på fem spørsmål (10 min).
+> — Du videresender én forhåndsutfylt e-post til domeneleverandøren din (5 min).
+> — Du har en kvarters skjermdeling med meg på dag sju (15 min).
+> Tretti minutter, fordelt over en uke. Det er hele jobben din."
 
-**Steg 3 — Du får en 15-minutters videogjennomgang.**
-Jeg viser hvordan du chatter, ser preview-en, og publiserer. Etter det er du selvgående.
-
-> "Total tidsbruk fra deg: under én time. Resten er vårt ansvar. Og hver eneste gang du gjør en endring etterpå — du ser den i preview før den går live. Du kan ikke ødelegge nettsiden."
+Se manus for full ord-for-ord tekst og `kundens-innsats.md` for diagrammet.
 
 ---
 
-## Scene 6 — PRIS, AVDRAMATISERT (4:15 – 5:00)
+## Scene 6 — PRIS, AVDRAMATISERT (5:15 – 6:00)
 Vis pakke-tabellen fra ai-webmaster.html. Anker på Autopilot Pro 12 900 kr.
 
 > "12 900 kr engangs. Del opp over 2–3 måneder rentefritt. Utsett første faktura i 30 dager — jeg leverer før du betaler første krone. Etter det: 0 kr i måneden til meg, for alltid. Du eier alt."
@@ -105,7 +104,7 @@ Vis pakke-tabellen fra ai-webmaster.html. Anker på Autopilot Pro 12 900 kr.
 
 ---
 
-## Scene 7 — HVA SOM SKJER NÅ (5:00 – 5:30)
+## Scene 7 — HVA SOM SKJER NÅ (6:00 – 6:30)
 Snakkende hode.
 
 > "Jeg tar bare 8 nye kunder denne måneden — jeg setter opp AI-motoren personlig på hver. Hvis du vil høre mer, svar på e-posten med 'Ring meg' eller 'Send pakkeforslag', så hører du fra meg innen 24 timer. Ingen forpliktelse, ingen presentasjon."
@@ -116,7 +115,7 @@ To svaralternativer:
 
 ---
 
-## Scene 8 — P.S. (5:30 – 5:45)
+## Scene 8 — P.S. (6:30 – 6:45)
 > "P.S. Hvis du allerede har en nettside du er fornøyd med utseendet på — vi flytter den inn i AI-systemet uten at den endrer seg visuelt. Du beholder alt, men vinner kontrollen."
 
 ---
@@ -125,9 +124,10 @@ To svaralternativer:
 
 **Live-demo (Scene 4) må være vanntett:**
 - [ ] Én tagning, ingen klipping.
-- [ ] Test 3–5 ganger først.
-- [ ] Bruk ekte demo-side (`web310---eksempel.html` eller bygg fiktiv rørlegger).
+- [ ] Test 3–5 ganger først (uavhengig av opptak — bare øvelse).
+- [ ] Demo-side: dmarketing.no via preview-branch — endringer går til preview, ikke live, under filming.
 - [ ] Vis klokke/timer på skjerm.
+- [ ] Endring 3 endrer **ikke** selve prisbeløpene live (kollisjon med pakke-tabellen). Endre undertekst eller annen kosmetisk tekst.
 
 **Lyd:**
 - [ ] Lavalier-mikrofon. Ikke webcam-mic.
@@ -136,7 +136,7 @@ To svaralternativer:
 - Send seer til **svar på e-post** ("Ring meg" / "Send pakkeforslag"), ikke skjema. Null friksjon, tråden er allerede i Instantly.
 
 **Lengde:**
-- Under 6 minutter. Hvis demoen blir 2 min, kutt Scene 3 til 30 sek.
+- Mål: 6:30–6:45. Hvis det føles for langt: drop endring 3 i Scene 4 → ~5:55. Aldri kutt Scene 5.
 
 ---
 
@@ -184,7 +184,7 @@ Kunde chatter med Claude (Projects)
 - **Cloudflare Pages** — gratis, byggetid for Astro typisk 30–60 sek. Match til 60-sekunders-løftet.
 - Vercel er også fint, men Cloudflare har høyere gratis-grenser og raskere edge i Norden.
 
-**Demo-side:** Bruk `web310---eksempel.html` som utgangspunkt. Konverter til en Astro-versjon med 4–5 sider (forside, tjenester, om, kontakt) for en **fiktiv rørlegger i Stavanger**. Ferdig før mandag.
+**Demo-side:** dmarketing.no — din egen levende nettside. Endringer skjer på `preview`-branch under opptak, ikke live. Etter opptak ruller du tilbake.
 
 ## 4. Segmentering: én video eller to?
 
@@ -197,12 +197,14 @@ Du sendte til både `leads-med-nettside.csv` og `leads-uten-nettside.csv`. Forsk
 ## 5. Tidslinje time-for-time (du har ~16 arbeidstimer igjen)
 
 **Tirsdag 06.05:**
-- 09–11: Bygg fiktiv rørlegger-demo-side i Astro, deploy til Cloudflare Pages.
-- 11–12: Sett opp Claude Code med GitHub MCP mot demo-repoet. Test 5 endringer.
-- 12–13: Lunsj + skriv ut manus ord-for-ord (jeg kan hjelpe).
-- 13–15: Filming. Snakkende-hode-scenene først (1, 2, 5, 7, 8). Skjermopptak-scenene sist (3, 4, 6).
+- 09–10: Sjekk Cloudflare Pages-oppsettet for dmarketing.no. Verifiser at `preview`-branch-deploy funker.
+- 10–11: Sett opp Claude Code med GitHub MCP mot dmarketing-repoet. Test 5 endringer ende-til-ende.
+- 11–12: Eksporter diagrammene fra mermaid.live til SVG. Ta cutaway-screenshots av maler/.
+- 12–13: Lunsj + les manus høyt, marker setninger som ikke føles som deg, omformuler.
+- 13–15: Filming. Snakkende-hode først (Scene 2, 7, 8) for ren lyd. Skjermopptak etter (Scene 1, 3, 4, 5, 6).
 - 15–16: Adobe Podcast Enhance på alle lydspor.
 - 16–19: Klipping i CapCut.
+- 19–20: Spill inn 3-min backup-video (`backup-video-manus.md`).
 
 **Onsdag 07.05:**
 - 09–11: Render, last opp til Loom, lag thumbnail.

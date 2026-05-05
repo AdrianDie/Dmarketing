@@ -1,6 +1,6 @@
 # Demo-video — Manus (ord-for-ord)
 
-**Total lengde mål: 5:30**
+**Total lengde mål: 6:30**
 **Lese-tempo: rolig, men ingen pauser. ~150 ord/min.**
 **Markering:** [SKJERM] = hva seer ser. [DU] = du i kamera. *(regi)* = handling.
 
@@ -47,21 +47,22 @@
 
 ## SCENE 3 — DEN GAMLE MODELLEN ER ØDELAGT (0:55 – 1:30)
 
-[SKJERM] Vis et faktura-bilde (kan være en mock du lager): "Endring av priser på nettside — 5 timer á 1 500 kr — 7 500 kr."
+[SKJERM] Vis Slide 1 (Faktura — total 10 550 kr).
 
 **Voice-over:**
-> "Dette er en ekte faktura-type. Fem timer for å endre noen priser på en nettside. Pluss to dagers venting før det skjedde."
+> "Dette er en typisk faktura. Ti tusen kroner for å endre noen priser, justere litt tekst, og koordinere prosjektet. Fire dagers behandlingstid. For en endring du i dag kunne gjort på nitti sekunder."
 
-[SKJERM] Klipp til e-post-tråd-mockup: "Hei, kan dere endre prisene?" → 4 dager senere "Hei, beklager forsinkelsen…"
+[SKJERM] Klipp til Slide 2 (E-post-tråd — Mandag → Fredag).
 
 **Voice-over:**
-> "Det er ikke fordi byråene er onde. Det er fordi modellen er fra 2010. Du betaler for at noen skal oversette ønskene dine til kode, deploye til en server, og fakturere deg for tiden det tar.
+> "Slik ser det ut i innboksen. Du sender en e-post mandag. Du får svar fredag. Og du betaler for ventetiden.
 >
-> Hvert eneste ledd i den kjeden — AI gjør nå gratis."
+> Det er ikke fordi byråene er onde. Det er fordi modellen er fra 2010. AI har gjort hvert eneste ledd i den kjeden gratis."
 
 ---
 
-## SCENE 4 — LIVE DEMO (1:30 – 3:30) ⭐ HOVEDSCENEN
+## SCENE 4 — LIVE DEMO (1:30 – 4:15) ⭐ HOVEDSCENEN
+**Realistisk timing:** 3 endringer × ~50 sek (chat + AI + preview + verifiser + publiser + live) ≈ 2:30, pluss intro 5s og outro 10s = 2:45. Hvis Cloudflare bygger raskere enn ventet, sparer du 15–30 sek.
 
 [SKJERM] To nettleserfaner side ved side. Én viser preview, én viser dmarketing.no live. Claude Code i bunnen.
 
@@ -94,19 +95,23 @@
 
 [DU SKRIVER]: `Publiser.`
 
-### Endring 3 — Pris (~25 sek)
+### Endring 3 — Pris (~50 sek)
 
-[DU SKRIVER]: `Sett prisen på Digital Grunnmur fra 7 900 til 6 900.`
+[DU SKRIVER]: `Endre underteksten på Autopilot Pro-pakken fra "Komplett kontroll" til "Komplett kontroll · 1 mnd inkludert support".`
 
 **Voice-over:**
-> "Pris-endringer er typisk det dyreste byråene tar betalt for, og det enkleste AI gjør."
+> "Pris og pakke-detaljer er typisk det dyreste byråene tar betalt for å endre. AI gjør det på under et minutt."
 
 *(Preview oppdateres. Du publiserer.)*
 
-### Avslutning på Scene 4 (~20 sek)
+> "Live."
+
+(Merknad: vi unngår å endre selve prisbeløpene under opptak fordi den faktiske prislisten på dmarketing.no skal være korrekt etter videoen er publisert. Endringer rundt teksten er trygt — du tilbakestiller alt etter opptak uansett.)
+
+### Avslutning på Scene 4 (~15 sek)
 
 **Voice-over:**
-> "Det jeg gjorde nå — tre endringer, fra idé til live, med preview underveis — tok under fire minutter totalt. Jeg åpnet ingen kode. Jeg trengte ikke vite hva 'CMS' er. Og jeg kunne ikke ødelegge noe, fordi alt går gjennom preview først.
+> "Tre endringer, fra idé til live, med preview underveis. Jeg åpnet ingen kode. Jeg trengte ikke vite hva 'CMS' er. Og jeg kunne ikke ødelegge noe, fordi alt går gjennom preview først.
 >
 > Det er som å skrive en SMS."
 
@@ -116,7 +121,7 @@
 
 ---
 
-## SCENE 5 — PROSESSEN VI KJØRER (3:30 – 4:30)
+## SCENE 5 — PROSESSEN VI KJØRER (4:15 – 5:15)
 
 [SKJERM] Vis **migrasjons- og leveransediagrammet** (eksportert SVG fra `demo-video-diagram.md`, diagram 1). Vertikal flyt: Eksisterende nettside → Fase 01–06 → Selvgående.
 
@@ -137,11 +142,13 @@
 >
 > Tjuetre tekniske leveranser. På sju dager.
 >
-> Din innsats: du svarer på fem spørsmål. Det tar deg ti minutter."
+> Din innsats i hele prosessen er tre korte handlinger. Du svarer på fem spørsmål — ti minutter. Du videresender én forhåndsutfylt e-post til domeneleverandøren din — fem minutter. Og du har en kvarters skjermdeling med meg på dag sju.
+>
+> Tretti minutter, fordelt over en uke. Det er hele jobben din."
 
 ---
 
-## SCENE 6 — PRIS (4:15 – 5:00)
+## SCENE 6 — PRIS (5:15 – 6:00)
 
 [SKJERM] Pakke-tabellen fra ai-webmaster.html. Highlight Autopilot Pro.
 
@@ -159,7 +166,7 @@
 
 ---
 
-## SCENE 7 — HVA SOM SKJER NÅ (5:00 – 5:30)
+## SCENE 7 — HVA SOM SKJER NÅ (6:00 – 6:30)
 
 [DU i kamera]
 
@@ -175,7 +182,7 @@
 
 ---
 
-## SCENE 8 — P.S. (5:30 – 5:45)
+## SCENE 8 — P.S. (6:30 – 6:45)
 
 [DU i kamera, mer avslappet, halvsmilende]
 
@@ -193,10 +200,17 @@
 | 1 Kroken | 0:25 | 0:25 |
 | 2 Ramme | 0:30 | 0:55 |
 | 3 Smerte | 0:35 | 1:30 |
-| 4 Demo | 2:00 | 3:30 |
-| 5 Reisen | 1:00 | 4:30 |
-| 6 Pris | 0:45 | 5:15 |
-| 7 CTA | 0:30 | 5:45 |
-| 8 P.S. | 0:15 | 6:00 |
+| 4 Demo | 2:45 | 4:15 |
+| 5 Prosess | 1:00 | 5:15 |
+| 6 Pris | 0:45 | 6:00 |
+| 7 CTA | 0:30 | 6:30 |
+| 8 P.S. | 0:15 | 6:45 |
 
-Mål: 6:00. Hvis det føles for langt: kutt Scene 3 til 25 sek og kombiner Scene 7+8 til 35 sek totalt = 5:30.
+**Mål: 6:30–6:45.** Live-demoens reelle byggetid avgjør den eksakte lengden.
+
+**Hvis 6:30 føles for langt:**
+- Drop Endring 3 i Scene 4 → sparer 50 sek → 5:55
+- Kutt Scene 3 til 0:25 → sparer 10 sek → 6:20
+- Kutt Scene 2 til 0:25 → sparer 5 sek
+
+**Ikke kutt Scene 5.** Den er det viktigste salgsargumentet — den rettferdiggjør prisen.

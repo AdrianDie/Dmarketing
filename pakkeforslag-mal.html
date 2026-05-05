@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<title>Pakkeforslag — AI-Webmaster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --ink: #09090B;
+    --muted: #71717A;
+    --line: #E4E4E7;
+    --line-2: #F4F4F5;
+    --brand: #2563EB;
+    --navy: #0B1F4A;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: white;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .font-display { font-family: 'Archivo', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+  }
+  .outline-text-white {
+    color: transparent;
+    -webkit-text-stroke: 1.5px white;
+  }
+
+  /* Page setup for print */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 18mm 16mm;
+    background: white;
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  @media screen {
+    body { background: #F4F4F5; padding: 32px 0; }
+    .page {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+  }
+
+  /* Logo header */
+  .logo-row {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .logo-solid {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 22px;
+    color: var(--ink);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-outline {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-size: 22px;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--ink);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Page 1: Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .header-meta {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .header-meta strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Page title */
+  .title-block {
+    margin-bottom: 56px;
+  }
+  .label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--brand);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 38px;
+    letter-spacing: -0.035em;
+    margin: 0 0 16px;
+    line-height: 1.05;
+  }
+  .lead {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 90%;
+  }
+  .lead strong { color: var(--ink); font-weight: 600; }
+
+  /* Section */
+  section { margin-bottom: 36px; }
+  section h2 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  section p {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  /* Pricing card */
+  .price-card {
+    background: var(--navy);
+    color: white;
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin: 32px 0;
+  }
+  .price-card .pkg-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .price-card h3 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: -0.025em;
+    margin: 0 0 4px;
+  }
+  .price-card .tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 24px;
+  }
+  .price-card .amount {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+  .price-card .amount .unit {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    margin-left: 8px;
+  }
+  .price-card .ongoing {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Inclusions list */
+  .inclusions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+    margin: 24px 0;
+  }
+  .inclusion-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .inclusion-item .check {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    background: var(--line-2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand);
+  }
+
+  /* Comparison */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .comparison-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .comparison-card .label {
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .comparison-card .label.featured { color: var(--brand); }
+  .comparison-card h4 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 12px;
+  }
+  .comparison-card .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .comparison-card .row:last-child { border-bottom: none; }
+  .comparison-card .row.total {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 2px solid var(--ink);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    border-bottom: none;
+  }
+  .comparison-card .amount {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Process */
+  .phases {
+    display: grid;
+    gap: 8px;
+  }
+  .phase {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-2);
+    font-size: 13px;
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .phase strong {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .phase span {
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  /* Customer effort */
+  .effort-box {
+    background: var(--line-2);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 16px 0;
+  }
+  .effort-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .effort-item {
+    text-align: center;
+  }
+  .effort-item .num {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: -0.03em;
+    color: var(--brand);
+    line-height: 1;
+  }
+  .effort-item .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+  .effort-item .desc {
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--ink);
+  }
+
+  /* Payment */
+  .payment-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .payment-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px;
+    font-size: 12px;
+  }
+  .payment-card strong {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .payment-card span {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CTA */
+  .cta-box {
+    background: var(--ink);
+    color: white;
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-top: 32px;
+    text-align: center;
+  }
+  .cta-box h3 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.025em;
+    margin: 0 0 8px;
+    color: white;
+  }
+  .cta-box p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin: 0 0 16px;
+  }
+  .cta-box .reply {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: white;
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: inline-block;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Print adjustments */
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====================================== -->
+<!-- SIDE 1                                   -->
+<!-- ====================================== -->
+<div class="page">
+  <div class="header">
+    <div class="logo-row">
+      <span class="logo-solid">Dietrichs</span>
+      <span class="logo-outline">marketing</span>
+    </div>
+    <div class="header-meta">
+      <div><strong>Pakkeforslag</strong></div>
+      <div>For: <strong>[BEDRIFTSNAVN]</strong></div>
+      <div>Dato: <strong>[DATO]</strong></div>
+      <div>Gyldig i: 14 dager</div>
+    </div>
+  </div>
+
+  <div class="title-block">
+    <div class="label">Anbefalt pakke</div>
+    <h1>Autopilot Pro for [BEDRIFTSNAVN].</h1>
+    <p class="lead">
+      Etter å ha sett <strong>[KUNDENS-URL]</strong> anbefaler jeg <strong>Autopilot Pro</strong>. Den gir deg full AI-styrt nettside, levert på 5–7 dager, med 0 kr i månedsavgifter etter levering. Du eier alt.
+    </p>
+  </div>
+
+  <section>
+    <h2>Investering</h2>
+
+    <div class="price-card">
+      <div class="pkg-label">Anbefalt pakke</div>
+      <h3>Autopilot Pro</h3>
+      <div class="tagline">Komplett kontroll · 1 mnd inkludert support</div>
+      <div class="amount">12 900 <span class="unit">kr engangs</span></div>
+      <div class="ongoing">+ 0 kr/mnd til oss · for alltid</div>
+    </div>
+
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <div class="label">Webbyrå-modell</div>
+        <h4>Status quo</h4>
+        <div class="row"><span>Oppsett</span><span class="amount">25 000 kr</span></div>
+        <div class="row"><span>Drift &amp; support / mnd</span><span class="amount">1 500 kr</span></div>
+        <div class="row"><span>Endringer ~3/år</span><span class="amount">~6 000 kr</span></div>
+        <div class="row total">
+          <span>3 år totalt</span><span class="amount">79 000 kr</span>
+        </div>
+      </div>
+      <div class="comparison-card" style="background: var(--navy); color: white; border-color: var(--navy);">
+        <div class="label featured" style="color: rgba(255,255,255,0.6);">AI-Webmaster</div>
+        <h4 style="color: white;">Autopilot Pro</h4>
+        <div class="row" style="border-bottom-color: rgba(255,255,255,0.1);"><span>Oppsett (engangs)</span><span class="amount">12 900 kr</span></div>
+        <div class="row" style="border-bottom-color: rgba(255,255,255,0.1);"><span>Drift &amp; support / mnd</span><span class="amount">0 kr</span></div>
+        <div class="row" style="border-bottom-color: rgba(255,255,255,0.1);"><span>Endringer (ubegrenset)</span><span class="amount">0 kr</span></div>
+        <div class="row total" style="border-top-color: white; color: #93C5FD;">
+          <span style="color: white;">3 år totalt</span><span class="amount">12 900 kr</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px;">
+      Differanse over 3 år: <strong style="color: var(--ink);">66 100 kr</strong> du beholder selv.
+    </p>
+  </section>
+
+  <div class="footer">
+    <span>Dietrichs Marketing · Org.nr 932 612 583</span>
+    <span>Side 1 / 2</span>
+  </div>
+</div>
+
+<!-- ====================================== -->
+<!-- SIDE 2                                   -->
+<!-- ====================================== -->
+<div class="page">
+  <div class="header">
+    <div class="logo-row">
+      <span class="logo-solid">Dietrichs</span>
+      <span class="logo-outline">marketing</span>
+    </div>
+    <div class="header-meta">
+      <div>Pakkeforslag for <strong>[BEDRIFTSNAVN]</strong></div>
+      <div>Side 2 av 2</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Hva inngår i Autopilot Pro</h2>
+    <div class="inclusions">
+      <div class="inclusion-item"><span class="check">✓</span><span>Bransje-tilpasset Astro-side, lynrask globalt</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Inntil 7 ferdige undersider</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Logo, farger, typografi tilpasset bedriften</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>SEO-grunnmur (meta, schema, sitemap)</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Lighthouse-score 95+ verifisert</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Integrasjoner: booking, Google Maps</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Skreddersydd Claude AI-motor</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Tone-of-voice-konfigurasjon</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Privat preview før alt går live</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>GitHub-repo i ditt navn (du eier koden)</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>Cloudflare Pages hosting (gratis)</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>SSL-sertifikat + DNS-konfigurasjon</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>5 personlige opplæringsvideoer (~28 min)</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>15-min live-gjennomgang</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>30 dagers inkludert support</span></div>
+      <div class="inclusion-item"><span class="check">✓</span><span>0 kr/mnd til oss — for alltid</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Prosessen</h2>
+    <div class="phases">
+      <div class="phase">
+        <span class="num">Fase 01<br>Dag 1</span>
+        <div>
+          <strong>Analyse</strong>
+          <span>Vi crawler eksisterende side, henter ut innhold, identifiserer logo og farger, analyserer DNS.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <span class="num">Fase 02<br>Dag 2–3</span>
+        <div>
+          <strong>Bygg</strong>
+          <span>Astro-prosjekt initialisert, bransje-tilpasset komponentbibliotek, innholdsmigrasjon, bildebehandling.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <span class="num">Fase 03<br>Dag 3</span>
+        <div>
+          <strong>SEO og ytelse</strong>
+          <span>Strukturert metadata, schema-markup, sitemap, robots.txt, Lighthouse-validering 95+.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <span class="num">Fase 04<br>Dag 4</span>
+        <div>
+          <strong>AI-motor</strong>
+          <span>Dedikert Claude-prosjekt, kontekst-innlasting, tone-of-voice, GitHub MCP-integrasjon.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <span class="num">Fase 05<br>Dag 5</span>
+        <div>
+          <strong>Infrastruktur</strong>
+          <span>GitHub-repo i ditt navn, Cloudflare Pages, DNS, SSL, preview-pipeline aktivert.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <span class="num">Fase 06<br>Dag 6–7</span>
+        <div>
+          <strong>Overlevering</strong>
+          <span>Personlige opplæringsvideoer, 15-min skjermdeling, tilgangsoverføring, 30 dagers support.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Din innsats</h2>
+    <div class="effort-box">
+      <p style="margin: 0 0 8px; font-size: 14px;">
+        Hele prosessen krever <strong>30 minutter fra deg</strong>, fordelt over 7 dager.
+      </p>
+      <div class="effort-grid">
+        <div class="effort-item">
+          <div class="num">10<span style="font-size: 18px;">min</span></div>
+          <div class="lbl">Steg 01</div>
+          <div class="desc">Svar på 5 spørsmål via e-post</div>
+        </div>
+        <div class="effort-item">
+          <div class="num">5<span style="font-size: 18px;">min</span></div>
+          <div class="lbl">Steg 02</div>
+          <div class="desc">Videresend forhåndsutfylt e-post til domeneleverandør</div>
+        </div>
+        <div class="effort-item">
+          <div class="num">15<span style="font-size: 18px;">min</span></div>
+          <div class="lbl">Steg 03</div>
+          <div class="desc">Skjermdeling med Adrian på dag 7</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Betaling og fleksibilitet</h2>
+    <div class="payment-options">
+      <div class="payment-card">
+        <strong>Del opp betalingen</strong>
+        <span>2–3 måneder rentefritt — uten ekstra kostnad.</span>
+      </div>
+      <div class="payment-card">
+        <strong>Utsett første faktura</strong>
+        <span>Inntil 30 dager. Få nettsiden live før du betaler første krone.</span>
+      </div>
+      <div class="payment-card">
+        <strong>Ingen binding</strong>
+        <span>Du betaler kun for oppsettet. Etter det eier du alt 100 %.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-box">
+    <h3>Klar til å sette i gang?</h3>
+    <p>Svar på e-posten med <span class="reply">Ja, sett i gang</span> så starter jeg byggingen i dag.</p>
+  </div>
+
+  <div class="footer">
+    <span>Dietrichs Marketing · adrian.dietrichs@gmail.com · dmarketing.no</span>
+    <span>Side 2 / 2</span>
+  </div>
+</div>
+
+</body>
+</html>
