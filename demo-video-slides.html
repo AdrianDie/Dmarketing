@@ -12,11 +12,10 @@
     --bg: #FAFAFA;
     --ink: #09090B;
     --muted: #71717A;
+    --muted-2: #A1A1AA;
     --line: #E4E4E7;
     --line-2: #F4F4F5;
     --brand: #2563EB;
-    --brand-50: #EFF6FF;
-    --brand-100: #DBEAFE;
     --navy: #0B1F4A;
   }
   * { box-sizing: border-box; }
@@ -30,14 +29,6 @@
   }
   .font-display { font-family: 'Archivo', sans-serif; }
   .font-mono { font-family: 'JetBrains Mono', monospace; }
-  .outline-text {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--ink);
-  }
-  .outline-text-white {
-    color: transparent;
-    -webkit-text-stroke: 1.5px white;
-  }
 
   .slide {
     position: fixed;
@@ -45,7 +36,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 64px;
+    padding: 80px;
     opacity: 0;
     transition: opacity 0.35s ease;
   }
@@ -55,62 +46,69 @@
     background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
     background-size: 28px 28px;
   }
-  .dot-grid-dark {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
 
-  /* HJELPERE */
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: white;
-    border: 1px solid var(--line);
-    color: var(--brand);
+  .label {
+    display: inline-block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 6px 14px;
-    border-radius: 999px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
   }
 
-  /* === SLIDE 1: FAKTURA === */
-  .invoice-frame {
+  /* SLIDE 1: FAKTURA */
+  .invoice {
     width: 100%;
-    max-width: 720px;
+    max-width: 680px;
     background: white;
-    border: 1.5px solid var(--line);
-    border-radius: 16px;
-    padding: 56px 64px;
-    box-shadow: 0 32px 96px -32px rgba(0,0,0,0.18);
-    transform: rotate(-1.2deg);
-    position: relative;
-  }
-  .invoice-frame::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, transparent, rgba(220,38,38,0.04));
-    pointer-events: none;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 64px 72px 56px;
   }
   .invoice-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 28px;
-    margin-bottom: 28px;
+  }
+  .invoice-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  .invoice-meta {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .invoice-meta strong {
+    color: var(--ink);
+    font-weight: 600;
   }
   .invoice-line {
     display: flex;
     justify-content: space-between;
     padding: 14px 0;
+    font-size: 14.5px;
     border-bottom: 1px solid var(--line-2);
-    font-size: 15px;
+  }
+  .invoice-line:last-of-type { border-bottom: none; }
+  .invoice-line .qty {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    font-size: 13px;
+    margin-right: 12px;
+  }
+  .invoice-line .amount {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
   }
   .invoice-total {
     display: flex;
@@ -121,158 +119,198 @@
     font-family: 'Archivo', sans-serif;
     font-weight: 800;
     font-size: 22px;
+    letter-spacing: -0.02em;
   }
-  .stamp {
-    position: absolute;
-    top: 24px;
-    right: -32px;
-    background: #DC2626;
-    color: white;
-    font-family: 'Archivo', sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 14px;
-    padding: 10px 24px;
-    transform: rotate(8deg);
-    box-shadow: 0 8px 24px rgba(220,38,38,0.3);
-    border-radius: 4px;
+  .invoice-total .amount { font-family: 'Archivo', sans-serif; }
+  .invoice-footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 32px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .invoice-footer span strong {
+    color: var(--ink);
+    font-weight: 600;
   }
 
-  /* === SLIDE 2: E-POST-TRÅD === */
-  .email-thread {
+  /* SLIDE 2: E-POST */
+  .email {
     width: 100%;
-    max-width: 760px;
+    max-width: 720px;
     background: white;
-    border: 1.5px solid var(--line);
-    border-radius: 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 32px 96px -32px rgba(0,0,0,0.18);
   }
-  .email-header {
+  .email-toolbar {
     background: var(--line-2);
-    padding: 18px 28px;
+    padding: 14px 24px;
     border-bottom: 1px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+  .email-toolbar .subject {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .email-toolbar .crumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
   .email-row {
-    padding: 24px 28px;
+    padding: 28px 32px;
     border-bottom: 1px solid var(--line-2);
   }
   .email-row:last-child { border-bottom: none; }
   .email-meta {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    gap: 16px;
   }
-  .email-from {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .email-from { display: flex; align-items: center; gap: 12px; }
   .email-avatar {
-    width: 36px; height: 36px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    background: var(--line-2);
+    border: 1px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: 700;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .email-name {
+    font-weight: 600;
     font-size: 14px;
+    color: var(--ink);
   }
-  .email-avatar.byraa {
-    background: linear-gradient(135deg, #71717A, #3F3F46);
-  }
-  .email-date {
+  .email-to {
     font-size: 12px;
     color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
+    margin-top: 2px;
   }
-  .email-date.late {
-    background: #FEE2E2;
-    color: #B91C1C;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-weight: 600;
-  }
-
-  /* === SLIDE 3: PRIS-SAMMENLIGNING === */
-  .compare-card {
-    background: white;
-    border: 1.5px solid var(--line);
-    border-radius: 24px;
-    padding: 48px 44px;
-    text-align: left;
-    position: relative;
-  }
-  .compare-card.bad {
-    background: linear-gradient(180deg, #FEF2F2 0%, white 100%);
-    border-color: #FECACA;
-  }
-  .compare-card.good {
-    background: var(--navy);
-    color: white;
-    border-color: var(--brand);
-    box-shadow: 0 32px 96px -16px rgba(11,31,74,0.4);
-  }
-  .compare-card .label {
+  .email-date {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 16px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.5;
+    flex-shrink: 0;
   }
-  .compare-card.bad .label { color: #DC2626; }
-  .compare-card.good .label { color: #60A5FA; }
+  .email-date .delta {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .email-body {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  .email-body .signature {
+    color: var(--muted);
+    margin-top: 12px;
+    display: block;
+  }
+
+  /* SLIDE 3: PRIS-SAMMENLIGNING */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1080px;
+  }
+  .compare-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 40px 36px;
+  }
+  .compare-card.featured {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+  }
+  .compare-card .label { color: var(--muted); margin-bottom: 12px; }
+  .compare-card.featured .label { color: rgba(255,255,255,0.55); }
   .compare-card h3 {
     font-family: 'Archivo', sans-serif;
     font-weight: 800;
-    font-size: 26px;
+    font-size: 22px;
     letter-spacing: -0.02em;
     margin: 0 0 28px;
   }
   .compare-row {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 14px 0;
+    font-size: 14.5px;
+    border-bottom: 1px solid var(--line-2);
   }
-  .compare-card.good .compare-row {
+  .compare-card.featured .compare-row {
     border-bottom-color: rgba(255,255,255,0.1);
   }
+  .compare-row .amount {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
   .compare-row.total {
-    margin-top: 20px;
-    padding-top: 24px;
+    margin-top: 12px;
+    padding-top: 22px;
     border-top: 2px solid var(--ink);
     border-bottom: none;
     font-family: 'Archivo', sans-serif;
     font-weight: 800;
-    font-size: 32px;
+    font-size: 28px;
     letter-spacing: -0.025em;
   }
-  .compare-card.good .compare-row.total {
-    border-top-color: white;
+  .compare-card.featured .compare-row.total { border-top-color: white; }
+  .compare-card.featured .compare-row.total .amount {
+    color: #93C5FD;
+    font-family: 'Archivo', sans-serif;
   }
 
-  /* === SLIDE 4: END CARD === */
+  .savings-note {
+    text-align: center;
+    margin-top: 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .savings-note strong {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* SLIDE 4: END CARD */
   .end-content { text-align: center; max-width: 720px; }
   .logo-row {
     display: inline-flex;
     align-items: baseline;
     gap: 0.6rem;
-    margin-bottom: 32px;
+    margin-bottom: 48px;
   }
   .logo-solid {
     font-family: 'Archivo', sans-serif;
     font-weight: 700;
     letter-spacing: -0.01em;
-    font-size: 48px;
+    font-size: 40px;
     color: white;
     text-transform: uppercase;
     line-height: 1;
@@ -281,47 +319,90 @@
     font-family: 'Archivo', sans-serif;
     font-weight: 600;
     letter-spacing: 0.02em;
-    font-size: 48px;
+    font-size: 40px;
     color: transparent;
     -webkit-text-stroke: 1.5px white;
     text-transform: uppercase;
     line-height: 1;
   }
+  .end-content h2 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 52px);
+    letter-spacing: -0.035em;
+    margin: 0 0 28px;
+    line-height: 1.05;
+    color: white;
+  }
+  .end-content h2 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px white;
+  }
+  .end-content .reply {
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    margin: 0 0 56px;
+    line-height: 1.6;
+  }
+  .end-content .reply code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: white;
+    background: rgba(255,255,255,0.08);
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .end-content .url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.1em;
+  }
+  .end-content .footer {
+    margin-top: 56px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
 
-  /* === KONTROLLER === */
+  /* KONTROLLER */
   .controls {
     position: fixed;
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 6px;
+    gap: 4px;
     background: white;
     padding: 6px;
-    border-radius: 14px;
+    border-radius: 10px;
     border: 1px solid var(--line);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     z-index: 1000;
   }
   .controls button {
-    background: var(--ink);
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 10px;
+    background: white;
+    color: var(--ink);
+    border: 1px solid transparent;
+    padding: 9px 16px;
+    border-radius: 6px;
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.15s ease;
-    min-width: 44px;
+    transition: all 0.15s ease;
   }
-  .controls button:hover { background: var(--brand); }
-  .controls button.active { background: var(--brand); }
-  .controls .label {
+  .controls button:hover { background: var(--line-2); }
+  .controls button.active {
+    background: var(--ink);
+    color: white;
+  }
+  .controls .label-mini {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    color: var(--muted);
+    color: var(--muted-2);
     align-self: center;
     padding: 0 12px;
     text-transform: uppercase;
@@ -332,209 +413,193 @@
     position: fixed;
     top: 24px;
     right: 24px;
-    background: var(--ink);
-    color: white;
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--muted);
     padding: 8px 14px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 500;
     letter-spacing: 0.1em;
     z-index: 1000;
   }
+  .slide-counter strong { color: var(--ink); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<div class="slide-counter" id="counter">1 / 4</div>
+<div class="slide-counter"><strong id="counter-current">01</strong> / 04</div>
 
-<!-- ========================================== -->
-<!-- SLIDE 1: FAKTURA (Scene 3)                  -->
-<!-- ========================================== -->
+<!-- SLIDE 1: FAKTURA -->
 <div class="slide dot-grid active" id="slide-1" style="background: var(--bg);">
-  <div class="invoice-frame">
-    <div class="stamp">2 dagers ventetid</div>
+  <div class="invoice">
     <div class="invoice-header">
       <div>
-        <div class="font-display" style="font-weight:800; font-size: 24px; letter-spacing:-0.02em;">Faktura</div>
-        <div class="font-mono" style="color: var(--muted); font-size: 12px; margin-top: 4px;">#2024-0847</div>
+        <h1 class="invoice-title">Faktura</h1>
+        <div style="margin-top: 6px;" class="font-mono">
+          <span style="color: var(--muted); font-size: 12px;">Nr. 2024-0847</span>
+        </div>
       </div>
-      <div style="text-align: right;">
-        <div style="font-weight: 600; font-size: 14px;">Webbyrå AS</div>
-        <div style="color: var(--muted); font-size: 12px; margin-top: 4px;">Org.nr 99X XXX XXX</div>
+      <div class="invoice-meta">
+        <div><strong>Webbyrå AS</strong></div>
+        <div>Org.nr 99X XXX XXX</div>
+        <div style="margin-top: 8px;">Til: Bedriften Din AS</div>
       </div>
     </div>
 
     <div class="invoice-line">
-      <span>Endring av priser på nettside (5 timer á 1&nbsp;500 kr)</span>
-      <span class="font-mono">7&nbsp;500,-</span>
+      <span><span class="qty">5,0 t</span>Endring av priser på nettside</span>
+      <span class="amount">7&nbsp;500</span>
     </div>
     <div class="invoice-line">
-      <span>Småjusteringer i tekst (1,5 timer á 1&nbsp;500 kr)</span>
-      <span class="font-mono">2&nbsp;250,-</span>
+      <span><span class="qty">1,5 t</span>Småjusteringer i tekst</span>
+      <span class="amount">2&nbsp;250</span>
     </div>
     <div class="invoice-line">
-      <span>Prosjektkoordinering</span>
-      <span class="font-mono">800,-</span>
+      <span><span class="qty">0,5 t</span>Prosjektkoordinering</span>
+      <span class="amount">800</span>
     </div>
 
     <div class="invoice-total">
       <span>Sum å betale</span>
-      <span>10&nbsp;550 kr</span>
+      <span class="amount">10&nbsp;550 kr</span>
     </div>
 
-    <div style="margin-top: 24px; color: var(--muted); font-size: 12px;">
-      Forfallsdato: 14 dager · Faktureres etter levering
+    <div class="invoice-footer">
+      <span>Forespurt: <strong>14.04</strong></span>
+      <span>Levert: <strong>18.04</strong></span>
+      <span>Behandlingstid: <strong>4 dager</strong></span>
     </div>
   </div>
 </div>
 
-<!-- ========================================== -->
-<!-- SLIDE 2: E-POST-TRÅD (Scene 3)              -->
-<!-- ========================================== -->
+<!-- SLIDE 2: E-POST -->
 <div class="slide dot-grid" id="slide-2" style="background: var(--bg);">
-  <div class="email-thread">
-    <div class="email-header">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <div style="width:10px; height:10px; border-radius:50%; background:#EF4444;"></div>
-        <div style="width:10px; height:10px; border-radius:50%; background:#F59E0B;"></div>
-        <div style="width:10px; height:10px; border-radius:50%; background:#10B981;"></div>
-        <div style="margin-left:14px; font-size: 13px; color: var(--muted); font-family:'JetBrains Mono', monospace;">Innboks · 1 av 47 uleste</div>
-      </div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--ink);">Re: Endring av priser</div>
+  <div class="email">
+    <div class="email-toolbar">
+      <div class="subject">Endring av priser på tjenestesiden</div>
+      <div class="crumb">2 meldinger</div>
     </div>
 
-    <!-- Mail 1: Kunde -->
     <div class="email-row">
       <div class="email-meta">
         <div class="email-from">
-          <div class="email-avatar">K</div>
+          <div class="email-avatar">KH</div>
           <div>
-            <div style="font-weight: 600; font-size: 14px;">Kari Hansen</div>
-            <div style="font-size: 12px; color: var(--muted);">til: support@webbyraa.no</div>
+            <div class="email-name">Kari Hansen</div>
+            <div class="email-to">til support@webbyraa.no</div>
           </div>
         </div>
-        <div class="email-date">Mandag 13:42</div>
+        <div class="email-date">
+          14.04.2025 · 13:42
+          <span class="delta">Mandag</span>
+        </div>
       </div>
-      <div style="font-size: 14px; color: var(--ink); line-height: 1.6;">
+      <div class="email-body">
         Hei,<br><br>
-        Kan dere endre prisene på tjenestesiden vår? Vi har justert listen og vil ha det oppdatert.<br><br>
-        Mvh Kari
+        Kan dere endre prisene på tjenestesiden vår? Vi har justert listen og vil ha det oppdatert.
+        <span class="signature">Mvh Kari</span>
       </div>
     </div>
 
-    <!-- Mail 2: Byrå -->
     <div class="email-row">
       <div class="email-meta">
         <div class="email-from">
-          <div class="email-avatar byraa">W</div>
+          <div class="email-avatar">W</div>
           <div>
-            <div style="font-weight: 600; font-size: 14px;">Webbyrå Support</div>
-            <div style="font-size: 12px; color: var(--muted);">til: kari@bedrift.no</div>
+            <div class="email-name">Webbyrå Support</div>
+            <div class="email-to">til kari@bedrift.no</div>
           </div>
         </div>
-        <div class="email-date late">Torsdag 16:08 · 4 dager senere</div>
+        <div class="email-date">
+          18.04.2025 · 16:08
+          <span class="delta">Fredag · +4 dager</span>
+        </div>
       </div>
-      <div style="font-size: 14px; color: var(--ink); line-height: 1.6;">
+      <div class="email-body">
         Hei Kari, beklager forsinkelsen — vi har vært nedlesset i prosjekter.<br><br>
-        Kan du bekrefte hvilke priser som skal endres? Vedlegg gjerne et skjermbilde. Vi får dette gjort i løpet av neste uke.<br><br>
-        <span style="color: var(--muted);">Mvh<br>Webbyrå</span>
+        Kan du bekrefte hvilke priser som skal endres? Vedlegg gjerne et skjermbilde. Vi får dette gjort i løpet av neste uke.
+        <span class="signature">Mvh<br>Webbyrå</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ========================================== -->
-<!-- SLIDE 3: PRIS-SAMMENLIGNING (Scene 6)       -->
-<!-- ========================================== -->
+<!-- SLIDE 3: PRIS-SAMMENLIGNING -->
 <div class="slide dot-grid" id="slide-3" style="background: var(--bg);">
-  <div style="max-width: 1100px; width: 100%;">
-    <div style="text-align:center; margin-bottom: 48px;">
-      <span class="eyebrow">Sammenligning over 3 år</span>
-      <h2 class="font-display" style="font-weight:800; font-size: clamp(32px, 4vw, 48px); letter-spacing:-0.03em; margin: 20px 0 8px; line-height: 1.05;">
-        Webbyrå vs.<br>
-        <span class="outline-text">AI-Webmaster.</span>
+  <div style="width: 100%; max-width: 1080px;">
+    <div style="text-align: center; margin-bottom: 56px;">
+      <div class="label" style="display: inline-block; margin-bottom: 16px;">Sammenligning over 3 år</div>
+      <h2 class="font-display" style="font-weight: 800; font-size: clamp(32px, 4vw, 44px); letter-spacing: -0.03em; margin: 0; line-height: 1.1;">
+        Kostnad per modell
       </h2>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-
-      <!-- Webbyrå -->
-      <div class="compare-card bad">
+    <div class="compare-grid">
+      <div class="compare-card">
         <div class="label">Tradisjonelt webbyrå</div>
-        <h3>Det gamle systemet</h3>
-        <div class="compare-row"><span>Oppsett (engangs)</span><span class="font-mono">25&nbsp;000 kr</span></div>
-        <div class="compare-row"><span>Drift &amp; support</span><span class="font-mono">1&nbsp;500 kr / mnd</span></div>
-        <div class="compare-row"><span>Endringer (~3/år)</span><span class="font-mono">~6&nbsp;000 kr</span></div>
-        <div class="compare-row total" style="color:#B91C1C;">
-          <span>3 år totalt</span><span>79&nbsp;000 kr</span>
+        <h3>Status quo</h3>
+        <div class="compare-row"><span>Oppsett (engangs)</span><span class="amount">25&nbsp;000 kr</span></div>
+        <div class="compare-row"><span>Drift &amp; support</span><span class="amount">1&nbsp;500 kr / mnd</span></div>
+        <div class="compare-row"><span>Endringer (~3/år)</span><span class="amount">~6&nbsp;000 kr</span></div>
+        <div class="compare-row total">
+          <span>3 år totalt</span>
+          <span class="amount">79&nbsp;000 kr</span>
         </div>
       </div>
 
-      <!-- AI-Webmaster -->
-      <div class="compare-card good">
+      <div class="compare-card featured">
         <div class="label">AI-Webmaster</div>
         <h3 style="color: white;">Autopilot Pro</h3>
-        <div class="compare-row"><span>Oppsett (engangs)</span><span class="font-mono">12&nbsp;900 kr</span></div>
-        <div class="compare-row"><span>Drift &amp; support</span><span class="font-mono">0 kr / mnd</span></div>
-        <div class="compare-row"><span>Endringer (ubegrenset)</span><span class="font-mono">0 kr</span></div>
-        <div class="compare-row total" style="color: #60A5FA;">
-          <span>3 år totalt</span><span>12&nbsp;900 kr</span>
+        <div class="compare-row"><span>Oppsett (engangs)</span><span class="amount">12&nbsp;900 kr</span></div>
+        <div class="compare-row"><span>Drift &amp; support</span><span class="amount">0 kr / mnd</span></div>
+        <div class="compare-row"><span>Endringer (ubegrenset)</span><span class="amount">0 kr</span></div>
+        <div class="compare-row total">
+          <span>3 år totalt</span>
+          <span class="amount">12&nbsp;900 kr</span>
         </div>
       </div>
     </div>
 
-    <div style="text-align:center; margin-top: 40px;">
-      <div style="display:inline-flex; align-items:center; gap:14px; background: var(--ink); color: white; padding: 18px 32px; border-radius: 16px; box-shadow: 0 16px 48px -16px rgba(0,0,0,0.3);">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 13l4 4L19 7"/>
-        </svg>
-        <span style="font-family:'Archivo', sans-serif; font-weight: 700; font-size: 18px;">
-          Du sparer <span style="color: #60A5FA;">66&nbsp;100 kr</span> over 3 år
-        </span>
-      </div>
+    <div class="savings-note">
+      Differanse over 3 år: <strong>66&nbsp;100 kr</strong>
     </div>
   </div>
 </div>
 
-<!-- ========================================== -->
-<!-- SLIDE 4: END CARD (Scene 8)                 -->
-<!-- ========================================== -->
-<div class="slide dot-grid-dark" id="slide-4" style="background: var(--navy); color: white;">
+<!-- SLIDE 4: END CARD -->
+<div class="slide" id="slide-4" style="background: var(--navy);">
   <div class="end-content">
     <div class="logo-row">
       <span class="logo-solid">Dietrichs</span>
       <span class="logo-outline">marketing</span>
     </div>
 
-    <h2 class="font-display" style="font-weight:800; font-size: clamp(36px, 5vw, 56px); letter-spacing:-0.035em; margin: 0 0 24px; line-height: 1.05;">
+    <h2>
       Klar til å eie<br>
-      <span class="outline-text-white">nettsiden din?</span>
+      <span class="outline">nettsiden din?</span>
     </h2>
 
-    <p style="font-size: 18px; color: rgba(255,255,255,0.75); margin: 0 0 36px; line-height: 1.6;">
-      Svar på e-posten med <strong style="color:white;">"Ring meg"</strong> eller <strong style="color:white;">"Send pakkeforslag"</strong>.<br>
+    <p class="reply">
+      Svar på e-posten med <code>Ring meg</code> eller <code>Send pakkeforslag</code>.<br>
       Du hører fra meg innen 24 timer.
     </p>
 
-    <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); padding: 14px 24px; border-radius: 999px; backdrop-filter: blur(8px);">
-      <span style="width:8px; height:8px; border-radius:50%; background: #22C55E; box-shadow: 0 0 16px #22C55E;"></span>
-      <span style="font-family:'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.1em;">dmarketing.no</span>
-    </div>
+    <div class="url">dmarketing.no</div>
 
-    <div style="margin-top: 56px; font-size: 13px; color: rgba(255,255,255,0.4);">
-      Adrian Dietrichs · Dataingeniør &amp; grunnlegger · adrian.dietrichs@gmail.com
+    <div class="footer">
+      Adrian Dietrichs · adrian.dietrichs@gmail.com
     </div>
   </div>
 </div>
 
-<!-- KONTROLLER -->
 <div class="controls">
-  <button onclick="show(1)" id="btn-1">1 · Faktura</button>
-  <button onclick="show(2)" id="btn-2">2 · E-post</button>
-  <button onclick="show(3)" id="btn-3">3 · Pris</button>
-  <button onclick="show(4)" id="btn-4">4 · End</button>
-  <span class="label">← →&nbsp;eller&nbsp;1–4</span>
+  <button onclick="show(1)" id="btn-1">01 Faktura</button>
+  <button onclick="show(2)" id="btn-2">02 E-post</button>
+  <button onclick="show(3)" id="btn-3">03 Pris</button>
+  <button onclick="show(4)" id="btn-4">04 End</button>
+  <span class="label-mini">←&nbsp;→&nbsp;eller&nbsp;1–4</span>
 </div>
 
 <script>
@@ -547,7 +612,7 @@
     document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
     document.getElementById('slide-' + n).classList.add('active');
     document.getElementById('btn-' + n).classList.add('active');
-    document.getElementById('counter').textContent = n + ' / ' + total;
+    document.getElementById('counter-current').textContent = String(n).padStart(2,'0');
     current = n;
   }
 
