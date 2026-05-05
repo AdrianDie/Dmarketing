@@ -35,7 +35,7 @@
 ---
 
 ### Hvordan det henger sammen (1:30 – 2:30)
-[SKJERM] Vis `demo-video-diagram.html` — start animasjonen.
+[SKJERM] Vis prosess-diagrammet (eksportert PNG/SVG fra `demo-video-diagram.md`).
 
 > "La meg vise deg flyten med ett enkelt eksempel.
 >

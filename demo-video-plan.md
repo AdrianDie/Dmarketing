@@ -277,7 +277,7 @@ Den verste utgangen er at en kunde signerer, oppdager friksjon du ikke nevnte, o
 - [ ] dmarketing.no er nedstemt-versjon av live-siden (du vet hva som er på den nå, så du kan reversere alt etter opptak hvis nødvendig)
 
 ## 2. Visuelle assets (klart før filming)
-- [ ] `demo-video-diagram.html` testet i fullskjerm — animasjonen funker
+- [ ] `demo-video-diagram.md` eksportert til PNG/SVG via mermaid.live (bredde 1920, bakgrunn #FAFAFA) — én fil for hovedversjon, én for forenklet
 - [ ] `demo-video-slides.html` testet — alle 4 slides skifter med tastatur
 - [ ] 3 mal-screenshots klare for cutaway i Scene 4: ta screenshots av `maler/rorlegger.html`, `maler/frisor.html`, `maler/tannlege.html` (åpne hver i nettleser, ta hele-side-screenshot)
 
@@ -285,7 +285,7 @@ Den verste utgangen er at en kunde signerer, oppdager friksjon du ikke nevnte, o
 - [ ] Fane 1: Claude Code mot dmarketing-repoet
 - [ ] Fane 2: Preview-URL (Cloudflare-generert)
 - [ ] Fane 3: dmarketing.no (live)
-- [ ] Fane 4: `demo-video-diagram.html`
+- [ ] Fane 4: Eksportert diagram-bilde (PNG/SVG fra `demo-video-diagram.md`)
 - [ ] Fane 5: `demo-video-slides.html`
 - [ ] Fane 6: `maler/rorlegger.html` (for cutaway)
 
