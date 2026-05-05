@@ -116,32 +116,28 @@
 
 ---
 
-## SCENE 5 — REISEN OG DET VI GJØR (3:30 – 4:30)
+## SCENE 5 — PROSESSEN VI KJØRER (3:30 – 4:30)
 
-[SKJERM] Vis **reise-diagrammet** (eksportert PNG fra `demo-video-diagram.md`, "Reisen — full"). Tre kolonner: rød i dag → blå arbeid → grønn ferdig.
+[SKJERM] Vis **migrasjons- og leveransediagrammet** (eksportert SVG fra `demo-video-diagram.md`, diagram 1). Vertikal flyt: Eksisterende nettside → Fase 01–06 → Selvgående.
 
-**Voice-over (zoomer langsomt fra venstre til høyre):**
-> "La meg vise deg reisen.
+**Voice-over (kameraet panorerer langsomt nedover diagrammet, en fase om gangen):**
+> "Når du sier ja, kjører vi denne prosessen. Den tar fem til sju dager. Din innsats er én ting du gjør — én gang.
 >
-> Til venstre — der du er i dag. Treg eller utdatert nettside. Faktura for hver endring. Faste månedsavgifter. Du venter dager på selv den enkleste justering. Og koden — den eier du ikke engang.
+> **Fase 01.** Vi crawler din eksisterende nettside, henter ut alt innhold, alle bilder, kontaktinfo. Vi identifiserer logo, farger, og tonen i tekstene dine. Vi analyserer DNS-en og finner ut hvem som hoster siden i dag.
 >
-> I midten — det vi gjør, i løpet av fem til syv dager. Og det er litt mye, så bli med:
+> **Fase 02.** Vi initialiserer et nytt prosjekt i Astro — en moderne, lynrask kodebase. Vi bygger et bransje-tilpasset komponentbibliotek. Vi mapper alle de gamle URL-ene dine til den nye strukturen, så Google ikke mister deg. Bilder konverteres til moderne formater og lastes lazy.
 >
-> Vi registrerer domenet i ditt navn. Setter opp et GitHub-repo du eier hundre prosent. Kobler det til Cloudflare-hosting som er superrask globalt. Og vi setter opp preview-systemet du så i sted.
+> **Fase 03.** Vi setter opp hele SEO-grunnmuren. Strukturert metadata, schema-markup som forteller Google at du er en lokal bedrift, sitemap, robots.txt. Vi tester at siden scorer 95 av 100 på Google sin egen Lighthouse-test — på alle fire akser.
 >
-> Vi designer en bransje-tilpasset side fra bunnen. Vi flytter inn alt innholdet fra din gamle side. Vi setter opp logo, farger, typografi. Vi optimaliserer alle bildene.
+> **Fase 04.** Vi setter opp et privat AI-prosjekt for deg. Vi laster inn all kontekst om bedriften — tjenester, priser, FAQ. Vi konfigurerer tonen så AI-en skriver som deg, ikke som en robot. Og vi kobler det opp mot GitHub via det vi kaller MCP — slik at chat-meldinger blir til ekte kode-pushes automatisk.
 >
-> Vi gjør hele SEO-grunnmuren — meta-tags, schema, sitemap. Vi sørger for at siden din scorer 95 av 100 på Google sin egen ytelses-test. Og vi setter opp AI-motoren med all kontekst om din bedrift, og en tone som matcher hvordan *du* skriver.
+> **Fase 05.** Vi setter opp infrastrukturen i ditt navn. GitHub-repo som du eier. Cloudflare Pages som hoster siden globalt på et CDN i over tre hundre byer. SSL-sertifikat. DNS. Og preview-pipelinen du så tidligere — slik at ingenting går live uten at du sier ja.
 >
-> Til slutt får du fem opplæringsvideoer, en personlig gjennomgang med meg, og en måned støtte etter levering.
+> **Fase 06.** Til slutt overleveringen. Personlige opplæringsvideoer. Femten minutters skjermdeling med meg. Tilganger overført. Tretti dagers inkludert support.
 >
-> Sytten konkrete leveranser. På sju dager."
-
-[SKJERM] Pause på høyre kolonne.
-
-> "Til høyre — det du har fra dag åtte og for alltid. Hundre prosent eierskap. Null kroner i måneden til meg. Endringer på under nitti sekunder. Og du kan aldri ødelegge noe — alt går gjennom preview først.
+> Tjuetre tekniske leveranser. På sju dager.
 >
-> Og hva er din innsats i hele dette? Du svarer på fem spørsmål. Det tar ti minutter. Resten er mitt ansvar."
+> Din innsats: du svarer på fem spørsmål. Det tar deg ti minutter."
 
 ---
 
