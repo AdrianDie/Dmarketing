@@ -183,7 +183,8 @@
       .nav-item-text-full { font-size: 70px; line-height: 90px; display: none; }
       .nav-item-text { font-size: 70px; line-height: 120px; }
       .nav-items { width: 90%; }
-      .navbar-2 { margin-top: 30px; }
+      .heading-6.logo-1 { font-size: 22px; line-height: 30px; }
+      .heading-6.logo-2 { font-size: 22px; line-height: 30px; margin-left: 6px; }
     }
     @media screen and (max-width: 479px) {
       .nav-item-text { font-size: 35px; line-height: 200%; }
@@ -191,8 +192,10 @@
       .nav-items { margin-top: 20%; }
       .navbar-2 {
         justify-content: space-between; width: 100%;
-        margin: 30px 0 0; padding: 0 5px 0 8px;
+        margin: 0 auto; padding: 0 16px;
       }
+      .heading-6.logo-1 { font-size: 18px; line-height: 28px; margin-left: 0; }
+      .heading-6.logo-2 { font-size: 18px; line-height: 28px; margin-left: 5px; }
     }
   `;
   const style = document.createElement('style');
