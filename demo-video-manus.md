@@ -6,16 +6,38 @@
 
 ---
 
-## SCENE 1 — KROKEN (0:00 – 0:25)
+## SCENE 1 — ÅPNING (0:00 – 1:00)
+
+[DU i kamera]
+
+> "Jeg heter Adrian, og det var jeg som sendte deg en mail for litt siden.
+>Til daglig jobber jeg med kunstig intelligens. Grunnen til at jeg tar kontakt med deg, er rett og slett at jeg ser et ekstremt potensial her som veldig mange bedrifter ikke vet om ennå.
+>Enten du betaler et webbyrå for småoppdateringer, har faste månedlige utgifter til utviklere, betaler dyrt for selve plattformen nettsiden ligger på – eller kanskje du vurderer å betale for en helt ny nettside... Alt dette kan du nå gjøre gratis, med minimal innsats, takket være AI.
+>Og jeg tenkte å bevise det for deg nå.
+>Systemet jeg skal vise deg nå er en av mange effektiviseringer som kan gjøres ved AI. Jeg bruker dette for min egen nettside, og jeg har allerede gjort det samme for mange andre. Og det funker like bra uansett om du er rørlegger, frisør eller tannlege.
+>Planen for denne videoen er veldig kort: Jeg skal vise deg hvordan det funker i praksis. Jeg skal vise hvor utrolig lite du faktisk trenger å gjøre. Og til slutt: hva det koster å sette opp, og hvorfor du aldri trenger å betale meg eller andre for oppdateringer og drift i etterkant.
+
+Adrian
+Jobber med KI
+potensial
+ENten du betaler
+alt dette kan gjøres
+løsningen
+planen
+"
+
+---
+
+## SCENE 2 — KROKEN / LIVE DEMO INTRO (1:00 – 1:30)
 
 [SKJERM] Du sitter i Claude Code. Cursor blinker.
+
+**Voice-over:**
+> "Det første jeg vil vise deg er hvor enkelt det er."
 
 [DU SKRIVER]: `Sett prisen på Autopilot Pro fra 12 900 til 11 900.`
 
 *(Trykk enter. Klokke starter på 00:00 i hjørnet.)*
-
-**Voice-over (mens Claude jobber):**
-> "Pass på klokken oppe i hjørnet."
 
 *(Preview-link dukker opp i chatten. Du klikker. Ny pris synlig på preview-URL. Klokke står på 00:38.)*
 
@@ -26,22 +48,8 @@
 
 *(Cut til dmarketing.no — ny pris synlig. Klokke 01:18.)*
 
-**Voice-over:**
-> "Nå er den live. Åtti sekunder fra idé til ferdig — med en sikkerhetsknapp på veien. Det hadde kostet deg 1 500 kr og to dagers venting hos et webbyrå. Jeg skal vise deg hvordan du gjør akkurat dette på din egen side."
-
----
-
-## SCENE 2 — DEN ÆRLIGE RAMMEN (0:25 – 0:55)
-
-[DU i kamera]
-
-> "Jeg heter Adrian. Jeg er dataingeniør, og jeg sendte deg en e-post tidligere denne uken.
->
-> Grunnen er enkel: jeg tror du betaler for mye for nettsiden din, eller du har en utdatert side du ikke tør røre fordi det blir dyrt og tregt hver gang.
->
-> Jeg skal vise deg tre ting i denne videoen. Hvordan systemet fungerer. Hva *du* faktisk må gjøre — det er nesten ingenting. Og hva det koster, og hvorfor du aldri trenger å betale meg igjen etter det.
->
-> Fem og et halvt minutt. La oss kjøre."
+**Voice-over *(sakte, markert på "åtti sekunder")*:**
+> "Nå er den live. Åtti sekunder fra idé til ferdig — med en sikkerhetsknapp på veien. Det hadde kostet deg 1 500 kr og to dagers venting hos et webbyrå."
 
 ---
 
@@ -144,7 +152,7 @@
 >
 > Din innsats i hele prosessen er tre korte handlinger. Du svarer på fem spørsmål — ti minutter. Du videresender én forhåndsutfylt e-post til domeneleverandøren din — fem minutter. Og du har en kvarters skjermdeling med meg på dag sju.
 >
-> Tretti minutter, fordelt over en uke. Det er hele jobben din."
+> Tretti minutter, fordelt over en uke. *(sakte, markert)* Det er hele jobben din."
 
 ---
 
@@ -152,7 +160,7 @@
 
 [SKJERM] Pakke-tabellen fra ai-webmaster.html. Highlight Autopilot Pro.
 
-**Voice-over:**
+**Voice-over *(sakte, markert på beløpet)*:**
 > "Tolv tusen ni hundre kroner. Engangs. Det er anbefalt-pakken — Autopilot Pro.
 >
 > Du kan dele det opp over to eller tre måneder, rentefritt. Du kan utsette første faktura i tretti dager — som betyr at jeg leverer nettsiden din **før** du betaler første krone. Og etter det: null kroner i måneden til meg, for alltid. Du eier alt.
@@ -161,7 +169,7 @@
 > Webbyrå: 25 000 oppsett + 1 500 × 36 mnd = **79 000 kr på 3 år**
 > Autopilot Pro: 12 900 engangs + 0 × 36 mnd = **12 900 kr på 3 år**
 
-**Voice-over:**
+**Voice-over *(sakte, markert på "66 000 kroner du beholder selv")*:**
 > "Et webbyrå koster typisk åtti tusen kroner over tre år. Min løsning koster tretten tusen — én gang. Differansen er 66 000 kroner du beholder selv."
 
 ---
@@ -197,20 +205,20 @@
 # Tidssjekk
 | Scene | Lengde | Akkumulert |
 |---|---|---|
-| 1 Kroken | 0:25 | 0:25 |
-| 2 Ramme | 0:30 | 0:55 |
-| 3 Smerte | 0:35 | 1:30 |
-| 4 Demo | 2:45 | 4:15 |
-| 5 Prosess | 1:00 | 5:15 |
-| 6 Pris | 0:45 | 6:00 |
-| 7 CTA | 0:30 | 6:30 |
-| 8 P.S. | 0:15 | 6:45 |
+| 1 Åpning (hook + ramme) | 1:00 | 1:00 |
+| 2 Kroken / demo-intro | 0:30 | 1:30 |
+| 3 Smerte | 0:35 | 2:05 |
+| 4 Demo | 2:45 | 4:50 |
+| 5 Prosess | 1:00 | 5:50 |
+| 6 Pris | 0:45 | 6:35 |
+| 7 CTA | 0:30 | 7:05 |
+| 8 P.S. | 0:15 | 7:20 |
 
-**Mål: 6:30–6:45.** Live-demoens reelle byggetid avgjør den eksakte lengden.
+**Mål: 6:30–7:20.** Live-demoens reelle byggetid avgjør den eksakte lengden.
 
-**Hvis 6:30 føles for langt:**
-- Drop Endring 3 i Scene 4 → sparer 50 sek → 5:55
-- Kutt Scene 3 til 0:25 → sparer 10 sek → 6:20
-- Kutt Scene 2 til 0:25 → sparer 5 sek
+**Hvis det føles for langt:**
+- Drop Endring 3 i Scene 4 → sparer 50 sek
+- Kutt Scene 3 til 0:25 → sparer 10 sek
+- Kutt "skifte"-avsnittet i Scene 1 → sparer 20 sek
 
 **Ikke kutt Scene 5.** Den er det viktigste salgsargumentet — den rettferdiggjør prisen.

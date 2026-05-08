@@ -1,5 +1,7 @@
 # CLAUDE.md — Dietrichs Marketing
 
+> **FØR du gjør noe i dette prosjektet:** les `SETUP.md` og kjør gjennom bootstrap-sjekklisten der (Node-avhengigheter, frontend-design skill, Puppeteer screenshot-loop). Ikke hopp over.
+
 ## Prosjektkontekst
 Nettsidemaler for norske småbedrifter. Selges for 5 000–20 000 kr per stk.
 Inngangsdør til Google Ads-forvaltning (3 000–5 000 kr/mnd recurring).
