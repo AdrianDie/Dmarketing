@@ -158,9 +158,33 @@
       .preloader-image .logo-2 { font-size: clamp(22px, 6vw, 32px); }
     }
 
-    /* Mobile menu */
-    .menu-overlay { transition: opacity 0.25s, visibility 0.25s; }
-    .menu-overlay.hidden-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+    /* Mobile menu — overlay slides in fra høyre (Webflow-stil) */
+    .menu-overlay {
+      transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s;
+      clip-path: inset(0 0 0 0);
+    }
+    .menu-overlay.hidden-menu {
+      clip-path: inset(0 0 0 100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    /* Animer nav-items inn i overlay (stagger) */
+    .menu-overlay.hidden-menu .group { opacity: 0; transform: translateY(20px); }
+    .menu-overlay .group {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .menu-overlay .group:nth-child(1) { transition-delay: 0.30s; }
+    .menu-overlay .group:nth-child(2) { transition-delay: 0.36s; }
+    .menu-overlay .group:nth-child(3) { transition-delay: 0.42s; }
+    .menu-overlay .group:nth-child(4) { transition-delay: 0.48s; }
+    .menu-overlay .group:nth-child(5) { transition-delay: 0.54s; }
+    .menu-overlay .group:nth-child(6) { transition-delay: 0.60s; }
+
+    /* Hamburger-animasjon (linjene blir til X når meny åpen) */
+    #menu-btn-icon span { transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.2s; transform-origin: center; }
+    #menu-btn.is-open #menu-btn-icon span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    #menu-btn.is-open #menu-btn-icon span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 
     /* Meny-lenke hover (Webflow-stil: stroke → fill slide-up) */
     .nav-link { display: inline-block; overflow: hidden; line-height: 1; vertical-align: bottom; }
@@ -168,10 +192,12 @@
       display: flex; flex-direction: column;
       transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
     }
-    .nav-link-stroke { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.7); }
-    .nav-link-fill { color: #60A5FA; }
+    .nav-link-stroke { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.5); transition: -webkit-text-stroke-color 0.3s; }
+    .nav-link-fill { color: #fff; }
     .group:hover .nav-link-inner { transform: translateY(-50%); }
-    .group:hover .nav-link-num { color: #60A5FA; transition: color 0.4s ease; }
+    .group:hover .nav-link-num { color: #fff; transition: color 0.4s ease; }
+    .group { transition: padding-left 0.4s ease; }
+    .group:hover { padding-left: 12px; }
   </style>
 </head>
 <body>
@@ -981,8 +1007,14 @@
         if (label) label.textContent = open ? 'Lukk' : 'Meny';
         document.body.style.overflow = open ? 'hidden' : '';
       };
-      btn.addEventListener('click', () => setOpen(overlay.classList.contains('hidden-menu')));
-      overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      const setOpenWithBtn = (open) => {
+        setOpen(open);
+        btn.classList.toggle('is-open', open);
+      };
+      btn.addEventListener('click', () => setOpenWithBtn(overlay.classList.contains('hidden-menu')));
+      overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpenWithBtn(false)));
+      // Lukk med Escape
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpenWithBtn(false); });
     })();
 
     // Floating CTA
