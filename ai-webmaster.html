@@ -185,7 +185,9 @@
     body { background-color: #FAFAFA !important; color: #09090B !important; }
     h1, h2, h3, h4, h5, h6 { text-transform: none !important; margin-left: 0 !important; }
     .nav-container-2 { display: none; }
-    .navbar-2 { background: transparent !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 5% !important; height: 56px !important; z-index: 50; }
+    .navbar-2.w-container, .navbar-2 { background: transparent !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 20px !important; height: 56px !important; z-index: 50; box-sizing: border-box; }
+    @media (min-width: 768px) { .navbar-2.w-container, .navbar-2 { padding: 0 48px !important; } }
+    @media (min-width: 1024px) { .navbar-2.w-container, .navbar-2 { padding: 0 64px !important; } }
     .open-wrap .navigation-text { color: #09090B !important; }
     .close-wrap .navigation-text { color: #fff !important; }
     .hamburger-line, .hamburger-line-4 { background-color: #09090B !important; }
@@ -355,7 +357,7 @@
   <!-- ============================================== -->
   <!-- SEKSJON 1: HERO                                 -->
   <!-- ============================================== -->
-  <header class="dot-grid pt-16 md:pt-20">
+  <header class="pt-16 md:pt-20">
     <div class="bg-gradient-to-b from-[#FAFAFA]/50 to-[#FAFAFA]">
       <div class="max-w-4xl mx-auto px-6 pt-24 pb-32 md:pt-32 md:pb-40 text-center">
 
