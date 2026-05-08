@@ -2,6 +2,8 @@
 
 > **FØR du gjør noe i dette prosjektet:** les `SETUP.md` og kjør gjennom bootstrap-sjekklisten der (Node-avhengigheter, frontend-design skill, Puppeteer screenshot-loop). Ikke hopp over.
 
+> **Les også [docs/CLAUDE_NOTES.md](docs/CLAUDE_NOTES.md)** — levende hjelpedokument med arkitektur, vanlige feller (Webflow vs Tailwind, margin-collapse, specificity-kollisjoner), workflow-mønstre (PR-flyt, worktree, lokal server), og verktøy. **Oppdater dokumentet når du oppdager noe nytt.**
+
 ## Prosjektkontekst
 Nettsidemaler for norske småbedrifter. Selges for 5 000–20 000 kr per stk.
 Inngangsdør til Google Ads-forvaltning (3 000–5 000 kr/mnd recurring).
