@@ -1,9 +1,16 @@
+---
+tags: [claude, reference, hub]
+type: doc
+---
+
 # Claude Notes — Dmarketing
 
 > Levende hjelpedokument for Claude Code (og fremtidige instanser).
 > **Hver gang en sesjon avslører ny innsikt eller feller, oppdater dette dokumentet** — ikke la samme feil gjenta seg.
 
 Dette er ment å åpnes både fra repoet og fra Obsidian. Strukturen er flat med korte seksjoner og konkrete eksempler.
+
+Tilbake til [[Home]].
 
 ---
 
