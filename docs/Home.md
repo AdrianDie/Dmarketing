@@ -1,78 +1,73 @@
 ---
 tags: [hub, dmarketing]
 type: index
+scope: dmarketing-repo
 ---
 
 # Home — Dmarketing Vault
 
-Dette er en Obsidian-vault for Dmarketing-prosjektet og Claude-samarbeid. Filene her er ren markdown og finnes i `docs/`-mappen i repoet — Obsidian gir dem bare grafvisning og lenker.
+Dette er en Obsidian-vault for **Dmarketing-prosjektet** (dmarketing.no + klient-arbeid + maler). Filene er ren markdown og finnes i `docs/`-mappen i repoet — Obsidian gir dem bare grafvisning og lenker.
 
-## Hovednoter
+> **Scope:** Alt i denne vaulten skal være knyttet til Dmarketing-business. Personlige notater eller andre prosjekter hører hjemme i en separat vault.
 
-- [[CLAUDE_NOTES]] — levende hjelpedokument for Claude-sesjoner (arkitektur, feller, workflow)
-
-## Slik bruker du vaulten
-
-### Lese
-- Klikk på en wikilink (`[[...]]`) for å åpne den noten
-- Åpne grafvisning (cmd/ctrl + G) for å se hvordan noter er koblet
-- Søk med cmd/ctrl + O
-
-### Skrive
-- Nye notater = nye `.md`-filer i denne mappen
-- Lag en lenke til en annen note: `[[Note-navn]]`
-- Lag en lenke til en seksjon: `[[CLAUDE_NOTES#Arkitektur — to CSS-systemer]]`
-- Front matter (YAML på topp) gir Claude metadata å filtrere på
-
-### Med Claude Code
-Pek Claude Code på vault-mappen (eller hele repoet) og be om hva du vil:
-
-- *"Lag en note 'Klient-X' under `docs/clients/` som beskriver pakken og linker til relevante mal-eksempler i `maler/`"*
-- *"Les gjennom `CLAUDE_NOTES.md` og lag separate noter for hver felle med wikilinks tilbake til oversikten"*
-- *"Lag en daglig logg-note for i dag og oppsummer hva vi gjorde i denne sesjonen"*
-- *"Bygg en `docs/leads/`-mappe og importer leads fra `leads.js`-output"*
-
-Claude leser markdown supert og kan både lese og skrive vaultens filer.
-
-## Forslag til struktur (når vaulten vokser)
+## Struktur
 
 ```
 docs/
 ├── Home.md                  ← du er her
-├── CLAUDE_NOTES.md          ← Claude-samarbeids-doc
+├── CLAUDE_NOTES.md          ← Claude-samarbeids-doc (arkitektur, feller, workflow)
 ├── clients/                 ← per-klient-noter
-│   ├── elektriker-stavanger.md
-│   └── ...
-├── topics/                  ← konsepter, ideer
-│   ├── pricing-strategi.md
-│   └── ...
-├── decisions/               ← arkitektur-beslutninger med dato
-│   ├── 2026-05-08-clean-urls.md
-│   └── ...
-├── leads/                   ← lead-noter (importert fra leads.js)
-└── daily/                   ← daglig logg (valgfritt)
-    └── 2026-05-08.md
+├── decisions/               ← arkitektur/forretnings-beslutninger med dato
+├── leads/                   ← lead-spor med kilde og status
+└── topics/                  ← konsepter, ideer, strategier
 ```
 
-Ikke lag denne strukturen på dag 1 — la den vokse organisk basert på hva du faktisk trenger.
+Hver mappe har en `_README.md` som forklarer hvordan den brukes, og en `_template.md` Claude kan kopiere når den lager nye notater.
+
+## Hovednoter
+
+- [[CLAUDE_NOTES]] — levende hjelpedokument for Claude-sesjoner (arkitektur, feller, workflow)
+- [[clients/_README]] — slik fungerer klient-notater
+- [[decisions/_README]] — slik fungerer beslutnings-loggen
+- [[leads/_README]] — slik fungerer lead-tracker
+- [[topics/_README]] — slik fungerer emne-notater
+
+## Hvordan Claude bruker vaulten
+
+Claude Code har full filtilgang i repoet. Når du ber Claude gjøre noe, kan du peke direkte på vaulten:
+
+**Lese:**
+- *"Les `docs/CLAUDE_NOTES.md` før du gjør CSS-endringer på ai-webmaster"*
+- *"Slå opp i `docs/clients/<navn>.md` for å se hva vi har levert tidligere"*
+
+**Skrive:**
+- *"Lag en ny klient-note for [navn] med template fra `docs/clients/_template.md`"*
+- *"Legg til en beslutnings-note i `docs/decisions/` for valget vi nettopp tok"*
+- *"Oppdater `docs/CLAUDE_NOTES.md` med den nye CSS-fellen vi oppdaget"*
+
+**CLAUDE.md** (i repo-roten) sier til Claude at vaulten finnes og at den skal leses ved relevante oppgaver. Du trenger ikke minne om det hver gang.
+
+## Slik bruker du vaulten selv
+
+### Lese i Obsidian
+- Klikk på en wikilink (`[[...]]`) for å åpne den noten
+- Åpne grafvisning (`Ctrl+G`) for å se hvordan noter er koblet
+- Søk med `Ctrl+O`
+
+### Skrive
+- Nye notater = nye `.md`-filer i riktig undermappe
+- Lag en lenke til en annen note: `[[Note-navn]]`
+- Front matter (YAML på topp) gir både Obsidian (tags, grafvisning) og Claude (filtrering) struktur
 
 ## Tips for grafvisning
 
-- Slå på "tags" i graph-innstillingene for å fargelegge etter `tags:` i front matter
+- Slå på "tags" i graph-innstillingene for å fargelegge etter tags
 - Filtrer grafen med søk (`tag:#client` viser bare klient-noter)
 - Hover over en node for å se hvilke andre den linker til
 - Bruk "local graph" på en enkelt note for å se nær-konteksten
 
-## Når legge til nye notater
-
-Hver gang du:
-- Tar en arkitektur-beslutning du vil huske → lag en `decisions/<dato>-<tema>.md`
-- Lærer noe om en klient → lag/oppdater `clients/<navn>.md`
-- Oppdager en ny CSS-felle eller workflow-feil → oppdater [[CLAUDE_NOTES]]
-- Skal forberede et tilbud → lag `topics/<emne>.md` med Claude
-
 ## Relatert
 
-- `CLAUDE.md` (i repo-roten) — design-filosofi, kode-standarder
+- `CLAUDE.md` (repo-rot) — design-filosofi, kode-standarder, peker til denne vaulten
 - `SETUP.md` — bootstrap-sjekkliste
-- `~/.claude/projects/<repo>/memory/` — Claude-spesifikke memory-filer
+- `~/.claude/projects/<repo>/memory/` — Claude-spesifikke memory-filer (auto-lastet i hver sesjon)

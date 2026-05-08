@@ -2,7 +2,26 @@
 
 > **FØR du gjør noe i dette prosjektet:** les `SETUP.md` og kjør gjennom bootstrap-sjekklisten der (Node-avhengigheter, frontend-design skill, Puppeteer screenshot-loop). Ikke hopp over.
 
-> **Les også [docs/CLAUDE_NOTES.md](docs/CLAUDE_NOTES.md)** — levende hjelpedokument med arkitektur, vanlige feller (Webflow vs Tailwind, margin-collapse, specificity-kollisjoner), workflow-mønstre (PR-flyt, worktree, lokal server), og verktøy. **Oppdater dokumentet når du oppdager noe nytt.**
+> **Les også [docs/CLAUDE_NOTES.md](docs/CLAUDE_NOTES.md)** ved første relevante CSS/UI/arkitektur-oppgave i sesjonen — levende hjelpedokument med arkitektur, vanlige feller (Webflow vs Tailwind, margin-collapse, specificity-kollisjoner), workflow-mønstre (PR-flyt, worktree, lokal server), og verktøy. **Oppdater dokumentet når du oppdager noe nytt.**
+
+## Obsidian-vault i `docs/`
+
+`docs/`-mappen er en Obsidian-vault for prosjekt-kunnskap. Strukturen:
+
+- `docs/Home.md` — landingsside
+- `docs/CLAUDE_NOTES.md` — Claude-samarbeids-doc (les ved CSS/UI-oppgaver)
+- `docs/clients/` — klient-noter (én note per kunde)
+- `docs/decisions/` — arkitektur/forretnings-beslutninger med dato
+- `docs/leads/` — lead-tracker
+- `docs/topics/` — emner og strategier
+
+**Når du skal:**
+- Foreslå CSS/UI-endring → sjekk `docs/CLAUDE_NOTES.md` for relevante feller først
+- Jobbe med en spesifikk klient → les `docs/clients/<navn>.md` hvis den finnes
+- Ta en arkitektur-beslutning → opprett `docs/decisions/<dato>-<tema>.md`
+- Oppdage en ny felle eller workflow-issue → oppdater `docs/CLAUDE_NOTES.md`
+
+Vaulten skrives i ren markdown med YAML front matter (`tags:`, `type:`, osv.) — Obsidian gir grafvisning, men filene er normale `.md` du kan redigere fritt.
 
 ## Prosjektkontekst
 Nettsidemaler for norske småbedrifter. Selges for 5 000–20 000 kr per stk.
