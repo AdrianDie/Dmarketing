@@ -3,3 +3,9 @@ node_modules/
 leads/
 !docs/leads/
 mobile_screenshots/
+
+# Claude Code
+.claude/worktrees/
+
+# Obsidian (per-bruker workspace; tracker ikke vault-config)
+.obsidian/
