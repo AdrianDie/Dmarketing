@@ -202,11 +202,11 @@
 
   // 3. Bygg meny-HTML
   const items = [
-    { num: '01', label: 'Forside', href: 'index.html', key: 'forside' },
-    { num: '02', label: 'Tjenester', href: 'tjenester.html', key: 'tjenester' },
-    { num: '03', label: 'Kontakt', href: 'kontakt.html', key: 'kontakt' },
-    { num: '04', label: 'Maler', href: 'maler/index.html', key: 'maler' },
-    { num: '05', label: 'AI-webmaster', href: 'ai-webmaster.html', key: 'ai-webmaster' },
+    { num: '01', label: 'Forside', href: '/', key: 'forside' },
+    { num: '02', label: 'Tjenester', href: 'tjenester', key: 'tjenester' },
+    { num: '03', label: 'Kontakt', href: 'kontakt', key: 'kontakt' },
+    { num: '04', label: 'Maler', href: 'maler/', key: 'maler' },
+    { num: '05', label: 'AI-webmaster', href: 'ai-webmaster', key: 'ai-webmaster' },
   ];
 
   const navItemsHTML = items.map(item => `
@@ -221,7 +221,7 @@
   const menuHTML = `
   <section class="menu-wrap">
     <div class="navbar-2">
-      <a href="${basePath}index.html" class="logo-link-wrapper brand-3">
+      <a href="${basePath}/" class="logo-link-wrapper brand-3">
         <div class="logo-text-container">
           <h1 class="heading-6 logo-1">Dietrichs</h1>
           <h1 class="heading-6 logo-2">marketing</h1>
