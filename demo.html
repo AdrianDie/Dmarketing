@@ -88,6 +88,10 @@
       pointer-events: none;
     }
     #floating-cta.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    /* Mobil: skjul floating CTA — wraper til 3 linjer og overlapper inline-CTA */
+    @media (max-width: 767px) {
+      #floating-cta { display: none !important; }
+    }
   </style>
 </head>
 <body>
