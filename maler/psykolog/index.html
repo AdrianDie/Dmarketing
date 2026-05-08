@@ -37,29 +37,76 @@
   </div>
 </nav>
 
-<section class="bg-grid relative overflow-hidden">
-  <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,255,255,0) 0%,#FAFAFA 100%)"></div>
-  <div class="relative max-w-6xl mx-auto px-6 pt-40 pb-28 text-center">
-    <div data-animate class="inline-flex items-center gap-2 bg-white border border-slate-200 shadow-sm text-[12px] font-medium text-slate-500 px-4 py-2 rounded-full mb-10">
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>Ledige timer denne uken — [By]
+<!-- HERO — Soft asymmetrisk med bilde + glass-pill -->
+<section class="relative pt-24 overflow-hidden" style="background:linear-gradient(180deg,#ECFEFF 0%,#FFFFFF 70%);">
+  <div class="pointer-events-none absolute top-1/2 right-0 w-[700px] h-[700px] -translate-y-1/2 translate-x-1/3" style="background:radial-gradient(circle,rgba(14,116,144,0.10) 0%,transparent 70%);"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-12 gap-12 items-center pt-20 pb-24">
+      <div class="md:col-span-6">
+        <div data-animate class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-cyan-200 text-[12px] font-medium text-brand px-4 py-2 rounded-full mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>Ledige timer denne uken
+        </div>
+        <h1 data-animate class="f-display font-bold text-5xl md:text-6xl lg:text-7xl text-slate-900 leading-[1.0] mb-7" style="letter-spacing:-0.025em">
+          Et trygt rom<br/><span class="italic font-medium" style="color:#0E7490">for deg.</span>
+        </h1>
+        <p data-animate class="text-lg text-slate-500 max-w-md leading-relaxed mb-9">
+          Autorisert psykolog i [By] med tid til å lytte. Individualterapi, parterapi og familieterapi — konfidensielt, uten venteliste.
+        </p>
+        <div data-animate class="flex flex-col sm:flex-row gap-3 mb-9">
+          <a href="kontakt.html" class="bg-brand text-white f-display font-semibold px-7 py-3.5 rounded-xl text-[14px] hover:bg-brand-light transition-all hover:scale-[1.02] text-center">Book uforpliktende samtale</a>
+          <a href="tel:+4712345678" class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-700 f-display font-semibold px-7 py-3.5 rounded-xl text-[14px] hover:border-slate-400 transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            123 45 678
+          </a>
+        </div>
+        <div data-animate class="inline-flex items-center gap-3 bg-white/90 border border-slate-200 rounded-2xl px-5 py-3 shadow-sm">
+          <div class="relative">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+            <span class="absolute inset-0 w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping opacity-50"></span>
+          </div>
+          <div>
+            <div class="text-[11px] uppercase tracking-widest text-slate-400 leading-none mb-1">Neste ledige time</div>
+            <div class="text-[14px] font-semibold text-slate-900">Torsdag 09:30 · [By]sentrum</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-6 relative" data-animate>
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
+          <img src="../bilder/psykolog/lyst-rom.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=1000&q=80'"
+               alt="Et trygt rom"
+               class="w-full h-full object-cover" />
+          <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to top,rgba(14,116,144,0.20) 0%,transparent 50%);"></div>
+
+          <!-- Pull-quote overlay bottom -->
+          <div class="absolute bottom-6 left-6 right-6 rounded-2xl p-5" style="background:rgba(255,255,255,0.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.9);">
+            <p class="f-display text-[18px] text-slate-800 leading-snug italic mb-2" style="font-weight:500;">
+              "Jeg kom hit redd. Jeg går herfra hørt."
+            </p>
+            <p class="text-[11px] text-slate-500 tracking-wide">— Pasient hos Samtaletid</p>
+          </div>
+        </div>
+
+        <!-- Floating sertifisering -->
+        <div class="absolute -top-4 -left-4 rounded-xl px-4 py-3 shadow-lg" style="background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.9);">
+          <div class="flex items-center gap-2.5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            <div>
+              <div class="text-[11px] text-slate-400 leading-none mb-0.5">Autorisert</div>
+              <div class="text-[12px] font-semibold text-slate-900 leading-none">Helsedirektoratet</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <h1 data-animate class="f-display font-extrabold text-6xl md:text-7xl lg:text-8xl tracking-tight text-slate-900 leading-[1.0] mb-7" style="letter-spacing:-0.04em">
-      Et trygt rom<br/><span class="text-brand">for deg</span>
-    </h1>
-    <p data-animate class="text-lg text-slate-500 max-w-lg mx-auto leading-relaxed mb-12">
-      Autorisert psykolog og familieterapeut i [By]. Individualterapi, parterapi og familieterapi — konfidensielt og uten venteliste.
-    </p>
-    <div data-animate class="flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="kontakt.html" class="bg-brand text-white f-display font-semibold px-8 py-4 rounded-xl text-[14px] hover:bg-brand-light hover:shadow-[0_0_30px_rgba(14,116,144,.25)] hover:scale-[1.02] transition-all">Book en time</a>
-      <a href="tel:+4712345678" class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-700 f-display font-semibold px-8 py-4 rounded-xl text-[14px] hover:border-slate-400 hover:scale-[1.01] transition-all">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>123 45 678
-      </a>
-    </div>
-    <div data-animate class="flex flex-wrap justify-center gap-7 mt-16 text-[13px] text-slate-400">
-      <span class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Autorisert psykolog</span>
+
+    <!-- Trust strip below hero -->
+    <div data-animate class="flex flex-wrap justify-center gap-x-8 gap-y-3 pb-12 text-[13px] text-slate-500 border-t border-cyan-100 pt-8">
+      <span class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M9 12l2 2 4-4"/></svg>Autorisert psykolog</span>
       <span class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>Full taushetsplikt</span>
       <span class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Ingen venteliste</span>
-      <span class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87V15.13a1 1 0 01-1.447.899L15 14M3 8h12a2 2 0 012 2v4a2 2 0 01-2 2H3a2 2 0 01-2-2V10a2 2 0 012-2z"/></svg>Videokonsultasjon</span>
+      <span class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87V15.13a1 1 0 01-1.447.899L15 14"/></svg>Videokonsultasjon</span>
     </div>
   </div>
 </section>

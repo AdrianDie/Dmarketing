@@ -10,7 +10,7 @@
       theme: {
         extend: {
           fontFamily: {
-            display: ['Manrope', 'sans-serif'],
+            display: ['Bricolage Grotesque', 'sans-serif'],
             body: ['Inter', 'sans-serif'],
           },
           colors: {
@@ -24,13 +24,16 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bricolage+Grotesque:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.9/dist/motion.js"></script>
 
   <style>
     * { -webkit-font-smoothing: antialiased; }
     body { font-family: 'Inter', sans-serif; background: #fff; color: #0F172A; }
-    .f-display { font-family: 'Manrope', sans-serif; }
+    .f-display { font-family: 'Bricolage Grotesque', sans-serif; }
+    .swatch-circle { transition: transform .25s ease, box-shadow .25s ease; cursor: pointer; }
+    .swatch-circle:hover { transform: scale(1.08) rotate(-2deg); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+    .paint-stroke { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'><path d='M0,30 Q50,5 100,30 T200,30' stroke='rgba(255,255,255,0.18)' stroke-width='2' fill='none'/></svg>"); background-repeat: repeat-x; }
 
     #nav { transition: background .25s, box-shadow .25s; }
     #nav.scrolled { background: rgba(255,255,255,.92); backdrop-filter: blur(16px); box-shadow: 0 1px 0 #E2E8F0; }
@@ -91,58 +94,146 @@
   </div>
 </nav>
 
-<!-- ─── HERO ─────────────────────────────────────────────── -->
-<section class="bg-grid relative overflow-hidden">
-  <div class="pointer-events-none absolute inset-0"
-       style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0) 0%, #fff 100%)"></div>
-
-  <div class="relative max-w-6xl mx-auto px-6 pt-40 pb-28 text-center">
-
-    <div data-animate class="inline-flex items-center gap-2 bg-white border border-slate-200 shadow-sm text-[12px] font-medium text-slate-500 px-4 py-2 rounded-full mb-10">
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
-      Tilgjengelig for nye oppdrag — [By] og omegn
+<!-- ─── HERO — Split-screen: fargefelt + innhold ──────────── -->
+<section class="relative pt-14 overflow-hidden">
+  <div class="grid md:grid-cols-2 min-h-[640px]">
+    <!-- LEFT: gradient fargefelt med store fargesirkler -->
+    <div class="relative flex items-end overflow-hidden paint-stroke" style="background:linear-gradient(135deg,#0D5C2C 0%,#15803D 60%,#16A34A 100%);">
+      <!-- Floating swatches -->
+      <div class="absolute top-12 left-10 w-24 h-24 rounded-full swatch-circle shadow-2xl" style="background:#FBBF24;"></div>
+      <div class="absolute top-32 right-16 w-16 h-16 rounded-full swatch-circle shadow-2xl" style="background:#F87171;"></div>
+      <div class="absolute bottom-44 left-24 w-20 h-20 rounded-full swatch-circle shadow-2xl" style="background:#60A5FA;"></div>
+      <div class="absolute top-20 right-44 w-12 h-12 rounded-full swatch-circle shadow-2xl" style="background:#F3F4F6;"></div>
+      <div class="absolute bottom-20 right-10 w-28 h-28 rounded-full swatch-circle shadow-2xl" style="background:#1E293B;"></div>
+      <!-- Text bottom-left -->
+      <div data-animate class="relative z-10 px-12 pb-16 max-w-md">
+        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/20 text-[11px] font-semibold text-white/90 uppercase tracking-widest px-3 py-1.5 rounded-full mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-300 inline-block"></span>
+          [By]s lokale malerfirma
+        </div>
+        <h1 class="f-display font-extrabold text-5xl md:text-6xl text-white leading-[0.95] mb-5" style="letter-spacing:-0.035em">
+          Ferdig malt —<br/>
+          <span class="italic font-medium" style="color:#FBBF24">i tide, til avtalt pris.</span>
+        </h1>
+        <p class="text-white/80 text-[15px] leading-relaxed">
+          17 år med pensel og rull i [By]. Innvendig, utvendig, sparkling — vi rydder hver dag og leverer på avtalt dag.
+        </p>
+      </div>
     </div>
 
-    <h1 data-animate
-        class="f-display font-extrabold text-6xl md:text-7xl lg:text-8xl tracking-tight text-slate-900 leading-[1.0] mb-7"
-        style="letter-spacing: -0.04em">
-      Ferdig malt —<br/>
-      <span class="text-brand">i tide, til avtalt pris</span>
-    </h1>
+    <!-- RIGHT: hvit, innhold + mini-galleri -->
+    <div class="relative bg-white px-10 md:px-16 py-20 flex flex-col justify-center">
+      <p data-animate class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-5">FargeVerk · Siden 2007</p>
+      <h2 data-animate class="f-display font-extrabold text-3xl text-slate-900 mb-5 leading-tight" style="letter-spacing:-0.02em">
+        Du velger farge.<br/>Vi tar resten.
+      </h2>
+      <p data-animate class="text-slate-500 text-[15px] leading-relaxed mb-7 max-w-md">
+        Autorisert malerfirma med 5 års garanti på alt arbeid. Gratis NCS-fargerådgivning ved oppdrag over 10 000 kr.
+      </p>
 
-    <p data-animate class="text-lg text-slate-500 max-w-lg mx-auto leading-relaxed mb-12">
-      Autorisert malerfirma i [By]. Innvendig og utvendig maling, tapetsering og sparkling — til fast pris med 5 års garanti.
-    </p>
+      <div data-animate class="flex flex-col sm:flex-row gap-3 mb-9">
+        <a href="#kontakt"
+           class="bg-brand text-white f-display font-semibold px-6 py-3.5 rounded-xl text-[14px] hover:bg-brand-light hover:shadow-[0_0_30px_rgba(21,128,61,.30)] hover:scale-[1.02] transition-all text-center">
+          Få fastpris-tilbud
+        </a>
+        <a href="tel:+4712345678"
+           class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-700 f-display font-semibold px-6 py-3.5 rounded-xl text-[14px] hover:border-slate-400 transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          123 45 678
+        </a>
+      </div>
 
-    <div data-animate class="flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="#kontakt"
-         class="bg-brand text-white f-display font-semibold px-8 py-4 rounded-xl text-[14px] hover:bg-brand-light hover:shadow-[0_0_30px_rgba(21,128,61,.30)] hover:scale-[1.02] transition-all">
-        Få gratis befaring
-      </a>
-      <a href="tel:+4712345678"
-         class="inline-flex items-center justify-center gap-2 border border-slate-200 text-slate-700 f-display font-semibold px-8 py-4 rounded-xl text-[14px] hover:border-slate-400 hover:scale-[1.01] transition-all">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        123 45 678
-      </a>
+      <!-- Mini-galleri 3 thumbnails -->
+      <div data-animate class="grid grid-cols-3 gap-2.5">
+        <div class="aspect-square rounded-lg overflow-hidden">
+          <img src="bilder/malerfirma/vegg-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80'" alt="Vegg malt" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="aspect-square rounded-lg overflow-hidden">
+          <img src="bilder/malerfirma/vegg-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1503602642458-232111445657?w=400&q=80'" alt="Maler-detalj" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="aspect-square rounded-lg overflow-hidden">
+          <img src="bilder/malerfirma/vegg-3.jpg" onerror="this.src='https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=400&q=80'" alt="Pensel" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-5 mt-7 text-[12px] text-slate-500">
+        <span class="flex items-center gap-1.5">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M9 12l2 2 4-4"/></svg>
+          Mesterbrev
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M12 8v4l3 3"/></svg>
+          5 års garanti
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M11 2l1 5h5l-4 3 1 5-4-3-4 3 1-5-4-3h5z"/></svg>
+          4.9 — 110+
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NCS-FARGEKART ─────────────────────────────────────── -->
+<section id="fargekart" class="py-20 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div data-animate class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <p class="text-[12px] font-semibold tracking-widest uppercase text-brand mb-3">NCS-fargekart 2026</p>
+        <h2 class="f-display font-extrabold text-4xl text-slate-900 leading-tight" style="letter-spacing:-0.03em">Årets utvalgte farger</h2>
+      </div>
+      <p class="text-[14px] text-slate-500 max-w-sm leading-relaxed">Vi følger Norsk Standard (NCS). Klikk en farge for å se den på vegg — eller bestill gratis prøveboks levert hjem.</p>
     </div>
 
-    <div data-animate class="flex flex-wrap justify-center gap-7 mt-16 text-[13px] text-slate-400">
-      <span class="flex items-center gap-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        Malermesterbrev
-      </span>
-      <span class="flex items-center gap-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        5 års garanti
-      </span>
-      <span class="flex items-center gap-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-        4.9 / 5 — 110+ anmeldelser
-      </span>
-      <span class="flex items-center gap-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
-        Gratis fargerådgivning
-      </span>
+    <div data-stagger class="grid grid-cols-4 md:grid-cols-8 gap-4">
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#F5F0E6"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 0505-Y20R</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Linfrø</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#D8DCC0"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 2010-G50Y</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Salvie</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#5C7A8C"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 5020-B</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Fjord</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#C2876A"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 3030-Y50R</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Terracotta</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#2B3140"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 8010-R90B</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Midnatt</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#E8E4DC"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 1502-Y</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Kalk</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3" style="background:#7C8763"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 5020-G50Y</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Olivengrønn</div>
+      </div>
+      <div class="text-center">
+        <div class="aspect-square rounded-xl swatch-circle shadow-md mb-3 border border-slate-200" style="background:#FAFAFA"></div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wide">S 0500-N</div>
+        <div class="text-[12px] font-medium text-slate-900 mt-0.5">Ren hvit</div>
+      </div>
+    </div>
+
+    <div data-animate class="mt-10 flex flex-wrap items-center gap-4 text-[13px] text-slate-500">
+      <a href="#kontakt" class="inline-flex items-center gap-2 bg-brand-soft text-brand font-semibold px-4 py-2 rounded-lg text-[13px] hover:bg-green-100 transition-colors">
+        Bestill gratis prøveboks
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+      <span>Alle farger inkluderer test-rull og pensel — vi anbefaler å se prøven på din vegg i 24 timer før du bestemmer deg.</span>
     </div>
   </div>
 </section>
