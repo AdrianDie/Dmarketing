@@ -158,20 +158,151 @@
       .preloader-image .logo-2 { font-size: clamp(22px, 6vw, 32px); }
     }
 
-    /* Mobile menu */
-    .menu-overlay { transition: opacity 0.25s, visibility 0.25s; }
-    .menu-overlay.hidden-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+    /* ============================================== */
+    /* MENY (1:1 fra index.html / Webflow-side)         */
+    /* Scoped: bare meny-spesifikke klasser - ingen     */
+    /* webflow.css-import (Tailwind beholdes intakt)    */
+    /* ============================================== */
+    .menu-wrap { background-color: #1a1a1f; }
+    .navbar-2 {
+      z-index: 101; justify-content: space-between; align-items: center;
+      width: 90%; max-width: 1440px; height: 50px;
+      margin: 50px auto 0; display: flex; position: relative;
+    }
+    .logo-link-wrapper {
+      flex-direction: column; justify-content: center; align-items: center;
+      display: flex; text-decoration: none;
+    }
+    .brand-3 { order: -1; }
+    .brand-3.w--current { flex-flow: column; }
+    .logo-text-container { order: 0; margin-top: 20px; display: flex; }
+    .heading-6 {
+      color: whitesmoke; letter-spacing: 2px; text-transform: uppercase;
+      margin: 0; font-family: Archivo, sans-serif;
+      font-size: 12px; font-weight: 400; line-height: 12px;
+    }
+    .heading-6.logo-1 { margin-left: 10px; font-size: 30px; line-height: 45px; }
+    .heading-6.logo-2 {
+      color: transparent; -webkit-text-stroke: 0.5px whitesmoke;
+      margin: 0 0 0 10px; font-size: 30px; line-height: 45px;
+    }
+    .navigation__menu-btn {
+      cursor: pointer; flex-direction: column; order: 1;
+      justify-content: flex-start; align-items: center;
+      height: 25px; overflow: hidden; display: flex;
+      background: transparent; border: 0; padding: 0;
+    }
+    .open-wrap { align-items: center; height: 25px; display: flex; }
+    .navigation-text {
+      color: #fff; letter-spacing: 3px; text-transform: uppercase;
+      font-family: Archivo, sans-serif; font-size: 12px; line-height: 12px;
+      text-decoration: none;
+    }
+    .hamburger {
+      flex-direction: column; justify-content: space-between; align-items: flex-end;
+      width: 25px; height: 10px; margin-left: 12.5px; display: flex;
+    }
+    .hamburger-line { background-color: #fff; width: 25px; height: 2.22px; }
+    .hamburger-line-4 { background-color: #fff; width: 15px; height: 2.22px; }
+    .close-wrap {
+      flex-direction: row; justify-content: flex-end; align-items: center;
+      height: 25px; display: flex;
+    }
+    .close-btn {
+      width: 18px; height: 18px; margin-left: 12.5px; position: relative;
+    }
+    .close-btn::before, .close-btn::after {
+      content: ""; position: absolute; top: 50%; left: 0;
+      width: 100%; height: 2px; background: #fff;
+    }
+    .close-btn::before { transform: rotate(45deg); }
+    .close-btn::after { transform: rotate(-45deg); }
 
-    /* Meny-lenke hover (Webflow-stil: stroke → fill slide-up) */
-    .nav-link { display: inline-block; overflow: hidden; line-height: 1; vertical-align: bottom; }
-    .nav-link-inner {
-      display: flex; flex-direction: column;
+    /* Nav-overlay (åpen meny) */
+    .nav-container-2 {
+      z-index: 97; background-color: #1a1a1f;
+      flex-direction: column; justify-content: flex-start; align-items: center;
+      min-height: 100vh; padding: 100px 0 80px;
+      position: fixed; inset: 0;
+      overflow-y: auto;
+    }
+    .nav__bg {
+      z-index: -1; background-color: #1a1a1f;
+      position: absolute; inset: 0;
+    }
+    .nav-items {
+      z-index: 99; flex-flow: column; align-items: flex-start;
+      width: 80%; max-width: 1200px; margin: 40px auto 0;
+      display: flex; position: relative; overflow: hidden;
+    }
+    .nav-item {
+      align-items: center; text-decoration: none; display: flex;
+    }
+    .nav-item.hide { display: none; }
+    .nav-item-number {
+      color: #fff; letter-spacing: 3px; margin-right: 20px;
+      font-family: Archivo, sans-serif; font-size: 12px; line-height: 12px;
+      transform: rotate(-90deg);
+    }
+    .special-text-wrapper { height: 130px; overflow: hidden; }
+    .nav-item-text {
+      color: transparent; -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 0.8px #A5A3A6;
+      text-transform: uppercase; font-family: Archivo, sans-serif;
+      font-size: 90px; font-weight: 700; line-height: 130px; display: block;
+    }
+    .nav-item-text-full {
+      color: #fff; text-transform: uppercase; font-family: Archivo, sans-serif;
+      font-size: 90px; font-weight: 700; line-height: 130px;
+    }
+    /* Hover-animasjon: slide tekst opp, fill-versjon kommer inn */
+    .special-text-wrapper > div {
       transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
     }
-    .nav-link-stroke { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.7); }
-    .nav-link-fill { color: #60A5FA; }
-    .group:hover .nav-link-inner { transform: translateY(-50%); }
-    .group:hover .nav-link-num { color: #60A5FA; transition: color 0.4s ease; }
+    .nav-item:hover .nav-item-text,
+    .nav-item:hover .nav-item-text-full {
+      transform: translateY(-130px);
+    }
+
+    /* Toggle: skjul nav-container-2 når meny er stengt */
+    .nav-container-2.hidden-menu {
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+    .nav-container-2 {
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    /* Toggle: bytt mellom open-wrap og close-wrap */
+    .navigation__menu-btn.is-open .open-wrap { display: none; }
+    .navigation__menu-btn:not(.is-open) .close-wrap { display: none; }
+
+    @media screen and (min-width: 1440px) {
+      .nav-item-text, .nav-item-text-full { font-size: 85px; line-height: 110px; }
+      .nav-items { width: 50%; }
+      .navigation-text { font-size: 15px; }
+      .heading-6.logo-1, .heading-6.logo-2 { font-size: 40px; line-height: 30px; }
+      .special-text-wrapper { height: 110px; }
+      .nav-item:hover .nav-item-text,
+      .nav-item:hover .nav-item-text-full { transform: translateY(-110px); }
+    }
+    @media screen and (max-width: 991px) {
+      .nav-item-text, .nav-item-text-full { font-size: 85px; }
+    }
+    @media screen and (max-width: 767px) {
+      .special-text-wrapper { height: auto; }
+      .nav-item-text-full { font-size: 70px; line-height: 90px; display: none; }
+      .nav-item-text { font-size: 70px; line-height: 120px; }
+      .nav-items { width: 90%; }
+      .navbar-2 { margin-top: 30px; }
+    }
+    @media screen and (max-width: 479px) {
+      .nav-item-text { font-size: 35px; line-height: 200%; }
+      .nav-item-text-full { font-size: 35px; display: none; }
+      .nav-items { margin-top: 20%; }
+      .navbar-2 {
+        justify-content: space-between; width: 100%;
+        margin: 30px 0 0; padding: 0 5px 0 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -189,86 +320,71 @@
   </div>
 
   <!-- ============================================== -->
-  <!-- NAV (matcher hovedsiden, men omvendt: svart bg) -->
+  <!-- MENY (1:1 fra index.html — Webflow-struktur)    -->
   <!-- ============================================== -->
-  <nav class="relative z-50 bg-white border-b border-zinc-100">
-    <div class="w-full px-8 md:px-16 lg:px-20 h-16 md:h-20 flex items-center justify-between">
-      <a href="index.html" class="logo-row" aria-label="Dietrichs Marketing">
-        <span class="logo-solid">Dietrichs</span>
-        <span class="logo-outline">Marketing</span>
+  <section class="menu-wrap">
+    <div class="navbar-2">
+      <a href="index.html" class="logo-link-wrapper brand-3">
+        <div class="logo-text-container">
+          <h1 class="heading-6 logo-1">Dietrichs</h1>
+          <h1 class="heading-6 logo-2">marketing</h1>
+        </div>
       </a>
-
-      <!-- Meny-knapp (åpner overlay) -->
-      <button id="menu-btn" class="flex items-center gap-3 text-[#09090B] text-xs md:text-sm font-medium uppercase tracking-[0.2em]" aria-label="Åpne meny">
-        <span id="menu-btn-label">Meny</span>
-        <span id="menu-btn-icon" class="flex flex-col gap-1.5">
-          <span class="block w-7 h-px bg-[#09090B]"></span>
-          <span class="block w-7 h-px bg-[#09090B]"></span>
-        </span>
+      <button type="button" id="menu-btn" class="navigation__menu-btn" aria-label="Åpne meny">
+        <div class="open-wrap">
+          <div class="navigation-text">Meny</div>
+          <div class="hamburger">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line-4"></div>
+          </div>
+        </div>
+        <div class="close-wrap">
+          <div class="navigation-text">Lukk</div>
+          <div class="close-btn"></div>
+        </div>
       </button>
     </div>
-  </nav>
+  </section>
 
-  <!-- Menu overlay (full-screen, nummerert som hovedsiden) -->
-  <div id="menu-overlay" class="menu-overlay hidden-menu fixed inset-0 z-40 bg-black text-white pt-20 md:pt-24 px-6 md:px-10 overflow-y-auto">
-    <div class="max-w-7xl mx-auto pt-10 md:pt-16 pb-10">
-      <p class="text-xs uppercase tracking-[0.3em] text-white/40 mb-8">Navigasjon</p>
-      <div class="flex flex-col gap-2 md:gap-3">
-        <a href="index.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
-          <span class="nav-link-num font-mono text-sm text-white/40">01</span>
-          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
-            <span class="nav-link-inner">
-              <span class="nav-link-stroke">Forside</span>
-              <span class="nav-link-fill">Forside</span>
-            </span>
-          </span>
-        </a>
-        <a href="tjenester.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
-          <span class="nav-link-num font-mono text-sm text-white/40">02</span>
-          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
-            <span class="nav-link-inner">
-              <span class="nav-link-stroke">Tjenester</span>
-              <span class="nav-link-fill">Tjenester</span>
-            </span>
-          </span>
-        </a>
-        <a href="kontakt.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
-          <span class="nav-link-num font-mono text-sm text-white/40">03</span>
-          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
-            <span class="nav-link-inner">
-              <span class="nav-link-stroke">Kontakt</span>
-              <span class="nav-link-fill">Kontakt</span>
-            </span>
-          </span>
-        </a>
-        <a href="maler/index.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
-          <span class="nav-link-num font-mono text-sm text-white/40">04</span>
-          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
-            <span class="nav-link-inner">
-              <span class="nav-link-stroke">Maler</span>
-              <span class="nav-link-fill">Maler</span>
-            </span>
-          </span>
-        </a>
-        <a href="#priser" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
-          <span class="nav-link-num font-mono text-sm text-white/40">05</span>
-          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
-            <span class="nav-link-inner">
-              <span class="nav-link-stroke">Priser &amp; pakker</span>
-              <span class="nav-link-fill">Priser &amp; pakker</span>
-            </span>
-          </span>
-        </a>
-        <a href="demo.html" class="group flex items-baseline gap-6 py-3 border-b border-white/10">
-          <span class="nav-link-num font-mono text-sm text-white/40">06</span>
-          <span class="nav-link font-display font-extrabold text-3xl md:text-5xl tracking-tight">
-            <span class="nav-link-inner">
-              <span class="nav-link-stroke">Se demo-video</span>
-              <span class="nav-link-fill">Se demo-video</span>
-            </span>
-          </span>
-        </a>
-      </div>
+  <!-- Meny-overlay (åpen tilstand) -->
+  <div id="menu-overlay" class="nav-container-2 hidden-menu">
+    <div class="nav__bg"></div>
+    <div class="nav-items">
+      <a href="index.html" class="nav-item">
+        <div class="nav-item-number">01</div>
+        <div class="special-text-wrapper">
+          <div class="nav-item-text">Forside</div>
+          <div class="nav-item-text-full">Forside</div>
+        </div>
+      </a>
+      <a href="tjenester.html" class="nav-item">
+        <div class="nav-item-number">02</div>
+        <div class="special-text-wrapper">
+          <div class="nav-item-text">Tjenester</div>
+          <div class="nav-item-text-full">Tjenester</div>
+        </div>
+      </a>
+      <a href="kontakt.html" class="nav-item">
+        <div class="nav-item-number">03</div>
+        <div class="special-text-wrapper">
+          <div class="nav-item-text">Kontakt</div>
+          <div class="nav-item-text-full">Kontakt</div>
+        </div>
+      </a>
+      <a href="maler/index.html" class="nav-item">
+        <div class="nav-item-number">04</div>
+        <div class="special-text-wrapper">
+          <div class="nav-item-text">Maler</div>
+          <div class="nav-item-text-full">Maler</div>
+        </div>
+      </a>
+      <a href="ai-webmaster.html" class="nav-item">
+        <div class="nav-item-number">05</div>
+        <div class="special-text-wrapper">
+          <div class="nav-item-text">AI-webmaster</div>
+          <div class="nav-item-text-full">AI-webmaster</div>
+        </div>
+      </a>
     </div>
   </div>
 
@@ -963,15 +1079,15 @@
   </div>
 
   <script>
-    // Meny toggle
+    // Meny toggle (Webflow-stil)
     (function () {
       const btn = document.getElementById('menu-btn');
-      const label = document.getElementById('menu-btn-label');
       const overlay = document.getElementById('menu-overlay');
       if (!btn || !overlay) return;
       const setOpen = (open) => {
         overlay.classList.toggle('hidden-menu', !open);
-        if (label) label.textContent = open ? 'Lukk' : 'Meny';
+        btn.classList.toggle('is-open', open);
+        btn.setAttribute('aria-label', open ? 'Lukk meny' : 'Åpne meny');
         document.body.style.overflow = open ? 'hidden' : '';
       };
       btn.addEventListener('click', () => setOpen(overlay.classList.contains('hidden-menu')));
