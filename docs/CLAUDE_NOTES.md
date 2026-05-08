@@ -1,11 +1,14 @@
 ---
-tags: [claude, reference, hub]
+tags: [claude, reference, hub, dmarketing]
 type: doc
+scope: dmarketing-repo
 ---
 
-# Claude Notes — Dmarketing
+# Claude Notes — Dmarketing-repoet
 
-> Levende hjelpedokument for Claude Code (og fremtidige instanser).
+> **Scope:** Dette dokumentet er kun for Dmarketing-repoet (`Dmarketing/`) — alt som inkluderer dmarketing.no, ai-webmaster, demo, og klient-templates i `maler/`. Ikke generelle Claude-tips.
+>
+> **Levende hjelpedokument** for Claude Code (og fremtidige instanser).
 > **Hver gang en sesjon avslører ny innsikt eller feller, oppdater dette dokumentet** — ikke la samme feil gjenta seg.
 
 Dette er ment å åpnes både fra repoet og fra Obsidian. Strukturen er flat med korte seksjoner og konkrete eksempler.
