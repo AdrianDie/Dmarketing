@@ -163,7 +163,7 @@
     /* Scoped: bare meny-spesifikke klasser - ingen     */
     /* webflow.css-import (Tailwind beholdes intakt)    */
     /* ============================================== */
-    .menu-wrap { background-color: #1a1a1f; padding: 50px 0; }
+    .menu-wrap { background-color: #ffffff; padding: 50px 0; border-bottom: 1px solid #E4E4E7; }
     .navbar-2 {
       z-index: 101; justify-content: space-between; align-items: center;
       width: 90%; max-width: 1440px; height: 50px;
@@ -177,13 +177,13 @@
     .brand-3.w--current { flex-flow: column; }
     .logo-text-container { order: 0; margin-top: 20px; display: flex; }
     .heading-6 {
-      color: whitesmoke; letter-spacing: 2px; text-transform: uppercase;
+      color: #09090B; letter-spacing: 2px; text-transform: uppercase;
       margin: 0; font-family: Archivo, sans-serif;
       font-size: 12px; font-weight: 600; line-height: 12px;
     }
     .heading-6.logo-1 { margin-left: 10px; font-size: 30px; line-height: 45px; }
     .heading-6.logo-2 {
-      color: transparent; -webkit-text-stroke: 0.5px whitesmoke;
+      color: transparent; -webkit-text-stroke: 0.5px #09090B;
       margin: 0 0 0 10px; font-size: 30px; line-height: 45px;
     }
     .navigation__menu-btn {
@@ -197,7 +197,7 @@
     .navigation__menu-btn:focus-visible { outline: none; }
     .open-wrap { align-items: center; height: 25px; display: flex; }
     .navigation-text {
-      color: #fff; letter-spacing: 3px; text-transform: uppercase;
+      color: #09090B; letter-spacing: 3px; text-transform: uppercase;
       font-family: Archivo, sans-serif; font-size: 12px; line-height: 12px;
       text-decoration: none;
     }
@@ -205,8 +205,22 @@
       flex-direction: column; justify-content: space-between; align-items: flex-end;
       width: 25px; height: 10px; margin-left: 12.5px; display: flex;
     }
-    .hamburger-line { background-color: #fff; width: 25px; height: 2.22px; }
-    .hamburger-line-4 { background-color: #fff; width: 15px; height: 2.22px; }
+    .hamburger-line { background-color: #09090B; width: 25px; height: 2.22px; }
+    .hamburger-line-4 { background-color: #09090B; width: 15px; height: 2.22px; }
+    /* Når menyen er åpen: hele meny-stripen flipper til mørkt tema */
+    body.menu-open .menu-wrap { background-color: #1a1a1f; border-bottom-color: rgba(255,255,255,0.1); }
+    body.menu-open .heading-6 { color: whitesmoke; }
+    body.menu-open .heading-6.logo-2 { -webkit-text-stroke-color: whitesmoke; }
+    body.menu-open .navigation-text { color: #fff; }
+    body.menu-open .hamburger-line,
+    body.menu-open .hamburger-line-4 { background-color: #fff; }
+    body.menu-open .close-btn::before,
+    body.menu-open .close-btn::after { background: #fff; }
+    /* Smooth fargetransisjon */
+    .menu-wrap, .heading-6, .navigation-text,
+    .hamburger-line, .hamburger-line-4 {
+      transition: background-color 0.25s ease, color 0.25s ease, -webkit-text-stroke-color 0.25s ease, border-color 0.25s ease;
+    }
     .close-wrap {
       flex-direction: row; justify-content: flex-end; align-items: center;
       height: 25px; display: flex;
@@ -1096,6 +1110,7 @@
       const setOpen = (open) => {
         overlay.classList.toggle('hidden-menu', !open);
         btn.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
         btn.setAttribute('aria-label', open ? 'Lukk meny' : 'Åpne meny');
         document.body.style.overflow = open ? 'hidden' : '';
       };
