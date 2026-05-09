@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="UTF-8">
+<title>Faktura — Dietrichs Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #09090B;
+    --muted: #71717A;
+    --line: #E4E4E7;
+    --bg: #FAFAFA;
+    --brand: #2563EB;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Toolbar — hides on print */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: white;
+    border-bottom: 1px solid var(--line);
+    padding: 12px 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .toolbar button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .toolbar button:hover { border-color: var(--ink); }
+  .toolbar button.primary {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .toolbar button.primary:hover { background: #000; }
+  .toolbar .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+
+  /* Page — A4 */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    background: white;
+    padding: 24mm 20mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+  }
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-logo {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .brand {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .brand-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .doc-title {
+    text-align: right;
+  }
+  .doc-title h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin: 0 0 8px;
+  }
+  .doc-meta {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .doc-meta strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Address blocks */
+  .addresses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+    padding: 24px;
+    background: var(--bg);
+    border-radius: 12px;
+  }
+  .addr-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .addr-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .addr-lines {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #3F3F46;
+  }
+
+  /* Items table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+  }
+  thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  thead th.num { text-align: right; }
+  tbody td {
+    padding: 14px 8px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody td.desc { width: 55%; }
+
+  .row-delete {
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    font-size: 16px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .row-delete:hover { color: #DC2626; background: #FEE2E2; }
+
+  .add-row {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--brand);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 8px 0;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .add-row:hover { text-decoration: underline; }
+
+  /* Totals */
+  .totals {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+  }
+  .totals-table {
+    width: 280px;
+  }
+  .totals-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .totals-row.muted { color: var(--muted); font-size: 13px; }
+  .totals-row.total {
+    border-top: 2px solid var(--ink);
+    margin-top: 8px;
+    padding-top: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Payment info */
+  .payment {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  .payment-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .payment-item-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .payment-item-value {
+    font-size: 14px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer-note {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Editable affordance */
+  [contenteditable="true"] {
+    outline: none;
+    border-radius: 4px;
+    transition: background 0.1s;
+  }
+  [contenteditable="true"]:hover {
+    background: #FEF3C7;
+  }
+  [contenteditable="true"]:focus {
+    background: #FEF3C7;
+    box-shadow: 0 0 0 2px #F59E0B;
+  }
+
+  /* MVA toggle */
+  .mva-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: white;
+  }
+  .mva-status:hover { border-color: var(--ink); }
+  .mva-status input { margin: 0; }
+
+  /* Print */
+  @media print {
+    body { background: white; }
+    .toolbar, .add-row, .row-delete, .mva-status { display: none !important; }
+    .page {
+      width: auto;
+      min-height: auto;
+      margin: 0;
+      padding: 16mm 14mm;
+      box-shadow: none;
+    }
+    [contenteditable="true"]:hover,
+    [contenteditable="true"]:focus {
+      background: transparent;
+      box-shadow: none;
+    }
+    .addresses, .payment {
+      background: #FAFAFA !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="primary" onclick="window.print()">Skriv ut / Lagre som PDF</button>
+  <button onclick="addRow()">+ Legg til linje</button>
+  <label class="mva-status">
+    <input type="checkbox" id="mva-toggle"> MVA-pliktig (25 %)
+  </label>
+  <span class="hint">Klikk i alle gule felt for å redigere · Ctrl+P → "Lagre som PDF"</span>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand-row">
+      <img src="../images/D-1-modified.png" alt="Dietrichs Marketing" class="brand-logo">
+      <div>
+        <div class="brand">Dietrichs Marketing</div>
+        <div class="brand-tagline">Nettsider og Google Ads for norske bedrifter</div>
+      </div>
+    </div>
+    <div class="doc-title">
+      <h1>FAKTURA</h1>
+      <div class="doc-meta">
+        <div>Fakturanr: <strong contenteditable="true">2026-XXX</strong></div>
+        <div>Fakturadato: <strong contenteditable="true">DD.MM.2026</strong></div>
+        <div>Forfallsdato: <strong contenteditable="true">DD.MM.2026</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Addresses -->
+  <div class="addresses">
+    <div>
+      <div class="addr-label">Fra</div>
+      <div class="addr-name">Dietrichs Marketing</div>
+      <div class="addr-lines" contenteditable="true">Adrian Dietrichs<br>[Gateadresse]<br>[Postnr] [Poststed]<br>Org.nr 932 612 583<br>adrian.dietrichs@gmail.com<br>934 39 278</div>
+    </div>
+    <div>
+      <div class="addr-label">Til</div>
+      <div class="addr-name" contenteditable="true">[Kundenavn / Bedriftsnavn]</div>
+      <div class="addr-lines" contenteditable="true">[Kontaktperson]<br>[Gateadresse]<br>[Postnr] [Poststed]<br>Org.nr [hvis bedrift]</div>
+    </div>
+  </div>
+
+  <!-- Items -->
+  <table id="items">
+    <thead>
+      <tr>
+        <th>Beskrivelse</th>
+        <th class="num">Antall</th>
+        <th class="num">Enhetspris</th>
+        <th class="num">Sum</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="items-body">
+      <tr>
+        <td class="desc" contenteditable="true">[Beskrivelse av tjeneste]</td>
+        <td class="num qty" contenteditable="true">1</td>
+        <td class="num price" contenteditable="true">0</td>
+        <td class="num sum">0,00</td>
+        <td><button class="row-delete" onclick="deleteRow(this)" title="Slett linje">×</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="add-row" onclick="addRow()">+ Legg til linje</button>
+
+  <!-- Totals -->
+  <div class="totals">
+    <div class="totals-table">
+      <div class="totals-row">
+        <span>Sum eks. MVA</span>
+        <span id="subtotal">0,00</span>
+      </div>
+      <div class="totals-row muted" id="mva-row" style="display:none;">
+        <span>MVA 25 %</span>
+        <span id="mva-amount">0,00</span>
+      </div>
+      <div class="totals-row muted" id="utenfor-mva-row">
+        <span>Merverdiavgift</span>
+        <span>Utenfor mva</span>
+      </div>
+      <div class="totals-row total">
+        <span>Å betale</span>
+        <span id="total">0,00 kr</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment -->
+  <div class="payment">
+    <div class="payment-title">Betalingsinformasjon</div>
+    <div class="payment-grid">
+      <div>
+        <div class="payment-item-label">Kontonummer</div>
+        <div class="payment-item-value" contenteditable="true">[XXXX XX XXXXX]</div>
+      </div>
+      <div>
+        <div class="payment-item-label">KID (valgfritt)</div>
+        <div class="payment-item-value" contenteditable="true">—</div>
+      </div>
+      <div>
+        <div class="payment-item-label">Betalingsfrist</div>
+        <div class="payment-item-value" contenteditable="true">14 dager</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>Dietrichs Marketing · Org.nr 932 612 583</div>
+    <div>adrian.dietrichs@gmail.com · 934 39 278</div>
+  </div>
+
+  <div class="footer-note" contenteditable="true">
+    Takk for handelen! Spørsmål om fakturaen? Kontakt Adrian på 934 39 278.
+  </div>
+
+</div>
+
+<script>
+  const fmt = n => new Intl.NumberFormat('nb-NO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+  const fmtKr = n => fmt(n) + ' kr';
+  const parseNum = s => parseFloat(String(s).replace(/\s/g, '').replace(',', '.')) || 0;
+
+  function recalc() {
+    let subtotal = 0;
+    document.querySelectorAll('#items-body tr').forEach(row => {
+      const qty = parseNum(row.querySelector('.qty').textContent);
+      const price = parseNum(row.querySelector('.price').textContent);
+      const sum = qty * price;
+      row.querySelector('.sum').textContent = fmt(sum);
+      subtotal += sum;
+    });
+
+    const mvaOn = document.getElementById('mva-toggle').checked;
+    const mva = mvaOn ? subtotal * 0.25 : 0;
+    const total = subtotal + mva;
+
+    document.getElementById('subtotal').textContent = fmt(subtotal);
+    document.getElementById('mva-amount').textContent = fmt(mva);
+    document.getElementById('total').textContent = fmtKr(total);
+    document.getElementById('mva-row').style.display = mvaOn ? 'flex' : 'none';
+    document.getElementById('utenfor-mva-row').style.display = mvaOn ? 'none' : 'flex';
+  }
+
+  function addRow() {
+    const tbody = document.getElementById('items-body');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="desc" contenteditable="true">[Beskrivelse]</td>
+      <td class="num qty" contenteditable="true">1</td>
+      <td class="num price" contenteditable="true">0</td>
+      <td class="num sum">0,00</td>
+      <td><button class="row-delete" onclick="deleteRow(this)" title="Slett linje">×</button></td>
+    `;
+    tbody.appendChild(tr);
+    attachListeners(tr);
+    recalc();
+    tr.querySelector('.desc').focus();
+  }
+
+  function deleteRow(btn) {
+    const rows = document.querySelectorAll('#items-body tr');
+    if (rows.length <= 1) return;
+    btn.closest('tr').remove();
+    recalc();
+  }
+
+  function attachListeners(scope) {
+    scope.querySelectorAll('.qty, .price').forEach(el => {
+      el.addEventListener('input', recalc);
+      el.addEventListener('blur', recalc);
+    });
+  }
+
+  document.getElementById('mva-toggle').addEventListener('change', recalc);
+  attachListeners(document);
+  recalc();
+</script>
+
+</body>
+</html>
