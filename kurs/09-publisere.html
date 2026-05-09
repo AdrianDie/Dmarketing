@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>09: Publisere endringer | AI-Webmaster Kurs</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Inter', 'sans-serif'] }, colors: { ink: '#09090B', brand: '#2563EB', navy: '#0B1F4A' } } } }</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+    .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
+    .prose-custom ul, .prose-custom ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .prose-custom li { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 0.5rem; }
+    .prose-custom ul li { list-style-type: disc; }
+    .prose-custom ol li { list-style-type: decimal; }
+    .prose-custom strong { color: #09090B; }
+    .prose-custom code { background: #F4F4F5; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+    .callout { background: #EFF6FF; border-left: 3px solid #2563EB; padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    .callout p { margin-bottom: 0; color: #1E3A8A; }
+    .callout-warn { background: #FEF3C7; border-left-color: #D97706; }
+    .callout-warn p { color: #78350F; }
+    .flow-step { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #F4F4F5; }
+    .flow-step:last-child { border-bottom: none; }
+    .flow-num { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.25rem; color: #2563EB; line-height: 1; flex-shrink: 0; width: 2rem; }
+    .flow-content h3 { margin-top: 0 !important; margin-bottom: 0.25rem !important; font-size: 1rem !important; }
+    .flow-content p { font-size: 0.95rem !important; margin-bottom: 0 !important; }
+  </style>
+</head>
+<body>
+  <script>window.DIETRICHS_MENU_CONFIG = { basePath: '../' };</script>
+  <script src="../components/dietrichs-menu.js" defer></script>
+
+  <header class="py-14 md:py-20 px-6 border-b border-zinc-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-center gap-3 mb-5">
+        <a href="./" class="text-xs font-semibold uppercase tracking-widest text-zinc-500 hover:text-blue-600">← Alle moduler</a>
+        <span class="text-zinc-300">/</span>
+        <span class="badge text-xs text-zinc-400">MODUL 09</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Drift</span>
+      </div>
+      <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.03em] text-ink leading-[1.05] mb-5">
+        Publisere endringer
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-600 leading-relaxed">
+        Hva som faktisk skjer når Claude trykker "publiser" — og hva du gjør hvis det går galt.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-10 md:py-14 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="video-frame">🎬 Video kommer</div>
+      <p class="text-xs text-zinc-400 mt-3 text-center">Estimert: 8 minutter</p>
+    </div>
+  </section>
+
+  <article class="px-6 pb-16">
+    <div class="max-w-3xl mx-auto prose-custom">
+
+      <h2>Det som skjer (under panseret)</h2>
+      <div class="not-prose bg-white border border-zinc-200 rounded-2xl p-6 my-6">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-content">
+            <h3>Claude lagrer filen</h3>
+            <p class="text-zinc-600">Endringen skrives lokalt og deretter til GitHub via en "git commit + push".</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-content">
+            <h3>GitHub mottar endringen</h3>
+            <p class="text-zinc-600">Filen oppdateres på din konto. Du kan se historikken under "Commits".</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-content">
+            <h3>Cloudflare Pages varsles automatisk</h3>
+            <p class="text-zinc-600">En "webhook" forteller Cloudflare at det er ny kode.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-content">
+            <h3>Cloudflare bygger nettsiden</h3>
+            <p class="text-zinc-600">Astro kjører <code>npm run build</code> som lager HTML-filer fra kildekoden. ~30–60 sek.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div class="flow-content">
+            <h3>Live for hele verden</h3>
+            <p class="text-zinc-600">Cloudflares CDN kopierer filene til 300+ datasentre. Besøkende får siden raskt uansett hvor de er.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>Total tid: <strong>30 sekunder til ~2 minutter</strong>, avhengig av hvor stor endringen er.</p>
+
+      <h2>Hvor du kan se status</h2>
+
+      <h3>Cloudflare Pages dashboard</h3>
+      <p>Gå til <code>dash.cloudflare.com</code> → Pages → din prosjekt-navn. Du ser:</p>
+      <ul>
+        <li>Liste over alle publiseringer (de kalles "deployments")</li>
+        <li>Status: "Building", "Success", eller "Failed"</li>
+        <li>Hvor lang tid byggene tar</li>
+        <li>Hvilket commit som ble bygget</li>
+      </ul>
+
+      <h3>GitHub commits</h3>
+      <p>Gå til <code>github.com/[ditt-brukernavn]/[ditt-repo]/commits</code> for å se hver eneste endring som er gjort. Hver commit har en melding (Claude skriver disse), tidspunkt, og hvilke filer som endret seg.</p>
+
+      <h2>Hvis bygget feiler</h2>
+      <p>Cloudflare gir deg en feilmelding. De vanligste:</p>
+
+      <h3>"Build failed: cannot find module 'x'"</h3>
+      <p>Noen pakke mangler. Be Claude kjøre <code>npm install</code> og prøve igjen.</p>
+
+      <h3>"Build failed: syntax error in [fil]"</h3>
+      <p>Claude skrev noe som ikke er gyldig kode. Be Claude se på filen og rette.</p>
+
+      <div class="callout-warn callout">
+        <p><strong>Bra nytt:</strong> hvis bygget feiler, går nettsiden <strong>IKKE</strong> ned. Den siste vellykkede versjonen forblir live til neste vellykket build. Du kan prøve igjen så mange ganger du vil.</p>
+      </div>
+
+      <h2>Rollback (gå tilbake til forrige versjon)</h2>
+      <p>To måter:</p>
+
+      <h3>Metode 1: Be Claude angre</h3>
+      <p>"Reverter den siste endringen" — Claude lager en ny commit som angrer forrige.</p>
+
+      <h3>Metode 2: Cloudflare instant rollback</h3>
+      <p>I Cloudflare dashboard, finn den forrige vellykket build, klikk "Rollback to this deployment". Live på 5 sekunder. Bra hvis du vil sjekke om noe gikk galt før commit-historikken.</p>
+
+      <h2>Hvor lang tid tar endringer å vises i nettleseren?</h2>
+      <p>Tre lag av tid:</p>
+      <ol>
+        <li><strong>Build-tid (Cloudflare):</strong> 30 sek til 2 min</li>
+        <li><strong>CDN-cache-oppdatering:</strong> 5–30 sek</li>
+        <li><strong>Din browser-cache:</strong> kan vise gammel versjon i opptil 1 time hvis du ikke gjør hard reload</li>
+      </ol>
+
+      <p>Trick for å se nye endringer NÅ:</p>
+      <ul>
+        <li>Hard reload: <strong>Ctrl + Shift + R</strong> (Windows) eller <strong>Cmd + Shift + R</strong> (Mac)</li>
+        <li>Eller åpne i privat-modus / inkognito</li>
+        <li>Eller legg til en query: <code>dmarketing.no/?nocache=1</code></li>
+      </ul>
+
+      <h2>Når sider IKKE skal publiseres automatisk</h2>
+      <p>Hvis du vil eksperimentere uten å publisere, kan du si til Claude:</p>
+      <ul>
+        <li><code>Lag en ny side, men ikke publiser ennå. Vis meg en "preview"-URL først.</code></li>
+        <li>Cloudflare lager automatisk preview-URLer for branches som ikke er <code>main</code></li>
+      </ul>
+
+      <div class="callout">
+        <p>I neste modul går vi gjennom de mest vanlige problemene du møter i drift, og hvordan løse dem på 5 minutter.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <nav class="border-t border-zinc-200 bg-white py-8 px-6">
+    <div class="max-w-3xl mx-auto flex justify-between items-center">
+      <a href="08-prompts" class="text-sm text-zinc-500 hover:text-blue-600 flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>08: AI-prompts</a>
+      <a href="10-feilsoking" class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-500 transition-colors text-sm">Modul 10: Feilsøking<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </nav>
+  <footer class="bg-[#0F172A] text-white py-6 px-6"><div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40"><div>© 2026 Dietrichs Marketing</div><div>Org.nr 932 612 583</div></div></footer>
+</body>
+</html>

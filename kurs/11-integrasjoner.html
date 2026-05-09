@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11: Avanserte integrasjoner | AI-Webmaster Kurs</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Inter', 'sans-serif'] }, colors: { ink: '#09090B', brand: '#2563EB', navy: '#0B1F4A' } } } }</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+    .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
+    .prose-custom ul, .prose-custom ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .prose-custom li { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 0.5rem; }
+    .prose-custom ul li { list-style-type: disc; }
+    .prose-custom ol li { list-style-type: decimal; }
+    .prose-custom strong { color: #09090B; }
+    .prose-custom code { background: #F4F4F5; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+    .callout { background: #EFF6FF; border-left: 3px solid #2563EB; padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    .callout p { margin-bottom: 0; color: #1E3A8A; }
+    .prompt-example { background: #F4F4F5; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #18181B; white-space: pre-wrap; }
+    .integration { background: white; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.5rem; margin: 1.25rem 0; }
+    .integration h3 { margin-top: 0 !important; }
+    .integration .meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .integration .pill { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0.625rem; border-radius: 1rem; font-weight: 600; }
+    .pill-tier { background: #DBEAFE; color: #1E40AF; }
+    .pill-cost { background: #ECFDF5; color: #065F46; }
+    .pill-time { background: #FEF3C7; color: #78350F; }
+  </style>
+</head>
+<body>
+  <script>window.DIETRICHS_MENU_CONFIG = { basePath: '../' };</script>
+  <script src="../components/dietrichs-menu.js" defer></script>
+
+  <header class="py-14 md:py-20 px-6 border-b border-zinc-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-center gap-3 mb-5">
+        <a href="./" class="text-xs font-semibold uppercase tracking-widest text-zinc-500 hover:text-blue-600">← Alle moduler</a>
+        <span class="text-zinc-300">/</span>
+        <span class="badge text-xs text-zinc-400">MODUL 11</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Avansert · Autopilot Pro+</span>
+      </div>
+      <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.03em] text-ink leading-[1.05] mb-5">
+        Avanserte integrasjoner
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-600 leading-relaxed">
+        Booking, Google Maps, skjemaer til CRM, sosiale feeds. Hva du trenger og hva du IKKE trenger.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-10 md:py-14 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="video-frame">🎬 Video kommer</div>
+      <p class="text-xs text-zinc-400 mt-3 text-center">Estimert: 18 minutter</p>
+    </div>
+  </section>
+
+  <article class="px-6 pb-16">
+    <div class="max-w-3xl mx-auto prose-custom">
+
+      <h2>Tenk før du integrerer</h2>
+      <p>Hver integrasjon er en avhengighet. Hvis tjenesten faller eller endrer pris, påvirker det deg. Spør:</p>
+      <ul>
+        <li>Trenger jeg dette nå, eller bare "kult å ha"?</li>
+        <li>Hva koster det hvis jeg vokser? Mange er gratis ved få kunder, dyre etter 1000.</li>
+        <li>Kan jeg flytte data ut hvis jeg slutter med tjenesten?</li>
+      </ul>
+
+      <h2>Vanligste integrasjoner — sortert etter verdi</h2>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">Anbefalt for alle</span>
+          <span class="pill pill-cost">Gratis</span>
+          <span class="pill pill-time">~10 min å sette opp</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Google Maps embed</h3>
+        <p class="text-zinc-600 mt-2">Vis kontoret/adressen på kontakt-siden. Hjelper også lokal SEO.</p>
+        <p class="font-semibold text-sm mt-3">Slik:</p>
+        <div class="prompt-example">Embed Google Maps på kontakt-siden, sentrert på adressen vår [adresse].
+Pin med bedriftens navn. Responsive (full bredde på mobil).</div>
+      </div>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">Anbefalt for service-bedrifter</span>
+          <span class="pill pill-cost">Gratis (Calendly) eller fra 100 kr/mnd (norske)</span>
+          <span class="pill pill-time">~15 min</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Booking-system</h3>
+        <p class="text-zinc-600 mt-2">La kunder bestille tid uten å ringe deg. Calendly er enkleste, Bookis/Bokio er norske alternativer.</p>
+        <p class="font-semibold text-sm mt-3">Slik:</p>
+        <div class="prompt-example">Embed Calendly-bookingen min (https://calendly.com/...) på en ny side: /book-time.
+Knapp i header som peker dit. Sett "Book gratis 15 min"-CTA på forsiden.</div>
+      </div>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">Trenger e-post-skjema?</span>
+          <span class="pill pill-cost">Gratis (under 50/mnd)</span>
+          <span class="pill pill-time">~10 min</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Skjema → e-post (Formspree)</h3>
+        <p class="text-zinc-600 mt-2">Kontakt-skjema som sender til e-posten din. Formspree er enkleste — ingen server-oppsett.</p>
+        <p class="font-semibold text-sm mt-3">Slik:</p>
+        <div class="prompt-example">Sett opp kontakt-skjemaet med Formspree:
+1. Felt: navn, e-post, melding
+2. Send til adrian@dmarketing.no
+3. Vis "Takk!"-melding etter sending
+4. Spam-protect med honeypot</div>
+      </div>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">Avansert</span>
+          <span class="pill pill-cost">CRM-priser (HubSpot fra 0, Pipedrive fra ~150 kr/mnd)</span>
+          <span class="pill pill-time">~30 min</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Skjema → CRM (HubSpot, Pipedrive)</h3>
+        <p class="text-zinc-600 mt-2">Hver kontakt-forespørsel havner som lead i CRM-en din. Bra hvis du har volumer.</p>
+        <p class="font-semibold text-sm mt-3">Slik:</p>
+        <div class="prompt-example">Koble kontakt-skjemaet til HubSpot via deres embed-form-kode.
+Hver innsendelse skaper et nytt kontakt-lead med tagging "fra-nettsiden".</div>
+      </div>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">Avansert</span>
+          <span class="pill pill-cost">Gratis (Instagram, Facebook Embed)</span>
+          <span class="pill pill-time">~20 min</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Sosiale feeds (Instagram-bilder)</h3>
+        <p class="text-zinc-600 mt-2">Vis siste 6 Instagram-bilder på forsiden. Holder siden "levende" uten at du må oppdatere manuelt.</p>
+        <p class="font-semibold text-sm mt-3">Slik:</p>
+        <div class="prompt-example">Embed Instagram-feeden min på forsiden, mellom hero og tjenester.
+Vis 6 siste bilder. Bruk Lightwidget eller Instagrams offisielle embed.</div>
+      </div>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">SEO/sporing</span>
+          <span class="pill pill-cost">Gratis</span>
+          <span class="pill pill-time">~5 min</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Google Analytics 4 + Search Console</h3>
+        <p class="text-zinc-600 mt-2">Se hvor mange besøker, hvilke søk de bruker, hva de klikker på.</p>
+        <p class="font-semibold text-sm mt-3">Slik:</p>
+        <div class="prompt-example">Sett opp Google Analytics 4 på alle sider. ID: G-XXXXXX
+Verifiser også Google Search Console.
+Cookie-banner med samtykke for sporing.</div>
+      </div>
+
+      <div class="integration not-prose">
+        <div class="meta">
+          <span class="pill pill-tier">For e-handel</span>
+          <span class="pill pill-cost">2.4 % + 1.80 kr per transaksjon (Stripe)</span>
+          <span class="pill pill-time">~1 time</span>
+        </div>
+        <h3 class="font-display font-bold text-xl">Betaling — Stripe Payment Links</h3>
+        <p class="text-zinc-600 mt-2">Selg digitale produkter eller ta forskuddsbetaling for tjenester. Stripe Payment Links krever ingen kode.</p>
+      </div>
+
+      <h2>Hva du IKKE trenger</h2>
+      <ul>
+        <li><strong>Live-chat-widget</strong> (Intercom, Drift): med mindre du har noen som faktisk svarer i sann tid, blir det skuffelse. Bruk e-post.</li>
+        <li><strong>Cookie-banner-tjenester</strong> (Cookiebot, OneTrust): for små sider holder en enkel egendesignet banner.</li>
+        <li><strong>"AI-chatbot på siden"</strong>: 95 % av småbedrifter trenger ikke dette. Det forvirrer mer enn det hjelper.</li>
+        <li><strong>Newsletter-popup</strong>: kunder hater dem. Bruk en stille seksjon i bunnen i stedet.</li>
+      </ul>
+
+      <h2>Sikkerhet og personvern</h2>
+      <p>Hver integrasjon kan samle data om besøkende. Du må:</p>
+      <ul>
+        <li>Liste alle tracking-tjenester i personvernerklæringen</li>
+        <li>Be om samtykke før Analytics/Marketing-cookies settes</li>
+        <li>Ha en database-prosessor-avtale (DPA) med leverandøren hvis de behandler norske personopplysninger</li>
+      </ul>
+
+      <p>Be Claude oppdatere personvernerklæringen når du legger til en ny integrasjon:</p>
+      <div class="prompt-example">Jeg har akkurat lagt til Google Analytics 4 og Calendly. Oppdater personvernerklæring/personvernerklaering.html med disse to tjenestene — hva de samler, lagringstid, og lenke til deres egne erklæringer.</div>
+
+      <div class="callout">
+        <p>Siste modul: hva betyr "100 % eierskap" i praksis, og hvordan flytter du alt hvis du vil bytte leverandør?</p>
+      </div>
+
+    </div>
+  </article>
+
+  <nav class="border-t border-zinc-200 bg-white py-8 px-6">
+    <div class="max-w-3xl mx-auto flex justify-between items-center">
+      <a href="10-feilsoking" class="text-sm text-zinc-500 hover:text-blue-600 flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>10: Feilsøking</a>
+      <a href="12-eierskap" class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-500 transition-colors text-sm">Modul 12: Eierskap<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </nav>
+  <footer class="bg-[#0F172A] text-white py-6 px-6"><div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40"><div>© 2026 Dietrichs Marketing</div><div>Org.nr 932 612 583</div></div></footer>
+</body>
+</html>

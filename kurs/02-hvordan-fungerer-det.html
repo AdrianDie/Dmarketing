@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>02: Hvordan AI-Webmaster fungerer | AI-Webmaster Kurs</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Inter', 'sans-serif'] }, colors: { ink: '#09090B', brand: '#2563EB', navy: '#0B1F4A' } } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+    .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
+    .prose-custom ul { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .prose-custom ul li { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 0.5rem; list-style-type: disc; }
+    .prose-custom strong { color: #09090B; }
+    .prose-custom code { background: #F4F4F5; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+    .callout { background: #EFF6FF; border-left: 3px solid #2563EB; padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    .callout p { margin-bottom: 0; color: #1E3A8A; }
+    .stack-card { background: white; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <script>window.DIETRICHS_MENU_CONFIG = { basePath: '../' };</script>
+  <script src="../components/dietrichs-menu.js" defer></script>
+
+  <header class="py-14 md:py-20 px-6 border-b border-zinc-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-center gap-3 mb-5">
+        <a href="./" class="text-xs font-semibold uppercase tracking-widest text-zinc-500 hover:text-blue-600">← Alle moduler</a>
+        <span class="text-zinc-300">/</span>
+        <span class="badge text-xs text-zinc-400">MODUL 02</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Konsept</span>
+      </div>
+      <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.03em] text-ink leading-[1.05] mb-5">
+        Hvordan AI-Webmaster fungerer
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-600 leading-relaxed">
+        Tre teknologier som spiller sammen. Du trenger ikke å forstå dem dypt, men det hjelper å vite hva som er hva.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-10 md:py-14 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="video-frame">🎬 Video kommer</div>
+      <p class="text-xs text-zinc-400 mt-3 text-center">Estimert: 8 minutter</p>
+    </div>
+  </section>
+
+  <article class="px-6 pb-16">
+    <div class="max-w-3xl mx-auto prose-custom">
+
+      <h2>Tre lag, tre verktøy</h2>
+      <p>Nettsiden din er bygget av tre teknologier som hver har én jobb:</p>
+
+      <div class="grid sm:grid-cols-3 gap-4 my-8 not-prose">
+        <div class="stack-card">
+          <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-base mb-1">Astro</h3>
+          <p class="text-sm text-zinc-600">Bygger nettsiden som lynrask HTML.</p>
+        </div>
+        <div class="stack-card">
+          <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-base mb-1">Claude</h3>
+          <p class="text-sm text-zinc-600">AI-en som redigerer på din kommando.</p>
+        </div>
+        <div class="stack-card">
+          <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#2563EB" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-base mb-1">Cloudflare</h3>
+          <p class="text-sm text-zinc-600">Hoster siden og gjør den raskt synlig over hele verden.</p>
+        </div>
+      </div>
+
+      <h2>Slik henger de sammen</h2>
+      <p>Tenk på det som tre roller i en bakeri-analogi:</p>
+      <ul>
+        <li><strong>Astro = ovnen.</strong> Den tar inn råvarer (tekst, bilder, oppskrifter) og baker dem til ferdig brød (HTML-sider).</li>
+        <li><strong>Claude = bakeren.</strong> Den følger oppskriften, men tar også bestillinger fra deg ("ekstra rosin", "mindre salt").</li>
+        <li><strong>Cloudflare = butikken.</strong> Den selger brødet til alle som kommer innom — verden over, raskt og kjølig.</li>
+      </ul>
+
+      <h2>Hva skjer når du gir Claude en oppgave</h2>
+      <p>Du sier: <code>"Endre åpningstid fredag til 08–14"</code>. Slik flyter det:</p>
+      <ol class="space-y-3 my-6 list-decimal pl-6 text-zinc-700">
+        <li><strong>Claude leser nettsiden din</strong> (filene som inneholder tekst og struktur).</li>
+        <li><strong>Claude finner riktig sted</strong> (åpningstid-blokken på forsiden eller kontakt-siden).</li>
+        <li><strong>Claude foreslår endring</strong> og bekrefter — du godkjenner.</li>
+        <li><strong>Endringen lagres på GitHub</strong> (din konto, din kode).</li>
+        <li><strong>Cloudflare ser endringen</strong> og bygger ny versjon (~30–60 sek).</li>
+        <li><strong>Live</strong>: alle som besøker siden ser den nye åpningstiden.</li>
+      </ol>
+
+      <div class="callout">
+        <p><strong>Hele prosessen tar 30–90 sekunder.</strong> Sammenlign med "send e-post til byrå → vente to dager → faktura på 800 kr".</p>
+      </div>
+
+      <h2>Hva betyr "100 % eierskap"</h2>
+      <ul>
+        <li><strong>Koden ligger på din GitHub-konto.</strong> Hvis du sier opp samarbeidet, beholder du alt.</li>
+        <li><strong>Domenet er ditt.</strong> Du har konto hos domeneregistrator (Domeneshop, Namecheap, osv.).</li>
+        <li><strong>Hostingen er din.</strong> Cloudflare-kontoen er på din e-post.</li>
+        <li><strong>AI-en er din.</strong> Du har en privat Claude-konfigurasjon med din bedrift som kontekst.</li>
+      </ul>
+      <p>Hvis du vil flytte til et annet byrå i fremtiden, kan du det — uten å miste noe.</p>
+
+      <h2>Hva må du forstå for å bruke kurset</h2>
+      <p>
+        Veldig lite teknisk. Du trenger ikke å vite hvordan Astro fungerer for å bruke den, akkurat som du ikke trenger å vite hvordan motoren i bilen er bygget for å kjøre. Men det kan være kjekt å forstå at:
+      </p>
+      <ul>
+        <li>Tekst og bilder ligger i <strong>filer</strong> (ikke en "database")</li>
+        <li>Filer ligger på <strong>GitHub</strong> (en mappe i skyen)</li>
+        <li>Cloudflare <strong>bygger</strong> nettsiden hver gang en fil endrer seg</li>
+        <li>Claude er bare en chat — du <strong>snakker</strong> med den, så endrer den filer</li>
+      </ul>
+
+      <div class="callout">
+        <p>I neste modul setter vi opp tilgangen din. Etter det er du klar til din første endring.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <nav class="border-t border-zinc-200 bg-white py-8 px-6">
+    <div class="max-w-3xl mx-auto flex justify-between items-center">
+      <a href="01-velkommen" class="text-sm text-zinc-500 hover:text-blue-600 flex items-center gap-2">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        01: Velkommen
+      </a>
+      <a href="03-komme-i-gang" class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-500 transition-colors text-sm">
+        Modul 03: Komme i gang
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </nav>
+  <footer class="bg-[#0F172A] text-white py-6 px-6"><div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40"><div>© 2026 Dietrichs Marketing</div><div>Org.nr 932 612 583</div></div></footer>
+</body>
+</html>
