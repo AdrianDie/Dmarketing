@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12: 100 % eierskap og flytt | AI-Webmaster Kurs</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Inter', 'sans-serif'] }, colors: { ink: '#09090B', brand: '#2563EB', navy: '#0B1F4A' } } } }</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+    .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
+    .prose-custom ul, .prose-custom ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .prose-custom li { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 0.5rem; }
+    .prose-custom ul li { list-style-type: disc; }
+    .prose-custom ol li { list-style-type: decimal; }
+    .prose-custom strong { color: #09090B; }
+    .prose-custom code { background: #F4F4F5; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+    .callout { background: #EFF6FF; border-left: 3px solid #2563EB; padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    .callout p { margin-bottom: 0; color: #1E3A8A; }
+    .ownership-card { background: white; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.5rem; margin: 1rem 0; }
+    .ownership-card h3 { margin-top: 0 !important; }
+    .ownership-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #2563EB; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <script>window.DIETRICHS_MENU_CONFIG = { basePath: '../' };</script>
+  <script src="../components/dietrichs-menu.js" defer></script>
+
+  <header class="py-14 md:py-20 px-6 border-b border-zinc-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-center gap-3 mb-5">
+        <a href="./" class="text-xs font-semibold uppercase tracking-widest text-zinc-500 hover:text-blue-600">← Alle moduler</a>
+        <span class="text-zinc-300">/</span>
+        <span class="badge text-xs text-zinc-400">MODUL 12</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Avansert</span>
+      </div>
+      <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.03em] text-ink leading-[1.05] mb-5">
+        100 % eierskap og flytt
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-600 leading-relaxed">
+        Hva betyr eierskap i praksis? Hvordan flytter du alt hvis du vil bytte leverandør?
+      </p>
+    </div>
+  </header>
+
+  <section class="py-10 md:py-14 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="video-frame">🎬 Video kommer</div>
+      <p class="text-xs text-zinc-400 mt-3 text-center">Estimert: 12 minutter</p>
+    </div>
+  </section>
+
+  <article class="px-6 pb-16">
+    <div class="max-w-3xl mx-auto prose-custom">
+
+      <h2>Det du faktisk eier</h2>
+
+      <div class="ownership-card not-prose">
+        <p class="label">Aktivum 1</p>
+        <h3 class="font-display font-bold text-xl">Domenet</h3>
+        <p class="text-zinc-600 mt-2">Du har konto direkte hos domeneregistrator (Domeneshop, Namecheap, GoDaddy). Vi setter opp DNS, men kontoen er din. Hvis du sier opp samarbeidet vårt, beholder du domenet.</p>
+        <p class="text-sm text-zinc-500 mt-2">Konto: <code>din e-post</code> hos <code>domeneshop.no</code> (eller hvor du valgte)</p>
+      </div>
+
+      <div class="ownership-card not-prose">
+        <p class="label">Aktivum 2</p>
+        <h3 class="font-display font-bold text-xl">Kildekoden</h3>
+        <p class="text-zinc-600 mt-2">All HTML, CSS, JavaScript ligger på din GitHub-konto. Du kan klone den til en harddisk, dele med en annen utvikler, eller deploye et helt annet sted. Ingen lock-in.</p>
+        <p class="text-sm text-zinc-500 mt-2">URL: <code>github.com/[ditt-brukernavn]/[repo-navn]</code></p>
+      </div>
+
+      <div class="ownership-card not-prose">
+        <p class="label">Aktivum 3</p>
+        <h3 class="font-display font-bold text-xl">Innhold (tekst, bilder)</h3>
+        <p class="text-zinc-600 mt-2">All tekst og alle bilder er filer i repo-et. De følger med kildekoden. Ingen "innholdsdatabase" som du må eksportere.</p>
+      </div>
+
+      <div class="ownership-card not-prose">
+        <p class="label">Aktivum 4</p>
+        <h3 class="font-display font-bold text-xl">Hosting-konto (Cloudflare)</h3>
+        <p class="text-zinc-600 mt-2">Cloudflare Pages-kontoen er på din e-post. Gratis så lenge du ikke trenger 100 000+ besøk/måned. Du kan flytte til Vercel, Netlify, AWS — kildekoden er bærbar.</p>
+      </div>
+
+      <div class="ownership-card not-prose">
+        <p class="label">Aktivum 5</p>
+        <h3 class="font-display font-bold text-xl">AI-konfigurasjon</h3>
+        <p class="text-zinc-600 mt-2">Claude-prosjektet med din bedrifts kontekst er i din Claude-konto. Hvis vi avslutter samarbeidet, beholder du tilgangen så lenge du har Claude-abonnement (~ kr 200/mnd). Eller bytt til ChatGPT — koden er kompatibel med begge.</p>
+      </div>
+
+      <h2>Det vi (Dietrichs) faktisk har tilgang til</h2>
+      <ul>
+        <li><strong>Som collaborator</strong> på din GitHub-konto (vi kan se og bidra)</li>
+        <li><strong>Som collaborator</strong> i Claude-prosjektet (vi kan hjelpe ved support)</li>
+        <li><strong>Vi har IKKE</strong> ditt domene-passord, ditt Cloudflare-passord, eller noen kontoer som er knyttet til deg</li>
+      </ul>
+      <p>Når du sier opp samarbeidet:</p>
+      <ol>
+        <li>Du fjerner oss som collaborator i GitHub (1 klikk)</li>
+        <li>Du fjerner oss fra Claude-prosjektet (1 klikk)</li>
+        <li>Ferdig. Ingen oppsigelsestid, ingen oppgjør, ingen "eksport-pakke" å vente på.</li>
+      </ol>
+
+      <h2>Slik flytter du alt til en annen leverandør</h2>
+      <p>Scenario: du vil bytte til et annet byrå eller drifte alt selv.</p>
+
+      <h3>Steg 1: behold tilgang til alle kontoer</h3>
+      <p>Sjekk at du logger på:</p>
+      <ul>
+        <li>Domeneregistrator (Domeneshop, Namecheap)</li>
+        <li>GitHub</li>
+        <li>Cloudflare</li>
+        <li>Claude</li>
+      </ul>
+      <p>Hvis ikke — be oss om reset av kontoen til ditt e-post-passord.</p>
+
+      <h3>Steg 2: gi nye leverandør tilgang</h3>
+      <p>Be ny leverandør om GitHub-brukernavnet deres. Du legger dem til som collaborator. De har nå hva vi hadde.</p>
+
+      <h3>Steg 3: si opp oss</h3>
+      <p>Send melding: "Jeg avslutter samarbeidet". Vi fjerner oss fra alle kontoer innen 24 timer.</p>
+
+      <h3>Steg 4: ny leverandør tar over</h3>
+      <p>Med kildekode + innhold + alle kontoer, kan ny leverandør:</p>
+      <ul>
+        <li>Fortsette å bruke nettsiden som er</li>
+        <li>Migrere til deres egen tech-stack hvis de foretrekker det</li>
+        <li>Hjelpe deg med endringer fra dag 1</li>
+      </ul>
+
+      <h2>Hva med data du har lagret hos integrasjonene?</h2>
+      <p>For hver integrasjon (Calendly, HubSpot, Formspree, osv.):</p>
+      <ul>
+        <li>Du har egen konto</li>
+        <li>Du kan eksportere data (CSV, JSON) fra deres dashboard</li>
+        <li>Vi har aldri eierskap her</li>
+      </ul>
+
+      <h2>Backup</h2>
+      <p>Du har automatisk backup på fire steder:</p>
+      <ol>
+        <li><strong>GitHub:</strong> hver versjon noensinne, evig</li>
+        <li><strong>Cloudflare:</strong> kan rulle tilbake til hvilken som helst tidligere build</li>
+        <li><strong>Lokalt på din maskin</strong> hvis du kloner repo-et: <code>git clone</code></li>
+        <li><strong>Wayback Machine</strong> (archive.org) lager snap-shots av offentlige nettsider</li>
+      </ol>
+
+      <h2>Hva betyr dette for fremtiden?</h2>
+      <p>Et tradisjonelt byrå som "eier" nettsiden din har et insentiv til å gjøre deg avhengig — så du må betale 800 kr for hver endring. AI-Webmaster snur logikken: vi tjener på at du <em>liker</em> samarbeidet, ikke på at du er låst til oss.</p>
+
+      <p>Hvis du en dag tenker "jeg vil prøve noe annet", kan du. Det er hele poenget.</p>
+
+      <h2>Du er ferdig med kurset</h2>
+      <p>Gratulerer — du har nå alt du trenger for å:</p>
+      <ul>
+        <li>Oppdatere innholdet på nettsiden din selv</li>
+        <li>Lage nye sider og kampanjer på 15 minutter</li>
+        <li>Få godt SEO-grunnlag</li>
+        <li>Snakke effektivt med Claude</li>
+        <li>Feilsøke når noe går galt</li>
+        <li>Integrere booking, betalinger, sosiale feeds</li>
+        <li>Eie alt selv, og flytte når du vil</li>
+      </ul>
+
+      <div class="callout">
+        <p>Hvis du sitter fast: ta kontakt på <strong>adrian@dmarketing.no</strong>. Vi er her som ressurs, ikke som gatekeeper.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <nav class="border-t border-zinc-200 bg-white py-8 px-6">
+    <div class="max-w-3xl mx-auto flex justify-between items-center">
+      <a href="11-integrasjoner" class="text-sm text-zinc-500 hover:text-blue-600 flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>11: Integrasjoner</a>
+      <a href="./" class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-500 transition-colors text-sm">Tilbake til kurs-oversikt<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </nav>
+  <footer class="bg-[#0F172A] text-white py-6 px-6"><div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40"><div>© 2026 Dietrichs Marketing</div><div>Org.nr 932 612 583</div></div></footer>
+</body>
+</html>

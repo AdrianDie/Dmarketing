@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>06: Lage en ny side | AI-Webmaster Kurs</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Inter', 'sans-serif'] }, colors: { ink: '#09090B', brand: '#2563EB', navy: '#0B1F4A' } } } }</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
+    .font-display { font-family: 'Archivo', sans-serif; }
+    .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
+    .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
+    .prose-custom ul, .prose-custom ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .prose-custom li { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 0.5rem; }
+    .prose-custom ul li { list-style-type: disc; }
+    .prose-custom ol li { list-style-type: decimal; }
+    .prose-custom strong { color: #09090B; }
+    .prose-custom code { background: #F4F4F5; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+    .callout { background: #EFF6FF; border-left: 3px solid #2563EB; padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    .callout p { margin-bottom: 0; color: #1E3A8A; }
+    .prompt-example { background: #F4F4F5; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #18181B; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <script>window.DIETRICHS_MENU_CONFIG = { basePath: '../' };</script>
+  <script src="../components/dietrichs-menu.js" defer></script>
+
+  <header class="py-14 md:py-20 px-6 border-b border-zinc-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-center gap-3 mb-5">
+        <a href="./" class="text-xs font-semibold uppercase tracking-widest text-zinc-500 hover:text-blue-600">← Alle moduler</a>
+        <span class="text-zinc-300">/</span>
+        <span class="badge text-xs text-zinc-400">MODUL 06</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Drift</span>
+      </div>
+      <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.03em] text-ink leading-[1.05] mb-5">
+        Lage en ny side
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-600 leading-relaxed">
+        Tjeneste-side, kampanje-side, blogg-innlegg, "om oss"-side — be Claude bygge basert på eksisterende stil.
+      </p>
+    </div>
+  </header>
+
+  <section class="py-10 md:py-14 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="video-frame">🎬 Video kommer</div>
+      <p class="text-xs text-zinc-400 mt-3 text-center">Estimert: 11 minutter</p>
+    </div>
+  </section>
+
+  <article class="px-6 pb-16">
+    <div class="max-w-3xl mx-auto prose-custom">
+
+      <h2>Når lage en ny side?</h2>
+      <ul>
+        <li><strong>Ny tjeneste</strong> — du har lagt til "Døgnservice" og vil ha egen side med detaljer</li>
+        <li><strong>Kampanje</strong> — sommerprisene 2026, eller "Bestill før 1. juni og få 20 % rabatt"</li>
+        <li><strong>Blogg-innlegg</strong> — for SEO, ekspertise, eller bare for å fortelle</li>
+        <li><strong>Landingsside for Google Ads</strong> — fokusert side som matcher annonsen</li>
+        <li><strong>"Om oss" eller "Karriere"</strong> — institusjonelle sider</li>
+      </ul>
+
+      <h2>Beste prompt-mønster</h2>
+      <p>Den beste tilnærmingen er å gi Claude et eksempel-side som referanse:</p>
+      <div class="prompt-example">Lag en ny side: tjenester/akutt-rorleggervakt.html
+
+Bruk samme stil og struktur som tjenester/standard-service.html.
+
+Innhold:
+- Hero: "Akutt rørleggervakt — 24/7 i Stavanger"
+- Underoverskrift: "Rør sprakk midt på natten? Vi rykker ut."
+- 3 hovedpunkter: 30-min responstid, fastpris, ingen tillegg på helg
+- Pris-tabell: Ut-rykning kveld (kr 1 500), Natt (kr 2 200), Helg (kr 1 800)
+- CTA: Telefonknapp + skjema
+
+Tone of voice: profesjonell men trygg. Norsk. Ikke for mye emoji.</div>
+
+      <h2>Hvor mye detaljer trengs i prompten?</h2>
+      <p>Det avhenger av hvor strenge ønsker du har. Tre nivåer:</p>
+
+      <h3>Minimalt (Claude tar friheter)</h3>
+      <div class="prompt-example">Lag en ny tjeneste-side om "Akutt rørleggervakt 24/7" i Stavanger. Bruk samme stil som de andre tjeneste-sidene.</div>
+
+      <h3>Middels (anbefales)</h3>
+      <div class="prompt-example">Lag en ny tjeneste-side om "Akutt rørleggervakt 24/7" i Stavanger. Inkluder:
+- Hero med tittel + 1 setning
+- 3 punkter om hva vi tilbyr
+- Pris-info (kveld/natt/helg)
+- CTA: telefonknapp øverst og skjema nederst
+
+Bruk samme stil som tjenester/standard-service.html.</div>
+
+      <h3>Detaljert (når du har klar tekst)</h3>
+      <div class="prompt-example">Lag en ny side på tjenester/akutt-rorleggervakt.html med dette eksakt innholdet:
+
+[full tekst og struktur ...]</div>
+
+      <h2>Etter at siden er laget</h2>
+      <p>Claude vil typisk:</p>
+      <ol>
+        <li>Lage filen på riktig sted</li>
+        <li>Foreslå å legge til lenke i meny</li>
+        <li>Oppdatere sitemap</li>
+        <li>Be deg verifisere før publisering</li>
+      </ol>
+
+      <p>Du kan be om justeringer:</p>
+      <div class="prompt-example">Heroen ser litt mørkt ut. Bytt til lys bakgrunn.</div>
+      <div class="prompt-example">Pris-tabellen mangler "fra"-pris. Legg til.</div>
+      <div class="prompt-example">CTA "Ring nå" er for liten på mobil. Gjør den større.</div>
+
+      <h2>Linkje fra meny</h2>
+      <p>En ny side er ubrukelig hvis ingen finner den. Be Claude:</p>
+      <div class="prompt-example">Legg til lenke til den nye akutt-siden i hovedmenyen, mellom "Tjenester" og "Kontakt".</div>
+
+      <p>Eller hvis du vil ha det i et undermeny:</p>
+      <div class="prompt-example">Lag en undermeny under "Tjenester" som inkluderer alle 6 tjeneste-sidene.</div>
+
+      <h2>Mal: blogginnlegg</h2>
+      <p>Hvis du vil ha jevnlig SEO-innhold (anbefalt for Google Ads-resultater):</p>
+      <div class="prompt-example">Lag et blogginnlegg "Slik finner du en ærlig rørlegger i Stavanger" på blogg/aerlig-roerlegger-stavanger.html.
+
+Mål: SEO på "rørlegger Stavanger". Lengde: ca 1000 ord.
+
+Inkluder:
+- Innledning som beskriver problemet (vanskelig å vite hvem man kan stole på)
+- 5 tegn på en god rørlegger
+- 3 røde flagg
+- Avslutning med CTA om å ringe oss
+
+Bruk H2 og H3 logisk for SEO. Inkluder bilde i toppen.</div>
+
+      <div class="callout">
+        <p>I neste modul lærer du SEO-grunnleggende — slik at sidene du lager faktisk dukker opp i Google.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <nav class="border-t border-zinc-200 bg-white py-8 px-6">
+    <div class="max-w-3xl mx-auto flex justify-between items-center">
+      <a href="05-bytte-bilder" class="text-sm text-zinc-500 hover:text-blue-600 flex items-center gap-2"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>05: Bytte bilder</a>
+      <a href="07-seo" class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-500 transition-colors text-sm">Modul 07: SEO<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </nav>
+  <footer class="bg-[#0F172A] text-white py-6 px-6"><div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-white/40"><div>© 2026 Dietrichs Marketing</div><div>Org.nr 932 612 583</div></div></footer>
+</body>
+</html>
