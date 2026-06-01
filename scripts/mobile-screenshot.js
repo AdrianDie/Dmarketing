@@ -8,7 +8,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const url = process.argv[2] || 'http://127.0.0.1:8765/ai-webmaster.html';
+const url = process.argv[2] || 'http://127.0.0.1:8765/ai-nettsider.html';
 const outDir = path.join(__dirname, '..', 'mobile_screenshots');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 

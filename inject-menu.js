@@ -1,6 +1,6 @@
 // Helper: injects Dietrichs menu into a target HTML file.
 // Usage: node inject-menu.js <file> <currentItem>
-//   <currentItem> = forside | tjenester | kontakt | maler | ai-webmaster
+//   <currentItem> = forside | tjenester | kontakt | maler | ai-nettsider
 import fs from 'fs';
 import path from 'path';
 
@@ -81,11 +81,11 @@ const navHtml = (cur) => `
               <div class="nav-item-text-full">Maler</div>
             </div>
           </a>
-          <a href="ai-webmaster.html" class="nav-item w-inline-block${cur==='ai-webmaster'?' w--current':''}">
+          <a href="ai-nettsider.html" class="nav-item w-inline-block${cur==='ai-nettsider'?' w--current':''}">
             <div class="nav-item-number">05</div>
             <div class="special-text-wrapper">
-              <div class="nav-item-text">AI-webmaster</div>
-              <div class="nav-item-text-full">AI-webmaster</div>
+              <div class="nav-item-text">AI-nettsider</div>
+              <div class="nav-item-text-full">AI-nettsider</div>
             </div>
           </a>
         </div>

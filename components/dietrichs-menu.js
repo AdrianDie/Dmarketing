@@ -209,7 +209,7 @@
     { num: '02', label: 'Tjenester', href: 'tjenester', key: 'tjenester' },
     { num: '03', label: 'Kontakt', href: 'kontakt', key: 'kontakt' },
     { num: '04', label: 'Maler', href: 'maler/', key: 'maler' },
-    { num: '05', label: 'AI-webmaster', href: 'ai-webmaster', key: 'ai-webmaster' },
+    { num: '05', label: 'AI-nettsider', href: 'ai-nettsider', key: 'ai-nettsider' },
   ];
 
   const navItemsHTML = items.map(item => `
