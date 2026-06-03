@@ -65,15 +65,77 @@
     <div class="max-w-3xl mx-auto prose-custom">
 
       <div class="callout">
-        <p><strong>Hva denne modulen dekker:</strong> hvor du står i dag, de to måtene vi kan flytte deg over på, hva vi trenger fra deg, og hvordan domenet og e-posten din følger med — trygt. Etter dette er du klar for selve verktøyene (modul 04).</p>
+        <p><strong>Hva denne modulen dekker:</strong> hvor du står i dag, de to måtene vi kan flytte deg over på, hva vi trenger fra deg, og hvordan domenet og e-posten din følger med — trygt. Etter dette er du klar for selve verktøyene (modul 04). Møter du et ord du ikke kjenner underveis, kan du alltid slå det opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
       </div>
+
+      <!-- Diagram: Overgangen (kopiert fra _diagrammer.html) -->
+      <figure class="not-prose my-8 rounded-2xl border border-zinc-200 bg-white p-6 md:p-8">
+        <div style="max-width:600px; margin:0 auto;">
+          <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Overgangen: din side i dag flyttes til en ny side på samme domene. Domene og e-post følger med, uten nedetid." style="width:100%; height:auto; display:block;">
+            <defs>
+              <marker id="moveArrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#2563EB" />
+              </marker>
+            </defs>
+
+            <!-- LEFT: Din side i dag -->
+            <g>
+              <rect x="24" y="58" width="190" height="150" rx="14" fill="#F4F4F5" stroke="#E4E4E7" stroke-width="1.5" />
+              <!-- old browser window -->
+              <rect x="52" y="84" width="134" height="92" rx="8" fill="#FFFFFF" stroke="#D4D4D8" stroke-width="1.5" />
+              <rect x="52" y="84" width="134" height="20" rx="8" fill="#E4E4E7" />
+              <circle cx="63" cy="94" r="2.4" fill="#A1A1AA" />
+              <circle cx="71" cy="94" r="2.4" fill="#A1A1AA" />
+              <circle cx="79" cy="94" r="2.4" fill="#A1A1AA" />
+              <rect x="64" y="116" width="80" height="7" rx="3.5" fill="#D4D4D8" />
+              <rect x="64" y="130" width="110" height="5" rx="2.5" fill="#E4E4E7" />
+              <rect x="64" y="141" width="110" height="5" rx="2.5" fill="#E4E4E7" />
+              <rect x="64" y="152" width="64" height="5" rx="2.5" fill="#E4E4E7" />
+              <text x="119" y="232" text-anchor="middle" font-size="14" font-weight="700" fill="#09090B">Din side i dag</text>
+              <text x="119" y="251" text-anchor="middle" font-size="11" fill="#71717A">treg og vanskelig å endre</text>
+            </g>
+
+            <!-- MIDDLE: move arrow -->
+            <line x1="232" y1="133" x2="368" y2="133" stroke="#2563EB" stroke-width="2.5" marker-end="url(#moveArrow)" />
+            <rect x="252" y="112" width="96" height="26" rx="13" fill="#EFF6FF" />
+            <text x="300" y="129" text-anchor="middle" font-size="12" font-weight="600" fill="#2563EB">vi flytter den</text>
+
+            <!-- RIGHT: Ny side -->
+            <g>
+              <rect x="386" y="58" width="190" height="150" rx="14" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" />
+              <!-- new browser window -->
+              <rect x="414" y="84" width="134" height="92" rx="8" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1.5" />
+              <rect x="414" y="84" width="134" height="20" rx="8" fill="#2563EB" />
+              <circle cx="425" cy="94" r="2.4" fill="#FFFFFF" />
+              <circle cx="433" cy="94" r="2.4" fill="#FFFFFF" />
+              <circle cx="441" cy="94" r="2.4" fill="#FFFFFF" />
+              <rect x="426" y="116" width="80" height="7" rx="3.5" fill="#2563EB" />
+              <rect x="426" y="130" width="110" height="5" rx="2.5" fill="#DBEAFE" />
+              <rect x="426" y="141" width="110" height="5" rx="2.5" fill="#DBEAFE" />
+              <rect x="426" y="152" width="64" height="5" rx="2.5" fill="#DBEAFE" />
+              <text x="481" y="232" text-anchor="middle" font-size="14" font-weight="700" fill="#09090B">Ny side</text>
+              <text x="481" y="251" text-anchor="middle" font-size="11" fill="#71717A">rask, og du endrer den selv</text>
+            </g>
+
+            <!-- BOTTOM: følger med-banner -->
+            <g>
+              <rect x="120" y="271" width="360" height="24" rx="12" fill="#DCFCE7" />
+              <!-- check -->
+              <circle cx="142" cy="283" r="7.5" fill="#16A34A" />
+              <path d="M138.5 283 l2.5 2.5 4 -4.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              <text x="300" y="287" text-anchor="middle" font-size="11.5" font-weight="600" fill="#166534">Samme domene og e-post følger med — uten nedetid</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption class="text-center text-sm text-zinc-500 mt-4">Vi flytter siden din til et nytt, raskere fundament. Domenet og e-posten følger med — uten nedetid.</figcaption>
+      </figure>
 
       <h2>Hvor du står i dag</h2>
       <p>
         Akkurat nå har du sannsynligvis en nettside hos en leverandør som <strong>Wix, Squarespace, WordPress</strong> eller et lokalt webbyrå. Den fortsetter å fungere helt som normalt gjennom hele overgangen — <strong>vi bytter ikke om på noe før den nye siden er ferdig og testet.</strong>
       </p>
       <p>
-        Domenet ditt (f.eks. <code>dittfirma.no</code>) beholder du. Det er <em>ditt</em> — vi flytter bare hvor det peker, når tiden er inne.
+        Domenet ditt — altså nettadressen folk skriver for å finne deg, f.eks. <code>dittfirma.no</code> — beholder du. Det er <em>ditt</em> — vi flytter bare hvor det peker, når tiden er inne.
       </p>
 
       <h2>To veier inn</h2>
@@ -122,8 +184,13 @@
       <p>
         Dette er det eneste steget som «flytter» noe — og det gjøres kontrollert. Vi peker domenet ditt til den nye siden via DNS. For deg som besøker siden skjer det sømløst; den nye siden tar over på samme adresse.
       </p>
+
+      <div class="callout">
+        <p><strong>Forklart enkelt: Hva er DNS?</strong> DNS er internettets adressebok. Den forteller nettleseren hvilken datamaskin som skal vise fram nettsiden når noen skriver <code>dittfirma.no</code>. Vi endrer bare hvilken adresse boken peker til — som å sette opp en ny adresse i en GPS. Du trenger ikke gjøre dette selv.</p>
+      </div>
+
       <div class="callout callout-ok">
-        <p><strong>E-posten din berøres ikke.</strong> Vi flytter kun web-pekerne. E-post-oppsettet ditt (f.eks. Microsoft 365 eller Google Workspace) og signeringen (DKIM) holdes intakt, så du sender og mottar e-post som før — gjennom hele overgangen.</p>
+        <p><strong>E-posten din berøres ikke.</strong> Vi flytter kun web-pekerne. E-posten din fortsetter å virke nøyaktig som før — vi rører ikke noe av e-post-oppsettet ditt, uansett hvilken e-postløsning du bruker (for eksempel Microsoft 365 eller Google Workspace, eller noe annet). Du sender og mottar e-post som vanlig gjennom hele overgangen.</p>
       </div>
 
       <div class="shot">
@@ -137,7 +204,7 @@
 
       <h2>SEO og Google-plasseringen din bevares</h2>
       <p>
-        En vanlig bekymring er: «mister jeg plasseringen min i Google?» Nei. Vi kartlegger de gamle adressene (URL-ene) og setter opp <strong>videresendinger</strong> der det trengs, slik at både Google og folk som har bokmerket sider havner riktig. Rangeringen følger med over.
+        En vanlig bekymring er: «mister jeg plasseringen min i Google?» Nei. Vi kartlegger de gamle adressene (URL-ene) og setter opp automatiske <strong>videresendinger</strong> der det trengs — det vil si at gamle lenker fortsatt fører folk og Google til riktig sted, selv om siden har flyttet. Slik beholder du <strong>rangeringen</strong> din, altså plasseringen i Googles søkeresultater.
       </p>
 
       <h2>Go-live — slik vet du at du er over</h2>

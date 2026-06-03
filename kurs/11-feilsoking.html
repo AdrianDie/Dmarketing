@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
     .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
-    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
     .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
     .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
     .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
@@ -59,6 +58,10 @@
   <article class="px-6 py-12 md:py-16">
     <div class="max-w-3xl mx-auto prose-custom">
 
+      <div class="callout">
+        <p><strong>Hva denne modulen dekker:</strong> de 10 vanligste problemene du kan møte, og en enkel «fix» til hvert. I de fleste tilfellene løser du det ved å be Claude om hjelp — du trenger ikke kunne noe teknisk selv. Møter du et ord du ikke kjenner, kan du slå det opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
+      </div>
+
       <h2>Først: prøv dette ALLTID først</h2>
       <ol>
         <li><strong>Hard reload:</strong> Ctrl+Shift+R (Win) / Cmd+Shift+R (Mac). Løser ~40 % av "siden ser feil ut"-problemer.</li>
@@ -81,9 +84,9 @@
       <div class="problem not-prose">
         <p class="label">Problem 2</p>
         <h3>Bilde lastes ikke (404)</h3>
-        <p class="text-zinc-600 text-sm mt-2">Et bilde vises som ødelagt-symbol eller bare blank.</p>
+        <p class="text-zinc-600 text-sm mt-2">Et bilde vises som ødelagt-symbol eller bare blank. («404» er nettleserens måte å si «denne filen finnes ikke (lenger)» — du har sikkert sett en «404 – siden finnes ikke»-side før.)</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Be Claude: <code>Sjekk at bildet [navn] finnes i riktig mappe og at img src peker dit.</code> Vanligste årsak: bildet ble flyttet, eller filnavnet ble endret.</p>
+          <p><strong>Fix:</strong> Be Claude: <code>Sjekk at bildet [navn] finnes i riktig mappe og at siden henter inn det riktige bildet.</code> Vanligste årsak: bildet ble flyttet, eller filnavnet ble endret.</p>
         </div>
       </div>
 
@@ -101,7 +104,7 @@
         <h3>Cloudflare-build feiler ("Build failed")</h3>
         <p class="text-zinc-600 text-sm mt-2">Cloudflare-dashboardet viser rødt "Failed".</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Klikk på den feilede deploymentet → "View build logs". Kopier feilmeldingen til Claude og si: <code>Cloudflare-build feiler med denne feilmeldingen: [paste]. Hva er galt og hvordan fikser jeg det?</code></p>
+          <p><strong>Fix:</strong> Klikk på den feilede publiseringen, og finn knappen "View build logs" (det betyr «vis bygge-loggen» — selve den tekniske feilmeldingen fra da siden ble satt sammen). Kopier hele feilmeldingen, lim den inn til Claude og si: <code>Cloudflare-build feiler med denne feilmeldingen: [lim inn]. Hva er galt og hvordan fikser jeg det?</code></p>
         </div>
       </div>
 
@@ -110,7 +113,7 @@
         <h3>Mobil-versjon ser annerledes ut enn forventet</h3>
         <p class="text-zinc-600 text-sm mt-2">Tekst er for stor, knapp er for liten, layout brytes.</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Si til Claude: <code>På mobil (under 768px bredde), [problem-beskrivelse]. Fix det uten å påvirke desktop-versjonen.</code> Tailwind har <code>md:</code>-klasser som styrer dette.</p>
+          <p><strong>Fix:</strong> Si til Claude: <code>På mobil ser [problem-beskrivelse] feil ut. Fiks det uten å endre hvordan det ser ut på PC.</code> Du trenger ikke vite hvordan det gjøres teknisk — Claude vet hvilke innstillinger som styrer mobilvisningen.</p>
         </div>
       </div>
 
@@ -119,7 +122,7 @@
         <h3>Skjema sender ikke til e-post</h3>
         <p class="text-zinc-600 text-sm mt-2">Brukere fyller ut kontakt-skjema, men du får aldri e-post.</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Sjekk om skjemaet er koblet til en service (Formspree, Brevo, osv.). Be Claude: <code>Sjekk hvilken endpoint kontakt-skjemaet sender til, og verifiser at den er riktig.</code> Test ofte ved å sende et test-skjema til deg selv.</p>
+          <p><strong>Fix:</strong> Skjemaet må være koblet til en e-post-tjeneste (for eksempel Formspree eller Brevo) for at meldingene skal komme fram. Be Claude: <code>Sjekk at kontakt-skjemaet er riktig koblet opp, så meldingene faktisk sendes til e-posten min.</code> Test gjerne ved å sende et test-skjema til deg selv.</p>
         </div>
       </div>
 
@@ -128,7 +131,7 @@
         <h3>Claude forstår ikke hva jeg vil</h3>
         <p class="text-zinc-600 text-sm mt-2">Du har bedt om noe, men resultatet er ikke det du tenkte.</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Vær mer spesifikk. Se modul 08 om effektive prompts. Inkluder: HVOR (hvilken side, hvilken seksjon), HVA (eksakt tekst eller bilde), HVORFOR (kontekst). Hvis du har bilde av hvordan det SKAL se ut, last opp.</p>
+          <p><strong>Fix:</strong> Vær mer spesifikk. Se modul 09 om effektive prompts. Inkluder: HVOR (hvilken side, hvilken seksjon), HVA (eksakt tekst eller bilde), HVORFOR (kontekst). Hvis du har bilde av hvordan det SKAL se ut, last opp.</p>
         </div>
       </div>
 
@@ -137,7 +140,7 @@
         <h3>Domenet peker ikke til siden</h3>
         <p class="text-zinc-600 text-sm mt-2">DNS-konfigurasjon er feil — siden er live på Cloudflare, men domenet ditt viser noe annet.</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Logg inn på domeneregistratoren din (Domeneshop, Namecheap). Sjekk at A-records peker til Cloudflare. Hvis usikker, kontakt oss — DNS er det stedet hvor det er lett å gjøre noe galt.</p>
+          <p><strong>Fix:</strong> Hvis domenet ditt ikke viser den nye siden, er det nesten alltid noe med DNS-innstillingene (det vi gikk gjennom i modul 03 — internettets «adressebok»). Dette er lett å gjøre feil, så her anbefaler vi: kontakt oss, så fikser vi det sammen.</p>
         </div>
       </div>
 
@@ -146,7 +149,7 @@
         <h3>Side er treg å laste</h3>
         <p class="text-zinc-600 text-sm mt-2">Tar 3+ sekunder å laste siden.</p>
         <div class="fix">
-          <p><strong>Fix:</strong> Mest sannsynlig: tunge bilder. Be Claude: <code>List alle bilder på siden og deres filstørrelse. Hvilke er over 500 KB?</code> Optimaliser disse (modul 05). Sjekk også med Google PageSpeed Insights.</p>
+          <p><strong>Fix:</strong> Mest sannsynlig: tunge bilder. Be Claude: <code>List alle bilder på siden og deres filstørrelse. Hvilke er over 500 KB?</code> Optimaliser disse (se modul 06). Vil du måle farten, kan du bruke det gratis verktøyet «Google PageSpeed Insights» (søk det opp, lim inn nettadressen din, så får du en fart-score og konkrete tips).</p>
         </div>
       </div>
 

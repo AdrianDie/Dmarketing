@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
     .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
-    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
     .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
     .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
     .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
@@ -30,6 +29,9 @@
     .prompt-good, .prompt-bad { border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; white-space: pre-wrap; }
     .prompt-good { background: #ECFDF5; border-left: 3px solid #10B981; color: #064E3B; }
     .prompt-bad { background: #FEF2F2; border-left: 3px solid #EF4444; color: #7F1D1D; }
+    .prompt-label { display: block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .prompt-good .prompt-label { color: #047857; }
+    .prompt-bad .prompt-label { color: #DC2626; }
   </style>
 </head>
 <body>
@@ -48,7 +50,7 @@
         Effektive AI-prompts
       </h1>
       <p class="text-lg md:text-xl text-zinc-600 leading-relaxed">
-        Forskjellen på 5 minutter og 50 minutter med Claude er hvordan du formulerer deg. Her er mønstrene som funger.
+        Forskjellen på 5 minutter og 50 minutter med Claude er hvordan du formulerer deg. Her er mønstrene som fungerer.
       </p>
     </div>
   </header>
@@ -56,6 +58,10 @@
 
   <article class="px-6 py-12 md:py-16">
     <div class="max-w-3xl mx-auto prose-custom">
+
+      <div class="callout">
+        <p><strong>Forklart enkelt: Hva er en «prompt»?</strong> En prompt er rett og slett meldingen du skriver til Claude — beskjeden om hva du vil ha gjort, på vanlig norsk. Du skriver den i et tekstfelt, omtrent som å sende en melding til en kollega. Denne modulen handler om hvordan du skriver slike beskjeder så Claude treffer på første forsøk. Møter du andre ord du ikke kjenner, kan du slå dem opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
+      </div>
 
       <h2>Tre ingredienser i en god prompt</h2>
       <ol>
@@ -67,16 +73,16 @@
       <h2>Bra vs dårlig — eksempler</h2>
 
       <h3>Eksempel 1: endre tekst</h3>
-      <div class="prompt-bad">Endre teksten</div>
-      <div class="prompt-good">På forsiden, endre H1-overskriften fra "Velkommen til oss" til "Norges raskeste rørlegger i Stavanger". Husk å sjekke at den fortsatt passer på mobil.</div>
+      <div class="prompt-bad"><span class="prompt-label">✗ For vag</span>Endre teksten</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>På forsiden, endre H1-overskriften fra "Velkommen til oss" til "Norges raskeste rørlegger i Stavanger". Husk å sjekke at den fortsatt passer på mobil.</div>
 
       <h3>Eksempel 2: endre farge</h3>
-      <div class="prompt-bad">Bytt fargen til rød</div>
-      <div class="prompt-good">På "Book time"-knappen i headeren: bytt bakgrunnsfargen fra blå (#2563EB) til rød (#DC2626). Behold hvit tekst.</div>
+      <div class="prompt-bad"><span class="prompt-label">✗ For vag</span>Bytt fargen til rød</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>På "Book time"-knappen i headeren: bytt bakgrunnsfargen fra blå til rød. Behold hvit tekst. (Vil du være helt nøyaktig, kan du oppgi fargekoder — for eksempel blå #2563EB til rød #DC2626 — men du kan også bare skrive "gjør knappen rød". Claude skjønner begge deler.)</div>
 
       <h3>Eksempel 3: legge til seksjon</h3>
-      <div class="prompt-bad">Legg til en seksjon om garantier</div>
-      <div class="prompt-good">Legg til en ny seksjon på forsiden, mellom hero og tjenester:
+      <div class="prompt-bad"><span class="prompt-label">✗ For vag</span>Legg til en seksjon om garantier</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Legg til en ny seksjon på forsiden, mellom hero og tjenester:
 
 Tittel: "Vår garanti"
 3 punkter:
@@ -92,31 +98,31 @@ Bruk samme kort-stil som på tjenester-seksjonen.</div>
       <p><strong>Mal:</strong> "I [filnavn], endre [element] fra [gammelt] til [nytt]. [Eventuelle ekstra krav]."</p>
 
       <h3>Mønster: Be om forslag før gjennomføring</h3>
-      <div class="prompt-good">Foreslå 3 alternative formuleringer av hero-overskriften på forsiden. Den nåværende er "Velkommen til oss" — vi vil noe mer SEO-vennlig som inkluderer "rørlegger Stavanger". Ikke endre noe ennå, bare vis forslag.</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Foreslå 3 alternative formuleringer av hero-overskriften på forsiden. Den nåværende er "Velkommen til oss" — vi vil noe mer SEO-vennlig som inkluderer "rørlegger Stavanger". Ikke endre noe ennå, bare vis forslag.</div>
 
       <h3>Mønster: Fiks alt på én gang</h3>
-      <div class="prompt-good">Bytt telefonnummeret 12 34 56 78 → 99 88 77 66 OVERALT på nettsiden. List opp alle stedene du finner det først så jeg kan godkjenne, så endre alle samtidig.</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Bytt telefonnummeret 12 34 56 78 → 99 88 77 66 OVERALT på nettsiden. List opp alle stedene du finner det først så jeg kan godkjenne, så endre alle samtidig.</div>
 
       <h3>Mønster: Lag noe nytt</h3>
-      <p>Se modul 06 for komplette eksempler på "Lag en ny side"-prompts.</p>
+      <p>Se modul 07 for komplette eksempler på "Lag en ny side"-prompts.</p>
 
       <h2>Be om forklaring når du er usikker</h2>
-      <div class="prompt-good">Hvorfor er det dårlig SEO å ha samme tittel på forsiden og kontakt-siden? Forklar i 2-3 setninger.</div>
-      <div class="prompt-good">Forklar forskjellen på H1 og H2 — og hvorfor jeg bare skal ha én H1 per side.</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Hvorfor er det dårlig SEO å ha samme tittel på forsiden og kontakt-siden? Forklar i 2-3 setninger.</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Forklar forskjellen på H1 og H2 — og hvorfor jeg bare skal ha én H1 per side.</div>
       <p>Claude er en dyktig forklarer. Bruk det.</p>
 
       <h2>Vanlige feil</h2>
 
       <h3>Feil 1: For vag prompt</h3>
-      <div class="prompt-bad">Gjør siden bedre</div>
+      <div class="prompt-bad"><span class="prompt-label">✗ For vag</span>Gjør siden bedre</div>
       <p>Hva betyr "bedre"? Raskere? Penere? Mer SEO-vennlig? Vær spesifikk.</p>
 
       <h3>Feil 2: For mange ting i én prompt</h3>
-      <div class="prompt-bad">Endre hero-bildet, skriv om tjenestene, legg til kontakt-skjema, oppdater priser, og lag ny om-oss-side</div>
+      <div class="prompt-bad"><span class="prompt-label">✗ For mye på én gang</span>Endre hero-bildet, skriv om tjenestene, legg til kontakt-skjema, oppdater priser, og lag ny om-oss-side</div>
       <p>Del opp. Én oppgave om gangen. Da kan du verifisere hver i tur.</p>
 
       <h3>Feil 3: Ikke gi referanse</h3>
-      <div class="prompt-bad">Lag siden i samme stil</div>
+      <div class="prompt-bad"><span class="prompt-label">✗ For vag</span>Lag siden i samme stil</div>
       <p>Samme stil som hva? Si: "samme stil som tjenester/elektriker.html".</p>
 
       <h3>Feil 4: Glem å se på resultatet</h3>
@@ -124,16 +130,16 @@ Bruk samme kort-stil som på tjenester-seksjonen.</div>
 
       <h2>Be om angre / revert</h2>
       <p>Hvis du gjorde noe du ikke skulle:</p>
-      <div class="prompt-good">Reverter den siste endringen. Sett siden tilbake til hvordan den var før.</div>
-      <p>Eller mer kirurgisk:</p>
-      <div class="prompt-good">På forsiden, sett H1 tilbake til "Velkommen til oss" — beholdt resten.</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Reverter den siste endringen. Sett siden tilbake til hvordan den var før.</div>
+      <p>Eller mer presist, hvis du bare vil angre én bestemt ting:</p>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>På forsiden, sett H1 tilbake til "Velkommen til oss" — behold resten.</div>
 
       <h2>Tone of voice</h2>
       <p>Si det til Claude rett ut hvilken stil du vil ha:</p>
-      <div class="prompt-good">Skriv om "Om oss"-siden i en mer personlig tone. Bruk "vi" og "du", ikke "selskapet" og "kunden". Norsk, direkte, ingen byråkrati-språk.</div>
+      <div class="prompt-good"><span class="prompt-label">✓ Bra prompt</span>Skriv om "Om oss"-siden i en mer personlig tone. Bruk "vi" og "du", ikke "selskapet" og "kunden". Norsk, direkte, ingen byråkrati-språk.</div>
 
       <div class="callout">
-        <p>I modul 09 ser vi på hva som faktisk skjer når Claude trykker "publiser" — så du forstår hvorfor det noen ganger tar 30 sek og andre ganger feiler.</p>
+        <p>I neste modul (modul 10) ser vi på hva som faktisk skjer når du publiserer — så du forstår hvorfor det noen ganger tar 30 sek og andre ganger feiler.</p>
       </div>
 
     </div>
