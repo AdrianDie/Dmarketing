@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
     .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
-    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
     .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
     .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
     .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
@@ -57,95 +56,100 @@
   <article class="px-6 py-12 md:py-16">
     <div class="max-w-3xl mx-auto prose-custom">
 
+      <div class="callout">
+        <p><strong>Denne modulen handler om én ting:</strong> du eier alt selv, og kan når som helst ta det med deg videre. Vi går gjennom nøyaktig hva du eier, hva vi hos Dietrichs har tilgang til, og hvordan du flytter alt til en annen leverandør hvis du vil. Møter du et ord du ikke kjenner, kan du slå det opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
+      </div>
+
       <h2>Det du faktisk eier</h2>
 
       <div class="ownership-card not-prose">
         <p class="label">Aktivum 1</p>
-        <h3 class="font-display font-bold text-xl">Domenet</h3>
-        <p class="text-zinc-600 mt-2">Du har konto direkte hos domeneregistrator (Domeneshop, Namecheap, GoDaddy). Vi setter opp DNS, men kontoen er din. Hvis du sier opp samarbeidet vårt, beholder du domenet.</p>
-        <p class="text-sm text-zinc-500 mt-2">Konto: <code>din e-post</code> hos <code>domeneshop.no</code> (eller hvor du valgte)</p>
+        <h3 class="font-display font-bold text-xl">Domenet (nettadressen din)</h3>
+        <p class="text-zinc-600 mt-2">Domenet er nettadressen folk skriver for å finne deg, for eksempel <code>dittfirma.no</code>. Du har egen konto direkte hos domeneleverandøren (for eksempel Domeneshop, Namecheap eller GoDaddy). Vi setter opp det tekniske, men kontoen er din. Sier du opp samarbeidet med oss, beholder du domenet uansett.</p>
+        <p class="text-sm text-zinc-500 mt-2">Konto: <code>din e-post</code> hos <code>domeneshop.no</code> (eller der du valgte)</p>
       </div>
 
       <div class="ownership-card not-prose">
         <p class="label">Aktivum 2</p>
-        <h3 class="font-display font-bold text-xl">Kildekoden</h3>
-        <p class="text-zinc-600 mt-2">All HTML, CSS, JavaScript ligger på din GitHub-konto. Du kan klone den til en harddisk, dele med en annen utvikler, eller deploye et helt annet sted. Ingen lock-in.</p>
-        <p class="text-sm text-zinc-500 mt-2">URL: <code>github.com/[ditt-brukernavn]/[repo-navn]</code></p>
+        <h3 class="font-display font-bold text-xl">Selve nettsiden (kildekoden)</h3>
+        <p class="text-zinc-600 mt-2">Alle filene nettsiden er bygget av ligger på din egen GitHub-konto. Du kan når som helst laste ned en komplett kopi til din egen PC, gi den til en annen utvikler, eller legge nettsiden ut (publisere den) hos et helt annet firma. Det er ingen innlåsing — du er aldri bundet til oss eller noe bestemt firma.</p>
+        <p class="text-sm text-zinc-500 mt-2">Nettadresse: <code>github.com/[ditt-brukernavn]/[mappe-navn]</code></p>
       </div>
 
       <div class="ownership-card not-prose">
         <p class="label">Aktivum 3</p>
-        <h3 class="font-display font-bold text-xl">Innhold (tekst, bilder)</h3>
-        <p class="text-zinc-600 mt-2">All tekst og alle bilder er filer i repo-et. De følger med kildekoden. Ingen "innholdsdatabase" som du må eksportere.</p>
+        <h3 class="font-display font-bold text-xl">Innholdet (all tekst og alle bilder)</h3>
+        <p class="text-zinc-600 mt-2">All tekst og alle bilder ligger som vanlige filer sammen med resten av nettsiden. De følger automatisk med når du tar med deg nettsiden videre. Det finnes ikke noe eget system du må «hente ut» innholdet fra først.</p>
       </div>
 
       <div class="ownership-card not-prose">
         <p class="label">Aktivum 4</p>
-        <h3 class="font-display font-bold text-xl">Hosting-konto (Cloudflare)</h3>
-        <p class="text-zinc-600 mt-2">Cloudflare Pages-kontoen er på din e-post. Gratis så lenge du ikke trenger 100 000+ besøk/måned. Du kan flytte til Vercel, Netlify, AWS — kildekoden er bærbar.</p>
+        <h3 class="font-display font-bold text-xl">Stedet siden «bor» (hosting hos Cloudflare)</h3>
+        <p class="text-zinc-600 mt-2">Hosting er stedet på internett der nettsiden din «bor» og vises fram fra. Den kontoen står på din egen e-post. Den er gratis så lenge du ikke har over 100 000 besøk i måneden. Hvis du vil, kan du flytte hostingen til andre leverandører — for eksempel Vercel, Netlify eller Amazon (AWS) — siden filene dine fungerer hvor som helst.</p>
       </div>
 
       <div class="ownership-card not-prose">
         <p class="label">Aktivum 5</p>
-        <h3 class="font-display font-bold text-xl">AI-konfigurasjon</h3>
-        <p class="text-zinc-600 mt-2">Claude-prosjektet med din bedrifts kontekst er i din Claude-konto. Hvis vi avslutter samarbeidet, beholder du tilgangen så lenge du har Claude-abonnement (~ kr 200/mnd). Eller bytt til ChatGPT — koden er kompatibel med begge.</p>
+        <h3 class="font-display font-bold text-xl">Din egen Claude (som kjenner bedriften din)</h3>
+        <p class="text-zinc-600 mt-2">Du har en egen Claude som allerede vet alt om bedriften din, og den ligger på din egen Claude-konto. Hvis vi avslutter samarbeidet, beholder du tilgangen så lenge du har et Claude-abonnement (rundt 200 kr/mnd). Du kan også bytte til ChatGPT i stedet for Claude — nettsiden fungerer like fint med begge.</p>
       </div>
 
       <h2>Det vi (Dietrichs) faktisk har tilgang til</h2>
+      <p>Vi er lagt til som «collaborator» på kontoene dine. En collaborator er en medhjelper med tilgang — vi kan altså se nettsiden din og hjelpe deg med å endre den, men du eier alt, og du kan fjerne oss med ett klikk når du vil.</p>
       <ul>
-        <li><strong>Som collaborator</strong> på din GitHub-konto (vi kan se og bidra)</li>
-        <li><strong>Som collaborator</strong> i Claude-prosjektet (vi kan hjelpe ved support)</li>
-        <li><strong>Vi har IKKE</strong> ditt domene-passord, ditt Cloudflare-passord, eller noen kontoer som er knyttet til deg</li>
+        <li><strong>Som medhjelper (collaborator)</strong> på din GitHub-konto, så vi kan se og hjelpe til med nettsiden</li>
+        <li><strong>Som medhjelper (collaborator)</strong> i din Claude, så vi kan hjelpe deg hvis du sitter fast</li>
+        <li><strong>Vi har IKKE</strong> passordet til domenet ditt, passordet til Cloudflare, eller noen kontoer som er knyttet til deg personlig</li>
       </ul>
-      <p>Når du sier opp samarbeidet:</p>
+      <p>Når du vil avslutte samarbeidet:</p>
       <ol>
-        <li>Du fjerner oss som collaborator i GitHub (1 klikk)</li>
-        <li>Du fjerner oss fra Claude-prosjektet (1 klikk)</li>
-        <li>Ferdig. Ingen oppsigelsestid, ingen oppgjør, ingen "eksport-pakke" å vente på.</li>
+        <li>Du fjerner oss som medhjelper i GitHub (1 klikk)</li>
+        <li>Du fjerner oss fra din Claude (1 klikk)</li>
+        <li>Ferdig. Ingen oppsigelsestid, ingen sluttoppgjør, og ingen «eksport-pakke» du må vente på.</li>
       </ol>
 
       <h2>Slik flytter du alt til en annen leverandør</h2>
-      <p>Scenario: du vil bytte til et annet byrå eller drifte alt selv.</p>
+      <p>Tenk deg at du en dag vil bytte til et annet firma — eller styre alt helt selv. Slik gjør du det:</p>
 
-      <h3>Steg 1: behold tilgang til alle kontoer</h3>
-      <p>Sjekk at du logger på:</p>
+      <h3>Steg 1: sørg for at du kommer inn på alle kontoene</h3>
+      <p>Sjekk at du klarer å logge inn på:</p>
       <ul>
-        <li>Domeneregistrator (Domeneshop, Namecheap)</li>
+        <li>Domeneleverandøren (for eksempel Domeneshop eller Namecheap)</li>
         <li>GitHub</li>
         <li>Cloudflare</li>
         <li>Claude</li>
       </ul>
-      <p>Hvis ikke — be oss om reset av kontoen til ditt e-post-passord.</p>
+      <p>Klarer du ikke å logge inn på en av dem? Da ber du oss om å tilbakestille kontoen, så du får full tilgang med din egen e-post.</p>
 
-      <h3>Steg 2: gi nye leverandør tilgang</h3>
-      <p>Be ny leverandør om GitHub-brukernavnet deres. Du legger dem til som collaborator. De har nå hva vi hadde.</p>
+      <h3>Steg 2: gi den nye leverandøren tilgang</h3>
+      <p>Spør den nye leverandøren om GitHub-brukernavnet deres, og legg dem til som medhjelper (collaborator). Da har de nøyaktig den samme tilgangen som vi hadde.</p>
 
-      <h3>Steg 3: si opp oss</h3>
-      <p>Send melding: "Jeg avslutter samarbeidet". Vi fjerner oss fra alle kontoer innen 24 timer.</p>
+      <h3>Steg 3: avslutt med oss</h3>
+      <p>Send oss en melding: «Jeg avslutter samarbeidet». Vi fjerner oss fra alle kontoene innen 24 timer.</p>
 
-      <h3>Steg 4: ny leverandør tar over</h3>
-      <p>Med kildekode + innhold + alle kontoer, kan ny leverandør:</p>
+      <h3>Steg 4: den nye leverandøren tar over</h3>
+      <p>Nå har den nye leverandøren selve nettsiden, alt innholdet og alle kontoene. Da kan de:</p>
       <ul>
-        <li>Fortsette å bruke nettsiden som er</li>
-        <li>Migrere til deres egen tech-stack hvis de foretrekker det</li>
-        <li>Hjelpe deg med endringer fra dag 1</li>
+        <li>Fortsette å bruke nettsiden akkurat som den er</li>
+        <li>Bygge den om med sine egne verktøy, hvis de heller vil det</li>
+        <li>Hjelpe deg med endringer fra dag én</li>
       </ul>
 
-      <h2>Hva med data du har lagret hos integrasjonene?</h2>
-      <p>For hver integrasjon (Calendly, HubSpot, Formspree, osv.):</p>
+      <h2>Hva med dataene du har lagret hos integrasjonene?</h2>
+      <p>For hver integrasjon (Calendly, HubSpot, Formspree, og så videre) gjelder:</p>
       <ul>
-        <li>Du har egen konto</li>
-        <li>Du kan eksportere data (CSV, JSON) fra deres dashboard</li>
-        <li>Vi har aldri eierskap her</li>
+        <li>Du har din egen konto</li>
+        <li>Du kan laste ned dataene dine fra deres egen oversiktsside</li>
+        <li>Vi eier aldri noe av dette</li>
       </ul>
 
-      <h2>Backup</h2>
-      <p>Du har automatisk backup på fire steder:</p>
+      <h2>Sikkerhetskopier (backup)</h2>
+      <p>Nettsiden din blir automatisk sikkerhetskopiert på fire steder, helt gratis:</p>
       <ol>
-        <li><strong>GitHub:</strong> hver versjon noensinne, evig</li>
-        <li><strong>Cloudflare:</strong> kan rulle tilbake til hvilken som helst tidligere build</li>
-        <li><strong>Lokalt på din maskin</strong> hvis du kloner repo-et: <code>git clone</code></li>
-        <li><strong>Wayback Machine</strong> (archive.org) lager snap-shots av offentlige nettsider</li>
+        <li><strong>GitHub:</strong> tar vare på hver eneste versjon, for alltid</li>
+        <li><strong>Cloudflare:</strong> kan når som helst rulle tilbake til en tidligere versjon av siden</li>
+        <li><strong>Din egen PC,</strong> hvis du laster ned en kopi av alle filene («klone» er bare det tekniske ordet for å lage en slik kopi)</li>
+        <li><strong>Wayback Machine</strong> (nettstedet archive.org) tar automatisk «øyeblikksbilder» av offentlige nettsider gjennom årene — enda en sikkerhetskopi du får helt gratis</li>
       </ol>
 
       <h2>Hva betyr dette for fremtiden?</h2>

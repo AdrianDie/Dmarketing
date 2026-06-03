@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
     .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
-    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
     .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
     .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
     .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
@@ -58,14 +57,18 @@
   <article class="px-6 py-12 md:py-16">
     <div class="max-w-3xl mx-auto prose-custom">
 
+      <div class="callout">
+        <p><strong>Forklart enkelt: Hva er SEO?</strong> SEO står for "Search Engine Optimization" — søkemotoroptimalisering. På vanlig norsk: alt du gjør for at nettsiden din skal dukke høyere opp når folk googler etter det du tilbyr. Jo bedre SEO, jo flere finner deg gratis via Google. Møter du et ord du ikke kjenner i denne modulen, slå det opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
+      </div>
+
       <h2>Det viktigste først</h2>
       <p>SEO på 5 minutter:</p>
       <ol>
-        <li>Hver side har en god <strong>title</strong> (under 60 tegn)</li>
-        <li>Hver side har en god <strong>meta-description</strong> (under 160 tegn)</li>
-        <li>Hver side har én <strong>H1</strong> som er hovedoverskriften</li>
-        <li>Bilder har <strong>alt-tekst</strong></li>
-        <li>Sitemap finnes (Astro genererer automatisk)</li>
+        <li>Hver side har en god <strong>title</strong> (den klikkbare blå tittelen i Google) — under 60 tegn</li>
+        <li>Hver side har en god <strong>meta-description</strong> (den lille teksten under tittelen i Google) — under 160 tegn</li>
+        <li>Hver side har én <strong>H1</strong> — den aller største overskriften øverst, altså hovedtittelen på siden</li>
+        <li>Bilder har <strong>alt-tekst</strong> (en kort tekst som beskriver bildet)</li>
+        <li>Sitemap finnes — det lages helt automatisk, du trenger ikke gjøre noe</li>
       </ol>
       <p>Hvis du har de fem, er du i topp 30 % av norske småbedrifter på SEO-grunnlag.</p>
 
@@ -115,13 +118,15 @@
 
 Vis meg forslag før du publiserer.</div>
 
+      <p><strong>Hvorfor bare én H1?</strong> Google bruker den ene store overskriften (H1) til å forstå hva siden handler om. Har du flere, blir det uklart hva som er hovedbudskapet — derfor bør det være nøyaktig én per side. Resten av overskriftene blir mindre (H2, H3) og fungerer som underoverskrifter.</p>
+
       <h2>Lokal SEO (viktigst for håndverkere/lokale tjenester)</h2>
       <p>Hvis du opererer i et bestemt område, er <strong>lokal SEO</strong> nøkkelen:</p>
       <ul>
-        <li><strong>Google Business Profile</strong> (gratis, lager du på <code>business.google.com</code>) — kommer ikke fra nettsiden, men er tett koblet til</li>
-        <li><strong>NAP-konsistens:</strong> Navn, Adresse, Telefon må være eksakt identisk over hele nettsiden, Google Business, Facebook, gulesider.no, m.m.</li>
+        <li><strong>Google Business Profile</strong> (gratis bedriftsside hos Google, lager du på <code>business.google.com</code>) — kommer ikke fra nettsiden, men er tett koblet til</li>
+        <li><strong>Samme firmainfo over alt:</strong> sørg for at firmanavn, adresse og telefonnummer står HELT likt på nettsiden, Google Business, Facebook, gulesider.no og lignende. Google blir forvirret hvis det er små forskjeller. (Fagfolk kaller dette "NAP-konsistens" — Navn, Adresse, Telefon.)</li>
         <li><strong>Stedsnavn i title</strong> ("Rørlegger Stavanger" — ikke bare "Rørlegger")</li>
-        <li><strong>Embed Google Maps</strong> på kontakt-siden (modul 11)</li>
+        <li><strong>Bygg inn Google Maps</strong> på kontakt-siden (modul 12)</li>
       </ul>
 
       <h2>Innhold som rangerer</h2>
@@ -140,7 +145,7 @@ Vis meg forslag før du publiserer.</div>
         <li>Én H1 per side</li>
         <li>Alle bilder har alt-tekst</li>
         <li>Lenker bruker meningsfull tekst (ikke "klikk her")</li>
-        <li>URL er kort og beskrivende (<code>/rorlegger-stavanger</code>, ikke <code>/page?id=23</code>)</li>
+        <li>Nettadressen er kort og beskrivende (<code>/rorlegger-stavanger</code>, ikke <code>/page?id=23</code>) — altså en adresse et menneske kan lese, ikke en med rare tegn og tall</li>
         <li>Mobile-vennlig (vi har det allerede via Tailwind)</li>
         <li>Lastes raskt (vi har det via Cloudflare + Astro)</li>
       </ul>

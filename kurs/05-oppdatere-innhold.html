@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
     .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
-    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
     .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
     .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
     .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
@@ -27,6 +26,10 @@
     .prose-custom code { background: #F4F4F5; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
     .callout { background: #EFF6FF; border-left: 3px solid #2563EB; padding: 1.25rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
     .callout p { margin-bottom: 0; color: #1E3A8A; }
+    .callout-warn { background: #FEF3C7; border-left-color: #D97706; }
+    .callout-warn p { color: #78350F; }
+    .callout-ok { background: #F0FDF4; border-left-color: #16A34A; }
+    .callout-ok p { color: #14532D; }
     .prompt-example { background: #F4F4F5; border-radius: 0.5rem; padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #18181B; }
   </style>
 </head>
@@ -54,6 +57,17 @@
 
   <article class="px-6 py-12 md:py-16">
     <div class="max-w-3xl mx-auto prose-custom">
+
+      <div class="callout">
+        <p><strong>Forklart enkelt: noen ord vi bruker.</strong> I denne modulen møter du fire ord fra «nettside-verdenen». Her er de på vanlig norsk:</p>
+        <ul style="margin-top:0.75rem;">
+          <li><strong>Hero</strong> = det store toppfeltet øverst på forsiden — det første folk ser, ofte med et stort bilde og en stor overskrift. (Vi sier også «toppbanner».)</li>
+          <li><strong>H1</strong> = den aller største overskriften øverst på siden, altså hovedtittelen. (H2 og H3 er mindre underoverskrifter.)</li>
+          <li><strong>Footer</strong> = bunnfeltet helt nederst på siden, der kontaktinfo og «© firmanavn» ofte står. (Vi sier også «bunnen».)</li>
+          <li><strong>CTA</strong> = en handlingsknapp som «Ring nå» eller «Bestill tid». (Står for «call to action», men du kan bare tenke «handlingsknapp».)</li>
+        </ul>
+        <p style="margin-top:0.75rem;">Du trenger ikke pugge disse — du kan alltid bare skrive «den store overskriften øverst» eller «knappen» til Claude, så skjønner den det. Møter du flere ord du ikke kjenner, slå dem opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
+      </div>
 
       <h2>Tre regler for gode prompts</h2>
       <ol>
@@ -93,12 +107,12 @@ Lørdag stengt</div>
       </div>
 
       <h2>Hvor finner jeg hvilken tekst</h2>
-      <p>Du trenger ikke huske dette — Claude finner det selv. Men hvis du vil ha en mental modell:</p>
+      <p>Du trenger ikke huske dette — Claude finner det selv. Men hvis du vil ha en grov oversikt:</p>
       <ul>
-        <li><strong>Hero-tekst:</strong> alltid i index/forsiden</li>
+        <li><strong>Hero-tekst</strong> (teksten i toppfeltet): alltid på forsiden</li>
         <li><strong>Tjenestebeskrivelser:</strong> tjenester-siden, ofte også på forsiden</li>
-        <li><strong>Åpningstider:</strong> kontakt-siden + ofte i footer</li>
-        <li><strong>Telefonnummer:</strong> footer på alle sider, hero-CTA, kontakt-siden</li>
+        <li><strong>Åpningstider:</strong> kontakt-siden + ofte i footer (bunnen)</li>
+        <li><strong>Telefonnummer:</strong> footer (bunnen) på alle sider, handlingsknappen øverst (hero-CTA), kontakt-siden</li>
         <li><strong>Priser:</strong> ofte på flere steder — alltid be Claude sjekke alt</li>
       </ul>
 
@@ -108,10 +122,10 @@ Lørdag stengt</div>
       <p>Hvis du sier "endre 'Velkommen' til 'Hei'" og Claude finner ordet 30 ganger på siden, blir det rot. Vær mer spesifikk: "Endre H1-overskriften på forsiden ..." eller gi mer kontekst.</p>
 
       <h3>Du glemmer å nevne mobile-versjon</h3>
-      <p>De fleste tekster er like på desktop og mobil, men noen ganger har de ulik formulering for å spare plass. Hvis du vil endre begge, si: <code>... gjelder begge versjoner (desktop og mobil)</code>.</p>
+      <p>De fleste tekster er like på desktop (vanlig PC- eller Mac-skjerm) og mobil, men noen ganger har de ulik formulering for å spare plass. Hvis du vil endre begge, si: <code>... gjelder begge versjoner (desktop og mobil)</code>.</p>
 
       <h3>Du publiserer noe du ikke ville</h3>
-      <p>Si til Claude: <code>angre den siste endringen</code>. Claude reverterer via Git, og siden går tilbake til forrige versjon på 30 sek. Ingen permanent skade.</p>
+      <p>Si til Claude: <code>angre den siste endringen</code>. Siden går tilbake til slik den var før, på rundt 30 sekunder. Ingen permanent skade — du kan alltid angre.</p>
 
       <div class="callout">
         <p>I neste modul ser vi på det andre du oppdaterer ofte: bilder.</p>

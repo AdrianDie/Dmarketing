@@ -15,7 +15,6 @@
     body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #09090B; }
     .font-display { font-family: 'Archivo', sans-serif; }
     .badge { font-family: 'JetBrains Mono', 'Courier New', monospace; }
-    .video-frame { aspect-ratio: 16/9; width: 100%; border-radius: 1rem; overflow: hidden; box-shadow: 0 24px 60px -12px rgba(9,9,11,0.18), 0 0 0 1px rgba(9,9,11,0.04); background: #09090B; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; }
     .prose-custom h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.875rem; line-height: 1.2; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
     .prose-custom h3 { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
     .prose-custom p { font-size: 1.0625rem; line-height: 1.7; color: #3F3F46; margin-bottom: 1.25rem; }
@@ -60,12 +59,16 @@
         <li><strong>Ny tjeneste</strong> — du har lagt til "Døgnservice" og vil ha egen side med detaljer</li>
         <li><strong>Kampanje</strong> — sommerprisene 2026, eller "Bestill før 1. juni og få 20 % rabatt"</li>
         <li><strong>Blogg-innlegg</strong> — for SEO, ekspertise, eller bare for å fortelle</li>
-        <li><strong>Landingsside for Google Ads</strong> — fokusert side som matcher annonsen</li>
+        <li><strong>Landingsside for Google Ads</strong> — en egen, fokusert side du sender folk til fra en annonse, slik at siden matcher akkurat det annonsen lovet</li>
         <li><strong>"Om oss" eller "Karriere"</strong> — institusjonelle sider</li>
       </ul>
 
+      <div class="callout">
+        <p><strong>Forklart enkelt: et par ord du møter her.</strong> <strong>Landingsside</strong> = en egen, fokusert side du sender folk til fra en annonse — den handler bare om én ting. <strong>Google Ads</strong> = betalte annonser som vises helt øverst i Google-søk når noen søker etter det du tilbyr. Møter du flere ukjente ord underveis, slå dem opp i <a href="ordliste" class="text-blue-600 underline">ordlisten</a>.</p>
+      </div>
+
       <h2>Beste prompt-mønster</h2>
-      <p>Den beste tilnærmingen er å gi Claude et eksempel-side som referanse:</p>
+      <p>Den beste tilnærmingen er å gi Claude en eksisterende side som referanse:</p>
       <div class="prompt-example">Lag en ny side: tjenester/akutt-rorleggervakt.html
 
 Bruk samme stil og struktur som tjenester/standard-service.html.
@@ -75,9 +78,13 @@ Innhold:
 - Underoverskrift: "Rør sprakk midt på natten? Vi rykker ut."
 - 3 hovedpunkter: 30-min responstid, fastpris, ingen tillegg på helg
 - Pris-tabell: Ut-rykning kveld (kr 1 500), Natt (kr 2 200), Helg (kr 1 800)
-- CTA: Telefonknapp + skjema
+- CTA (handlingsknapp): Telefonknapp + skjema
 
-Tone of voice: profesjonell men trygg. Norsk. Ikke for mye emoji.</div>
+Språkstil: profesjonell men trygg. Norsk. Ikke for mye emoji.</div>
+
+      <div class="callout">
+        <p><strong>Du trenger ikke finne på filnavn selv.</strong> Skråstreken og <code>.html</code> i <code>tjenester/akutt-rorleggervakt.html</code> ser teknisk ut, men du trenger ikke skjønne det. Du kan like gjerne bare skrive <em>«Lag en ny tjeneste-side om akutt rørleggervakt»</em> — så finner Claude ut av både navn og hvor filen skal ligge helt selv. Vi viser detaljert filnavn her bare så du ser at det er mulig å være presis hvis du vil.</p>
+      </div>
 
       <h2>Hvor mye detaljer trengs i prompten?</h2>
       <p>Det avhenger av hvor strenge ønsker du har. Tre nivåer:</p>
@@ -102,10 +109,10 @@ Bruk samme stil som tjenester/standard-service.html.</div>
       <h2>Etter at siden er laget</h2>
       <p>Claude vil typisk:</p>
       <ol>
-        <li>Lage filen på riktig sted</li>
-        <li>Foreslå å legge til lenke i meny</li>
-        <li>Oppdatere sitemap</li>
-        <li>Be deg verifisere før publisering</li>
+        <li>Lage filen på riktig sted (du trenger ikke vite hvor — Claude ordner det)</li>
+        <li>Foreslå å legge til lenke i menyen</li>
+        <li>Oppdatere "sitemap" — en liste over alle sidene dine som hjelper Google å finne dem. Claude gjør dette automatisk, så du trenger ikke tenke på det.</li>
+        <li>Be deg sjekke at alt ser riktig ut før publisering</li>
       </ol>
 
       <p>Du kan be om justeringer:</p>
@@ -113,7 +120,7 @@ Bruk samme stil som tjenester/standard-service.html.</div>
       <div class="prompt-example">Pris-tabellen mangler "fra"-pris. Legg til.</div>
       <div class="prompt-example">CTA "Ring nå" er for liten på mobil. Gjør den større.</div>
 
-      <h2>Linkje fra meny</h2>
+      <h2>Lenke fra menyen</h2>
       <p>En ny side er ubrukelig hvis ingen finner den. Be Claude:</p>
       <div class="prompt-example">Legg til lenke til den nye akutt-siden i hovedmenyen, mellom "Tjenester" og "Kontakt".</div>
 
