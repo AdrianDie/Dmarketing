@@ -284,6 +284,36 @@
     }
   }
 
+  /* ---- ETAPPE-MERKNAD ---- */
+  .etappe-note {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    max-width: 760px;
+    margin: 28px auto 0;
+    padding: 14px 18px;
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #1E3A8A;
+  }
+  .etappe-note .note-label {
+    flex-shrink: 0;
+    margin-top: 1px;
+    padding: 3px 9px;
+    background: #FFFFFF;
+    border: 1px solid var(--brand-100);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
   /* ---- FINAL ---- */
   .final {
     background: var(--navy);
@@ -358,11 +388,12 @@
       <div class="card">
         <span class="card-tag">Valg A · Eksisterer allerede</span>
         <h3 class="card-title">Vi flytter siden din</h3>
-        <p class="card-sub">Vi eksporterer den eksisterende nettsiden din fra dagens plattform — Wix, Squarespace, WordPress, hva enn det er — og setter den opp på nytt på GitHub. Designet og innholdet beholdes som det er.</p>
+        <p class="card-sub">Vi eksporterer den eksisterende nettsiden din fra dagens plattform — Wix, Squarespace, WordPress, hva enn det er — og setter den opp på nytt på GitHub. Designet og innholdet beholdes som det er — og ønsker du justeringer, kan vi legge til endringer mens vi kopierer.</p>
         <div class="deliverable-list">
           <div class="deliverable"><span class="check">✓</span><span>Innhold, bilder, struktur kopieres direkte</span></div>
           <div class="deliverable"><span class="check">✓</span><span>SEO-rangering bevares (URL-mapping)</span></div>
           <div class="deliverable"><span class="check">✓</span><span>Du kvitter deg med plattform-mellomledd</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Ønskede endringer kan legges til underveis</span></div>
         </div>
       </div>
 
@@ -374,13 +405,18 @@
       <div class="card">
         <span class="card-tag">Valg B · Start på nytt</span>
         <h3 class="card-title">Vi bygger ny fra mal</h3>
-        <p class="card-sub">Du velger en av nettsidemalene våre — bygget for din bransje. Vi legger inn ditt innhold, dine bilder, dine farger. Klar på under sju dager.</p>
+        <p class="card-sub">Du velger en av nettsidemalene våre — bygget for din bransje. Vi legger inn ditt innhold, dine bilder, dine farger. Klar på opptil 4 virkedager.</p>
         <div class="deliverable-list">
           <div class="deliverable"><span class="check">✓</span><span>Bransje-tilpassede maler du kan velge fra</span></div>
           <div class="deliverable"><span class="check">✓</span><span>Konverteringsoptimert design</span></div>
           <div class="deliverable"><span class="check">✓</span><span>Lighthouse 95+ ut av boksen</span></div>
         </div>
       </div>
+    </div>
+
+    <div class="etappe-note">
+      <span class="note-label">Merk</span>
+      <span>Ønsker du å gjøre endringer på siden? Samle endringene dere ønsker og send dem så tidlig som mulig — så får vi alt klart i én jobb.</span>
     </div>
 
     <div class="arrow-down" style="margin-top: 32px;"></div>
@@ -415,10 +451,10 @@
       <div class="card card-hl card-recommended">
         <span class="card-tag">Anbefalt · 17 USD / mnd</span>
         <h3 class="card-title">Claude Code (anbefalt)</h3>
-        <p class="card-sub">Claude jobber direkte i kodebasen din. Du skriver i chat — Claude pusher endringene selv. Ingen koding, ingen kopiering. Samme abonnement gir deg også Claude til å automatisere alt annet i bedriften.</p>
+        <p class="card-sub">Claude jobber direkte i kodebasen din. Du skriver i chat — Claude publiserer endringene selv. Ingen koding, ingen kopiering. Samme abonnement gir deg også Claude til å automatisere alt annet i bedriften.</p>
         <div class="deliverable-list">
           <div class="deliverable"><span class="check">✓</span><span>Ingen teknisk kunnskap nødvendig</span></div>
-          <div class="deliverable"><span class="check">✓</span><span>Endringer pushes automatisk</span></div>
+          <div class="deliverable"><span class="check">✓</span><span>Endringer publiseres automatisk</span></div>
           <div class="deliverable"><span class="check">✓</span><span>Bruk Claude til å automatisere hele bedriften</span></div>
         </div>
       </div>
