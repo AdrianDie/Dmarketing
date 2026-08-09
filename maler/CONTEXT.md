@@ -121,6 +121,20 @@ Bygge 3 bransjespesifikke nettsidemaler i ren HTML/CSS/JS som:
 6. Tjenester og priser
 7. Om oss-tekst og team
 8. Anmeldelser
+9. **Stilguide + skill** — to filer som gjør at kundens egen Claude holder hus-stilen
+   vår på alt de lager senere. Fyll inn `[KLAMMER]`-feltene i begge (samme verdier
+   som over: brand-hex, display-font, bedriftsnavn, bransje):
+   - **`kunde-stilguide-mal.md` → kundens repo som `CLAUDE.md`** (alltid-på, kort:
+     site-fakta + «match stilen»). Leses automatisk av Claude Code.
+   - **`kunde-skill-mal/` → kundens repo som `.claude/skills/nettside-stil/`**
+     (selve design-skillen — «ferdig vs uferdig»-signaler, komponenter, sjekkliste).
+     Claude Code oppdager den automatisk; den kan også lastes opp som kunnskap i et
+     gratis Claude-Project (modul 04-prosjektet) eller limes inn i en hvilken som
+     helst Claude/ChatGPT.
+
+   Skillen er en kunde-vennlig versjon av vår interne `mal-design-patterns` + Linear-stil
+   (CLAUDE.md). Kurset (modul 07 + ordliste) forklarer den som «stilguiden / skillen din»
+   og hvordan kunden får den inn i sin egen Claude. Endrer vi hus-stilen, oppdater begge maler.
 
 ---
 
